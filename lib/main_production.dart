@@ -13,7 +13,7 @@ import 'package:podium/bootstrap.dart';
 import 'package:podium/src/app/app.dart';
 
 Future<void> main() async {
-  print('1. MAIN PRODUCTION IS RUNNING');
+  debugPrint('1. MAIN PRODUCTION IS RUNNING');
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
 

@@ -2,6 +2,7 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:podium/src/app/app.dart';
 import 'package:podium/theme.dart';
 
 class App extends StatelessWidget {
@@ -14,7 +15,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('2a. APP IS RUNNING - AppBloc is provided');
+    debugPrint('2a. APP IS RUNNING - AppBloc is provided');
     return RepositoryProvider.value(
       value: _authenticationRepository,
       child: MultiBlocProvider(
@@ -36,7 +37,7 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('2b. APPVIEW BUILT - MaterialApp is created here');
+    debugPrint('2b. APPVIEW BUILT - MaterialApp is created here');
     return MaterialApp(
       theme: appTheme,
       home: const FlowBuilder<AppPage>(
