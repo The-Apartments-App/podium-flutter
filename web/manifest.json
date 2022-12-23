@@ -1,11 +1,11 @@
 {
-    "name": "Podium",
+    "name": "Podium Apartments",
     "short_name": "Podium",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A Very Good Project created by Very Good CLI.",
+    "background_color": "#098D69",
+    "theme_color": "#098D69",
+    "description": "A new standard of living.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
