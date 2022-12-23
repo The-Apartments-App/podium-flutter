@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:podium/app/app.dart';
+import 'package:podium/src/app/app.dart';
 import 'package:podium/counter/counter.dart';
 
 void main() {
