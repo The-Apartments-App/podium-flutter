@@ -10,8 +10,6 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
 
 /// {@template sign_up_with_email_and_password_failure}
 /// Thrown if during the sign up process if a failure occurs.
@@ -223,20 +221,20 @@ class AuthenticationRepository {
   ///
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
-    print('logInWithGoogle called in authentication_repo.dart');
+    debugPrint('logInWithGoogle called in authentication_repo.dart');
     try {
       late final firebase_auth.AuthCredential credential;
       if (isWeb) {
-        print('this isWeb');
+        debugPrint('this isWeb');
         final googleProvider = firebase_auth.GoogleAuthProvider();
         final userCredential = await _firebaseAuth.signInWithPopup(
           googleProvider,
         );
         credential = userCredential.credential!;
       } else {
-        print('This isNotWeb');
+        debugPrint('This isNotWeb');
         final googleUser = await _googleSignIn.signIn();
-        print('this is googleUser: $googleUser');
+        debugPrint('this is googleUser: $googleUser');
         final googleAuth = await googleUser!.authentication;
         credential = firebase_auth.GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
@@ -245,7 +243,7 @@ class AuthenticationRepository {
       }
       await _firebaseAuth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
-      print('error in loginwithgoogle: $e');
+      debugPrint('error in loginwithgoogle: $e');
       throw LogInWithGoogleFailure.fromCode(e.code);
     } catch (_) {
       throw const LogInWithGoogleFailure();
@@ -253,17 +251,17 @@ class AuthenticationRepository {
   }
 
   Future<void> signInWithFacebook() async {
-    print('logInWithFacebook called in authentication_repo.dart');
+    debugPrint('logInWithFacebook called in authentication_repo.dart');
     try {
       final result = await FacebookAuth.instance.login();
-      print('result in authentication_repo.dart: $result');
+      debugPrint('result in authentication_repo.dart: $result');
       if (result.status == LoginStatus.success) {
         final credential = firebase_auth.FacebookAuthProvider.credential(
-            result.accessToken!.token);
+            result.accessToken!.token,);
         await _firebaseAuth.signInWithCredential(credential);
       }
     } on Exception catch (e) {
-      print('this is the error: $e');
+      debugPrint('this is the error: $e');
     }
   }
 
@@ -307,7 +305,7 @@ class AuthenticationRepository {
     required String displayName,
     required String photoURL,
   }) async {
-    print('UPDATE PROFILE CALLED');
+    debugPrint('UPDATE PROFILE CALLED');
     try {
       if (_firebaseAuth.currentUser != null) {
         await _firebaseAuth.currentUser?.updateEmail(email);
@@ -325,26 +323,26 @@ class AuthenticationRepository {
   Future<void> updateProfilePicture({
     File? photo,
   }) async {
-    print('UPDATE PROFILE PICTURE CALLED');
-    print('NEW PHOTO IS $photo');
+    debugPrint('UPDATE PROFILE PICTURE CALLED');
+    debugPrint('NEW PHOTO IS $photo');
     try {
       if (_firebaseAuth.currentUser != null) {
-        print('currentUser is not null');
+        debugPrint('currentUser is not null');
         final storageRef = FirebaseStorage.instance.ref();
-        print('storageRef: $storageRef');
+        debugPrint('storageRef: $storageRef');
         final userImageRef =
             storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
-        print('userImageRef: $userImageRef');
+        debugPrint('userImageRef: $userImageRef');
         if (photo != null) {
           await userImageRef.putFile(photo);
         } else {
           throw Exception('Error putting file in cloud');
         }
         final profileUrl = await userImageRef.getDownloadURL();
-        print('profileUrl: $profileUrl');
+        debugPrint('profileUrl: $profileUrl');
 
         await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
-        print('Firebase Auth updated ------------');
+        debugPrint('Firebase Auth updated ------------');
       }
     } on FirebaseAuthException catch (e) {
       throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);

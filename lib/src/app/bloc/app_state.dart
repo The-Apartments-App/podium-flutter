@@ -29,35 +29,40 @@ class AppState extends Equatable {
   AppState.userHome(User user)
       : this._(
           page: AppPage.userHome,
-          status: user.isNotEmpty ? AppStatus.authenticated : AppStatus.unauthenticated,
+          status: user.isNotEmpty ?
+            AppStatus.authenticated : AppStatus.unauthenticated,
           user: user
         ,);
 
   AppState.userSettings(User user)
       : this._(
           page: AppPage.userSettings,
-          status: user.isNotEmpty ? AppStatus.authenticated : AppStatus.unauthenticated,
+          status: user.isNotEmpty ?
+            AppStatus.authenticated : AppStatus.unauthenticated,
           user: user
         ,);
 
   AppState.userDocuments(User user)
     : this._(
         page: AppPage.userDocuments,
-        status: user.isNotEmpty ? AppStatus.authenticated : AppStatus.unauthenticated,
+        status: user.isNotEmpty ?
+          AppStatus.authenticated : AppStatus.unauthenticated,
         user: user
       ,);
 
     AppState.userPayments(User user)
       : this._(
           page: AppPage.userPayments,
-          status: user.isNotEmpty ? AppStatus.authenticated : AppStatus.unauthenticated,
+          status: user.isNotEmpty ?
+            AppStatus.authenticated : AppStatus.unauthenticated,
           user: user
         ,);
 
     AppState.serviceRequest(User user)
       : this._(
           page: AppPage.serviceRequest,
-          status: user.isNotEmpty ? AppStatus.authenticated : AppStatus.unauthenticated,
+          status: user.isNotEmpty ?
+            AppStatus.authenticated : AppStatus.unauthenticated,
           user: user
         ,);
 

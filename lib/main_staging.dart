@@ -1,5 +1,3 @@
-
-
 // Copyright (c) 2022, Very Good Ventures
 // https://verygood.ventures
 //
@@ -15,7 +13,7 @@ import 'package:podium/bootstrap.dart';
 import 'package:podium/src/app/app.dart';
 
 Future<void> main() async {
-  print('MAIN STAGING IS RUNNING');
+  debugPrint('MAIN STAGING IS RUNNING');
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
 
