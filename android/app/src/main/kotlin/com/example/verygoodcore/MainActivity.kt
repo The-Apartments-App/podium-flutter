@@ -1,4 +1,4 @@
-package com.example.verygoodcore.podium
+package com.podium
 
 import io.flutter.embedding.android.FlutterActivity
 
