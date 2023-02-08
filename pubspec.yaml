@@ -14,7 +14,7 @@ dependencies:
   cloud_firestore: ^4.2.0
   equatable: ^2.0.3
   firebase_analytics: ^10.0.8
-  firebase_auth: ^4.2.0
+  firebase_auth: ^4.2.6
   firebase_core: ^2.4.0
   firebase_storage: ^11.0.7
   flow_builder: ^0.0.9
