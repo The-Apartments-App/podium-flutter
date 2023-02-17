@@ -11,7 +11,7 @@ dependencies:
   authentication_repo:
     path: lib/packages/authentication_repo
   bloc: ^8.1.0
-  cloud_firestore: ^4.2.0
+  cloud_firestore: ^4.4.2
   equatable: ^2.0.3
   firebase_analytics: ^10.0.8
   firebase_auth: ^4.2.0
