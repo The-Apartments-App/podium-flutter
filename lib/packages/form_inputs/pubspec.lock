@@ -5,15 +5,17 @@ packages:
     dependency: "direct main"
     description:
       name: formz
-      url: "https://pub.dartlang.org"
+      sha256: ed92f501f4a44b1da9137a025007df773b3732147b413c464158ecd997612ab6
+      url: "https://pub.dev"
     source: hosted
     version: "0.4.1"
   very_good_analysis:
     dependency: "direct dev"
     description:
       name: very_good_analysis
-      url: "https://pub.dartlang.org"
+      sha256: "4815adc7ded57657038d2bb2a7f332c50e3c8152f7d3c6acf8f6b7c0cc81e5e2"
+      url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.18.0 <3.0.0"
+  dart: ">=2.18.0 <4.0.0"
