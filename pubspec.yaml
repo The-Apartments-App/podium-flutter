@@ -22,17 +22,16 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_facebook_auth: ^5.0.8
-  flutter_launcher_icons: ^0.11.0
+  flutter_launcher_icons: ^0.12.0
   flutter_pdfview: ^1.2.5
   flutter_signin_button: ^2.0.0
-  flutter_stripe: ^7.0.0
+  flutter_stripe: ^9.0.0+1
   font_awesome_flutter: ^9.0.0
   form_builder_image_picker: ^3.1.0
-  form_builder_validators: ^8.4.0
   form_inputs:
     path: lib/packages/form_inputs
   formz: ^0.4.0
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.3
   http: ^0.13.5
   image_picker: ^0.8.6
   meta: ^1.7.0
@@ -44,7 +43,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
-  very_good_analysis: ^3.1.0
+  very_good_analysis: ^4.0.0+1
 
 flutter:
   generate: true
