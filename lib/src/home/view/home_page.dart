@@ -24,8 +24,8 @@ class _HomePageState extends State<HomePage> {
     final user = FirebaseAuth.instance.currentUser;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (user == null) {
-        debugPrint('3c. (if user == null) Login Modal PopUp');
-        show(context);
+        debugPrint('3c. (if user == null) Routed to Login');
+        routeToLogin(context);
       } else {
         debugPrint(
           'CURRENT USER: $user',
@@ -37,17 +37,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void show(BuildContext context) {
-    showModalBottomSheet<void>(
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext context) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height - 100,
-          child: const LoginPage(),
-        );
-      },
-    );
+  void routeToLogin(BuildContext context) {
+    context.flow<AppPage>().update((state) => AppPage.userLogin);
   }
 
   @override
@@ -129,7 +120,7 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () => {
                 if (user.isEmpty)
-                  {show(context)}
+                  {routeToLogin(context)}
                 else
                   {
                     context
@@ -158,7 +149,7 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () => {
                 if (user.isEmpty)
-                  {show(context)}
+                  {routeToLogin(context)}
                 else
                   {
                     context
@@ -187,7 +178,7 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () => {
                 if (user.isEmpty)
-                  {show(context)}
+                  {routeToLogin(context)}
                 else
                   {
                     context
@@ -216,7 +207,7 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () => {
                 if (user.isEmpty)
-                  {show(context)}
+                  {routeToLogin(context)}
                 else
                   {
                     context
@@ -243,7 +234,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             TextButton(
-              onPressed: () => {FirebaseAuth.instance.signOut(), show(context)},
+              onPressed: () =>
+                  {FirebaseAuth.instance.signOut(), routeToLogin(context)},
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
