@@ -55,20 +55,24 @@ class LoginForm extends StatelessWidget {
               const SizedBox(height: 8),
               _PasswordInput(),
               const SizedBox(height: 8),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                _LoginButton(),
-                const SizedBox(width: 8),
-                _DemoUserButton()
-              ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _LoginButton(),
+                  const SizedBox(width: 8),
+                  _DemoUserButton()
+                ],
+              ),
               const SizedBox(height: 8),
-              SignInButton(Buttons.Google,
-                  onPressed: () =>
-                      context.read<LoginCubit>().logInWithGoogle(),),
+              SignInButton(
+                Buttons.Google,
+                onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
+              ),
               SignInButton(
                 Buttons.Facebook,
                 onPressed: () => context.read<LoginCubit>().logInWithFacebook(),
               ),
-              _showAppleSignInButton(),
+              // _showAppleSignInButton(),
               const SizedBox(height: 4),
               _SignUpButton(),
             ],

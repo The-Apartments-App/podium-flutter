@@ -69,52 +69,54 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
     return SizedBox(
       height: 300,
       width: 300,
-      child: Column(children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              children: [
-                const Text('Current Photo:'),
-                getProfilePic(),
-              ],
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  const Text('Current Photo:'),
+                  getProfilePic(),
+                ],
+              ),
+              Column(
+                children: [
+                  const Text('New Photo:'),
+                  getNewProfilePic(),
+                ],
+              ),
+            ],
+          ),
+          ElevatedButton(
+            onPressed: () {
+              takePhoto(ImageSource.camera);
+            },
+            child: const Row(
+              children: [Icon(Icons.camera), Text('Camera')],
             ),
-            Column(
-              children: [
-                const Text('New Photo:'),
-                getNewProfilePic(),
-              ],
+          ),
+          ElevatedButton(
+            onPressed: () {
+              takePhoto(ImageSource.gallery);
+            },
+            child: const Row(
+              children: [Icon(Icons.camera_roll), Text('Gallery')],
             ),
-          ],
-        ),
-        ElevatedButton(
-          onPressed: () {
-            takePhoto(ImageSource.camera);
-          },
-          child: Row(
-            children: const [Icon(Icons.camera), Text('Camera')],
           ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            takePhoto(ImageSource.gallery);
-          },
-          child: Row(
-            children: const [Icon(Icons.camera_roll), Text('Gallery')],
+          ElevatedButton(
+            onPressed: () {
+              context
+                  .read<UpdateProfileCubit>()
+                  .updateWithNewPicture(fileController);
+              Navigator.pop(context);
+            },
+            child: const Row(
+              children: [Icon(Icons.save), Text('Save Picture')],
+            ),
           ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            context
-                .read<UpdateProfileCubit>()
-                .updateWithNewPicture(fileController);
-            Navigator.pop(context);
-          },
-          child: Row(
-            children: const [Icon(Icons.save), Text('Save Picture')],
-          ),
-        ),
-      ],),
+        ],
+      ),
     );
   }
 }

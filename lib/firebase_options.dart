@@ -25,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -68,12 +65,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAgtfuOjEhLJC6kODXyg7J2Cox2eIwvqiU',
-    appId: '1:158576154553:ios:dc280fd22b0dfc1fbb8868',
+    appId: '1:158576154553:ios:953e4b3e19ccbc70bb8868',
     messagingSenderId: '158576154553',
     projectId: 'podium-78b4e',
     databaseURL: 'https://podium-78b4e-default-rtdb.firebaseio.com',
     storageBucket: 'podium-78b4e.appspot.com',
-    iosClientId: '158576154553-6036bul3480tlimr3mfkv71ai5uq6dht.apps.googleusercontent.com',
-    iosBundleId: 'com.podium.dev',
+    iosClientId: '158576154553-9ubij3hn8i4uavchk5lbdar01057ge8t.apps.googleusercontent.com',
+    iosBundleId: 'com.podium',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyAgtfuOjEhLJC6kODXyg7J2Cox2eIwvqiU',
+    appId: '1:158576154553:ios:f165f7f94d28d432bb8868',
+    messagingSenderId: '158576154553',
+    projectId: 'podium-78b4e',
+    databaseURL: 'https://podium-78b4e-default-rtdb.firebaseio.com',
+    storageBucket: 'podium-78b4e.appspot.com',
+    iosClientId: '158576154553-10p4tuinalhluulb2nk7hmk5elr6s4ih.apps.googleusercontent.com',
+    iosBundleId: 'com.masterRepo.RunnerTests',
   );
 }

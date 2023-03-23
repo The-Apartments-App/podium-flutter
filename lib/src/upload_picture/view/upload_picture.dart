@@ -47,8 +47,8 @@ class UploadPictureState extends State<UploadPicture> {
                     debugPrint('photo from gallery is -> $photo');
                     // context.read<UpdateProfileCubit>().profilePictureChanged(photo);
                   },
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(Icons.image),
                       Text('From Gallery'),
                     ],
@@ -61,8 +61,8 @@ class UploadPictureState extends State<UploadPicture> {
                     final photo = getImage(ImageSource.camera);
                     debugPrint('photo from camera is -> $photo');
                   },
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(Icons.camera),
                       Text('From Camera'),
                     ],
@@ -91,22 +91,25 @@ class UploadPictureState extends State<UploadPicture> {
           ),
           //if image not null show the image
           //if image null show text
-          if (image != null) Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.file(
-                      //to show image, you type like this.
-                      File(image!.path),
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width,
-                      height: 300,
-                    ),
-                  ),
-                ) else const Text(
-                  'No Image',
-                  style: TextStyle(fontSize: 20),
-                )
+          if (image != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.file(
+                  //to show image, you type like this.
+                  File(image!.path),
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                  height: 300,
+                ),
+              ),
+            )
+          else
+            const Text(
+              'No Image',
+              style: TextStyle(fontSize: 20),
+            )
         ],
       ),
     );

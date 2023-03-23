@@ -94,7 +94,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () => Future.delayed(
-            Duration.zero, () => debugPrint('Page refreshed on pull down'),),
+          Duration.zero,
+          () => debugPrint('Page refreshed on pull down'),
+        ),
         child: ListView(
           children: <Widget>[
             Padding(
@@ -135,11 +137,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.userPayments)
                   }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       'Payments',
                       style: userAccountPageTextStyle,
@@ -164,11 +166,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.serviceRequest)
                   }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       'Service Request',
                       style: userAccountPageTextStyle,
@@ -193,11 +195,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.userDocuments)
                   }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       'Documents',
                       style: userAccountPageTextStyle,
@@ -222,11 +224,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.userSettings)
                   }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       'Settings',
                       style: userAccountPageTextStyle,
