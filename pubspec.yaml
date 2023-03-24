@@ -40,6 +40,8 @@ dependencies:
 
 dev_dependencies:
   bloc_test: ^9.0.0
+  build_runner: ^2.4.1
+  build_web_compilers: ^4.0.2
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0

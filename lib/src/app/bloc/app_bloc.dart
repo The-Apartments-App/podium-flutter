@@ -41,6 +41,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void _onAppPageChanged(AppPageChanged event, Emitter<AppState> emit) {
     switch (event.page) {
+      case AppPage.userLogin:
+        return emit(
+          AppState.userLogin(event.user),
+        );
       case AppPage.userHome:
         return emit(
           AppState.userHome(event.user),
@@ -60,6 +64,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       case AppPage.serviceRequest:
         return emit(
           AppState.serviceRequest(event.user),
+        );
+      case AppPage.buildingAmenities:
+        return emit(
+          AppState.buildingAmenities(event.user),
         );
     }
   }

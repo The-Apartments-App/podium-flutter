@@ -8,26 +8,16 @@ class LoginPage extends StatelessWidget {
 
   static Page<void> page() => const MaterialPage<void>(child: LoginPage());
 
-  void show(BuildContext context) {
-    showModalBottomSheet<void>(
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext context) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height - 100,
-          child: const LoginPage(),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: BlocProvider(
         create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
-        child: const LoginForm(),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: const LoginForm(),
+        ),
       ),
     );
   }

@@ -3,7 +3,6 @@ import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/login/login.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,8 +23,8 @@ class _HomePageState extends State<HomePage> {
     final user = FirebaseAuth.instance.currentUser;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (user == null) {
-        debugPrint('3c. (if user == null) Login Modal PopUp');
-        show(context);
+        debugPrint('3c. (if user == null) Routed to Login');
+        routeToLogin(context);
       } else {
         debugPrint(
           'CURRENT USER: $user',
@@ -37,23 +36,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void show(BuildContext context) {
-    showModalBottomSheet<void>(
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext context) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height - 100,
-          child: const LoginPage(),
-        );
-      },
-    );
+  void routeToLogin(BuildContext context) {
+    context.flow<AppPage>().update((state) => AppPage.userLogin);
   }
 
   @override
   Widget build(BuildContext context) {
     debugPrint(
-      '3b. HOME PAGE BUILT - User Account Page, Login Modal should appear here.',
+      '3b. HOME PAGE BUILT - User Account Page',
     );
     const userAccountPageTextStyle = TextStyle(
       color: Colors.black,
@@ -94,7 +84,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () => Future.delayed(
-            Duration.zero, () => debugPrint('Page refreshed on pull down'),),
+          Duration.zero,
+          () => debugPrint('Page refreshed on pull down'),
+        ),
         child: ListView(
           children: <Widget>[
             Padding(
@@ -127,7 +119,7 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () => {
                 if (user.isEmpty)
-                  {show(context)}
+                  {routeToLogin(context)}
                 else
                   {
                     context
@@ -135,11 +127,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.userPayments)
                   }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       'Payments',
                       style: userAccountPageTextStyle,
@@ -153,10 +145,39 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            // TextButton(
+            //   onPressed: () => {
+            //     if (user.isEmpty)
+            //       {routeToLogin(context)}
+            //     else
+            //       {
+            //         context
+            //             .flow<AppPage>()
+            //             .update((state) => AppPage.buildingAmenities)
+            //       }
+            //   },
+            //   child: const Padding(
+            //     padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //         Text(
+            //           'Amenities',
+            //           style: userAccountPageTextStyle,
+            //         ),
+            //         Icon(
+            //           Icons.apartment,
+            //           size: 36,
+            //           color: Colors.black,
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
             TextButton(
               onPressed: () => {
                 if (user.isEmpty)
-                  {show(context)}
+                  {routeToLogin(context)}
                 else
                   {
                     context
@@ -164,11 +185,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.serviceRequest)
                   }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       'Service Request',
                       style: userAccountPageTextStyle,
@@ -185,7 +206,7 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () => {
                 if (user.isEmpty)
-                  {show(context)}
+                  {routeToLogin(context)}
                 else
                   {
                     context
@@ -193,11 +214,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.userDocuments)
                   }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       'Documents',
                       style: userAccountPageTextStyle,
@@ -214,7 +235,7 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () => {
                 if (user.isEmpty)
-                  {show(context)}
+                  {routeToLogin(context)}
                 else
                   {
                     context
@@ -222,11 +243,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.userSettings)
                   }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       'Settings',
                       style: userAccountPageTextStyle,
@@ -241,7 +262,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             TextButton(
-              onPressed: () => {FirebaseAuth.instance.signOut(), show(context)},
+              onPressed: () =>
+                  {FirebaseAuth.instance.signOut(), routeToLogin(context)},
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
