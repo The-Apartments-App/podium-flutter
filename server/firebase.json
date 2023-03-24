@@ -1,6 +1,7 @@
 {
   "storage": {
-    "rules": "storage.rules"
+    "rules": "functions/storage.rules",
+    "version": "2"
   },
   "hosting": {
     "public": "web"
