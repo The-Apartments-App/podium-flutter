@@ -41,6 +41,17 @@
 </head>
 <body>
   <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '1378794172984108',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v16.0'
+      });
+    };
+  </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
@@ -55,5 +66,4 @@
       });
     });
   </script>
-</body>
 </html>

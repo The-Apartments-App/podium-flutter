@@ -11,7 +11,8 @@ enum AppPage {
   userSettings,
   userDocuments,
   userPayments,
-  serviceRequest
+  serviceRequest,
+  buildingAmenities
 }
 
 class AppState extends Equatable {
@@ -30,6 +31,13 @@ class AppState extends Equatable {
 
   const AppState.unauthenticated()
       : this._(status: AppStatus.unauthenticated, page: AppPage.userLogin);
+
+  const AppState.userLogin(User user)
+      : this._(
+          page: AppPage.userLogin,
+          status: AppStatus.unauthenticated,
+          user: user,
+        );
 
   AppState.userHome(User user)
       : this._(
@@ -70,6 +78,14 @@ class AppState extends Equatable {
   AppState.serviceRequest(User user)
       : this._(
           page: AppPage.serviceRequest,
+          status: user.isNotEmpty
+              ? AppStatus.authenticated
+              : AppStatus.unauthenticated,
+          user: user,
+        );
+  AppState.buildingAmenities(User user)
+      : this._(
+          page: AppPage.buildingAmenities,
           status: user.isNotEmpty
               ? AppStatus.authenticated
               : AppStatus.unauthenticated,

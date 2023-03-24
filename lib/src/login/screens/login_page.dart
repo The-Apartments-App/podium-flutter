@@ -15,7 +15,9 @@ class LoginPage extends StatelessWidget {
       child: BlocProvider(
         create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
         child: SizedBox(
-            width: MediaQuery.of(context).size.width, child: const LoginForm()),
+          width: MediaQuery.of(context).size.width,
+          child: const LoginForm(),
+        ),
       ),
     );
   }

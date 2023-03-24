@@ -3,7 +3,6 @@ import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/login/login.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     debugPrint(
-      '3b. HOME PAGE BUILT - User Account Page, Login Modal should appear here.',
+      '3b. HOME PAGE BUILT - User Account Page',
     );
     const userAccountPageTextStyle = TextStyle(
       color: Colors.black,
@@ -146,6 +145,35 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            // TextButton(
+            //   onPressed: () => {
+            //     if (user.isEmpty)
+            //       {routeToLogin(context)}
+            //     else
+            //       {
+            //         context
+            //             .flow<AppPage>()
+            //             .update((state) => AppPage.buildingAmenities)
+            //       }
+            //   },
+            //   child: const Padding(
+            //     padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //         Text(
+            //           'Amenities',
+            //           style: userAccountPageTextStyle,
+            //         ),
+            //         Icon(
+            //           Icons.apartment,
+            //           size: 36,
+            //           color: Colors.black,
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
             TextButton(
               onPressed: () => {
                 if (user.isEmpty)

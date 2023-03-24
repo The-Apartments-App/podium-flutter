@@ -55,7 +55,9 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> logInWithDemoUser() async {
     await _authenticationRepository.logInWithEmailAndPassword(
-        email: 'demouser@podiumapartments.com', password: 'demopassword',);
+      email: 'demouser@podiumapartments.com',
+      password: 'demopassword',
+    );
   }
 
   Future<void> logInWithGoogle() async {
@@ -79,9 +81,12 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> logInWithFacebook() async {
+    debugPrint('loginWithFacebook called in login_cubit.dart');
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
+      debugPrint('before await authRepo.logInWithFacebook');
       await _authenticationRepository.signInWithFacebook();
+      debugPrint('after await authRepo.logInWithFacebook');
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on LogInWithGoogleFailure catch (e) {
       emit(

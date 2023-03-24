@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:podium/src/app/app.dart';
+import 'package:podium/src/building_amenities/building_amenities.dart';
 import 'package:podium/src/home/home.dart';
 import 'package:podium/src/service_requests/service_requests.dart';
 import 'package:podium/src/splash/splash.dart';
@@ -25,5 +26,7 @@ List<Page<dynamic>> onGenerateAppViewPages(
       return [UserSettingsPage.page()];
     case AppPage.serviceRequest:
       return [ServiceRequestPage.page()];
+    case AppPage.buildingAmenities:
+      return [BuildingAmenitiesPage.page()];
   }
 }

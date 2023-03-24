@@ -99,6 +99,11 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                   context.read<ServiceRequestCubit>().serviceTypeChanged(value)
                 },
               ),
+              if (dropdownController == ServiceType.emergency)
+                const Text(
+                  'IF THIS IS A SERIOUS EMERGENCY CALL 911',
+                  style: TextStyle(color: Colors.red),
+                ),
               const Padding(
                 padding: EdgeInsets.all(12),
                 child: TextField(

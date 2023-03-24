@@ -254,10 +254,14 @@ class AuthenticationRepository {
     debugPrint('logInWithFacebook called in authentication_repo.dart');
     try {
       final result = await FacebookAuth.instance.login();
-      debugPrint('result in authentication_repo.dart: $result');
+      debugPrint('result.status in authentication_repo.dart: ${result.status}');
+      debugPrint(
+          'result.message in authentication_repo.dart: ${result.message}');
       if (result.status == LoginStatus.success) {
+        debugPrint('result.status is sucess');
         final credential = firebase_auth.FacebookAuthProvider.credential(
-            result.accessToken!.token,);
+          result.accessToken!.token,
+        );
         await _firebaseAuth.signInWithCredential(credential);
       }
     } on Exception catch (e) {
