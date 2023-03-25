@@ -93,10 +93,10 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                   )
                 ],
                 onChanged: (value) => {
-                  setState(() {
-                    dropdownController = value;
-                  }),
-                  context.read<ServiceRequestCubit>().serviceTypeChanged(value)
+                  // setState(() {
+                  //   dropdownController = value;
+                  // }),
+                  // context.read<ServiceRequestCubit>().serviceTypeChanged(value)
                 },
               ),
               if (dropdownController == ServiceType.emergency)
