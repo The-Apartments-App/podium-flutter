@@ -11,3 +11,8 @@ jobs:
     with:
       flutter_channel: stable
       flutter_version: 3.3.8
+      
+  - name: Install Dart SDK
+  uses: google/setup-dart@v1
+  with:
+    sdk: '3.0.0'
