@@ -10,6 +10,7 @@
 .history
 .svn/
 notes.txt
+cors.json
 
 # IntelliJ related
 *.iml
