@@ -33,15 +33,19 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> logInWithCredentials() async {
+    debugPrint('loginWithCredentials called in login_cubit.dart');
     if (!state.status.isValidated) return;
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
+      debugPrint('before await authRepo.logInWithEmailAndPassword');
       await _authenticationRepository.logInWithEmailAndPassword(
         email: state.email.value,
         password: state.password.value,
       );
+      debugPrint('after await authRepo.logInWithEmailAndPassword');
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on LogInWithEmailAndPasswordFailure catch (e) {
+      debugPrint('LogInWithEmailAndPasswordFailure.message: ${e.message}');
       emit(
         state.copyWith(
           errorMessage: e.message,

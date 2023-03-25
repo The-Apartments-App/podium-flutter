@@ -105,7 +105,19 @@ class _EmailInput extends StatelessWidget {
   }
 }
 
-class _PasswordInput extends StatelessWidget {
+class _PasswordInput extends StatefulWidget {
+  @override
+  PasswordState createState() => PasswordState();
+}
+
+class PasswordState extends State<_PasswordInput> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  bool obscureTextSet = true;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
@@ -117,11 +129,21 @@ class _PasswordInput extends StatelessWidget {
             key: const Key('loginForm_passwordInput_textField'),
             onChanged: (password) =>
                 context.read<LoginCubit>().passwordChanged(password),
-            obscureText: true,
+            obscureText: obscureTextSet,
             decoration: InputDecoration(
               labelText: 'password',
               helperText: '',
               errorText: state.password.invalid ? 'invalid password' : null,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  obscureTextSet ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: () => {
+                  setState(() {
+                    obscureTextSet = !obscureTextSet;
+                  })
+                },
+              ),
             ),
           ),
         );
