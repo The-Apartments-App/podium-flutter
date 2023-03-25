@@ -8,6 +8,7 @@ ThemeData buildAppTheme() {
     textTheme: _appTextTheme(base.textTheme),
     colorScheme:
         ColorScheme.fromSwatch().copyWith(primary: const Color(0xFF1A966E)),
+    scaffoldBackgroundColor: const Color(0XFFFFFFFF),
   );
 }
 

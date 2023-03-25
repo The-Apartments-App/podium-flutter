@@ -9,12 +9,11 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: const Row(
+    return const Scaffold(
+      body: Column(
         children: [
-          ListingsPage(),
-          Expanded(child: LoginPage()),
+          Expanded(flex: 2, child: LoginPage()),
+          Expanded(child: ListingsPage()),
         ],
       ),
     );
