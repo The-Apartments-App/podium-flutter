@@ -24,19 +24,19 @@ dependencies:
   flutter_facebook_auth: ^5.0.8
   flutter_launcher_icons: ^0.12.0
   flutter_pdfview: ^1.2.5
-  flutter_signin_button: ^2.0.0
   flutter_stripe: ^9.0.0+1
-  font_awesome_flutter: ^9.0.0
+  font_awesome_flutter: ^10.4.0
   form_builder_image_picker: ^3.1.0
   form_inputs:
     path: lib/packages/form_inputs
-  formz: ^0.4.0
+  formz: ^0.6.0
   google_fonts: ^4.0.3
   http: ^0.13.5
   image_picker: ^0.8.6
-  meta: ^1.7.0
+  meta: ^1.9.0
   path_provider: ^2.0.11
   permission_handler: ^10.2.0
+  sign_in_button: ^3.2.0
 
 dev_dependencies:
   bloc_test: ^9.0.0

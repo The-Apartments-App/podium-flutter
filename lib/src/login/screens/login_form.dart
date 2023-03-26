@@ -1,36 +1,34 @@
-import 'dart:io';
-
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:formz/formz.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/login/cubit/login_cubit.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/signup/sign_up.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 
   Widget _showAppleSignInButton() {
-    if (Platform.isIOS) {
-      return SignInButton(
-        Buttons.Apple,
-        onPressed: () {
-          // _signInWithApple();
-        },
-      );
-    } else {
-      return const SizedBox(height: 8);
-    }
+    // if (Platform.isIOS) {
+    //   return SignInButton(
+    //     Buttons.Apple,
+    //     onPressed: () {
+    //       // _signInWithApple();
+    //     },
+    //   );
+    // } else {
+    // }
+    return const SizedBox(height: 8);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state.status.isSubmissionFailure) {
+        if (state.status.isFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -38,7 +36,7 @@ class LoginForm extends StatelessWidget {
                 content: Text(state.errorMessage ?? 'Authentication Failure'),
               ),
             );
-        } else if (state.status.isSubmissionSuccess) {
+        } else if (state.status.isSuccess) {
           context.flow<AppPage>().update((state) => AppPage.userHome);
         }
       },
@@ -62,11 +60,11 @@ class LoginForm extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               SignInButton(
-                Buttons.Google,
+                Buttons.google,
                 onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
               ),
               SignInButton(
-                Buttons.Facebook,
+                Buttons.facebook,
                 onPressed: () => context.read<LoginCubit>().logInWithFacebook(),
               ),
               // _showAppleSignInButton(),
@@ -96,7 +94,7 @@ class _EmailInput extends StatelessWidget {
             decoration: InputDecoration(
               labelText: 'email',
               helperText: '',
-              errorText: state.email.invalid ? 'invalid email' : null,
+              errorText: state.email.isValid ? null : 'invalid email',
             ),
           ),
         );
@@ -133,7 +131,7 @@ class PasswordState extends State<_PasswordInput> {
             decoration: InputDecoration(
               labelText: 'password',
               helperText: '',
-              errorText: state.password.invalid ? 'invalid password' : null,
+              errorText: state.password.isValid ? null : 'invalid password',
               suffixIcon: IconButton(
                 icon: Icon(
                   obscureTextSet ? Icons.visibility : Icons.visibility_off,
@@ -160,7 +158,7 @@ class _LoginButton extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(2),
-          child: state.status.isSubmissionInProgress
+          child: state.status.isInProgress
               ? const CircularProgressIndicator()
               : ElevatedButton(
                   key: const Key('loginForm_continue_raisedButton'),
@@ -170,7 +168,7 @@ class _LoginButton extends StatelessWidget {
                     ),
                     backgroundColor: const Color(0xFF1A966E),
                   ),
-                  onPressed: state.status.isValidated
+                  onPressed: state.status.isSuccess
                       ? () => context.read<LoginCubit>().logInWithCredentials()
                       : null,
                   child: const Text('Login'),

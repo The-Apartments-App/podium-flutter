@@ -40,12 +40,13 @@ class UploadPictureState extends State<UploadPicture> {
             child: Column(
               children: [
                 ElevatedButton(
-                  //if user click this button, user can upload image from gallery
+                  //if you click this button, user can upload image from gallery
                   onPressed: () {
                     Navigator.pop(context);
                     final photo = getImage(ImageSource.gallery);
                     debugPrint('photo from gallery is -> $photo');
-                    // context.read<UpdateProfileCubit>().profilePictureChanged(photo);
+                    // context.read<UpdateProfileCubit>()
+                    // .profilePictureChanged(photo);
                   },
                   child: const Row(
                     children: [

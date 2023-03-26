@@ -7,7 +7,7 @@ class UpdateProfileState extends Equatable {
     this.password = const Password.pure(),
     this.userName = const Username.pure(),
     this.profilePicture,
-    this.status = FormzStatus.pure,
+    this.status = FormzSubmissionStatus.initial,
     this.errorMessage,
   });
 
@@ -15,7 +15,7 @@ class UpdateProfileState extends Equatable {
   final Password password;
   final Username userName;
   final Image? profilePicture;
-  final FormzStatus status;
+  final FormzSubmissionStatus status;
   final String? errorMessage;
 
   @override
@@ -27,7 +27,7 @@ class UpdateProfileState extends Equatable {
     Password? password,
     Username? userName,
     Image? profilePicture,
-    FormzStatus? status,
+    FormzSubmissionStatus? status,
     String? errorMessage,
   }) {
     debugPrint('PROFILE STATE UPDATE');
