@@ -16,3 +16,5 @@ jobs:
     steps:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1.5.0
+        with:
+          sdk: '3.0.0'
