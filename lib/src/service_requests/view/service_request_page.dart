@@ -14,20 +14,21 @@ class ServiceRequestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ServiceRequestCubit>(
-        create: (_) =>
-            ServiceRequestCubit(context.read<AuthenticationRepository>()),
-        child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-              onPressed: () => {
-                context.flow<AppPage>().update((state) => AppPage.userHome),
-              },
-            ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
+      create: (_) =>
+          ServiceRequestCubit(context.read<AuthenticationRepository>()),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+            onPressed: () => {
+              context.flow<AppPage>().update((state) => AppPage.userHome),
+            },
           ),
-          body: const ServiceRequestForm(),
-        ),);
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: const ServiceRequestForm(),
+      ),
+    );
   }
 }

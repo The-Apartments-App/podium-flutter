@@ -89,7 +89,8 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     required String? rentBill,
   }) async {
     final url = Uri.parse(
-        'https://us-central1-podium-78b4e.cloudfunctions.net/StripePayEndpointMethodId',);
+      'https://us-central1-podium-78b4e.cloudfunctions.net/StripePayEndpointMethodId',
+    );
 
     final response = await http.post(
       url,

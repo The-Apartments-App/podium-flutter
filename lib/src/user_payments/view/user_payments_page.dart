@@ -40,39 +40,45 @@ class PaymentsPage extends StatelessWidget {
     initPaymentSheet();
     debugPrint('PAYMENTS SCREEN LOADED');
     const textStyle = TextStyle(
-        fontSize: 28, fontWeight: FontWeight.w600, color: Colors.black,);
+      fontSize: 28,
+      fontWeight: FontWeight.w600,
+      color: Colors.black,
+    );
 
     return BlocProvider(
-        create: (context) => PaymentBloc(),
-        child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-              onPressed: () => {
-                context.flow<AppPage>().update((state) => AppPage.userHome),
-              },
-            ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
-          body: BlocBuilder<PaymentBloc, PaymentState>(
-            builder: (context, state) {
-              return Column(
-                children: [
-                  const Text(
-                    r'Amount Due: $0',
-                    style: textStyle,
-                  ),
-                  SizedBox(
-                      height: 32, width: MediaQuery.of(context).size.width,),
-                  ElevatedButton(
-                    onPressed: Stripe.instance.presentPaymentSheet,
-                    child: const Text('Open Payment Sheet'),
-                  ),
-                ],
-              );
+      create: (context) => PaymentBloc(),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+            onPressed: () => {
+              context.flow<AppPage>().update((state) => AppPage.userHome),
             },
           ),
-        ),);
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: BlocBuilder<PaymentBloc, PaymentState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                const Text(
+                  r'Amount Due: $0',
+                  style: textStyle,
+                ),
+                SizedBox(
+                  height: 32,
+                  width: MediaQuery.of(context).size.width,
+                ),
+                ElevatedButton(
+                  onPressed: Stripe.instance.presentPaymentSheet,
+                  child: const Text('Open Payment Sheet'),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
   }
 }
