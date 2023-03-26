@@ -20,7 +20,7 @@ dependencies:
   flutter_facebook_auth: ^5.0.6
   google_sign_in: ^6.0.2
   image_picker: ^0.8.6
-  meta: ^1.7.0
+  meta: ^1.8.0
 
 dev_dependencies:
   flutter_test:
