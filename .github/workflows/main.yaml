@@ -11,6 +11,8 @@ jobs:
     with:
       flutter_channel: stable
       flutter_version: 3.3.8
-
-- name: Setup Dart SDK
-  uses: dart-lang/setup-dart@v1.5.0
+  setup-dart:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1.5.0
