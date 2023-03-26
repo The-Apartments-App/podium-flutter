@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: d74f051467a841ce893a50ebeb420b7a5695f985d2781e22b3927fbc849aea45
+      sha256: a36ec4843dc30ea6bf652bf25e3448db6c5e8bcf4aa55f063a5d1dad216d8214
       url: "https://pub.dev"
     source: hosted
-    version: "57.0.0"
+    version: "58.0.0"
   _flutterfire_internals:
     dependency: transitive
     description:
@@ -21,10 +21,10 @@ packages:
     dependency: transitive
     description:
       name: analyzer
-      sha256: b665679cdccab0c754e65021f01087c6fab07a0b13659dd58827f765739b40f8
+      sha256: cc4242565347e98424ce9945c819c192ec0838cb9d1f6aa4a97cc96becbc5b27
       url: "https://pub.dev"
     source: hosted
-    version: "5.9.0"
+    version: "5.10.0"
   args:
     dependency: transitive
     description:
@@ -327,14 +327,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  google_identity_services_web:
+    dependency: transitive
+    description:
+      name: google_identity_services_web
+      sha256: "5d9af2f1fa192f2629a266d038ee9307b0abe729a4f1b454dd21b414f5e7d381"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   google_sign_in:
     dependency: "direct main"
     description:
       name: google_sign_in
-      sha256: "821f354c053d51a2d417b02d42532a19a6ea8057d2f9ebb8863c07d81c98aaf9"
+      sha256: "750d08ffb4cd469f13068d15844ffd1d60c7ac1ca3c815918ba4ce4af22a2ddb"
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.4"
+    version: "6.0.2"
   google_sign_in_android:
     dependency: transitive
     description:
@@ -363,10 +371,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_web
-      sha256: "75cc41ebc53b1756320ee14d9c3018ad3e6cea298147dbcd86e9d0c8d6720b40"
+      sha256: "9f883b9b525297663510dfbbe8b04d39715aa0abba430851f501b7d1e4b0f465"
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.2+1"
+    version: "0.11.0+2"
   http:
     dependency: transitive
     description:
@@ -696,18 +704,18 @@ packages:
     dependency: "direct dev"
     description:
       name: very_good_analysis
-      sha256: "4815adc7ded57657038d2bb2a7f332c50e3c8152f7d3c6acf8f6b7c0cc81e5e2"
+      sha256: ebc48c51db35beeeec8c414e32f7bd78e612bd7f5992ccb0d46e19edaeb40b08
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "4.0.0+1"
   vm_service:
     dependency: transitive
     description:
       name: vm_service
-      sha256: b3dfd4c8a6974975a7f348b663050f3c5812a9a544d993554ee9664bde0e0bf8
+      sha256: f6deed8ed625c52864792459709183da231ebf66ff0cf09e69b573227c377efe
       url: "https://pub.dev"
     source: hosted
-    version: "11.2.1"
+    version: "11.3.0"
   watcher:
     dependency: transitive
     description:
@@ -741,5 +749,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.4"
+  dart: ">=2.19.0 <4.0.0"
   flutter: ">=3.3.0"
