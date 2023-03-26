@@ -10,8 +10,10 @@ class PaymentState extends Equatable {
   final PaymentStatus status;
   final CardFieldInputDetails cardFieldInputDetails;
 
-  PaymentState copyWith(
-      {PaymentStatus? status, CardFieldInputDetails? cardFieldInputDetails,}) {
+  PaymentState copyWith({
+    PaymentStatus? status,
+    CardFieldInputDetails? cardFieldInputDetails,
+  }) {
     return PaymentState(
       status: status ?? this.status,
       cardFieldInputDetails:
@@ -20,7 +22,5 @@ class PaymentState extends Equatable {
   }
 
   @override
-  List<Object> get props => [
-    status, cardFieldInputDetails
-  ];
+  List<Object> get props => [status, cardFieldInputDetails];
 }

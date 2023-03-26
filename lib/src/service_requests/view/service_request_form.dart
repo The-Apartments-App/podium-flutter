@@ -56,7 +56,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
   Widget build(BuildContext context) {
     return BlocListener<ServiceRequestCubit, ServiceRequestState>(
       listener: (context, state) {
-        if (state.status.isSubmissionFailure) {
+        if (state.status.isFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -64,7 +64,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                 content: Text(state.errorMessage ?? 'Authentication Failure'),
               ),
             );
-        } else if (state.status.isSubmissionSuccess) {
+        } else if (state.status.isSuccess) {
           Navigator.of(context).pop();
         }
       },
@@ -93,10 +93,10 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                   )
                 ],
                 onChanged: (value) => {
-                  setState(() {
-                    dropdownController = value;
-                  }),
-                  context.read<ServiceRequestCubit>().serviceTypeChanged(value)
+                  // setState(() {
+                  //   dropdownController = value;
+                  // }),
+                  // context.read<ServiceRequestCubit>().serviceTypeChanged(value)
                 },
               ),
               if (dropdownController == ServiceType.emergency)

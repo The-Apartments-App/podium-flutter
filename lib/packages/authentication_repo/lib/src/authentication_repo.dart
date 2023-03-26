@@ -256,7 +256,8 @@ class AuthenticationRepository {
       final result = await FacebookAuth.instance.login();
       debugPrint('result.status in authentication_repo.dart: ${result.status}');
       debugPrint(
-          'result.message in authentication_repo.dart: ${result.message}');
+        'result.message in authentication_repo.dart: ${result.message}',
+      );
       if (result.status == LoginStatus.success) {
         debugPrint('result.status is sucess');
         final credential = firebase_auth.FacebookAuthProvider.credential(

@@ -10,9 +10,9 @@ class SignUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SignUpCubit, SignUpState>(
       listener: (context, state) {
-        if (state.status.isSubmissionSuccess) {
+        if (state.status.isSuccess) {
           Navigator.of(context).pop();
-        } else if (state.status.isSubmissionFailure) {
+        } else if (state.status.isFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -52,7 +52,7 @@ class _EmailInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'email',
             helperText: '',
-            errorText: state.email.invalid ? 'invalid email' : null,
+            errorText: state.email.isValid ? null : 'invalid email',
           ),
         );
       },
@@ -74,7 +74,7 @@ class _PasswordInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'password',
             helperText: '',
-            errorText: state.password.invalid ? 'invalid password' : null,
+            errorText: state.email.isValid ? null : 'invalid email',
           ),
         );
       },
@@ -99,9 +99,9 @@ class _ConfirmPasswordInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'confirm password',
             helperText: '',
-            errorText: state.confirmedPassword.invalid
-                ? 'passwords do not match'
-                : null,
+            errorText: state.confirmedPassword.isValid
+                ? null
+                : 'passwords do not match',
           ),
         );
       },
@@ -115,7 +115,7 @@ class _SignUpButton extends StatelessWidget {
     return BlocBuilder<SignUpCubit, SignUpState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        return state.status.isSubmissionInProgress
+        return state.status.isInProgress
             ? const CircularProgressIndicator()
             : ElevatedButton(
                 key: const Key('signUpForm_continue_raisedButton'),
@@ -125,7 +125,7 @@ class _SignUpButton extends StatelessWidget {
                   ),
                   backgroundColor: Colors.orangeAccent,
                 ),
-                onPressed: state.status.isValidated
+                onPressed: state.status.isSuccess
                     ? () => context.read<SignUpCubit>().signUpFormSubmitted()
                     : null,
                 child: const Text('SIGN UP'),

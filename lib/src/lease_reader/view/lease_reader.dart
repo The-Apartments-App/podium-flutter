@@ -24,7 +24,6 @@ class LeaseReader extends StatelessWidget {
 }
 
 class PDFScreen extends StatefulWidget {
-
   const PDFScreen({
     super.key,
     this.path,
@@ -55,7 +54,8 @@ class PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
     final storageRef = FirebaseStorage.instance.ref();
     debugPrint('storageRef: $storageRef');
     final userLeaseAgreementRef = storageRef.child(
-        'users/${FirebaseAuth.instance.currentUser?.uid}/lease_agreement/Washington-Standard-Residential-Lease-Agreement-Template.pdf',);
+      'users/${FirebaseAuth.instance.currentUser?.uid}/lease_agreement/Washington-Standard-Residential-Lease-Agreement-Template.pdf',
+    );
     debugPrint('userLeaseAgreementRef: $userLeaseAgreementRef');
     pdfUrl = await userLeaseAgreementRef.getDownloadURL();
     debugPrint('pdfUrl: $pdfUrl');
@@ -68,7 +68,8 @@ class PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
       final bytes = data.bodyBytes;
       final dir = await getApplicationDocumentsDirectory();
       final file = File(
-          '${dir.path}/Washington-Standard-Residential-Lease-Agreement-Template.pdf',);
+        '${dir.path}/Washington-Standard-Residential-Lease-Agreement-Template.pdf',
+      );
       debugPrint('dir.path: ${dir.path}');
       final urlFile = await file.writeAsBytes(bytes);
       debugPrint('urlFile: $urlFile');
@@ -86,24 +87,26 @@ class PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    requestPersmission().then((_) => {
-          debugPrint('this is pdfUrl in initstate: $pdfUrl'),
-          getFileFromUrl(pdfUrl, 'who cares').then(
-            (value) => {
-              setState(() {
-                // ignore: unnecessary_null_comparison
-                if (value != null) {
-                  debugPrint('value.path : ${value.path}');
-                  urlPDFPath = value.path;
-                  loaded = true;
-                  exists = true;
-                } else {
-                  exists = false;
-                }
-              })
-            },
-          )
-        },);
+    requestPersmission().then(
+      (_) => {
+        debugPrint('this is pdfUrl in initstate: $pdfUrl'),
+        getFileFromUrl(pdfUrl, 'who cares').then(
+          (value) => {
+            setState(() {
+              // ignore: unnecessary_null_comparison
+              if (value != null) {
+                debugPrint('value.path : ${value.path}');
+                urlPDFPath = value.path;
+                loaded = true;
+                exists = true;
+              } else {
+                exists = false;
+              }
+            })
+          },
+        )
+      },
+    );
     super.initState();
   }
 

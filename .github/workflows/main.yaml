@@ -6,6 +6,14 @@ jobs:
   semantic-pull-request:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
 
+  setup-dart:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1.5.0
+        with:
+          sdk: '3.0.0-290.3.beta'
+
   build:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
