@@ -56,14 +56,6 @@ packages:
       relative: true
     source: path
     version: "1.0.0"
-  bazel_worker:
-    dependency: transitive
-    description:
-      name: bazel_worker
-      sha256: "500584fdb80bcb70a2990a5838338a757cc24bbf27d88bf791cbe9461c57cd5a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.2"
   bloc:
     dependency: "direct main"
     description:
@@ -112,14 +104,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
-  build_modules:
-    dependency: transitive
-    description:
-      name: build_modules
-      sha256: "8b5fa848cb29b2a726d75b473af6359d8ab6223d6bd943e8a01d16a7bf63e2b7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.0"
   build_resolvers:
     dependency: transitive
     description:
@@ -144,14 +128,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.2.7"
-  build_web_compilers:
-    dependency: "direct dev"
-    description:
-      name: build_web_compilers
-      sha256: a1b2682ca9a3273d3043856d794f60e2ac3bc2ae529803dd580c1f38ef8b5718
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.2"
   built_collection:
     dependency: transitive
     description:
@@ -1021,14 +997,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
-  protobuf:
-    dependency: transitive
-    description:
-      name: protobuf
-      sha256: "01dd9bd0fa02548bf2ceee13545d4a0ec6046459d847b6b061d8a27237108a08"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   provider:
     dependency: transitive
     description:
@@ -1061,14 +1029,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
-  scratch_space:
-    dependency: transitive
-    description:
-      name: scratch_space
-      sha256: a469a9642a4d7ee406d6224a85446eb8baa9dd6d81e2f0b76770deae7bd32aab
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   shelf:
     dependency: transitive
     description:
@@ -1323,5 +1283,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=3.0.0-134.0.dev <3.0.0"
+  dart: ">=3.0.0-134.0.dev <4.0.0"
   flutter: ">=3.7.0"
