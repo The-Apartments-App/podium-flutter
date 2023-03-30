@@ -45,11 +45,11 @@ class UserSettingsPage extends StatelessWidget {
                 },
               );
             },
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text(
                     'Update Profile',
                     style: TextStyle(

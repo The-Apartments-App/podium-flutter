@@ -127,11 +127,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.userPayments)
                   }
               },
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text(
                       'Payments',
                       style: userAccountPageTextStyle,
@@ -185,11 +185,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.serviceRequest)
                   }
               },
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text(
                       'Service Request',
                       style: userAccountPageTextStyle,
@@ -214,11 +214,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.userDocuments)
                   }
               },
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text(
                       'Documents',
                       style: userAccountPageTextStyle,
@@ -243,11 +243,11 @@ class _HomePageState extends State<HomePage> {
                         .update((state) => AppPage.userSettings)
                   }
               },
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text(
                       'Settings',
                       style: userAccountPageTextStyle,

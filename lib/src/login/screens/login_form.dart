@@ -78,7 +78,13 @@ class LoginForm extends StatelessWidget {
   }
 }
 
-class _EmailInput extends StatelessWidget {
+class _EmailInput extends StatefulWidget {
+  @override
+  State<_EmailInput> createState() => _EmailInputState();
+}
+
+class _EmailInputState extends State<_EmailInput> {
+  bool showError = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
@@ -88,13 +94,23 @@ class _EmailInput extends StatelessWidget {
           padding: const EdgeInsets.all(2),
           child: TextField(
             key: const Key('loginForm_emailInput_textField'),
-            onChanged: (email) =>
-                context.read<LoginCubit>().emailChanged(email),
+            onChanged: (email) {
+              context.read<LoginCubit>().emailChanged(email);
+              setState(() {
+                showError = false;
+              });
+            },
+            onEditingComplete: () {
+              setState(() {
+                showError = true;
+              });
+            },
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               labelText: 'email',
               helperText: '',
-              errorText: state.email.isValid ? null : 'invalid email',
+              errorText:
+                  state.email.isNotValid && showError ? 'invalid email' : null,
             ),
           ),
         );
@@ -115,6 +131,7 @@ class PasswordState extends State<_PasswordInput> {
   }
 
   bool obscureTextSet = true;
+  bool showError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -125,13 +142,24 @@ class PasswordState extends State<_PasswordInput> {
           padding: const EdgeInsets.all(2),
           child: TextField(
             key: const Key('loginForm_passwordInput_textField'),
-            onChanged: (password) =>
-                context.read<LoginCubit>().passwordChanged(password),
+            onChanged: (password) {
+              context.read<LoginCubit>().passwordChanged(password);
+              setState(() {
+                showError = false;
+              });
+            },
+            onEditingComplete: () {
+              setState(() {
+                showError = true;
+              });
+            },
             obscureText: obscureTextSet,
             decoration: InputDecoration(
               labelText: 'password',
               helperText: '',
-              errorText: state.password.isValid ? null : 'invalid password',
+              errorText: state.password.isNotValid && showError
+                  ? 'invalid password'
+                  : null,
               suffixIcon: IconButton(
                 icon: Icon(
                   obscureTextSet ? Icons.visibility : Icons.visibility_off,
@@ -168,9 +196,8 @@ class _LoginButton extends StatelessWidget {
                     ),
                     backgroundColor: const Color(0xFF1A966E),
                   ),
-                  onPressed: state.status.isSuccess
-                      ? () => context.read<LoginCubit>().logInWithCredentials()
-                      : null,
+                  onPressed: () =>
+                      context.read<LoginCubit>().logInWithCredentials(),
                   child: const Text('Login'),
                 ),
         );
