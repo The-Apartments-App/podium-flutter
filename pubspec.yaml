@@ -15,7 +15,7 @@ dependencies:
   equatable: ^2.0.3
   firebase_analytics: ^10.1.6
   firebase_auth: ^4.3.0
-  firebase_core: ^2.4.0
+  firebase_core: ^2.9.0
   firebase_storage: ^11.0.16
   flow_builder: ^0.0.9
   flutter:
