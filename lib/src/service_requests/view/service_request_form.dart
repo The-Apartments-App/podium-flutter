@@ -135,9 +135,9 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                   onPressed: () {
                     takePhoto(ImageSource.camera);
                   },
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
                         child: Icon(Icons.camera),
@@ -153,9 +153,9 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                   onPressed: () {
                     takePhoto(ImageSource.gallery);
                   },
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
                         child: Icon(Icons.camera_roll),
