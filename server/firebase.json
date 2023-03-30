@@ -4,7 +4,12 @@
     "version": "2"
   },
   "hosting": {
-    "public": "web"
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   },
   "functions": [
     {
@@ -16,8 +21,7 @@
         "firebase-debug.log",
         "firebase-debug.*.log"
       ],
-      "predeploy": [
-      ]
+      "predeploy": []
     }
   ]
 }
