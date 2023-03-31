@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="fonts/Questrial-Regular.ttf">
     <title>Podium Apartments</title>
 
-    <!-- update the version number as needed -->
+    <!-- update the version number as needed
     <script defer src="/__/firebase/9.18.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
+    include only the Firebase features as you need
     <script defer src="/__/firebase/9.18.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/9.18.0/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/9.18.0/firebase-firestore-compat.js"></script>
@@ -17,12 +18,11 @@
     <script defer src="/__/firebase/9.18.0/firebase-storage-compat.js"></script>
     <script defer src="/__/firebase/9.18.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/9.18.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/9.18.0/firebase-performance-compat.js"></script>
-    <!-- 
+    <script defer src="/__/firebase/9.18.0/firebase-performance-compat.js"></script> 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
-    -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+     -->
 
     <style media="screen">
       @font-face {
@@ -40,197 +40,16 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-family: questrialFont;
+        font-family: questrialFont sans-serif;
       }
 
-      .main-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .coming-soon{
-        font-weight: 400;
-        font-size: 40px;
-        background-image: linear-gradient(69deg, #069, #098d69);
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        -webkit-text-fill-color : transparent;
-      }
-
-      .partnerships-modal {
-        display: none; /* Hidden by default */
-        opacity: 0;
-        position: absolute; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        padding-top: 150px; /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
-        transition: opacity ease 500ms;
-      }
-
-
-      .modal-content {
-        background-color: lightgray;
-        margin: auto;
-        padding: 10px;
-        width: 350px;
-        border-radius: 25px;
-      }
-
-      .modal-title {
-        font-size: 32px;
-        font-weight: 400px;
-        color: #098d69;
-      }
-
-      .modal-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .modal-email-input {
-        height: 36px;
-        width: 260px;
-        border: none;
-        outline: none;
-        border-radius: 40px;
-        padding-left: 10px;
-      }
-
-      .modal-textarea-input {
-        resize: none;
-        height: 80px;
-        width: 250px;
-        border: none;
-        outline: none;
-        border-radius: 20px;
-        padding: 10px;
-      }
-
-      .modal-submit-button {
-        height: 32px;
-        width: 270px;
-        background: linear-gradient(69deg, #069, #098d69);
-        outline: none;
-        border: none;
-        border-radius: 10px;
-        font-family: questrialFont;
-        font-size: 20px;
-        font-weight: 700;
-        margin: 10px;
-      }
-
-      .modal-submit-button:hover{
-        cursor: pointer;
-      }
-
-      .x-container{
-        position: relative;
-        left: 95%;
-      }
-
-      i {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding: 5px;
-      }
-
-      i:hover{
-        background-color: gray;
-        border-radius: 50%;
-        cursor: pointer;
-      }
-
-      .partnerships-button {
-        font-family: questrialFont;
-        font-size: 42px;
-        color: #098d69;
-        height: 69px;
-        width: 420px;
-        border: 3px solid #098d69;
-        background-color: transparent;
-        border-radius: 10px;
-      }
-
-      .partnerships-button:hover {
-        cursor: pointer;
-      }
-
-  @media screen and (max-width: 469px) {
-    .podium-img, .partnerships-button {
-      transform: scale(.69);
-      transition: transform 200ms;
-    }
-
-  }
     </style>
   </head>
   <body>
     <main>
-      <div class="main-content">
-        <img class="podium-img" src="https://firebasestorage.googleapis.com/v0/b/podium-78b4e.appspot.com/o/podium_logo_with_title.png?alt=media&token=6ffad773-00bc-4510-a7ee-b4fa1ad991a7">
-        <h1 class="coming-soon">Coming Soon...</h1>
-  
-        <div class="partnerships-modal">
-          <div class="modal-content">
-            <span class="x-container"><i class="fa-solid fa-xmark"></i></span>
-            <form method="post" action="https://formsubmit.co/dylanvia@podiumapartments.com" class="modal-form">
-  
-              <p class="modal-title">Partner with Podium</p>
-              <input class="modal-email-input" type="email" id="email" name="email" placeholder="Your Email"><br>
-              <textarea class="modal-textarea-input" id="message" name="message" placeholder="Send us a message"></textarea>
-              <button class="modal-submit-button">Send It!</button>
-            </form>
-          </div>
-  
-        </div>
-      </div>
-    </main>
-    <footer>
-      <button class="partnerships-button">Partnerships</button>
-    </footer>
-    <script>
-      const partnershipsButton = document.querySelector('.partnerships-button');
-      const partnershipsModal = document.querySelector('.partnerships-modal');
-      const closeModalIcon = document.querySelector('.x-container');
-      const partnershipsForm = document.querySelector('modal-form');
-
-
-      const showPartnershipsModal = () => {
-          partnershipsModal.style.display = "block";
-          setTimeout(() => {
-            partnershipsModal.style.opacity = 1;
-          }, 0);
-      };
-
-      partnershipsButton.addEventListener('click', showPartnershipsModal)
-
-      closeModalIcon.onclick = function() {
-        partnershipsModal.style.display = "none";
-        partnershipsModal.style.opacity = 0;
-
-      }
-
-      window.onclick = function(event) {
-        if (event.target == partnershipsModal) {
-          partnershipsModal.style.display = "none";
-          partnershipsModal.style.opacity = 0;
-
-        }
-      }
-    </script>
-
-    <script>
+      <div id="flutter-app-container"></div>
+    
+    <!-- <script>
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
         // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
@@ -267,6 +86,15 @@
           loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
         }
       });
-    </script>
+    </script> -->
+      <script src="../../build/web/main.dart.js" type="application/javascript"></script>
+      <!-- <script>
+        // This code embeds your Flutter app in the HTML file
+        // Replace MyApp with the name of your top-level widget
+        const app = new App();
+        const container = document.getElementById('flutter-app-container');
+        const options = {initialRoute: window.location.pathname};
+        app.run(options, container);
+      </script> -->
   </body>
 </html>
