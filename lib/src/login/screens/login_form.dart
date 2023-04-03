@@ -40,34 +40,39 @@ class LoginForm extends StatelessWidget {
           context.flow<AppPage>().update((state) => AppPage.userHome);
         }
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            'lib/src/assets/images/podium_logo_with_title.png',
-            height: 180,
-          ),
-          SizedBox(width: 250, child: _EmailInput()),
-          const SizedBox(height: 8),
-          SizedBox(width: 250, child: _PasswordInput()),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [_LoginButton(), _DemoUserButton()],
-          ),
-          const SizedBox(height: 8),
-          SignInButton(
-            Buttons.google,
-            onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
-          ),
-          SignInButton(
-            Buttons.facebook,
-            onPressed: () => context.read<LoginCubit>().logInWithFacebook(),
-          ),
-          // _showAppleSignInButton(),
-          const SizedBox(height: 4),
-          _SignUpButton(),
-        ],
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width > 768
+            ? MediaQuery.of(context).size.width / 3
+            : 250,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'lib/src/assets/images/podium_logo_with_title.png',
+              height: 180,
+            ),
+            _EmailInput(),
+            const SizedBox(height: 8),
+            _PasswordInput(),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [_LoginButton(), _DemoUserButton()],
+            ),
+            const SizedBox(height: 8),
+            SignInButton(
+              Buttons.google,
+              onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
+            ),
+            SignInButton(
+              Buttons.facebook,
+              onPressed: () => context.read<LoginCubit>().logInWithFacebook(),
+            ),
+            // _showAppleSignInButton(),
+            const SizedBox(height: 4),
+            _SignUpButton(),
+          ],
+        ),
       ),
     );
   }

@@ -9,12 +9,15 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const mobileScreen = [LoginPage()];
+    const desktopScreen = [LoginPage(), ListingsPage()];
+
     return Scaffold(
-      body: ListView(
-        children: const [
-          LoginPage(),
-          ListingsPage(),
-        ],
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: MediaQuery.of(context).size.width < 768
+            ? mobileScreen
+            : desktopScreen,
       ),
     );
   }
