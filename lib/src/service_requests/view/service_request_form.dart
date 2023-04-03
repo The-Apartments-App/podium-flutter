@@ -41,7 +41,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
     //   debugPrint('PreviewPHOTO: ${user.photo}');
     //   return CircleAvatar(
     //     radius: 50,
-    //     backgroundImage: NetworkImage(user.photo!),
+    //     backgroundImage: Image.network(user.photo!).image,
     //   );
     // } else {
     //   return const CircleAvatar(
@@ -80,24 +80,61 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
               ),
               const SizedBox(height: 16),
               const Text('Service Type'),
-              DropdownButton(
-                value: dropdownController,
-                items: const [
-                  DropdownMenuItem(
-                    value: ServiceType.nonemergency,
-                    child: Text('Non-Emergency'),
-                  ),
-                  DropdownMenuItem(
-                    value: ServiceType.emergency,
-                    child: Text('Emergency'),
-                  )
-                ],
-                onChanged: (value) => {
-                  // setState(() {
-                  //   dropdownController = value;
-                  // }),
-                  // context.read<ServiceRequestCubit>().serviceTypeChanged(value)
+              // DropdownButton(
+              //   value: dropdownController,
+              //   items: const [
+              //     DropdownMenuItem(
+              //       value: ServiceType.nonemergency,
+              //       child: Text('Non-Emergency'),
+              //     ),
+              //     DropdownMenuItem(
+              //       value: ServiceType.emergency,
+              //       child: Text('Emergency'),
+              //     )
+              //   ],
+              //   onChanged: (value) => {
+              //     // setState(() {
+              //     //   dropdownController = value;
+              //     // }),
+              //     // context.read<ServiceRequestCubit>().serviceTypeChanged(value)
+              //   },
+              // ),
+              ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => SimpleDialog(
+                      title: const Text('Select Service Type'),
+                      children: [
+                        SimpleDialogOption(
+                          onPressed: () {
+                            Navigator.pop(context, ServiceType.nonemergency);
+                            context
+                                .read<ServiceRequestCubit>()
+                                .serviceTypeChanged(ServiceType.nonemergency);
+                          },
+                          child: const Text('Non-Emergency'),
+                        ),
+                        SimpleDialogOption(
+                          onPressed: () {
+                            Navigator.pop(context, ServiceType.emergency);
+                            context
+                                .read<ServiceRequestCubit>()
+                                .serviceTypeChanged(ServiceType.emergency);
+                          },
+                          child: const Text('Emergency'),
+                        ),
+                      ],
+                    ),
+                  ).then((value) {
+                    if (value != null && value is ServiceType) {
+                      setState(() {
+                        dropdownController = value;
+                      });
+                    }
+                  });
                 },
+                child: const Text('Select Service Type'),
               ),
               if (dropdownController == ServiceType.emergency)
                 const Text(

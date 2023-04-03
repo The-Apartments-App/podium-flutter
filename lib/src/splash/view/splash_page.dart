@@ -10,10 +10,10 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: const [
-          Expanded(flex: 2, child: LoginPage()),
-          Expanded(child: ListingsPage()),
+          LoginPage(),
+          ListingsPage(),
         ],
       ),
     );
