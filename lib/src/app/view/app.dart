@@ -3,7 +3,6 @@ import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/podium_logo/podium_logo.dart';
 import 'package:podium/theme.dart';
 
 class App extends StatelessWidget {
@@ -49,7 +48,7 @@ class AppView extends StatelessWidget {
         //   leading: const PodiumLogo(),
         // ),
         body: FlowBuilder<AppPage>(
-          state: AppPage.userHome,
+          state: AppPage.userLogin,
           onGeneratePages: onGenerateAppViewPages,
         ),
       ),

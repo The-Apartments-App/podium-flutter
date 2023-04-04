@@ -1,63 +1,104 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
-class PartnershipsButton extends StatelessWidget {
+class PartnershipsButton extends StatefulWidget {
   const PartnershipsButton({super.key});
 
   @override
+  State<PartnershipsButton> createState() => _PartnershipsButtonState();
+}
+
+class _PartnershipsButtonState extends State<PartnershipsButton> {
+  @override
   Widget build(BuildContext context) {
-    final emailTextController = TextEditingController();
+    final bodyTextController = TextEditingController();
+    final subjectTextController = TextEditingController();
     final messageTextController = TextEditingController();
     final formKey = GlobalKey<FormState>();
-    Future<void> submitForm() async {
-      if (formKey.currentState!.validate()) {
-        const url = 'https://formsubmit.co/dylanvia@podiumapartments.com';
-        final response = await http.post(
-          Uri.parse(url),
-          body: {
-            'email': emailTextController.text,
-            'message': messageTextController.text,
-          },
-        );
-        debugPrint('response from posting email: $response');
-        if (response.statusCode != 200) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Error'),
-              content: const Text(
-                  'There was an error submitting the form. Please try again later.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            ),
-          );
-        } else {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Success'),
-              content: const Text('Thank you for your submission!'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            ),
-          );
-          emailTextController.clear();
-          messageTextController.clear();
-        }
+
+    Future<void> send() async {
+      final email = Email(
+        body: bodyTextController.text,
+        subject: subjectTextController.text,
+        recipients: ['dylanvia@podiumapartments.com'],
+      );
+
+      String platformResponse;
+
+      try {
+        await FlutterEmailSender.send(email);
+        platformResponse = 'Email sent';
+      } catch (error) {
+        debugPrint('error: $error');
+        platformResponse = error.toString();
       }
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(platformResponse),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
     }
+
+    // Future<void> submitForm() async {
+    //   if (formKey.currentState!.validate()) {
+    //     const url = 'https://formsubmit.co/dylanvia@podiumapartments.com';
+    //     final response = await http.post(
+    //       Uri.parse(url),
+    //       body: {
+    //         'email': emailTextController.text,
+    //         'message': messageTextController.text,
+    //       },
+    //     );
+    //     debugPrint(
+    //         'response.statusCode from posting email: ${response.statusCode}');
+    //     if (response.statusCode != 200) {
+    //       showDialog(
+    //         context: context,
+    //         builder: (context) => AlertDialog(
+    //           title: const Text('Error'),
+    //           content: const Text(
+    //               'There was an error submitting the form. Please try again later.'),
+    //           actions: [
+    //             TextButton(
+    //               onPressed: () {
+    //                 Navigator.of(context).pop();
+    //               },
+    //               child: const Text('OK'),
+    //             ),
+    //           ],
+    //         ),
+    //       );
+    //     } else {
+    //       showDialog(
+    //         context: context,
+    //         builder: (context) => AlertDialog(
+    //           title: const Text('Success'),
+    //           content: const Text('Thank you for your submission!'),
+    //           actions: [
+    //             TextButton(
+    //               onPressed: () {
+    //                 Navigator.of(context).pop();
+    //               },
+    //               child: const Text('OK'),
+    //             ),
+    //           ],
+    //         ),
+    //       );
+    //       emailTextController.clear();
+    //       messageTextController.clear();
+    //     }
+    //   }
+    // }
 
     return ElevatedButton(
       onPressed: () {
@@ -119,7 +160,7 @@ class PartnershipsButton extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             TextFormField(
-                              controller: emailTextController,
+                              controller: subjectTextController,
                               decoration: InputDecoration(
                                 hintText: 'Email',
                                 filled: true,
@@ -153,7 +194,7 @@ class PartnershipsButton extends StatelessWidget {
                             ),
                             const SizedBox(height: 20),
                             ElevatedButton(
-                              onPressed: submitForm,
+                              onPressed: send,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xff098d69),
                                 shape: RoundedRectangleBorder(
