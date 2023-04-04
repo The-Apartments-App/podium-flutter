@@ -1,5 +1,6 @@
+import 'package:emailjs/emailjs.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PartnershipsButton extends StatefulWidget {
   const PartnershipsButton({super.key});
@@ -11,94 +12,40 @@ class PartnershipsButton extends StatefulWidget {
 class _PartnershipsButtonState extends State<PartnershipsButton> {
   @override
   Widget build(BuildContext context) {
-    final bodyTextController = TextEditingController();
-    final subjectTextController = TextEditingController();
+    final emailTextController = TextEditingController();
     final messageTextController = TextEditingController();
     final formKey = GlobalKey<FormState>();
+    final privateKey = dotenv.env['EMAILJS_PRIVATE_KEY'];
+    final serviceID =
+        dotenv.env['EMAILJS_SERVICE_ID'] ?? 'No service ID available';
+    final templateID =
+        dotenv.env['EMAILJS_TEMPLATE_ID'] ?? 'No template ID available';
+    debugPrint(privateKey);
+    debugPrint(serviceID);
+    debugPrint(templateID);
 
-    Future<void> send() async {
-      final email = Email(
-        body: bodyTextController.text,
-        subject: subjectTextController.text,
-        recipients: ['dylanvia@podiumapartments.com'],
-      );
-
-      String platformResponse;
-
+    Future<void> sendEmail() async {
       try {
-        await FlutterEmailSender.send(email);
-        platformResponse = 'Email sent';
+        await EmailJS.send(
+          serviceID,
+          templateID,
+          {
+            'user_email': emailTextController.text,
+            'message': messageTextController.text,
+          },
+          Options(
+            publicKey: 'MmTXgvYuIKZsRmifl',
+            privateKey: privateKey,
+          ),
+        );
+        debugPrint('SUCCESS!');
       } catch (error) {
-        debugPrint('error: $error');
-        platformResponse = error.toString();
+        if (error is EmailJSResponseStatus) {
+          debugPrint('ERROR... ${error.status}: ${error.text}');
+        }
+        debugPrint(error.toString());
       }
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(platformResponse),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
     }
-
-    // Future<void> submitForm() async {
-    //   if (formKey.currentState!.validate()) {
-    //     const url = 'https://formsubmit.co/dylanvia@podiumapartments.com';
-    //     final response = await http.post(
-    //       Uri.parse(url),
-    //       body: {
-    //         'email': emailTextController.text,
-    //         'message': messageTextController.text,
-    //       },
-    //     );
-    //     debugPrint(
-    //         'response.statusCode from posting email: ${response.statusCode}');
-    //     if (response.statusCode != 200) {
-    //       showDialog(
-    //         context: context,
-    //         builder: (context) => AlertDialog(
-    //           title: const Text('Error'),
-    //           content: const Text(
-    //               'There was an error submitting the form. Please try again later.'),
-    //           actions: [
-    //             TextButton(
-    //               onPressed: () {
-    //                 Navigator.of(context).pop();
-    //               },
-    //               child: const Text('OK'),
-    //             ),
-    //           ],
-    //         ),
-    //       );
-    //     } else {
-    //       showDialog(
-    //         context: context,
-    //         builder: (context) => AlertDialog(
-    //           title: const Text('Success'),
-    //           content: const Text('Thank you for your submission!'),
-    //           actions: [
-    //             TextButton(
-    //               onPressed: () {
-    //                 Navigator.of(context).pop();
-    //               },
-    //               child: const Text('OK'),
-    //             ),
-    //           ],
-    //         ),
-    //       );
-    //       emailTextController.clear();
-    //       messageTextController.clear();
-    //     }
-    //   }
-    // }
 
     return ElevatedButton(
       onPressed: () {
@@ -160,7 +107,7 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             TextFormField(
-                              controller: subjectTextController,
+                              controller: emailTextController,
                               decoration: InputDecoration(
                                 hintText: 'Email',
                                 filled: true,
@@ -194,7 +141,7 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
                             ),
                             const SizedBox(height: 20),
                             ElevatedButton(
-                              onPressed: send,
+                              onPressed: sendEmail,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xff098d69),
                                 shape: RoundedRectangleBorder(
