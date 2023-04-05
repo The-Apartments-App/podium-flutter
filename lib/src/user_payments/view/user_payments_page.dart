@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:podium/src/app/app.dart';
+import 'package:podium/src/appbar_back_button/appbar_back_button.dart';
 import 'package:podium/src/user_payments/bloc/payments_bloc.dart';
 
 class PaymentsPage extends StatelessWidget {
@@ -49,12 +50,7 @@ class PaymentsPage extends StatelessWidget {
       create: (context) => PaymentBloc(),
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => {
-              context.flow<AppPage>().update((state) => AppPage.userHome),
-            },
-          ),
+          leading: const AppBarBackButton(),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
