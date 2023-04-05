@@ -15,14 +15,14 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
     final emailTextController = TextEditingController();
     final messageTextController = TextEditingController();
     final formKey = GlobalKey<FormState>();
-    final privateKey = dotenv.env['EMAILJS_PRIVATE_KEY'];
-    final serviceID =
-        dotenv.env['EMAILJS_SERVICE_ID'] ?? 'No service ID available';
-    final templateID =
-        dotenv.env['EMAILJS_TEMPLATE_ID'] ?? 'No template ID available';
-    debugPrint(privateKey);
-    debugPrint(serviceID);
-    debugPrint(templateID);
+    // final privateKey = dotenv.env['EMAILJS_PRIVATE_KEY'];
+    // final serviceID =
+    //     dotenv.env['EMAILJS_SERVICE_ID'] ?? 'No service ID available';
+    // final templateID =
+    //     dotenv.env['EMAILJS_TEMPLATE_ID'] ?? 'No template ID available';
+    const privateKey = 'tkDacOuC2kK9X6eBYw6LA';
+    const serviceID = 'service_lslzt23';
+    const templateID = 'template_y5ke9zn';
 
     Future<void> sendEmail() async {
       try {
@@ -33,12 +33,27 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
             'user_email': emailTextController.text,
             'message': messageTextController.text,
           },
-          Options(
+          const Options(
             publicKey: 'MmTXgvYuIKZsRmifl',
             privateKey: privateKey,
           ),
         );
         debugPrint('SUCCESS!');
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text('Success!'),
+            content: const Text('Your message has been sent.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
       } catch (error) {
         if (error is EmailJSResponseStatus) {
           debugPrint('ERROR... ${error.status}: ${error.text}');
