@@ -40,9 +40,17 @@ class AppView extends StatelessWidget {
     debugPrint('2b. APPVIEW BUILT - MaterialApp is created here');
     return MaterialApp(
       theme: appTheme,
-      home: const FlowBuilder<AppPage>(
-        state: AppPage.userHome,
-        onGeneratePages: onGenerateAppViewPages,
+      home: const Scaffold(
+        // appBar: AppBar(
+        //   backgroundColor: const Color(0xFFFFFFFF),
+        //   foregroundColor: const Color(0xFF1A966E),
+        //   shadowColor: Colors.transparent,
+        //   leading: const PodiumLogo(),
+        // ),
+        body: FlowBuilder<AppPage>(
+          state: AppPage.userLogin,
+          onGeneratePages: onGenerateAppViewPages,
+        ),
       ),
     );
   }

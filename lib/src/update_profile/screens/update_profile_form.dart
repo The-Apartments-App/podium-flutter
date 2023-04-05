@@ -54,7 +54,7 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
       if (user.photo != null) {
         return CircleAvatar(
           radius: 50,
-          backgroundImage: NetworkImage(user.photo!),
+          backgroundImage: Image.network(user.photo!).image,
         );
       } else {
         return const CircleAvatar(

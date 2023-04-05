@@ -61,7 +61,8 @@ class _HomePageState extends State<HomePage> {
         return CircleAvatar(
           backgroundColor: Colors.transparent,
           radius: 50,
-          backgroundImage: NetworkImage(user.photo ?? 'https:www.google.com'),
+          backgroundImage:
+              Image.network(user.photo ?? 'https:www.google.com').image,
         );
       } else {
         return const CircleAvatar(
@@ -88,7 +89,7 @@ class _HomePageState extends State<HomePage> {
           () => debugPrint('Page refreshed on pull down'),
         ),
         child: ListView(
-          children: <Widget>[
+          children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(4, 20, 4, 4),
               child: Row(
