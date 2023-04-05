@@ -17,10 +17,10 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: comingSoon,
-        // children: MediaQuery.of(context).size.width < 768
-        //     ? mobileScreen
-        //     : desktopScreen,
+        // children: comingSoon,
+        children: MediaQuery.of(context).size.width < 768
+            ? mobileScreen
+            : desktopScreen,
       ),
     );
   }

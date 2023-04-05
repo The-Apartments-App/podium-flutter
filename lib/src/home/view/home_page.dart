@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/app/app.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,21 +24,9 @@ class _HomePageState extends State<HomePage> {
     final user = FirebaseAuth.instance.currentUser;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (user == null) {
-        debugPrint('3c. (if user == null) Routed to Login');
         routeToLogin(context);
-      } else {
-        debugPrint(
-          'CURRENT USER: $user',
-        );
-        debugPrint(
-          'CURRENT USER PROFILE PIC:${user.photoURL ?? "A user is logged in, but has no profilePic"}',
-        );
       }
     });
-  }
-
-  void routeToLogin(BuildContext context) {
-    context.flow<AppPage>().update((state) => AppPage.userLogin);
   }
 
   @override
@@ -56,8 +45,6 @@ class _HomePageState extends State<HomePage> {
 
     CircleAvatar getProfilePic() {
       if (user.photo != null) {
-        // debugPrint('USER.PHOTO IS NOT NULL');
-        // debugPrint('USER.PHOTO: ${user.photo}');
         return CircleAvatar(
           backgroundColor: Colors.transparent,
           radius: 50,

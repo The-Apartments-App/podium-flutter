@@ -1,5 +1,5 @@
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/app/app.dart';
 
 class AppBarBackButton extends StatelessWidget {
@@ -10,7 +10,7 @@ class AppBarBackButton extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
       onPressed: () => {
-        context.flow<AppPage>().update((state) => AppPage.userHome),
+        routeToPage(context, AppPage.userHome),
       },
     );
   }

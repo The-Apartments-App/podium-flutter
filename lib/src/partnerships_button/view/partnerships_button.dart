@@ -1,6 +1,6 @@
 import 'package:emailjs/emailjs.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PartnershipsButton extends StatefulWidget {
   const PartnershipsButton({super.key});

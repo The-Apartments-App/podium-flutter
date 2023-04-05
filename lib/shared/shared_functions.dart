@@ -1,4 +1,4 @@
-import 'package:authentication_repo/authentication_repo.dart';
+import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/podium_logo/podium_logo.dart';
@@ -16,15 +16,13 @@ Page<void> toPage(Widget page, String name) => MaterialPage<void>(
       name: name,
     );
 
-void routeToScreen(
+void routeToPage(
   BuildContext context,
   AppPage page,
-  String route,
-  User? user,
 ) {
-  Navigator.pushNamed(context, route);
+  context.flow<AppPage>().update((state) => page);
 }
 
 void routeToLogin(BuildContext context) {
-  routeToScreen(context, AppPage.userLogin, '/login', User.empty);
+  routeToPage(context, AppPage.userLogin);
 }

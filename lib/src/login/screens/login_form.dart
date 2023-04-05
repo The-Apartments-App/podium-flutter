@@ -1,7 +1,7 @@
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/login/cubit/login_cubit.dart';
 import 'package:podium/src/login/login.dart';
@@ -37,7 +37,7 @@ class LoginForm extends StatelessWidget {
               ),
             );
         } else if (state.status.isSuccess) {
-          context.flow<AppPage>().update((state) => AppPage.userHome);
+          routeToPage(context, AppPage.userHome);
         }
       },
       child: SizedBox(
@@ -235,7 +235,7 @@ class _DemoUserButton extends StatelessWidget {
         ),
         onPressed: () => {
           context.read<LoginCubit>().logInWithDemoUser(),
-          context.flow<AppPage>().update((state) => AppPage.userHome),
+          routeToPage(context, AppPage.userHome),
         },
         child: const Text('Demo User'),
       ),
