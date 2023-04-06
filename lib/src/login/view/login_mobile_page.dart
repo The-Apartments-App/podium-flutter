@@ -5,33 +5,33 @@ import 'package:podium/src/listings/listings_page.dart';
 import 'package:podium/src/login/login.dart';
 
 class LoginMobilePage extends StatefulWidget {
-  const LoginMobilePage({super.key});
+  const LoginMobilePage({super.key, required this.parentContext});
+  final BuildContext parentContext;
 
   @override
   State<LoginMobilePage> createState() => LoginMobilePageState();
 }
 
-GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-PersistentBottomSheetController? controller;
-bool bottomSheetIsShowing = false;
-
 class LoginMobilePageState extends State<LoginMobilePage> {
+  bool bottomSheetIsShowing = false;
   void showLogin(BuildContext context) {
-    controller =
-        scaffoldKey.currentState?.showBottomSheet((BuildContext context) {
-      return BlocProvider(
-        create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
-        child: const LoginForm(),
-      );
+    showModalBottomSheet<void>(
+      context: widget.parentContext,
+      builder: (_) {
+        return BlocProvider(
+          create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
+          child: const LoginForm(),
+        );
+      },
+    ).whenComplete(() => bottomSheetIsShowing = false);
+    setState(() {
+      bottomSheetIsShowing = true;
     });
-    bottomSheetIsShowing = true;
   }
 
-  void closeLogin() {
-    if (controller != null) {
-      controller?.close();
-      controller = null;
-      bottomSheetIsShowing = false;
+  void closeLogin(BuildContext context) {
+    if (bottomSheetIsShowing) {
+      Navigator.of(context).pop();
     }
   }
 
@@ -39,7 +39,7 @@ class LoginMobilePageState extends State<LoginMobilePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      showLogin(context);
+      showLogin(widget.parentContext);
     });
   }
 
@@ -52,7 +52,7 @@ class LoginMobilePageState extends State<LoginMobilePage> {
   void deactivate() {
     super.deactivate();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      closeLogin();
+      closeLogin(widget.parentContext);
     });
   }
 
@@ -63,6 +63,7 @@ class LoginMobilePageState extends State<LoginMobilePage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('bottomSheetIsShowing: $bottomSheetIsShowing');
     return Padding(
       padding: const EdgeInsets.all(8),
       child: BlocProvider(
