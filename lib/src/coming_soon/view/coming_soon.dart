@@ -14,18 +14,12 @@ class ComingSoon extends StatelessWidget {
           height: MediaQuery.of(context).size.height / 3,
           child: const PodiumLogoWithTitle(),
         ),
-        Text(
+        const Text(
           'Coming Soon..',
           style: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 40,
-            foreground: Paint()
-              ..shader = const LinearGradient(
-                colors: [Color(0x00ff0069), Color(0xFF098D69)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0.0, 1.0],
-              ).createShader(const Rect.fromLTWH(0, 0, 200, 70)),
+            color: Color(0xff098d69),
           ),
         ),
         const SizedBox(height: 45, width: 180, child: PartnershipsButton())

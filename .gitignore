@@ -11,6 +11,7 @@
 .svn/
 notes.txt
 cors.json
+*.env
 
 # IntelliJ related
 *.iml
