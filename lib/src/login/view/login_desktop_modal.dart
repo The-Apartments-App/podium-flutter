@@ -1,9 +1,8 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/src/listings/listings_page.dart';
 import 'package:podium/src/login/login.dart';
+import 'package:podium/src/login/view/login_form.dart';
 
 class LoginDesktopModal extends StatelessWidget {
   const LoginDesktopModal({super.key});

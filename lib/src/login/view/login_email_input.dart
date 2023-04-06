@@ -19,7 +19,9 @@ class LoginEmailInputState extends State<LoginEmailInput> {
         return Padding(
           padding: const EdgeInsets.all(2),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width > 768 ? 670 : 250,
+            width: MediaQuery.of(context).size.width >= 768
+                ? 670
+                : MediaQuery.of(context).size.width,
             child: TextField(
               key: const Key('loginFormLoginEmailInput_textField'),
               onChanged: (email) {

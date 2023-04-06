@@ -43,26 +43,25 @@ class LoginForm extends StatelessWidget {
           routeToPage(context, AppPage.userHome);
         }
       },
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * .7,
-        width: MediaQuery.of(context).size.width * .7,
-        child: Scaffold(
-          appBar: AppBar(
-            leading: const CloseButton(),
-            title: const Text('Log In or Sign Up'),
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            centerTitle: true,
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(0.5),
-              child: Container(
-                color: Colors.grey,
-                height: 0.5,
-              ),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: const CloseButton(),
+          title: const Text('Log In or Sign Up'),
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          centerTitle: true,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(0.5),
+            child: Container(
+              color: Colors.grey,
+              height: 0.5,
             ),
           ),
-          body: Column(
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(6),
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               const PodiumLogoWithTitle(height: 150, width: 150),
