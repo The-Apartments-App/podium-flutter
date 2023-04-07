@@ -16,39 +16,36 @@ class LoginEmailInputState extends State<LoginEmailInput> {
     return BlocBuilder<LoginCubit, LoginState>(
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(2),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width >= 768
-                ? 670
-                : MediaQuery.of(context).size.width,
-            child: TextField(
-              key: const Key('loginFormLoginEmailInput_textField'),
-              onChanged: (email) {
-                context.read<LoginCubit>().emailChanged(email);
-                setState(() {
-                  showError = false;
-                });
-              },
-              onEditingComplete: () {
-                setState(() {
-                  showError = true;
-                });
-              },
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.grey,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
+        return SizedBox(
+          width: MediaQuery.of(context).size.width >= 768
+              ? 670
+              : MediaQuery.of(context).size.width,
+          child: TextField(
+            style: const TextStyle(height: 1.5),
+            key: const Key('loginFormLoginEmailInput_textField'),
+            onChanged: (email) {
+              context.read<LoginCubit>().emailChanged(email);
+              setState(() {
+                showError = false;
+              });
+            },
+            onEditingComplete: () {
+              setState(() {
+                showError = true;
+              });
+            },
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.grey,
                 ),
-                labelText: 'Email',
-                helperText: '',
-                errorText: state.email.isNotValid && showError
-                    ? 'invalid email'
-                    : null,
+                borderRadius: BorderRadius.circular(8),
               ),
+              labelText: 'Email',
+              helperText: '',
+              errorText:
+                  state.email.isNotValid && showError ? 'invalid email' : null,
             ),
           ),
         );

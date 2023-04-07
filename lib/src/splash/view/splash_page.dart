@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:podium/src/coming_soon/coming_soon.dart';
 import 'package:podium/src/listings/listings_page.dart';

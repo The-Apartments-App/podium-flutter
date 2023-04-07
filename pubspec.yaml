@@ -28,6 +28,7 @@ dependencies:
   flutter_launcher_icons: ^0.12.0
   flutter_pdfview: ^1.3.0
   flutter_stripe: ^9.0.0+1
+  flutter_svg: ^2.0.4
   font_awesome_flutter: ^10.4.0
   form_builder_image_picker: ^3.1.0
   form_inputs:
@@ -56,9 +57,20 @@ flutter:
     - .env
 
   fonts:
-    - family: Questrial
+    - family: Roboto
       fonts:
-        - asset: lib/src/assets/fonts/Questrial-Regular.ttf
+        - asset: lib/src/assets/fonts/Roboto-Thin.ttf
+          weight: 100
+        - asset: lib/src/assets/fonts/Roboto-Light.ttf
+          weight: 300
+        - asset: lib/src/assets/fonts/Roboto-Regular.ttf
+          weight: 400
+        - asset: lib/src/assets/fonts/Roboto-Medium.ttf
+          weight: 500
+        - asset: lib/src/assets/fonts/Roboto-Bold.ttf
+          weight: 700
+        - asset: lib/src/assets/fonts/Roboto-Black.ttf
+          weight: 900
 
 flutter_icons:
   android: true

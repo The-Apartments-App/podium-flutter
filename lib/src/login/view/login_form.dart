@@ -7,6 +7,7 @@ import 'package:podium/src/login/cubit/login_cubit.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/login/view/login_continue_button.dart';
 import 'package:podium/src/login/view/login_email_input.dart';
+import 'package:podium/src/login/view/login_social_sign_in_button.dart';
 import 'package:podium/src/podium_logo_with_title/view/podium_logo_with_title.dart';
 import 'package:podium/src/signup/sign_up.dart';
 import 'package:sign_in_button/sign_in_button.dart';
@@ -45,58 +46,78 @@ class LoginForm extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 48,
           leading: const CloseButton(),
-          title: const Text('Log In or Sign Up'),
+          title: const Text(
+            'Log in or sign up',
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+          ),
           foregroundColor: Colors.black,
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           centerTitle: true,
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(0.5),
+            preferredSize: const Size.fromHeight(.2),
             child: Container(
-              color: Colors.grey,
-              height: 0.5,
+              color: Colors.grey.shade700,
+              height: .1,
             ),
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(6),
+          padding: const EdgeInsets.all(20),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
-              const PodiumLogoWithTitle(height: 150, width: 150),
-              const LoginEmailInput(),
-              const SizedBox(height: 8),
-              const LoginContinueButton(),
-              // const LoginPasswordInput(),
-              // const SizedBox(height: 8),
+              const SizedBox(height: 11),
               Row(
                 children: const [
+                  Text(
+                    'Welcome to Podium',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.start,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 21),
+              const LoginEmailInput(),
+              const LoginContinueButton(),
+              // const LoginPasswordInput(),
+              const SizedBox(height: 20.5),
+              Row(
+                children: [
                   Expanded(
                     child: Divider(
                       endIndent: 25,
-                      thickness: 1.15,
-                      color: Color(0xFFDDDDDD),
+                      thickness: 0,
+                      color: Colors.grey.shade400,
                     ),
                   ),
-                  Text('or'),
+                  const Text(
+                    'or',
+                    style: TextStyle(fontSize: 11.5),
+                  ),
                   Expanded(
                     child: Divider(
                       indent: 25,
-                      thickness: 1.15,
-                      color: Color(0xFFDDDDDD),
+                      thickness: 0,
+                      color: Colors.grey.shade400,
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 16),
+              SizedBox(
+                height: 48,
+                width: MediaQuery.of(context).size.width,
+                child: SocialSignInButton(
+                  buttonText: 'Continue with Facebook',
+                  onPressed: () =>
+                      context.read<LoginCubit>().logInWithFacebook(),
+                ),
+              ),
               SignInButton(
                 Buttons.google,
                 onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
-              ),
-              SignInButton(
-                Buttons.facebook,
-                onPressed: () => context.read<LoginCubit>().logInWithFacebook(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
