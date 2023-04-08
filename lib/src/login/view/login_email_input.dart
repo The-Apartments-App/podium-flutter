@@ -17,7 +17,7 @@ class LoginEmailInputState extends State<LoginEmailInput> {
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return SizedBox(
-          width: MediaQuery.of(context).size.width >= 768
+          width: MediaQuery.of(context).size.width >= 750
               ? 670
               : MediaQuery.of(context).size.width,
           child: TextField(

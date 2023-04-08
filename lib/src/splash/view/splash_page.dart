@@ -12,11 +12,11 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mobileScreen = [LoginMobilePage(parentContext: context)];
-    const desktopScreen = [LoginDesktopModal(), ListingsPage()];
+    final desktopScreen = [LoginDesktopModal(parentContext: context)];
     const comingSoon = [ComingSoon()];
     return Stack(
       // children: comingSoon,
-      children: MediaQuery.of(context).size.width <= 600
+      children: MediaQuery.of(context).size.width <= 750
           ? mobileScreen
           : desktopScreen,
     );

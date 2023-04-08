@@ -12,6 +12,7 @@ dependencies:
     path: lib/packages/authentication_repo
   bloc: ^8.1.0
   cloud_firestore: ^4.5.0
+  dropdown_button2: ^2.0.0
   emailjs: ^1.1.0
   equatable: ^2.0.3
   firebase_analytics: ^10.2.0
@@ -22,7 +23,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
-  flutter_dotenv: ^5.0.2
   flutter_email_sender: ^5.2.0
   flutter_facebook_auth: ^5.0.8
   flutter_launcher_icons: ^0.12.0
@@ -54,7 +54,6 @@ flutter:
   uses-material-design: true
   assets:
     - lib/src/assets/images/
-    - .env
 
   fonts:
     - family: Roboto

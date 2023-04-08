@@ -7,29 +7,31 @@ import 'package:podium/src/login/cubit/login_cubit.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/login/view/login_continue_button.dart';
 import 'package:podium/src/login/view/login_email_input.dart';
+import 'package:podium/src/login/view/login_phone_input.dart';
 import 'package:podium/src/login/view/login_social_sign_in_button.dart';
-import 'package:podium/src/podium_logo_with_title/view/podium_logo_with_title.dart';
 import 'package:podium/src/signup/sign_up.dart';
-import 'package:sign_in_button/sign_in_button.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
 
-  Widget _showAppleSignInButton() {
-    // if (Platform.isIOS) {
-    //   return SignInButton(
-    //     Buttons.Apple,
-    //     onPressed: () {
-    //       // _signInWithApple();
-    //     },
-    //   );
-    // } else {
-    // }
-    return const SizedBox(height: 8);
-  }
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
 
+class _LoginFormState extends State<LoginForm> {
+  bool isEmailInput = true;
   @override
   Widget build(BuildContext context) {
+    debugPrint('isEmailInput: $isEmailInput');
+
+    Widget emailOrPhone() {
+      if (isEmailInput == false) {
+        return const LoginPhoneInput();
+      } else {
+        return const LoginEmailInput();
+      }
+    }
+
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state.status.isFailure) {
@@ -44,98 +46,152 @@ class LoginForm extends StatelessWidget {
           routeToPage(context, AppPage.userHome);
         }
       },
-      child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 48,
-          leading: const CloseButton(),
-          title: const Text(
-            'Log in or sign up',
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-          ),
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          centerTitle: true,
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(.2),
-            child: Container(
-              color: Colors.grey.shade700,
-              height: .1,
-            ),
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              const SizedBox(height: 11),
-              Row(
-                children: const [
-                  Text(
-                    'Welcome to Podium',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-                    textAlign: TextAlign.start,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 21),
-              const LoginEmailInput(),
-              const LoginContinueButton(),
-              // const LoginPasswordInput(),
-              const SizedBox(height: 20.5),
-              Row(
+      child: ColoredBox(
+        color: const Color(0xFFFFFFFF),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 4, 12, 0),
+              child: Stack(
                 children: [
-                  Expanded(
-                    child: Divider(
-                      endIndent: 25,
-                      thickness: 0,
-                      color: Colors.grey.shade400,
+                  SizedBox(
+                    height: 36,
+                    child: Flex(
+                      direction: Axis.horizontal,
+                      children: const [
+                        Expanded(
+                          child: Text(
+                            'Log in or sign up',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const Text(
-                    'or',
-                    style: TextStyle(fontSize: 11.5),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      indent: 25,
-                      thickness: 0,
-                      color: Colors.grey.shade400,
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    child: Transform.scale(
+                      scale: .85,
+                      child: const CloseButton(),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: 48,
-                width: MediaQuery.of(context).size.width,
-                child: SocialSignInButton(
-                  buttonText: 'Continue with Facebook',
-                  onPressed: () =>
-                      context.read<LoginCubit>().logInWithFacebook(),
-                ),
+            ),
+            Divider(
+              color: Colors.grey.shade200,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Wrap(
+                children: [
+                  Column(
+                    children: const [
+                      SizedBox(height: 2),
+                      Text(
+                        'Welcome to Podium',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 24),
+                    ],
+                  ),
+                  emailOrPhone(),
+                  Transform.translate(
+                    offset: const Offset(0, -5),
+                    child: const LoginContinueButton(),
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(height: 56),
+                      Expanded(
+                        child: Divider(
+                          endIndent: 25,
+                          color: Colors.grey.shade500,
+                        ),
+                      ),
+                      const Text(
+                        'or',
+                        style: TextStyle(fontSize: 11.5),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          indent: 25,
+                          color: Colors.grey.shade500,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  Wrap(
+                    runSpacing: 15.5675,
+                    children: [
+                      SocialSignInButton(
+                        height: 20,
+                        width: 20,
+                        iconName: 'facebook-icon.svg',
+                        buttonText: 'Continue with Facebook',
+                        onPressed: () => {
+                          context.read<LoginCubit>().logInWithFacebook(),
+                        },
+                      ),
+                      // const SizedBox(height: 16),
+                      SocialSignInButton(
+                        height: 18,
+                        width: 18,
+                        iconName: 'google-icon.svg',
+                        buttonText: 'Continue with Google',
+                        onPressed: () =>
+                            context.read<LoginCubit>().logInWithGoogle(),
+                      ),
+                      // const SizedBox(height: 16),
+                      SocialSignInButton(
+                        height: 28,
+                        width: 28,
+                        iconName: 'apple-icon.svg',
+                        buttonText: 'Continue with Apple',
+                        onPressed: () =>
+                            context.read<LoginCubit>().logInWithGoogle(),
+                      ),
+                      // const SizedBox(height: 16),
+                      SocialSignInButton(
+                        height: 19,
+                        width: 19,
+                        iconName: isEmailInput != true
+                            ? 'email-icon.svg'
+                            : 'phone-icon.svg',
+                        buttonText: isEmailInput != true
+                            ? 'Continue with Email'
+                            : 'Continue with Phone',
+                        onPressed: () => setState(
+                          () => {
+                            if (isEmailInput != true)
+                              isEmailInput = true
+                            else
+                              isEmailInput = false
+                          },
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
-              SignInButton(
-                Buttons.google,
-                onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [_LoginButton(), _DemoUserButton()],
-              ),
-              const SizedBox(height: 8),
-              // _showAppleSignInButton(),
-              const SizedBox(height: 4),
-              _SignUpButton(),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-//
 class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

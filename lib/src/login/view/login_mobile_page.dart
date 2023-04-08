@@ -19,17 +19,18 @@ class LoginMobilePageState extends State<LoginMobilePage> {
       isScrollControlled: true,
       context: widget.parentContext,
       builder: (_) {
-        return FractionallySizedBox(
-          heightFactor: .7150,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-            child: BlocProvider(
-              create: (_) =>
-                  LoginCubit(context.read<AuthenticationRepository>()),
-              child: const LoginForm(),
+        return ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          ),
+          child: BlocProvider(
+            create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
+            child: ListView(
+              shrinkWrap: true,
+              children: const [
+                LoginForm(),
+              ],
             ),
           ),
         );
@@ -61,10 +62,10 @@ class LoginMobilePageState extends State<LoginMobilePage> {
 
   @override
   void deactivate() {
-    super.deactivate();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       closeLogin(widget.parentContext);
     });
+    super.deactivate();
   }
 
   @override
@@ -75,6 +76,8 @@ class LoginMobilePageState extends State<LoginMobilePage> {
   @override
   Widget build(BuildContext context) {
     debugPrint('bottomSheetIsShowing: $bottomSheetIsShowing');
+    debugPrint(
+        'size.width in mobile_page: ${MediaQuery.of(context).size.width}');
     return const ListingsPage();
   }
 }
