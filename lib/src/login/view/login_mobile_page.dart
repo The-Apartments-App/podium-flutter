@@ -75,9 +75,6 @@ class LoginMobilePageState extends State<LoginMobilePage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('bottomSheetIsShowing: $bottomSheetIsShowing');
-    debugPrint(
-        'size.width in mobile_page: ${MediaQuery.of(context).size.width}');
     return const ListingsPage();
   }
 }

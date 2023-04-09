@@ -270,6 +270,19 @@ class AuthenticationRepository {
     }
   }
 
+  /// Checks if the [email] provided is already in use
+  Future<void> checkEmailValidity({required String email}) async {
+    try {
+      final data = await _firebaseAuth.fetchSignInMethodsForEmail(email);
+      debugPrint('data returned from fetchSignInMethodsForEmail: $data');
+      if (data.isNotEmpty) {
+        throw Exception('Email in use by another provider.');
+      }
+    } catch (error) {
+      debugPrint('checkEmailValidity error: $error');
+    }
+  }
+
   /// Signs in with the provided [email] and [password].
   ///
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.

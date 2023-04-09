@@ -30,12 +30,33 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
+  void returnToEmail() {
+    emit(
+      state.copyWith(
+        emailIsValid: false,
+      ),
+    );
+  }
+
+  Future<void> checkEmailValidity() async {
+    debugPrint('checkEmail validity called in login_cubit.dart');
+    if (state.email.isNotValid) return;
+    try {
+      await _authenticationRepository.checkEmailValidity(
+        email: state.email.value,
+      );
+      emit(state.copyWith(emailIsValid: true));
+      debugPrint('state in checkEmailValidity: ${state.emailIsValid}');
+    } catch (error) {
+      debugPrint('error in checkEmailValidity: $error');
+    }
+  }
+
   Future<void> logInWithCredentials() async {
     debugPrint('loginWithCredentials called in login_cubit.dart');
     debugPrint('state: $state');
     debugPrint('state.status: ${state.status}');
     if (state.status.isCanceled) return;
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       debugPrint('before await authRepo.logInWithEmailAndPassword');
       await _authenticationRepository.logInWithEmailAndPassword(

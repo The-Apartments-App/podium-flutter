@@ -12,6 +12,7 @@ dependencies:
     path: lib/packages/authentication_repo
   bloc: ^8.1.0
   cloud_firestore: ^4.5.0
+  dots_indicator: ^2.1.0
   dropdown_button2: ^2.0.0
   emailjs: ^1.1.0
   equatable: ^2.0.3

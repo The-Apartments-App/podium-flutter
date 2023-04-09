@@ -43,7 +43,7 @@ class AppView extends StatelessWidget {
       home: const Scaffold(
         // appBar: AppBar(
         //   backgroundColor: const Color(0xFFFFFFFF),
-        //   foregroundColor: const Color(0xFF1A966E),
+        //   foregroundColor: const Color(0xFF03795D),
         //   shadowColor: Colors.transparent,
         //   leading: const PodiumLogo(),
         // ),
