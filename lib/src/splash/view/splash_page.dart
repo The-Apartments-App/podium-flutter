@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:podium/src/coming_soon/coming_soon.dart';
-import 'package:podium/src/listings/listings_page.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/login/view/login_mobile_page.dart';
 

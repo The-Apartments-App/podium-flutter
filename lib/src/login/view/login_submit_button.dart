@@ -43,18 +43,3 @@ class LoginSubmitButton extends StatelessWidget {
     );
   }
 }
-
-// ClipRRect(
-//       borderRadius: BorderRadius.circular(10),
-//       child: SizedBox(
-//         width: MediaQuery.of(context).size.width,
-//         height: 48.5,
-//         child: ElevatedButton(
-//           onPressed: () => {context.read<LoginCubit>().checkEmailValidity()},
-//           child: const Text(
-//             'Continue',
-//             style: TextStyle(fontSize: 16),
-//           ),
-//         ),
-//       ),
-//     );

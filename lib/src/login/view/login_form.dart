@@ -5,12 +5,8 @@ import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/login/cubit/login_cubit.dart';
 import 'package:podium/src/login/login.dart';
-import 'package:podium/src/login/view/login_continue_button.dart';
-import 'package:podium/src/login/view/login_email_input.dart';
 import 'package:podium/src/login/view/login_email_screen.dart';
 import 'package:podium/src/login/view/login_password_screen.dart';
-import 'package:podium/src/login/view/login_phone_input.dart';
-import 'package:podium/src/login/view/login_social_sign_in_button.dart';
 import 'package:podium/src/signup/sign_up.dart';
 
 class LoginForm extends StatefulWidget {
@@ -21,7 +17,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  bool emailIsValid = true;
+  bool emailIsValid = false;
 
   void returnToEmail() {
     debugPrint('returnToEmail is called in login_form.dart');
@@ -62,67 +58,67 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 
-class _LoginButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(2),
-          child: state.status.isInProgress
-              ? const CircularProgressIndicator()
-              : ElevatedButton(
-                  key: const Key('loginForm_continue_raisedButton'),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    backgroundColor: const Color(0xFF03795D),
-                  ),
-                  onPressed: () =>
-                      context.read<LoginCubit>().logInWithCredentials(),
-                  child: const Text('Login'),
-                ),
-        );
-      },
-    );
-  }
-}
+// class _LoginButton extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<LoginCubit, LoginState>(
+//       buildWhen: (previous, current) => previous.status != current.status,
+//       builder: (context, state) {
+//         return Padding(
+//           padding: const EdgeInsets.all(2),
+//           child: state.status.isInProgress
+//               ? const CircularProgressIndicator()
+//               : ElevatedButton(
+//                   key: const Key('loginForm_continue_raisedButton'),
+//                   style: ElevatedButton.styleFrom(
+//                     shape: RoundedRectangleBorder(
+//                       borderRadius: BorderRadius.circular(30),
+//                     ),
+//                     backgroundColor: const Color(0xFF03795D),
+//                   ),
+//                   onPressed: () =>
+//                       context.read<LoginCubit>().logInWithCredentials(),
+//                   child: const Text('Login'),
+//                 ),
+//         );
+//       },
+//     );
+//   }
+// }
 
-class _SignUpButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return TextButton(
-      key: const Key('loginForm_createAccount_flatButton'),
-      onPressed: () => Navigator.of(context).push<void>(SignUpPage.route()),
-      child: Text(
-        'CREATE ACCOUNT',
-        style: TextStyle(color: theme.primaryColor),
-      ),
-    );
-  }
-}
+// class _SignUpButton extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final theme = Theme.of(context);
+//     return TextButton(
+//       key: const Key('loginForm_createAccount_flatButton'),
+//       onPressed: () => Navigator.of(context).push<void>(SignUpPage.route()),
+//       child: Text(
+//         'CREATE ACCOUNT',
+//         style: TextStyle(color: theme.primaryColor),
+//       ),
+//     );
+//   }
+// }
 
-class _DemoUserButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(2),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          backgroundColor: const Color(0xFF03795D),
-        ),
-        onPressed: () => {
-          context.read<LoginCubit>().logInWithDemoUser(),
-          routeToPage(context, AppPage.userHome),
-        },
-        child: const Text('Demo User'),
-      ),
-    );
-  }
-}
+// class _DemoUserButton extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(2),
+//       child: ElevatedButton(
+//         style: ElevatedButton.styleFrom(
+//           shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.circular(30),
+//           ),
+//           backgroundColor: const Color(0xFF03795D),
+//         ),
+//         onPressed: () => {
+//           context.read<LoginCubit>().logInWithDemoUser(),
+//           routeToPage(context, AppPage.userHome),
+//         },
+//         child: const Text('Demo User'),
+//       ),
+//     );
+//   }
+// }

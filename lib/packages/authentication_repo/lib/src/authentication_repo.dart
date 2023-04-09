@@ -276,7 +276,23 @@ class AuthenticationRepository {
       final data = await _firebaseAuth.fetchSignInMethodsForEmail(email);
       debugPrint('data returned from fetchSignInMethodsForEmail: $data');
       if (data.isNotEmpty) {
-        throw Exception('Email in use by another provider.');
+        final signInMethod = data[0];
+        // throw Exception('Email in use by another provider.');
+        switch (signInMethod) {
+          case 'facebook.com':
+            debugPrint('Signing in with Facebook');
+            await signInWithFacebook();
+            break;
+          case 'google.com':
+            debugPrint('Signing in with Google');
+            await logInWithGoogle();
+            break;
+          case 'apple.com':
+            debugPrint('Signing in with Apple');
+            break;
+          default:
+            debugPrint('Invalid sign-in method');
+        }
       }
     } catch (error) {
       debugPrint('checkEmailValidity error: $error');
