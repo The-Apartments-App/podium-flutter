@@ -1,6 +1,6 @@
 import 'package:emailjs/emailjs.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PartnershipsButton extends StatefulWidget {
   const PartnershipsButton({super.key});
@@ -10,11 +10,10 @@ class PartnershipsButton extends StatefulWidget {
 }
 
 class _PartnershipsButtonState extends State<PartnershipsButton> {
-  @override
-  Widget build(BuildContext context) {
-    final emailTextController = TextEditingController();
-    final messageTextController = TextEditingController();
-    final formKey = GlobalKey<FormState>();
+  final emailTextController = TextEditingController();
+  final messageTextController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  Future<void> sendEmail(BuildContext context) async {
     // final privateKey = dotenv.env['EMAILJS_PRIVATE_KEY'];
     // final serviceID =
     //     dotenv.env['EMAILJS_SERVICE_ID'] ?? 'No service ID available';
@@ -23,45 +22,45 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
     const privateKey = 'tkDacOuC2kK9X6eBYw6LA';
     const serviceID = 'service_lslzt23';
     const templateID = 'template_y5ke9zn';
-
-    Future<void> sendEmail() async {
-      try {
-        await EmailJS.send(
-          serviceID,
-          templateID,
-          {
-            'user_email': emailTextController.text,
-            'message': messageTextController.text,
-          },
-          const Options(
-            publicKey: 'MmTXgvYuIKZsRmifl',
-            privateKey: privateKey,
-          ),
-        );
-        debugPrint('SUCCESS!');
-        showDialog(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: const Text('Success!'),
-            content: const Text('Your message has been sent.'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        );
-      } catch (error) {
-        if (error is EmailJSResponseStatus) {
-          debugPrint('ERROR... ${error.status}: ${error.text}');
-        }
-        debugPrint(error.toString());
+    try {
+      await EmailJS.send(
+        serviceID,
+        templateID,
+        {
+          'user_email': emailTextController.text,
+          'message': messageTextController.text,
+        },
+        const Options(
+          publicKey: 'MmTXgvYuIKZsRmifl',
+          privateKey: privateKey,
+        ),
+      );
+      debugPrint('SUCCESS!');
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Success!'),
+          content: const Text('Your message has been sent.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    } catch (error) {
+      if (error is EmailJSResponseStatus) {
+        debugPrint('ERROR... ${error.status}: ${error.text}');
       }
+      debugPrint(error.toString());
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
         showModalBottomSheet(
@@ -156,7 +155,7 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
                             ),
                             const SizedBox(height: 20),
                             ElevatedButton(
-                              onPressed: sendEmail,
+                              onPressed: () => sendEmail(context),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xff098d69),
                                 shape: RoundedRectangleBorder(

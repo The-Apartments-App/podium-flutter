@@ -1,8 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/src/app/app.dart';
+import 'package:podium/src/appbar_back_button/appbar_back_button.dart';
 import 'package:podium/src/service_requests/service_requests.dart';
 
 class ServiceRequestPage extends StatelessWidget {
@@ -18,12 +17,7 @@ class ServiceRequestPage extends StatelessWidget {
           ServiceRequestCubit(context.read<AuthenticationRepository>()),
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => {
-              context.flow<AppPage>().update((state) => AppPage.userHome),
-            },
-          ),
+          leading: const AppBarBackButton(),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),

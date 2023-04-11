@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
+import 'package:podium/src/home/view/home_page_banner.dart';
+import 'package:podium/src/home/view/home_page_menu_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,61 +17,12 @@ class _HomePageState extends State<HomePage> {
   _HomePageState();
 
   @override
-  void initState() {
-    super.initState();
-    debugPrint('3a. HOMEPAGE STATE INITIALIZED');
-    final user = FirebaseAuth.instance.currentUser;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (user == null) {
-        debugPrint('3c. (if user == null) Routed to Login');
-        routeToLogin(context);
-      } else {
-        debugPrint(
-          'CURRENT USER: $user',
-        );
-        debugPrint(
-          'CURRENT USER PROFILE PIC:${user.photoURL ?? "A user is logged in, but has no profilePic"}',
-        );
-      }
-    });
-  }
-
-  void routeToLogin(BuildContext context) {
-    context.flow<AppPage>().update((state) => AppPage.userLogin);
-  }
-
-  @override
   Widget build(BuildContext context) {
     debugPrint(
-      '3b. HOME PAGE BUILT - User Account Page',
-    );
-    const userAccountPageTextStyle = TextStyle(
-      color: Colors.black,
-      fontWeight: FontWeight.w600,
-      fontSize: 28,
+      '3. HOME PAGE BUILT - User Account Page',
     );
 
     final user = context.select((AppBloc bloc) => bloc.state.user);
-    const defaultProfilePic = 'lib/src/assets/images/podium_logo.png';
-
-    CircleAvatar getProfilePic() {
-      if (user.photo != null) {
-        // debugPrint('USER.PHOTO IS NOT NULL');
-        // debugPrint('USER.PHOTO: ${user.photo}');
-        return CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 50,
-          backgroundImage:
-              Image.network(user.photo ?? 'https:www.google.com').image,
-        );
-      } else {
-        return const CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 50,
-          backgroundImage: AssetImage(defaultProfilePic),
-        );
-      }
-    }
 
     String loginOrLogout() {
       if (user.isEmpty) {
@@ -81,7 +32,6 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    getProfilePic();
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () => Future.delayed(
@@ -90,199 +40,43 @@ class _HomePageState extends State<HomePage> {
         ),
         child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(4, 20, 4, 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * .5,
-                    child: Text(
-                      'Welcome, ${user.name ?? "Guest"}',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child: getProfilePic(),
-                  )
-                ],
-              ),
-            ),
+            const HomePageBanner(),
             Divider(
               endIndent: MediaQuery.of(context).size.width * .6,
               thickness: 1.85,
               color: Colors.grey.shade400,
             ),
-            TextButton(
-              onPressed: () => {
-                if (user.isEmpty)
-                  {routeToLogin(context)}
-                else
-                  {
-                    context
-                        .flow<AppPage>()
-                        .update((state) => AppPage.userPayments)
-                  }
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      'Payments',
-                      style: userAccountPageTextStyle,
-                    ),
-                    Icon(
-                      Icons.credit_card,
-                      size: 36,
-                      color: Colors.black,
-                    )
-                  ],
-                ),
-              ),
+            const HomePageMenuItem(
+              page: AppPage.userPayments,
+              buttonText: 'Payments',
+              icon: Icons.credit_card,
             ),
-            // TextButton(
-            //   onPressed: () => {
-            //     if (user.isEmpty)
-            //       {routeToLogin(context)}
-            //     else
-            //       {
-            //         context
-            //             .flow<AppPage>()
-            //             .update((state) => AppPage.buildingAmenities)
-            //       }
-            //   },
-            //   child: const Padding(
-            //     padding: EdgeInsets.fromLTRB(64, 32, 64, 32),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: [
-            //         Text(
-            //           'Amenities',
-            //           style: userAccountPageTextStyle,
-            //         ),
-            //         Icon(
-            //           Icons.apartment,
-            //           size: 36,
-            //           color: Colors.black,
-            //         )
-            //       ],
-            //     ),
-            //   ),
+            const HomePageMenuItem(
+              page: AppPage.serviceRequest,
+              buttonText: 'Service Request',
+              icon: Icons.home_repair_service,
+            ),
+            const HomePageMenuItem(
+              page: AppPage.userDocuments,
+              buttonText: 'Documents',
+              icon: Icons.file_copy,
+            ),
+            const HomePageMenuItem(
+              page: AppPage.userSettings,
+              buttonText: 'Settings',
+              icon: Icons.settings,
+            ),
+            HomePageMenuItem(
+              page: AppPage.userLogin,
+              buttonText: loginOrLogout(),
+              icon: Icons.logout,
+              isLogOut: true,
+            ),
+            // const HomePageMenuItem(
+            //   page: AppPage.buildingAmenities,
+            //   buttonText: 'Amenities',
+            //   icon: Icons.apartment,
             // ),
-            TextButton(
-              onPressed: () => {
-                if (user.isEmpty)
-                  {routeToLogin(context)}
-                else
-                  {
-                    context
-                        .flow<AppPage>()
-                        .update((state) => AppPage.serviceRequest)
-                  }
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      'Service Request',
-                      style: userAccountPageTextStyle,
-                    ),
-                    Icon(
-                      Icons.home_repair_service,
-                      size: 36,
-                      color: Colors.black,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () => {
-                if (user.isEmpty)
-                  {routeToLogin(context)}
-                else
-                  {
-                    context
-                        .flow<AppPage>()
-                        .update((state) => AppPage.userDocuments)
-                  }
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      'Documents',
-                      style: userAccountPageTextStyle,
-                    ),
-                    Icon(
-                      Icons.file_copy,
-                      size: 36,
-                      color: Colors.black,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () => {
-                if (user.isEmpty)
-                  {routeToLogin(context)}
-                else
-                  {
-                    context
-                        .flow<AppPage>()
-                        .update((state) => AppPage.userSettings)
-                  }
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      'Settings',
-                      style: userAccountPageTextStyle,
-                    ),
-                    Icon(
-                      Icons.settings,
-                      size: 36,
-                      color: Colors.black,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () =>
-                  {FirebaseAuth.instance.signOut(), routeToLogin(context)},
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      loginOrLogout(),
-                      style: userAccountPageTextStyle,
-                    ),
-                    const Icon(
-                      Icons.logout,
-                      size: 36,
-                      color: Colors.black,
-                    )
-                  ],
-                ),
-              ),
-            )
           ],
         ),
       ),

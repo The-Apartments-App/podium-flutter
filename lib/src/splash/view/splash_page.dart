@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:podium/src/coming_soon/coming_soon.dart';
 import 'package:podium/src/listings/listings_page.dart';
 import 'package:podium/src/login/login.dart';
+import 'package:podium/src/login/view/login_mobile_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -10,18 +11,14 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const mobileScreen = [LoginPage()];
-    const desktopScreen = [LoginPage(), ListingsPage()];
+    final mobileScreen = [LoginMobilePage(parentContext: context)];
+    final desktopScreen = [LoginDesktopModal(parentContext: context)];
     const comingSoon = [ComingSoon()];
-
-    return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: comingSoon,
-        // children: MediaQuery.of(context).size.width < 768
-        //     ? mobileScreen
-        //     : desktopScreen,
-      ),
+    return Stack(
+      // children: comingSoon,
+      children: MediaQuery.of(context).size.width <= 750
+          ? mobileScreen
+          : desktopScreen,
     );
   }
 }
