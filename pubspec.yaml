@@ -42,6 +42,7 @@ dependencies:
   path_provider: ^2.0.11
   permission_handler: ^10.2.0
   sign_in_button: ^3.2.0
+  sign_in_with_apple: ^4.3.0
 
 dev_dependencies:
   bloc_test: ^9.0.0
