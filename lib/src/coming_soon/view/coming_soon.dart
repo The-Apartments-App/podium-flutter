@@ -15,7 +15,7 @@ class ComingSoon extends StatelessWidget {
           child: const PodiumLogoWithTitle(),
         ),
         const Text(
-          'Coming Soon..',
+          'Coming Soon...',
           style: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 40,
