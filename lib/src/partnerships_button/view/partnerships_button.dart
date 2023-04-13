@@ -23,6 +23,24 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
     const serviceID = 'service_lslzt23';
     const templateID = 'template_y5ke9zn';
     try {
+      if (emailTextController.text.isEmpty) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Failure.'),
+            content: const Text('Your message has not been sent.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+        return;
+      }
       await EmailJS.send(
         serviceID,
         templateID,
