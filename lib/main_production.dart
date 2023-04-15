@@ -16,7 +16,6 @@ import 'package:podium/src/app/app.dart';
 
 Future<void> main() async {
   debugPrint('1. MAIN PRODUCTION IS RUNNING');
-  debugPrint('TEST FOR GIT');
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
 
