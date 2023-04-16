@@ -9,9 +9,7 @@ class AppBarBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-      onPressed: () => {
-        routeToPage(context, AppPage.userHome),
-      },
+      onPressed: () => routeToPage(context, AppPage.userHome),
     );
   }
 }

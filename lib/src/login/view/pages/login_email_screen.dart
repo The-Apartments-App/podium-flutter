@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/login/login.dart';
-import 'package:podium/src/login/view/login_continue_button.dart';
-import 'package:podium/src/login/view/login_email_input.dart';
-import 'package:podium/src/login/view/login_phone_input.dart';
-import 'package:podium/src/login/view/login_social_sign_in_button.dart';
+import 'package:podium/src/login/view/components/login_continue_button.dart';
+import 'package:podium/src/login/view/components/login_email_input.dart';
+import 'package:podium/src/login/view/components/login_phone_input.dart';
+import 'package:podium/src/login/view/components/login_social_sign_in_button.dart';
 
 class LoginEmailScreen extends StatefulWidget {
   const LoginEmailScreen({super.key});
@@ -120,7 +120,6 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                         context.read<LoginCubit>().logInWithFacebook(),
                       },
                     ),
-                    // const SizedBox(height: 16),
                     SocialSignInButton(
                       height: 18,
                       width: 18,
@@ -129,7 +128,6 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       onPressed: () =>
                           context.read<LoginCubit>().logInWithGoogle(),
                     ),
-                    // const SizedBox(height: 16),
                     SocialSignInButton(
                       height: 28,
                       width: 28,
@@ -138,7 +136,6 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       onPressed: () =>
                           context.read<LoginCubit>().logInWithGoogle(),
                     ),
-                    // const SizedBox(height: 16),
                     SocialSignInButton(
                       height: 19,
                       width: 19,
@@ -156,6 +153,16 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                             isEmailInput = false
                         },
                       ),
+                    ),
+                    SocialSignInButton(
+                      height: 28,
+                      width: 28,
+                      iconName: 'apple-icon.svg',
+                      buttonText: 'Continue as Demo User',
+                      onPressed: () => {
+                        context.read<LoginCubit>().logInWithDemoUser(),
+                        Navigator.of(context).pop(),
+                      },
                     ),
                   ],
                 )

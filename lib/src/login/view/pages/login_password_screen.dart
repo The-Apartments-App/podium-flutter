@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:podium/src/login/view/login_password_input.dart';
-import 'package:podium/src/login/view/login_submit_button.dart';
+import 'package:podium/src/login/view/components/login_password_input.dart';
+import 'package:podium/src/login/view/components/login_submit_button.dart';
 
 class LoginPasswordScreen extends StatefulWidget {
   const LoginPasswordScreen({super.key, required this.returnToEmail});

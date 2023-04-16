@@ -15,8 +15,7 @@ class HomePageBanner extends StatelessWidget {
         return CircleAvatar(
           backgroundColor: Colors.transparent,
           radius: 50,
-          backgroundImage:
-              Image.network(user.photo ?? 'https:www.google.com').image,
+          backgroundImage: Image.network(user.photo!).image,
         );
       } else {
         return const CircleAvatar(
