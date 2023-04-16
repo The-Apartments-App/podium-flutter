@@ -40,14 +40,23 @@ class PasswordState extends State<LoginPasswordInput> {
             },
             obscureText: obscureTextSet,
             decoration: InputDecoration(
-              labelText: 'password',
-              helperText: '',
+              border: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.grey,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              labelText: 'Password',
               errorText: state.password.isNotValid && showError
                   ? 'invalid password'
                   : null,
-              suffixIcon: IconButton(
-                icon: Icon(
-                  obscureTextSet ? Icons.visibility : Icons.visibility_off,
+              suffixIcon: TextButton(
+                child: Text(
+                  obscureTextSet ? 'Show' : 'Hide',
+                  style: const TextStyle(
+                    decoration: TextDecoration.underline,
+                    decorationThickness: 1.5,
+                  ),
                 ),
                 onPressed: () => {
                   setState(() {

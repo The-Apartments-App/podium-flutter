@@ -8,7 +8,7 @@ Page<void> toPage(Widget page, String name) {
     child: Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFFFFF),
-        foregroundColor: const Color(0xFF1A966E),
+        foregroundColor: const Color(0xFF03795D),
         shadowColor: Colors.transparent,
         leading: const PodiumLogo(),
       ),
@@ -23,8 +23,4 @@ void routeToPage(
   AppPage page,
 ) {
   context.flow<AppPage>().update((state) => page);
-}
-
-void routeToLogin(BuildContext context) {
-  routeToPage(context, AppPage.userLogin);
 }

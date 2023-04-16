@@ -1,7 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/src/listings/listings_page.dart';
+import 'package:podium/src/home/home.dart';
 import 'package:podium/src/login/login.dart';
 
 class LoginDesktopModal extends StatefulWidget {
@@ -28,12 +28,18 @@ class _LoginDesktopModalState extends State<LoginDesktopModal> {
               create: (_) =>
                   LoginCubit(context.read<AuthenticationRepository>()),
               child: Wrap(
-                children: const [
+                children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
-                    child: SizedBox(width: 575, child: LoginForm()),
+                    child: SizedBox(
+                      width: 575,
+                      child: Container(
+                        constraints: const BoxConstraints(minHeight: 400),
+                        child: const LoginForm(),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -81,9 +87,6 @@ class _LoginDesktopModalState extends State<LoginDesktopModal> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('dialogIsShowing: $dialogIsShowing');
-    debugPrint(
-        'size.width in desktop_modal: ${MediaQuery.of(context).size.width}');
-    return const ListingsPage();
+    return const HomePage();
   }
 }

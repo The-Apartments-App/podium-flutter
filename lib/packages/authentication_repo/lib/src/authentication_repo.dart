@@ -270,6 +270,35 @@ class AuthenticationRepository {
     }
   }
 
+  /// Checks if the [email] provided is already in use
+  Future<void> checkEmailValidity({required String email}) async {
+    try {
+      final data = await _firebaseAuth.fetchSignInMethodsForEmail(email);
+      debugPrint('data returned from fetchSignInMethodsForEmail: $data');
+      if (data.isNotEmpty) {
+        final signInMethod = data[0];
+        // throw Exception('Email in use by another provider.');
+        switch (signInMethod) {
+          case 'facebook.com':
+            debugPrint('Signing in with Facebook');
+            await signInWithFacebook();
+            break;
+          case 'google.com':
+            debugPrint('Signing in with Google');
+            await logInWithGoogle();
+            break;
+          case 'apple.com':
+            debugPrint('Signing in with Apple');
+            break;
+          default:
+            debugPrint('Invalid sign-in method');
+        }
+      }
+    } catch (error) {
+      debugPrint('checkEmailValidity error: $error');
+    }
+  }
+
   /// Signs in with the provided [email] and [password].
   ///
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.

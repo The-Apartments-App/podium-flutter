@@ -44,17 +44,18 @@ class LoginPhoneInputState extends State<LoginPhoneInput> {
                 },
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Colors.grey,
                     ),
-                    labelText: 'Phone Number',
-                    errorText: state.email.isNotValid && showError
-                        ? 'invalid email'
-                        : null,
-                    hintText: '(XXX)-XXX-XXXX'),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  labelText: 'Phone Number',
+                  errorText: state.email.isNotValid && showError
+                      ? 'invalid email'
+                      : null,
+                  hintText: '(XXX)-XXX-XXXX',
+                ),
               ),
               const SizedBox(height: 8),
               const Text(
