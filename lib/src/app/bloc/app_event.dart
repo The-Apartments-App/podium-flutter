@@ -1,5 +1,6 @@
 part of 'app_bloc.dart';
 
+// Abstract class representing events that can occur within the app
 abstract class AppEvent extends Equatable {
   const AppEvent();
 
@@ -7,8 +8,10 @@ abstract class AppEvent extends Equatable {
   List<Object> get props => [];
 }
 
+// Event representing a request to log out of the app
 class AppLogoutRequested extends AppEvent {}
 
+// Event representing a change in the user's authentication status
 class AppUserChanged extends AppEvent {
   @visibleForTesting
   const AppUserChanged(this.user);
@@ -19,6 +22,7 @@ class AppUserChanged extends AppEvent {
   List<Object> get props => [user];
 }
 
+// Event representing a change in the currently displayed page within the app
 class AppPageChanged extends AppEvent {
   const AppPageChanged(this.page, this.user);
 

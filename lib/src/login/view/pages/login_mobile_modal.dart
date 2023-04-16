@@ -2,7 +2,6 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/home/home.dart';
-import 'package:podium/src/listings/listings_page.dart';
 import 'package:podium/src/login/login.dart';
 
 class LoginMobilePage extends StatefulWidget {
@@ -36,16 +35,11 @@ class LoginMobilePageState extends State<LoginMobilePage> {
           ),
         );
       },
-    ).whenComplete(() => bottomSheetIsShowing = false);
-    setState(() {
-      bottomSheetIsShowing = true;
-    });
+    );
   }
 
   void closeLogin(BuildContext context) {
-    if (bottomSheetIsShowing) {
-      Navigator.of(context).pop();
-    }
+    Navigator.of(context).maybePop();
   }
 
   @override
@@ -57,21 +51,11 @@ class LoginMobilePageState extends State<LoginMobilePage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void deactivate() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       closeLogin(widget.parentContext);
     });
     super.deactivate();
-  }
-
-  @override
-  void activate() {
-    super.activate();
   }
 
   @override

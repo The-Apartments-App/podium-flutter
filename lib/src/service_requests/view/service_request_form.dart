@@ -37,8 +37,6 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
 
   Widget getPreviewImage() {
     // if (previewPhoto != null) {
-    //   debugPrint('PreviewPHOTO IS NOT NULL');
-    //   debugPrint('PreviewPHOTO: ${user.photo}');
     //   return CircleAvatar(
     //     radius: 50,
     //     backgroundImage: Image.network(user.photo!).image,

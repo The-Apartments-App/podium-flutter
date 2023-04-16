@@ -47,16 +47,14 @@ class _LoginDesktopModalState extends State<LoginDesktopModal> {
           ),
         );
       },
-    ).whenComplete(() => dialogIsShowing = false);
-    setState(() {
-      dialogIsShowing = true;
-    });
+    );
   }
 
   void closeLogin(BuildContext context) {
-    if (dialogIsShowing) {
-      Navigator.of(context, rootNavigator: true).pop();
-    }
+    // if (Navigator.of(context, rootNavigator: true).canPop()) {
+    //   Navigator.of(context).pop();
+    // }
+    Navigator.of(context).maybePop();
   }
 
   @override
@@ -68,21 +66,11 @@ class _LoginDesktopModalState extends State<LoginDesktopModal> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void deactivate() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       closeLogin(widget.parentContext);
     });
     super.deactivate();
-  }
-
-  @override
-  void activate() {
-    super.activate();
   }
 
   @override

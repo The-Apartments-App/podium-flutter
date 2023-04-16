@@ -12,7 +12,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 /// {@template sign_up_with_email_and_password_failure}
-/// Thrown if during the sign up process if a failure occurs.
+/// Thrown during the sign up process if a failure occurs.
 /// {@endtemplate}
 class SignUpWithEmailAndPasswordFailure implements Exception {
   /// {@macro sign_up_with_email_and_password_failure}
@@ -171,13 +171,10 @@ class AuthenticationRepository {
   /// Whether or not the current environment is web
   /// Should only be overriden for testing purposes. Otherwise,
   /// defaults to [kIsWeb]
-  @visibleForTesting
-  bool isWeb = kIsWeb;
+  final bool _isWeb = kIsWeb;
 
   /// User cache key.
-  /// Should only be used for testing purposes.
-  @visibleForTesting
-  static const userCacheKey = '__user_cache_key__';
+  static const _userCacheKey = '__user_cache_key__';
 
   /// Stream of [User] which will emit the current user when
   /// the authentication state changes.
@@ -186,7 +183,7 @@ class AuthenticationRepository {
   Stream<User> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
       final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
-      _cache.write(key: userCacheKey, value: user);
+      _cache.write(key: _userCacheKey, value: user);
       return user;
     });
   }
@@ -194,9 +191,11 @@ class AuthenticationRepository {
   /// Returns the current cached user.
   /// Defaults to [User.empty] if there is no cached user.
   User get currentUser {
-    return _cache.read<User>(key: userCacheKey) ?? User.empty;
+    return _cache.read<User>(key: _userCacheKey) ?? User.empty;
   }
 
+  /// Clears the current cached user by setting the user cache key
+  /// to an empty string and the cached user to [User.empty].
   void clearUser() {
     return _cache.write<User>(key: '', value: User.empty);
   }
@@ -221,45 +220,58 @@ class AuthenticationRepository {
   ///
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
-    debugPrint('logInWithGoogle called in authentication_repo.dart');
     try {
       late final firebase_auth.AuthCredential credential;
-      if (isWeb) {
-        debugPrint('this isWeb');
+
+      // Check if app is running on web or mobile
+      if (_isWeb) {
+        // Use Firebase GoogleAuthProvider to authenticate user via popup
         final googleProvider = firebase_auth.GoogleAuthProvider();
         final userCredential = await _firebaseAuth.signInWithPopup(
           googleProvider,
         );
         credential = userCredential.credential!;
       } else {
-        debugPrint('This isNotWeb');
+        // Use GoogleSignIn to authenticate user on mobile
         final googleUser = await _googleSignIn.signIn();
+
+        // Print information about the Google user for debugging purposes
         debugPrint('this is googleUser: $googleUser');
+
+        // Obtain user's authentication information
         final googleAuth = await googleUser!.authentication;
+
+        // Use Firebase GoogleAuthProvider to create AuthCredential
         credential = firebase_auth.GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
       }
+
+      // Sign in with Firebase AuthCredential
       await _firebaseAuth.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
+    } // Handle Firebase Authentication exceptions if they occur
+    on FirebaseAuthException catch (e) {
+      // Output the error message to the console for debugging purposes
       debugPrint('error in loginwithgoogle: $e');
+      // Throw a custom exception with the same error code to handle it in a more user-friendly way
       throw LogInWithGoogleFailure.fromCode(e.code);
-    } catch (_) {
+    }
+// Handle other exceptions if they occur
+    catch (_) {
+      // Throw a custom exception to handle it in a more user-friendly way
       throw const LogInWithGoogleFailure();
     }
   }
 
+  /// Starts the Sign In with Facebook flow.
+  ///
+  /// Throws an exception if an error occurs during the sign in process.
   Future<void> signInWithFacebook() async {
-    debugPrint('logInWithFacebook called in authentication_repo.dart');
     try {
       final result = await FacebookAuth.instance.login();
-      debugPrint('result.status in authentication_repo.dart: ${result.status}');
-      debugPrint(
-        'result.message in authentication_repo.dart: ${result.message}',
-      );
       if (result.status == LoginStatus.success) {
-        debugPrint('result.status is sucess');
+        debugPrint('result.status is success');
         final credential = firebase_auth.FacebookAuthProvider.credential(
           result.accessToken!.token,
         );
@@ -267,17 +279,22 @@ class AuthenticationRepository {
       }
     } on Exception catch (e) {
       debugPrint('this is the error: $e');
+      // Catching any exceptions that occur during the Facebook sign in process.
     }
   }
 
-  /// Checks if the [email] provided is already in use
+  /// Checks if the [email] provided is already in use by another account
+  ///
+  /// If the email is already in use, it attempts to sign in the user using the
+  /// corresponding authentication provider. If the sign-in fails, an error is
+  /// logged.
+  ///
+  /// Throws an error if the operation fails.
   Future<void> checkEmailValidity({required String email}) async {
     try {
       final data = await _firebaseAuth.fetchSignInMethodsForEmail(email);
-      debugPrint('data returned from fetchSignInMethodsForEmail: $data');
       if (data.isNotEmpty) {
         final signInMethod = data[0];
-        // throw Exception('Email in use by another provider.');
         switch (signInMethod) {
           case 'facebook.com':
             debugPrint('Signing in with Facebook');
@@ -296,6 +313,8 @@ class AuthenticationRepository {
       }
     } catch (error) {
       debugPrint('checkEmailValidity error: $error');
+      // Throw an error to be handled by the caller.
+      throw error;
     }
   }
 
@@ -333,6 +352,11 @@ class AuthenticationRepository {
     }
   }
 
+  /// Updates the current user's profile information.
+  ///
+  /// The [email], [password], [displayName], and [photoURL] parameters are required.
+  ///
+  /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs while updating the user profile.
   Future<void> updateProfile({
     required String email,
     required String password,
@@ -342,14 +366,23 @@ class AuthenticationRepository {
     debugPrint('UPDATE PROFILE CALLED');
     try {
       if (_firebaseAuth.currentUser != null) {
+        // Update the current user's email
         await _firebaseAuth.currentUser?.updateEmail(email);
+
+        // Update the current user's password
         await _firebaseAuth.currentUser?.updatePassword(password);
+
+        // Update the current user's display name
         await _firebaseAuth.currentUser?.updateDisplayName(displayName);
+
+        // Update the current user's photo URL
         await _firebaseAuth.currentUser?.updatePhotoURL(photoURL);
       }
     } on FirebaseAuthException catch (e) {
+      // If an exception occurs while updating the user profile, throw a SignUpWithEmailAndPasswordFailure
       throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (_) {
+      // If an unknown exception occurs while updating the user profile, throw a SignUpWithEmailAndPasswordFailure
       throw const SignUpWithEmailAndPasswordFailure();
     }
   }
@@ -386,6 +419,11 @@ class AuthenticationRepository {
   }
 }
 
+/// This extension method adds a convenient way to convert a [firebase_auth.User]
+/// object to a [User] object in our application domain model.
+///
+/// The [toUser] method returns a new [User] object that contains the user's
+/// ID, email, display name, and photo URL.
 extension on firebase_auth.User {
   User get toUser {
     return User(id: uid, email: email, name: displayName, photo: photoURL);
