@@ -41,7 +41,7 @@ class _LoginFormState extends State<LoginForm> {
             );
         } else if (state.status.isSuccess) {
           debugPrint('state.status.isSuccess == true');
-          routeToPage(context, AppPage.userHome);
+          Navigator.of(context).pop();
         } else if (state.emailIsValid == true) {
           debugPrint('state.emailIsValid == true');
           setState(() {

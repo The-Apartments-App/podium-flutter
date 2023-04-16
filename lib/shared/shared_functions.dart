@@ -24,7 +24,3 @@ void routeToPage(
 ) {
   context.flow<AppPage>().update((state) => page);
 }
-
-void routeToLogin(BuildContext context) {
-  routeToPage(context, AppPage.userLogin);
-}
