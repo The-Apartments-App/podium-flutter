@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:podium/src/login/cubit/login_cubit.dart';
 import 'package:podium/src/login/login.dart';
-import 'package:podium/src/login/view/pages/login_email_screen.dart';
+import 'package:podium/src/login/view/pages/login_main_screen.dart';
 import 'package:podium/src/login/view/pages/login_password_screen.dart';
+import 'package:podium/src/login/view/pages/login_phone_code_screen.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -14,14 +15,26 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  bool emailIsValid = false;
+  bool emailIsEntered = false;
+  bool phoneIsEntered = false;
 
-  void returnToEmail() {
-    debugPrint('returnToEmail is called in login_form.dart');
+  void returnToMain() {
+    debugPrint('returnToMain is called in login_form.dart');
     setState(() {
-      emailIsValid = false;
+      emailIsEntered = false;
+      phoneIsEntered = false;
     });
-    context.read<LoginCubit>().returnToEmail();
+    context.read<LoginCubit>().returnToMain();
+  }
+
+  Widget correctPage() {
+    if (emailIsEntered) {
+      return LoginPasswordScreen(returnToMain: returnToMain);
+    } else if (phoneIsEntered) {
+      return PhoneNumberCodeScreen(returnToMain: returnToMain);
+    } else {
+      return const LoginMainScreen();
+    }
   }
 
   @override
@@ -39,33 +52,19 @@ class _LoginFormState extends State<LoginForm> {
         } else if (state.status.isSuccess) {
           debugPrint('state.status.isSuccess == true');
           Navigator.of(context).maybePop();
-        } else if (state.emailIsValid == true) {
-          debugPrint('state.emailIsValid == true');
+        } else if (state.emailIsEntered == true) {
+          debugPrint('state.emailIsEntered == true');
           setState(() {
-            emailIsValid = true;
+            emailIsEntered = true;
+          });
+        } else if (state.phoneIsEntered == true) {
+          debugPrint('state.phoneIsEntered == true');
+          setState(() {
+            phoneIsEntered = true;
           });
         }
       },
-      child: emailIsValid == false
-          ? const LoginEmailScreen()
-          : LoginPasswordScreen(
-              returnToEmail: returnToEmail,
-            ),
+      child: correctPage(),
     );
   }
 }
-
-// class _SignUpButton extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = Theme.of(context);
-//     return TextButton(
-//       key: const Key('loginForm_createAccount_flatButton'),
-//       onPressed: () => Navigator.of(context).push<void>(SignUpPage.route()),
-//       child: Text(
-//         'CREATE ACCOUNT',
-//         style: TextStyle(color: theme.primaryColor),
-//       ),
-//     );
-//   }
-// }

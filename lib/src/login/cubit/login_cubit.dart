@@ -12,6 +12,30 @@ class LoginCubit extends Cubit<LoginState> {
 
   final AuthenticationRepository _authenticationRepository;
 
+  void phoneNumberChanged(String value) {
+    emit(
+      state.copyWith(
+        phoneNumber: value,
+      ),
+    );
+  }
+
+  void countryCodeChanged(String value) {
+    emit(
+      state.copyWith(
+        countryCode: value,
+      ),
+    );
+  }
+
+  void smsCodeChanged(String value) {
+    emit(
+      state.copyWith(
+        smsCode: value,
+      ),
+    );
+  }
+
   void emailChanged(String value) {
     final email = Email.dirty(value);
     emit(
@@ -30,25 +54,40 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
-  void returnToEmail() {
+  void returnToMain() {
     emit(
       state.copyWith(
-        emailIsValid: false,
+        emailIsEntered: false,
+        phoneIsEntered: false,
       ),
     );
   }
 
   Future<void> checkEmailValidity() async {
-    debugPrint('checkEmail validity called in login_cubit.dart');
+    debugPrint('checkEmailValidity called in login_cubit.dart');
     if (state.email.isNotValid) return;
     try {
       await _authenticationRepository.checkEmailValidity(
         email: state.email.value,
       );
-      emit(state.copyWith(emailIsValid: true));
-      debugPrint('state in checkEmailValidity: ${state.emailIsValid}');
+      emit(state.copyWith(emailIsEntered: true));
+      debugPrint('state in checkEmailValidity: ${state.emailIsEntered}');
     } catch (error) {
       debugPrint('error in checkEmailValidity: $error');
+    }
+  }
+
+  Future<void> checkPhoneValidity() async {
+    debugPrint('checkPhoneValidity called in login_cubit.dart');
+    try {
+      debugPrint('${state.countryCode} ${state.phoneNumber}');
+      await _authenticationRepository.checkPhoneValidity(
+        phoneNumber: '${state.countryCode} ${state.phoneNumber}',
+      );
+      emit(state.copyWith(phoneIsEntered: true));
+      debugPrint('state in checkPhoneValidity: ${state.phoneIsEntered}');
+    } catch (error) {
+      debugPrint('error in checkPhoneValidity: $error');
     }
   }
 

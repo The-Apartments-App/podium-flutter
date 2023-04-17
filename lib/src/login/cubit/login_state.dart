@@ -4,33 +4,58 @@ class LoginState extends Equatable {
   const LoginState({
     this.email = const Email.pure(),
     this.password = const Password.pure(),
+    this.countryCode = 'United States (+1)',
+    this.phoneNumber = '',
+    this.smsCode = '',
     this.status = FormzSubmissionStatus.initial,
     this.errorMessage,
-    this.emailIsValid = false,
+    this.emailIsEntered = false,
+    this.phoneIsEntered = false,
   });
 
   final Email email;
+  final String countryCode;
+  final String phoneNumber;
+  final String smsCode;
   final Password password;
   final FormzSubmissionStatus status;
   final String? errorMessage;
-  final bool emailIsValid;
+  final bool emailIsEntered;
+  final bool phoneIsEntered;
 
   @override
-  List<Object> get props => [email, password, status, emailIsValid];
+  List<Object> get props => [
+        email,
+        password,
+        countryCode,
+        phoneNumber,
+        smsCode,
+        status,
+        emailIsEntered,
+        phoneIsEntered
+      ];
 
   LoginState copyWith({
     Email? email,
     Password? password,
+    String? countryCode,
+    String? phoneNumber,
+    String? smsCode,
     FormzSubmissionStatus? status,
     String? errorMessage,
-    bool? emailIsValid,
+    bool? emailIsEntered,
+    bool? phoneIsEntered,
   }) {
     return LoginState(
       email: email ?? this.email,
       password: password ?? this.password,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      countryCode: countryCode ?? this.countryCode,
+      smsCode: smsCode ?? this.smsCode,
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
-      emailIsValid: emailIsValid ?? this.emailIsValid,
+      emailIsEntered: emailIsEntered ?? this.emailIsEntered,
+      phoneIsEntered: phoneIsEntered ?? this.phoneIsEntered,
     );
   }
 }

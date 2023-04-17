@@ -11,12 +11,27 @@ class LoginPhoneInput extends StatefulWidget {
   State<LoginPhoneInput> createState() => LoginPhoneInputState();
 }
 
+String formatPhoneNumber(String phoneNumber) {
+  // Remove all non-digit characters
+  final digitsOnly = phoneNumber.replaceAll(RegExp('[^0-9]'), '');
+
+  // Check if the input is a valid phone number with 10 digits
+  if (digitsOnly.length != 10) {
+    throw ArgumentError('Invalid phone number');
+  }
+
+  // Format the digits into the desired format
+  return '${digitsOnly.substring(0, 3)}-${digitsOnly.substring(3, 6)}-${digitsOnly.substring(6)}';
+}
+
 class LoginPhoneInputState extends State<LoginPhoneInput> {
   bool showError = false;
+  TextEditingController phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
-      buildWhen: (previous, current) => previous.email != current.email,
+      buildWhen: (previous, current) =>
+          previous.phoneNumber != current.phoneNumber,
       builder: (context, state) {
         return SizedBox(
           width: MediaQuery.of(context).size.width >= 750
@@ -29,15 +44,18 @@ class LoginPhoneInputState extends State<LoginPhoneInput> {
                 height: 5,
               ),
               TextField(
+                controller: phoneNumberController,
                 style: const TextStyle(height: 1.5),
                 key: const Key('loginFormLoginPhoneInput_textField'),
                 onChanged: (phoneNumber) {
-                  context.read<LoginCubit>().emailChanged(phoneNumber);
+                  context.read<LoginCubit>().phoneNumberChanged(phoneNumber);
                   setState(() {
                     showError = false;
                   });
                 },
                 onEditingComplete: () {
+                  phoneNumberController.text =
+                      formatPhoneNumber(phoneNumberController.text);
                   setState(() {
                     showError = true;
                   });
@@ -51,9 +69,10 @@ class LoginPhoneInputState extends State<LoginPhoneInput> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   labelText: 'Phone Number',
-                  errorText: state.email.isNotValid && showError
-                      ? 'invalid email'
-                      : null,
+                  errorText:
+                      phoneNumberController.text.length != 12 && showError
+                          ? 'invalid phone number'
+                          : null,
                   hintText: '(XXX)-XXX-XXXX',
                 ),
               ),

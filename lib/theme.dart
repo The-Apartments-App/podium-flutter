@@ -6,6 +6,7 @@ ThemeData buildAppTheme() {
   final base = ThemeData.light();
   return base.copyWith(
     canvasColor: Colors.transparent,
+    shadowColor: Colors.transparent,
     textTheme: _appTextTheme(base.textTheme),
     colorScheme:
         ColorScheme.fromSwatch().copyWith(primary: const Color(0xFF03795D)),

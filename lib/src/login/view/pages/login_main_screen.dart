@@ -6,14 +6,14 @@ import 'package:podium/src/login/view/components/login_email_input.dart';
 import 'package:podium/src/login/view/components/login_phone_input.dart';
 import 'package:podium/src/login/view/components/login_social_sign_in_button.dart';
 
-class LoginEmailScreen extends StatefulWidget {
-  const LoginEmailScreen({super.key});
+class LoginMainScreen extends StatefulWidget {
+  const LoginMainScreen({super.key});
 
   @override
-  State<LoginEmailScreen> createState() => _LoginEmailScreenState();
+  State<LoginMainScreen> createState() => _LoginMainScreenState();
 }
 
-class _LoginEmailScreenState extends State<LoginEmailScreen> {
+class _LoginMainScreenState extends State<LoginMainScreen> {
   bool isEmailInput = true;
   Widget emailOrPhone() {
     if (isEmailInput == false) {
@@ -85,7 +85,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                 ),
                 emailOrPhone(),
                 const SizedBox(height: 85),
-                const LoginContinueButton(),
+                LoginContinueButton(isEmailInput: isEmailInput),
                 Row(
                   children: [
                     const SizedBox(height: 56),

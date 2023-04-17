@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:podium/src/login/view/components/login_password_input.dart';
 import 'package:podium/src/login/view/components/login_submit_button.dart';
 
-class LoginPasswordScreen extends StatefulWidget {
-  const LoginPasswordScreen({super.key, required this.returnToMain});
+class PhoneNumberCodeScreen extends StatefulWidget {
+  const PhoneNumberCodeScreen({super.key, required this.returnToMain});
   final Function returnToMain;
 
   @override
-  State<LoginPasswordScreen> createState() => _LoginPasswordScreenState();
+  State<PhoneNumberCodeScreen> createState() => _PhoneNumberCodeScreenState();
 }
 
-class _LoginPasswordScreenState extends State<LoginPasswordScreen> {
+class _PhoneNumberCodeScreenState extends State<PhoneNumberCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
@@ -28,7 +28,7 @@ class _LoginPasswordScreenState extends State<LoginPasswordScreen> {
                     children: const [
                       Expanded(
                         child: Text(
-                          'Log in',
+                          'Confirm your number',
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 15,
@@ -44,11 +44,7 @@ class _LoginPasswordScreenState extends State<LoginPasswordScreen> {
                   top: 10,
                   child: Transform.scale(
                     scale: .85,
-                    child: BackButton(
-                      onPressed: () {
-                        widget.returnToMain();
-                      },
-                    ),
+                    child: const BackButton(),
                   ),
                 ),
               ],
@@ -61,7 +57,7 @@ class _LoginPasswordScreenState extends State<LoginPasswordScreen> {
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
             child: Wrap(
               children: const [
-                LoginPasswordInput(),
+                LoginPhoneCodeInput(),
                 SizedBox(
                   height: 70,
                 ),

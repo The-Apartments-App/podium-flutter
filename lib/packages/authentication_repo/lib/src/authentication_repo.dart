@@ -313,8 +313,44 @@ class AuthenticationRepository {
       }
     } catch (error) {
       debugPrint('checkEmailValidity error: $error');
-      // Throw an error to be handled by the caller.
-      throw error;
+    }
+  }
+
+  Future<void> checkPhoneValidity({
+    required String phoneNumber,
+    required String smsCode,
+  }) async {
+    try {
+      if (_isWeb) {
+        debugPrint('checkPhoneValidity called and isWeb');
+        await _firebaseAuth.signInWithPhoneNumber(phoneNumber);
+      } else {
+        await _firebaseAuth.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            debugPrint('verificationCompleted in verifyPhoneNumber');
+            await _firebaseAuth.signInWithCredential(credential);
+          },
+          verificationFailed: (FirebaseAuthException e) {
+            if (e.code == 'invalid-phone-number') {
+              // Handle invalid phone number error.
+              debugPrint('invalid phone number');
+            } else {
+              // Handle other errors.
+            }
+          },
+          codeSent: (String verificationId, int? resendToken) async {
+            final credential = PhoneAuthProvider.credential(
+              verificationId: verificationId,
+              smsCode: smsCode,
+            );
+            await _firebaseAuth.signInWithCredential(credential);
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {},
+        );
+      }
+    } catch (error) {
+      debugPrint('checkPhoneVaildity Error: $error');
     }
   }
 

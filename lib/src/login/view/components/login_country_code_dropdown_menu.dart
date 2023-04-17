@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:podium/src/login/login.dart';
 
 class CountryCodeDropdown extends StatefulWidget {
   const CountryCodeDropdown({super.key});
@@ -264,8 +266,13 @@ class CountryCodeDropdownState extends State<CountryCodeDropdown> {
         ),
       ),
       onChanged: (String? newValue) {
+        debugPrint(
+            "newValue!.split('(')[1].split(')')[0]: ${newValue!.split('(')[1].split(')')[0]}");
+        context
+            .read<LoginCubit>()
+            .countryCodeChanged(newValue!.split('(')[1].split(')')[0]);
         setState(() {
-          selectedCountryCode = newValue!;
+          selectedCountryCode = newValue;
         });
       },
       items: countryCodes.map<DropdownMenuItem<String>>((String value) {
