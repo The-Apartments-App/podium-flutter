@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:podium/src/login/view/components/login_password_input.dart';
+import 'package:podium/src/login/view/components/login_phone_code_input.dart';
+import 'package:podium/src/login/view/components/login_phone_code_submit_button.dart';
 import 'package:podium/src/login/view/components/login_submit_button.dart';
 
 class PhoneNumberCodeScreen extends StatefulWidget {
@@ -61,7 +62,7 @@ class _PhoneNumberCodeScreenState extends State<PhoneNumberCodeScreen> {
                 SizedBox(
                   height: 70,
                 ),
-                LoginSubmitButton(),
+                LoginPhoneCodeSubmitButton(),
               ],
             ),
           ),

@@ -316,10 +316,10 @@ class AuthenticationRepository {
     }
   }
 
-  Future<void> checkPhoneValidity({
+  Future<String> checkPhoneValidity({
     required String phoneNumber,
-    required String smsCode,
   }) async {
+    var returnedVerificationID = '';
     try {
       if (_isWeb) {
         debugPrint('checkPhoneValidity called and isWeb');
@@ -327,10 +327,7 @@ class AuthenticationRepository {
       } else {
         await _firebaseAuth.verifyPhoneNumber(
           phoneNumber: phoneNumber,
-          verificationCompleted: (PhoneAuthCredential credential) async {
-            debugPrint('verificationCompleted in verifyPhoneNumber');
-            await _firebaseAuth.signInWithCredential(credential);
-          },
+          verificationCompleted: (PhoneAuthCredential credential) {},
           verificationFailed: (FirebaseAuthException e) {
             if (e.code == 'invalid-phone-number') {
               // Handle invalid phone number error.
@@ -339,18 +336,31 @@ class AuthenticationRepository {
               // Handle other errors.
             }
           },
-          codeSent: (String verificationId, int? resendToken) async {
-            final credential = PhoneAuthProvider.credential(
-              verificationId: verificationId,
-              smsCode: smsCode,
-            );
-            await _firebaseAuth.signInWithCredential(credential);
+          codeSent: (String verificationId, int? resendToken) {
+            returnedVerificationID = verificationId;
           },
           codeAutoRetrievalTimeout: (String verificationId) {},
         );
       }
     } catch (error) {
       debugPrint('checkPhoneVaildity Error: $error');
+    }
+    debugPrint('returnedVerificationId: $returnedVerificationID');
+    return returnedVerificationID;
+  }
+
+  Future<void> signInWithVerificationCode({
+    required String verificationCode,
+    required String verificationID,
+  }) async {
+    try {
+      final credential = PhoneAuthProvider.credential(
+        verificationId: verificationID,
+        smsCode: verificationCode,
+      );
+      await _firebaseAuth.signInWithCredential(credential);
+    } catch (error) {
+      debugPrint('signInWithVerificationCode error: $error');
     }
   }
 

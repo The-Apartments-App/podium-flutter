@@ -7,6 +7,7 @@ class LoginState extends Equatable {
     this.countryCode = 'United States (+1)',
     this.phoneNumber = '',
     this.smsCode = '',
+    this.verificationId = '',
     this.status = FormzSubmissionStatus.initial,
     this.errorMessage,
     this.emailIsEntered = false,
@@ -17,6 +18,7 @@ class LoginState extends Equatable {
   final String countryCode;
   final String phoneNumber;
   final String smsCode;
+  final String verificationId;
   final Password password;
   final FormzSubmissionStatus status;
   final String? errorMessage;
@@ -30,6 +32,7 @@ class LoginState extends Equatable {
         countryCode,
         phoneNumber,
         smsCode,
+        verificationId,
         status,
         emailIsEntered,
         phoneIsEntered
@@ -41,6 +44,7 @@ class LoginState extends Equatable {
     String? countryCode,
     String? phoneNumber,
     String? smsCode,
+    String? verificationId,
     FormzSubmissionStatus? status,
     String? errorMessage,
     bool? emailIsEntered,
@@ -52,6 +56,7 @@ class LoginState extends Equatable {
       phoneNumber: phoneNumber ?? this.phoneNumber,
       countryCode: countryCode ?? this.countryCode,
       smsCode: smsCode ?? this.smsCode,
+      verificationId: verificationId ?? this.verificationId,
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
       emailIsEntered: emailIsEntered ?? this.emailIsEntered,

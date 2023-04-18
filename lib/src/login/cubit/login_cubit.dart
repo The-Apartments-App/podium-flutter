@@ -81,8 +81,29 @@ class LoginCubit extends Cubit<LoginState> {
     debugPrint('checkPhoneValidity called in login_cubit.dart');
     try {
       debugPrint('${state.countryCode} ${state.phoneNumber}');
-      await _authenticationRepository.checkPhoneValidity(
+      final verificationId = await _authenticationRepository.checkPhoneValidity(
         phoneNumber: '${state.countryCode} ${state.phoneNumber}',
+      );
+      emit(
+        state.copyWith(
+          phoneIsEntered: true,
+          verificationId: verificationId,
+        ),
+      );
+      debugPrint('state in checkPhoneValidity: ${state.phoneIsEntered}');
+    } catch (error) {
+      debugPrint('error in checkPhoneValidity: $error');
+    }
+  }
+
+  Future<void> logInWithPhoneCredentials() async {
+    debugPrint('signInWithPhoneCredentials called here');
+    try {
+      debugPrint('state.smsCode: ${state.smsCode}');
+      debugPrint('state.verificationId: ${state.verificationId}');
+      await _authenticationRepository.signInWithVerificationCode(
+        verificationCode: state.smsCode,
+        verificationID: state.verificationId,
       );
       emit(state.copyWith(phoneIsEntered: true));
       debugPrint('state in checkPhoneValidity: ${state.phoneIsEntered}');
