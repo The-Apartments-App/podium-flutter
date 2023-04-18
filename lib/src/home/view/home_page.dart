@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icons.settings,
             ),
             HomePageMenuItem(
-              route: '',
+              route: 'userHome',
               buttonText: loginOrLogout(),
               icon: Icons.logout,
               isLogOut: true,

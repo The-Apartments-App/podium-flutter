@@ -7,23 +7,27 @@ class ComingSoon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 3,
-          child: const PodiumLogoWithTitle(),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 3,
+              child: const PodiumLogoWithTitle(),
+            ),
+            const Text(
+              'Coming Soon...',
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 40,
+                color: Color(0xff098d69),
+              ),
+            ),
+            const SizedBox(height: 45, width: 180, child: PartnershipsButton())
+          ],
         ),
-        const Text(
-          'Coming Soon...',
-          style: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 40,
-            color: Color(0xff098d69),
-          ),
-        ),
-        const SizedBox(height: 45, width: 180, child: PartnershipsButton())
-      ],
+      ),
     );
   }
 }
