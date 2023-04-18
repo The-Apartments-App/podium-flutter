@@ -21,14 +21,3 @@ class AppUserChanged extends AppEvent {
   @override
   List<Object> get props => [user];
 }
-
-// Event representing a change in the currently displayed page within the app
-class AppPageChanged extends AppEvent {
-  const AppPageChanged(this.page, this.user);
-
-  final AppPage page;
-  final User user;
-
-  @override
-  List<Object> get props => [page, user];
-}

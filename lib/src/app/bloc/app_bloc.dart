@@ -33,7 +33,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     _userSubscription = _authenticationRepository.user.listen(
       (user) => add(AppUserChanged(user)),
     );
-    on<AppPageChanged>(_onAppPageChanged);
   }
 
   // Instance variables for the app bloc.
@@ -56,42 +55,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   void _onLogoutRequested(AppLogoutRequested event, Emitter<AppState> emit) {
     // Log the user out of the app and return to the login page.
     unawaited(_authenticationRepository.logOut());
-  }
-
-  // Callback function to be executed when an app page changed event is received
-  void _onAppPageChanged(AppPageChanged event, Emitter<AppState> emit) {
-    switch (event.page) {
-      // Set the app state to the corresponding page state
-      // based on the received event.
-      case AppPage.userLogin:
-        return emit(
-          AppState.userLogin(event.user),
-        );
-      case AppPage.userHome:
-        return emit(
-          AppState.userHome(event.user),
-        );
-      case AppPage.userDocuments:
-        return emit(
-          AppState.userDocuments(event.user),
-        );
-      case AppPage.userSettings:
-        return emit(
-          AppState.userSettings(event.user),
-        );
-      case AppPage.userPayments:
-        return emit(
-          AppState.userPayments(event.user),
-        );
-      case AppPage.serviceRequest:
-        return emit(
-          AppState.serviceRequest(event.user),
-        );
-      case AppPage.buildingAmenities:
-        return emit(
-          AppState.buildingAmenities(event.user),
-        );
-    }
   }
 
   // Clean up resources when the app bloc is closed.
