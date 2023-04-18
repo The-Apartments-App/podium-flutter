@@ -5,6 +5,15 @@ final ThemeData appTheme = buildAppTheme();
 ThemeData buildAppTheme() {
   final base = ThemeData.light();
   return base.copyWith(
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.windows: ZoomPageTransitionsBuilder(),
+        TargetPlatform.linux: ZoomPageTransitionsBuilder(),
+      },
+    ),
     canvasColor: Colors.transparent,
     textTheme: _appTextTheme(base.textTheme),
     colorScheme:

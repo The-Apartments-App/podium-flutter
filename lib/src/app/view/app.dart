@@ -1,8 +1,13 @@
 import 'package:authentication_repo/authentication_repo.dart';
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
+import 'package:podium/src/building_amenities/view/building_amenities.dart';
+import 'package:podium/src/home/home.dart';
+import 'package:podium/src/service_requests/view/service_request_page.dart';
+import 'package:podium/src/user_documents/user_documents.dart';
+import 'package:podium/src/user_payments/user_payments.dart';
+import 'package:podium/src/user_settings/user_settings.dart';
 import 'package:podium/theme.dart';
 
 class App extends StatelessWidget {
@@ -40,18 +45,15 @@ class AppView extends StatelessWidget {
     debugPrint('2b. APPVIEW BUILT - MaterialApp is created here');
     return MaterialApp(
       theme: appTheme,
-      home: const Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: const Color(0xFFFFFFFF),
-        //   foregroundColor: const Color(0xFF03795D),
-        //   shadowColor: Colors.transparent,
-        //   leading: const PodiumLogo(),
-        // ),
-        body: FlowBuilder<AppPage>(
-          state: AppPage.userLogin,
-          onGeneratePages: onGenerateAppViewPages,
-        ),
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/userPayments': (context) => const PaymentsPage(),
+        '/userDocuments': (context) => const DocumentsPage(),
+        '/userSettings': (context) => const UserSettingsPage(),
+        '/serviceRequest': (context) => const ServiceRequestPage(),
+        '/buildingAmenities': (context) => const BuildingAmenitiesPage(),
+      },
     );
   }
 }
