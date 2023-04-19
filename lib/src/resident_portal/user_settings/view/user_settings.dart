@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:podium/src/appbar_back_button/appbar_back_button.dart';
-import 'package:podium/src/lease_reader/lease_reader.dart';
+import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
-class DocumentsPage extends StatelessWidget {
-  const DocumentsPage({super.key});
+class UserSettingsPage extends StatelessWidget {
+  const UserSettingsPage({super.key});
 
-  static Page<void> page() => const MaterialPage<void>(child: DocumentsPage());
+  static Page<void> page() =>
+      const MaterialPage<void>(child: UserSettingsPage());
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('DOCUMENTS SCREEN LOADED');
+    debugPrint('USER SETTINGS SCREEN LOADED');
     return Scaffold(
       appBar: AppBar(
         leading: const AppBarBackButton(),
@@ -18,9 +19,14 @@ class DocumentsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
+          Divider(
+            endIndent: MediaQuery.of(context).size.width * .6,
+            thickness: 1.85,
+            color: Colors.grey.shade400,
+          ),
           TextButton(
             onPressed: () {
-              showDialog(
+              showDialog<void>(
                 context: context,
                 builder: (context) {
                   return Dialog(
@@ -28,7 +34,7 @@ class DocumentsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(40),
                     ),
                     elevation: 16,
-                    child: const LeaseReader(),
+                    child: const UpdateProfilePage(),
                   );
                 },
               );
@@ -39,7 +45,7 @@ class DocumentsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
                   Text(
-                    'View Lease',
+                    'Update Profile',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w600,

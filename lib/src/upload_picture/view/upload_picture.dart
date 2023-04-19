@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:podium/src/update_profile/update_profile.dart';
+import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
 class UploadPicture extends StatefulWidget {
   const UploadPicture({super.key});
@@ -29,7 +29,7 @@ class UploadPictureState extends State<UploadPicture> {
 
   //show popup dialog
   void myAlert() {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(

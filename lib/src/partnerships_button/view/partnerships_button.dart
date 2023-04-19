@@ -24,7 +24,7 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
     const templateID = 'template_y5ke9zn';
     try {
       if (emailTextController.text.isEmpty) {
-        showDialog(
+        await showDialog<void>(
           context: context,
           builder: (context) => AlertDialog(
             title: const Text('Failure.'),
@@ -54,7 +54,7 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
         ),
       );
       debugPrint('SUCCESS!');
-      showDialog(
+      await showDialog<void>(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Success!'),
