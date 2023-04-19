@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:podium/shared/shared_functions.dart';
-import 'package:podium/src/app/app.dart';
 
 class PodiumLogo extends StatelessWidget {
   const PodiumLogo({super.key});
@@ -9,7 +8,7 @@ class PodiumLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        routeToPage(context, AppPage.userHome);
+        routeToPage(context, 'userHome');
       },
       child: SizedBox(
         height: kToolbarHeight,

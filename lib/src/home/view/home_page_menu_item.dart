@@ -10,13 +10,13 @@ import 'package:podium/src/login/login.dart';
 class HomePageMenuItem extends StatelessWidget {
   const HomePageMenuItem({
     super.key,
-    required this.page,
+    required this.route,
     required this.buttonText,
     required this.icon,
     this.isLogOut,
   });
 
-  final AppPage page;
+  final String route;
   final String buttonText;
   final IconData icon;
   final bool? isLogOut;
@@ -95,19 +95,19 @@ class HomePageMenuItem extends StatelessWidget {
             );
     }
 
-    void handleRoute(AppPage page) {
+    void handleRoute(String route) {
       if (isLogOut != null) {
         FirebaseAuth.instance.signOut();
       }
       if (user.isEmpty) {
         showLogin(context);
       } else {
-        routeToPage(context, page);
+        routeToPage(context, route);
       }
     }
 
     return TextButton(
-      onPressed: () => {handleRoute(page)},
+      onPressed: () => {handleRoute(route)},
       child: Padding(
         padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
         child: Row(
