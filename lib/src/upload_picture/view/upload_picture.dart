@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,7 +28,7 @@ class UploadPictureState extends State<UploadPicture> {
 
   //show popup dialog
   void myAlert() {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -97,9 +96,9 @@ class UploadPictureState extends State<UploadPicture> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.file(
+                child: Image.asset(
                   //to show image, you type like this.
-                  File(image!.path),
+                  image!.path,
                   fit: BoxFit.cover,
                   width: MediaQuery.of(context).size.width,
                   height: 300,

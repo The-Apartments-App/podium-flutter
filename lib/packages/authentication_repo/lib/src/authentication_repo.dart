@@ -313,8 +313,6 @@ class AuthenticationRepository {
       }
     } catch (error) {
       debugPrint('checkEmailValidity error: $error');
-      // Throw an error to be handled by the caller.
-      throw error;
     }
   }
 

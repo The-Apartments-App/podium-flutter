@@ -4,7 +4,7 @@ class HomePageIcon extends StatelessWidget {
   const HomePageIcon({
     super.key,
     required this.icon,
-    this.size = 36,
+    this.size = 20,
     this.color = Colors.black,
   });
 
