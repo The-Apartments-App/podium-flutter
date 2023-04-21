@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   bool loginIsShowing = true;
   bool desktopIsShowing = false;
   bool mobileIsShowing = false;
+  bool isLoggedIn = false;
 
   void showDesktopLogin(BuildContext context) {
     showDialog<void>(
@@ -119,9 +120,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       screenSizeIsMobile = MediaQuery.of(context).size.width < 750;
-      if (screenSizeIsMobile ?? false) {
+      if ((screenSizeIsMobile ?? false) && !isLoggedIn) {
         showMobileLogin(context);
-      } else if (screenSizeIsDesktop ?? false) {
+      } else if ((screenSizeIsDesktop ?? false) && !isLoggedIn) {
         showDesktopLogin(context);
       }
     });
@@ -136,6 +137,16 @@ class _HomePageState extends State<HomePage> {
     screenSizeIsDesktop = !screenSizeIsMobile!;
 
     final user = context.select((AppBloc bloc) => bloc.state.user);
+
+    if (user.isNotEmpty) {
+      setState(() {
+        isLoggedIn = true;
+      });
+    } else {
+      setState(() {
+        isLoggedIn = false;
+      });
+    }
 
     String loginOrLogout() {
       if (user.isEmpty) {
@@ -152,46 +163,60 @@ class _HomePageState extends State<HomePage> {
           Duration.zero,
           () => debugPrint('Page refreshed on pull down'),
         ),
-        child: ListView(
-          children: [
-            const HomePageBanner(),
-            Divider(
-              endIndent: MediaQuery.of(context).size.width * .6,
-              thickness: 1.85,
-              color: Colors.grey.shade400,
-            ),
-            const HomePageMenuItem(
-              route: 'userPayments',
-              buttonText: 'Payments',
-              icon: Icons.credit_card,
-            ),
-            const HomePageMenuItem(
-              route: 'serviceRequest',
-              buttonText: 'Service Request',
-              icon: Icons.home_repair_service,
-            ),
-            const HomePageMenuItem(
-              route: 'userDocuments',
-              buttonText: 'Documents',
-              icon: Icons.file_copy,
-            ),
-            const HomePageMenuItem(
-              route: 'userSettings',
-              buttonText: 'Settings',
-              icon: Icons.settings,
-            ),
-            HomePageMenuItem(
-              route: 'userHome',
-              buttonText: loginOrLogout(),
-              icon: Icons.logout,
-              isLogOut: true,
-            ),
-            // const HomePageMenuItem(
-            //   route: 'buildingAmenities',
-            //   buttonText: 'Amenities',
-            //   icon: Icons.apartment,
-            // ),
-          ],
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 750),
+          child: ListView(
+            children: [
+              const HomePageBanner(),
+              Divider(
+                indent: 25,
+                endIndent: 25,
+                thickness: 1.85,
+                color: Colors.grey.shade400,
+              ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(24, 40, 0, 40),
+                child: Text(
+                  'Settings',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              const HomePageMenuItem(
+                route: 'userPayments',
+                buttonText: 'Payments',
+                icon: Icons.credit_card,
+              ),
+              const HomePageMenuItem(
+                route: 'serviceRequest',
+                buttonText: 'Service Request',
+                icon: Icons.home_repair_service,
+              ),
+              const HomePageMenuItem(
+                route: 'userDocuments',
+                buttonText: 'Documents',
+                icon: Icons.file_copy,
+              ),
+              const HomePageMenuItem(
+                route: 'userSettings',
+                buttonText: 'Settings',
+                icon: Icons.settings,
+              ),
+              HomePageMenuItem(
+                route: 'userHome',
+                buttonText: loginOrLogout(),
+                icon: Icons.logout,
+                isLogOut: true,
+              ),
+              // const HomePageMenuItem(
+              //   route: 'buildingAmenities',
+              //   buttonText: 'Amenities',
+              //   icon: Icons.apartment,
+              // ),
+            ],
+          ),
         ),
       ),
     );

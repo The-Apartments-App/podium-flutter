@@ -17,10 +17,21 @@ class DocumentsPage extends StatelessWidget {
         elevation: 0,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 40, 0, 40),
+            child: Text(
+              'Documents',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
           TextButton(
             onPressed: () {
-              showDialog(
+              showDialog<void>(
                 context: context,
                 builder: (context) {
                   return Dialog(
@@ -33,27 +44,89 @@ class DocumentsPage extends StatelessWidget {
                 },
               );
             },
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    'View Lease',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Icon(
-                    Icons.account_circle,
-                    size: 36,
-                    color: Colors.black,
-                  )
-                ],
+            child: const Padding(
+              padding: EdgeInsets.all(12),
+              child: Text(
+                'View Lease',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
               ),
             ),
+          ),
+          Divider(
+            indent: 25,
+            endIndent: 25,
+            thickness: 0,
+            color: Colors.grey.shade400,
+          ),
+          TextButton(
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    elevation: 16,
+                    child: const LeaseReader(),
+                  );
+                },
+              );
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(12),
+              child: Text(
+                'Terms of service',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+          Divider(
+            indent: 25,
+            endIndent: 25,
+            thickness: 0,
+            color: Colors.grey.shade400,
+          ),
+          TextButton(
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    elevation: 16,
+                    child: const LeaseReader(),
+                  );
+                },
+              );
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(12),
+              child: Text(
+                'Privacy policy',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+          Divider(
+            indent: 25,
+            endIndent: 25,
+            thickness: 0,
+            color: Colors.grey.shade400,
           ),
         ],
       ),
