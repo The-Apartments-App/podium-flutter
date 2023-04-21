@@ -31,7 +31,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
       maxHeight: 250,
       imageQuality: 75,
     );
-    debugPrint('image in takePhoto -> $image');
+    debugPrint('image.path in takePhoto -> ${image?.path}');
     final xfileToFile = File(image!.path);
 
     switch (activeFile) {
