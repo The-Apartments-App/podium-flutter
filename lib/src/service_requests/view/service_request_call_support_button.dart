@@ -7,9 +7,7 @@ class CallSupportButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> callSupport() async {
-      if (!await launchUrl(Uri.parse('tel:+16812619706'))) {
-        throw Exception('Could not call Darren.');
-      }
+      await launchUrl(Uri.parse('tel:+16812619706'));
     }
 
     return Padding(
