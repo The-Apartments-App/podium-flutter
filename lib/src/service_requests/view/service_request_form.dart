@@ -1,5 +1,5 @@
-import 'dart:io';
-
+import 'package:emailjs/emailjs.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -19,51 +19,49 @@ class ServiceRequestForm extends StatefulWidget {
 }
 
 class ServiceRequestFormState extends State<ServiceRequestForm> {
-  File? fileController0;
-  File? fileController1;
-  File? fileController2;
+  Uint8List? imageBytes0;
+  Uint8List? imageBytes1;
+  Uint8List? imageBytes2;
   int activeFile = 0;
-  Future<void> takePhoto(ImageSource source) async {
+
+  TextEditingController detailsInputController = TextEditingController();
+  Future<void> takePhoto() async {
     final picker = ImagePicker();
     final image = await picker.pickImage(
-      source: source,
+      source: ImageSource.camera,
       maxWidth: 200,
       maxHeight: 250,
       imageQuality: 75,
     );
-    debugPrint('image.path in takePhoto -> ${image?.path}');
-    final xfileToFile = File(image!.path);
+    final imageBytes = await image!.readAsBytes();
 
     switch (activeFile) {
       case 0:
         setState(() {
-          fileController0 = xfileToFile;
+          imageBytes0 = imageBytes;
         });
         break;
       case 1:
         setState(() {
-          fileController1 = xfileToFile;
+          imageBytes1 = imageBytes;
         });
         break;
       case 2:
         setState(() {
-          fileController2 = xfileToFile;
+          imageBytes2 = imageBytes;
         });
         break;
       default:
     }
-    debugPrint('xfileToFile: $xfileToFile');
-    debugPrint('fileController0: $fileController0');
-    debugPrint('fileController1: $fileController1');
-    debugPrint('fileController2: $fileController2');
   }
 
   Widget pictureBox1Child() {
-    if (fileController0 != null && fileController1 == null) {
+    if (imageBytes0 != null && imageBytes1 == null) {
       return const Icon(Icons.add);
-    } else if (fileController1 != null) {
-      return Image.asset(
-        fileController1!.path,
+    } else if (imageBytes1 != null) {
+      return Image.memory(
+        fit: BoxFit.fill,
+        imageBytes1!,
       );
     } else {
       return const Text('');
@@ -71,16 +69,78 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
   }
 
   Widget pictureBox2Child() {
-    if (fileController0 != null &&
-        fileController1 != null &&
-        fileController2 == null) {
+    if (imageBytes0 != null && imageBytes1 != null && imageBytes2 == null) {
       return const Icon(Icons.add);
-    } else if (fileController2 != null) {
-      return Image.asset(
-        fileController2!.path,
+    } else if (imageBytes2 != null) {
+      return Image.memory(
+        fit: BoxFit.fill,
+        imageBytes2!,
       );
     } else {
       return const Text('');
+    }
+  }
+
+  Future<void> sendServiceRequest(BuildContext context) async {
+    // final privateKey = dotenv.env['EMAILJS_PRIVATE_KEY'];
+    // final serviceID =
+    //     dotenv.env['EMAILJS_SERVICE_ID'] ?? 'No service ID available';
+    // final templateID =
+    //     dotenv.env['EMAILJS_TEMPLATE_ID'] ?? 'No template ID available';
+    const privateKey = 'tkDacOuC2kK9X6eBYw6LA';
+    const serviceID = 'service_lslzt23';
+    const templateID = 'template_xz7u84j';
+    try {
+      if (detailsInputController.text.isEmpty) {
+        await showDialog<void>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Failure.'),
+            content: const Text('Your message has not been sent.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+        return;
+      }
+      await EmailJS.send(
+        serviceID,
+        templateID,
+        {
+          'message': detailsInputController.text,
+        },
+        const Options(
+          publicKey: 'MmTXgvYuIKZsRmifl',
+          privateKey: privateKey,
+        ),
+      );
+      debugPrint('SUCCESS!');
+      await showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Success!'),
+          content: const Text('Your message has been sent.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    } catch (error) {
+      if (error is EmailJSResponseStatus) {
+        debugPrint('ERROR... ${error.status}: ${error.text}');
+      }
+      debugPrint(error.toString());
     }
   }
 
@@ -101,172 +161,178 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
         }
       },
       child: Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 800),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: ListView(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 16),
-                      child: Text(
-                        'Service Requests',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w400,
-                        ),
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: ListView(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 16),
+                    child: Text(
+                      'Service Requests',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
-                    const CallSupportButton(),
-                    const DetailsInput(),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: 250,
-                          width: MediaQuery.of(context).size.width < 700
-                              ? MediaQuery.of(context).size.width * .30
-                              : 200,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                activeFile = 0;
-                              });
-                              takePhoto(ImageSource.camera);
-                            },
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Center(
-                                child: fileController0 == null
-                                    ? const Icon(Icons.camera_alt)
-                                    : Image.asset(
-                                        fileController0!.path,
-                                      ),
-                              ),
+                  ),
+                  const CallSupportButton(),
+                  const DetailsInput(),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width < 700
+                            ? MediaQuery.of(context).size.width * .28
+                            : 100,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              activeFile = 0;
+                            });
+                            takePhoto();
+                          },
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: imageBytes0 == null
+                                  ? const Icon(Icons.camera_alt)
+                                  : Image.memory(
+                                      fit: BoxFit.fill,
+                                      imageBytes0!,
+                                    ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 250,
-                          width: MediaQuery.of(context).size.width < 700
-                              ? MediaQuery.of(context).size.width * .30
-                              : 200,
-                          child: GestureDetector(
-                            onTap: () {
-                              if (fileController0 == null) return;
-                              setState(() {
-                                activeFile = 1;
-                              });
-                              takePhoto(ImageSource.camera);
-                            },
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Center(
-                                child: pictureBox1Child(),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 250,
-                          width: MediaQuery.of(context).size.width < 700
-                              ? MediaQuery.of(context).size.width * .30
-                              : 200,
-                          child: GestureDetector(
-                            onTap: () {
-                              if (fileController0 == null ||
-                                  fileController1 == null) return;
-                              setState(() {
-                                activeFile = 2;
-                              });
-                              takePhoto(ImageSource.camera);
-                            },
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Center(
-                                child: pictureBox2Child(),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 12),
-                      child: SizedBox(
-                        height: 48.675,
-                        width: MediaQuery.of(context).size.width,
-                        child: ElevatedButton(
-                          style: const ButtonStyle(
-                            shadowColor:
-                                MaterialStatePropertyAll(Colors.transparent),
-                            shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                              ),
-                            ),
-                            side: MaterialStatePropertyAll(
-                              BorderSide(
-                                color: Colors.grey,
-                              ),
-                            ),
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.white),
-                            foregroundColor:
-                                MaterialStatePropertyAll(Colors.black),
-                          ),
-                          onPressed: () => ScaffoldMessenger.of(context)
-                            ..hideCurrentSnackBar()
-                            ..showSnackBar(
-                              const SnackBar(
-                                content: Text('Service Request Submitted'),
-                              ),
-                            ),
-                          child: const Text('Submit'),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                      SizedBox(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width < 700
+                            ? MediaQuery.of(context).size.width * .28
+                            : 100,
+                        child: GestureDetector(
+                          onTap: () {
+                            if (imageBytes0 == null) return;
+                            setState(() {
+                              activeFile = 1;
+                            });
+                            takePhoto();
+                          },
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: pictureBox1Child(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width < 700
+                            ? MediaQuery.of(context).size.width * .28
+                            : 100,
+                        child: GestureDetector(
+                          onTap: () {
+                            if (imageBytes0 == null || imageBytes1 == null) {
+                              return;
+                            }
+                            setState(() {
+                              activeFile = 2;
+                            });
+                            takePhoto();
+                          },
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: pictureBox2Child(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: SizedBox(
+                      height: 48.675,
+                      width: MediaQuery.of(context).size.width,
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                          shadowColor:
+                              MaterialStatePropertyAll(Colors.transparent),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4)),
+                            ),
+                          ),
+                          side: MaterialStatePropertyAll(
+                            BorderSide(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStatePropertyAll(Colors.white),
+                          foregroundColor:
+                              MaterialStatePropertyAll(Colors.black),
+                        ),
+                        onPressed: () => {
+                          if (true)
+                            {
+                              ScaffoldMessenger.of(context)
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Service Request Submitted'),
+                                  ),
+                                ),
+                              sendServiceRequest(context),
+                            }
+                        },
+                        child: const Text('Submit'),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
