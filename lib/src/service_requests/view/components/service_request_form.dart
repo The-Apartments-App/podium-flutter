@@ -5,8 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:podium/src/service_requests/cubit/service_request_cubit.dart';
-import 'package:podium/src/service_requests/view/service_request_call_support_button.dart';
-import 'package:podium/src/service_requests/view/service_request_details_input.dart';
+import 'package:podium/src/service_requests/view/components/service_request_call_support_button.dart';
+import 'package:podium/src/service_requests/view/components/service_request_details_input.dart';
+import 'package:podium/src/service_requests/view/components/service_request_image.dart';
+import 'package:podium/src/service_requests/view/components/service_request_image_container.dart';
 
 // Define a custom Form widget.
 class ServiceRequestForm extends StatefulWidget {
@@ -59,9 +61,8 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
     if (imageBytes0 != null && imageBytes1 == null) {
       return const Icon(Icons.add);
     } else if (imageBytes1 != null) {
-      return Image.memory(
-        fit: BoxFit.fill,
-        imageBytes1!,
+      return ServiceRequestImage(
+        bytes: imageBytes1!,
       );
     } else {
       return const Text('');
@@ -72,9 +73,8 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
     if (imageBytes0 != null && imageBytes1 != null && imageBytes2 == null) {
       return const Icon(Icons.add);
     } else if (imageBytes2 != null) {
-      return Image.memory(
-        fit: BoxFit.fill,
-        imageBytes2!,
+      return ServiceRequestImage(
+        bytes: imageBytes2!,
       );
     } else {
       return const Text('');
@@ -186,106 +186,47 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        height: 200,
-                        width: MediaQuery.of(context).size.width < 700
-                            ? MediaQuery.of(context).size.width * .28
-                            : 100,
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              activeFile = 0;
-                            });
-                            takePhoto();
-                          },
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            activeFile = 0;
+                          });
+                          takePhoto();
+                        },
+                        child: ServiceRequestImageContainer(
+                          child: imageBytes0 == null
+                              ? const Center(
+                                  child: Icon(Icons.camera_alt),
+                                )
+                              : ServiceRequestImage(
+                                  bytes: imageBytes0!,
                                 ),
-                              ],
-                            ),
-                            child: Center(
-                              child: imageBytes0 == null
-                                  ? const Icon(Icons.camera_alt)
-                                  : Image.memory(
-                                      fit: BoxFit.fill,
-                                      imageBytes0!,
-                                    ),
-                            ),
-                          ),
                         ),
                       ),
-                      SizedBox(
-                        height: 200,
-                        width: MediaQuery.of(context).size.width < 700
-                            ? MediaQuery.of(context).size.width * .28
-                            : 100,
-                        child: GestureDetector(
-                          onTap: () {
-                            if (imageBytes0 == null) return;
-                            setState(() {
-                              activeFile = 1;
-                            });
-                            takePhoto();
-                          },
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Center(
-                              child: pictureBox1Child(),
-                            ),
-                          ),
+                      GestureDetector(
+                        onTap: () {
+                          if (imageBytes0 == null) return;
+                          setState(() {
+                            activeFile = 1;
+                          });
+                          takePhoto();
+                        },
+                        child: ServiceRequestImageContainer(
+                          child: pictureBox1Child(),
                         ),
                       ),
-                      SizedBox(
-                        height: 200,
-                        width: MediaQuery.of(context).size.width < 700
-                            ? MediaQuery.of(context).size.width * .28
-                            : 100,
-                        child: GestureDetector(
-                          onTap: () {
-                            if (imageBytes0 == null || imageBytes1 == null) {
-                              return;
-                            }
-                            setState(() {
-                              activeFile = 2;
-                            });
-                            takePhoto();
-                          },
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Center(
-                              child: pictureBox2Child(),
-                            ),
-                          ),
+                      GestureDetector(
+                        onTap: () {
+                          if (imageBytes0 == null || imageBytes1 == null) {
+                            return;
+                          }
+                          setState(() {
+                            activeFile = 2;
+                          });
+                          takePhoto();
+                        },
+                        child: ServiceRequestImageContainer(
+                          child: pictureBox2Child(),
                         ),
                       ),
                     ],
