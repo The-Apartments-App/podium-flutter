@@ -161,6 +161,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
         }
       },
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         body: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 800),
@@ -179,6 +180,9 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                     ),
                   ),
                   const CallSupportButton(),
+                  const SizedBox(
+                    height: 60,
+                  ),
                   const DetailsInput(),
                   const SizedBox(
                     height: 8,
@@ -232,7 +236,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 12),
+                    padding: const EdgeInsets.only(top: 32),
                     child: SizedBox(
                       height: 48.675,
                       width: MediaQuery.of(context).size.width,
@@ -246,15 +250,6 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                                   BorderRadius.all(Radius.circular(4)),
                             ),
                           ),
-                          side: MaterialStatePropertyAll(
-                            BorderSide(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.white),
-                          foregroundColor:
-                              MaterialStatePropertyAll(Colors.black),
                         ),
                         onPressed: () => {
                           if (true)
