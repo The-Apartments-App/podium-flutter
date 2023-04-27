@@ -16,7 +16,7 @@ dependencies:
   dropdown_button2: ^2.0.0
   emailjs: ^1.1.0
   equatable: ^2.0.3
-  file_picker: ^5.2.10
+  file_picker: ^5.2.11
   firebase_analytics: ^10.2.1
   firebase_auth: ^4.3.0
   firebase_core: ^2.9.0
