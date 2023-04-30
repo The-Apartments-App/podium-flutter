@@ -81,7 +81,7 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        showModalBottomSheet(
+        showModalBottomSheet<void>(
           isScrollControlled: true,
           useSafeArea: true,
           backgroundColor: Colors.transparent,

@@ -121,16 +121,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      debugPrint('screenSizeIsMobile: $screenSizeIsMobile');
-      debugPrint('screenSizeIsDesktop: $screenSizeIsDesktop');
-      debugPrint('hasBeenVisited: $hasBeenVisited');
-      screenSizeIsMobile =
-          WidgetsBinding.instance.window.physicalSize.width < 750;
+      screenSizeIsMobile = MediaQuery.of(context).size.width < 750;
       if ((screenSizeIsMobile ?? false) && !isLoggedIn) {
-        debugPrint('this is called for mobile');
         showMobileLogin(context);
       } else if ((screenSizeIsDesktop ?? false) && !isLoggedIn) {
-        debugPrint('this is called for desktop');
         showDesktopLogin(context);
       }
     });
@@ -156,6 +150,16 @@ class _HomePageState extends State<HomePage> {
     } else {
       setState(() {
         isLoggedIn = true;
+      });
+    }
+
+    if (user.isNotEmpty) {
+      setState(() {
+        isLoggedIn = true;
+      });
+    } else {
+      setState(() {
+        isLoggedIn = false;
       });
     }
 

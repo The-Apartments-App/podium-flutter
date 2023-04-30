@@ -13,8 +13,7 @@ class ServiceRequestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ServiceRequestCubit>(
-      create: (_) =>
-          ServiceRequestCubit(context.read<AuthenticationRepository>()),
+      create: (_) => ServiceRequestCubit(),
       child: Scaffold(
         appBar: AppBar(
           leading: const AppBarBackButton(),

@@ -8,8 +8,7 @@ import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_home/home.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
-
-import 'package:podium/src/service_requests/view/service_request_page.dart';
+import 'package:podium/src/service_requests/service_requests.dart';
 
 import 'package:podium/theme.dart';
 

@@ -27,8 +27,8 @@ class HomePageMenuItem extends StatelessWidget {
 
     const homePageMenuItemTextStyle = TextStyle(
       color: Colors.black,
-      fontWeight: FontWeight.w600,
-      fontSize: 28,
+      fontWeight: FontWeight.w400,
+      fontSize: 14,
     );
 
     void showLogin(BuildContext context) {
@@ -106,21 +106,31 @@ class HomePageMenuItem extends StatelessWidget {
       }
     }
 
-    return TextButton(
-      onPressed: () => {handleRoute(route)},
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              buttonText,
-              style: homePageMenuItemTextStyle,
+    return Column(
+      children: [
+        TextButton(
+          onPressed: () => {handleRoute(route)},
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 6, 12, 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  buttonText,
+                  style: homePageMenuItemTextStyle,
+                ),
+                HomePageIcon(icon: icon)
+              ],
             ),
-            HomePageIcon(icon: icon)
-          ],
+          ),
         ),
-      ),
+        Divider(
+          indent: 25,
+          endIndent: 25,
+          thickness: 0,
+          color: Colors.grey.shade400,
+        )
+      ],
     );
   }
 }
