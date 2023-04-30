@@ -59,7 +59,7 @@ class LoginPhoneInputState extends State<LoginPhoneInput> {
               ),
               const SizedBox(height: 8),
               const Text(
-                'We’ll call or text you to confirm your number. Standard message and data rates apply.',
+                '''We’ll call or text you to confirm your number. Standard message and data rates apply.''',
                 style: TextStyle(
                   letterSpacing: .175,
                   fontSize: 12,

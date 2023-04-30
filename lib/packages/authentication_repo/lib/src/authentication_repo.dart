@@ -254,7 +254,8 @@ class AuthenticationRepository {
     on FirebaseAuthException catch (e) {
       // Output the error message to the console for debugging purposes
       debugPrint('error in loginwithgoogle: $e');
-      // Throw a custom exception with the same error code to handle it in a more user-friendly way
+      // Throw a custom exception with the same error code to
+      // handle it in a more user-friendly way
       throw LogInWithGoogleFailure.fromCode(e.code);
     }
 // Handle other exceptions if they occur
@@ -352,9 +353,11 @@ class AuthenticationRepository {
 
   /// Updates the current user's profile information.
   ///
-  /// The [email], [password], [displayName], and [photoURL] parameters are required.
+  /// The [email], [password], [displayName],
+  ///  and [photoURL] parameters are required.
   ///
-  /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs while updating the user profile.
+  /// Throws a [SignUpWithEmailAndPasswordFailure]
+  /// if an exception occurs while updating the user profile.
   Future<void> updateProfile({
     required String email,
     required String password,
@@ -377,10 +380,12 @@ class AuthenticationRepository {
         await _firebaseAuth.currentUser?.updatePhotoURL(photoURL);
       }
     } on FirebaseAuthException catch (e) {
-      // If an exception occurs while updating the user profile, throw a SignUpWithEmailAndPasswordFailure
+      // If an exception occurs while updating the user profile,
+      // throw a SignUpWithEmailAndPasswordFailure
       throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (_) {
-      // If an unknown exception occurs while updating the user profile, throw a SignUpWithEmailAndPasswordFailure
+      // If an unknown exception occurs while updating the user profile,
+      // throw a SignUpWithEmailAndPasswordFailure
       throw const SignUpWithEmailAndPasswordFailure();
     }
   }
@@ -417,7 +422,8 @@ class AuthenticationRepository {
   }
 }
 
-/// This extension method adds a convenient way to convert a [firebase_auth.User]
+/// This extension method adds a convenient way
+///  to convert a [firebase_auth.User]
 /// object to a [User] object in our application domain model.
 ///
 /// The [toUser] method returns a new [User] object that contains the user's

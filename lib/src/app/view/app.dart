@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/building_amenities/view/building_amenities.dart';
-import 'package:podium/src/coming_soon/view/coming_soon.dart';
 import 'package:podium/src/home/home.dart';
 import 'package:podium/src/service_requests/view/pages/service_request_page.dart';
+import 'package:podium/src/splash_page/splash_page.dart';
 import 'package:podium/src/user_documents/user_documents.dart';
 import 'package:podium/src/user_payments/user_payments.dart';
 import 'package:podium/src/user_settings/user_settings.dart';
@@ -48,7 +48,7 @@ class AppView extends StatelessWidget {
       theme: appTheme,
       initialRoute: '/',
       routes: {
-        '/': (context) => const ComingSoon(),
+        '/': (context) => const SplashPage(),
         '/userHome': (context) => const HomePage(),
         '/userPayments': (context) => const PaymentsPage(),
         '/userDocuments': (context) => const DocumentsPage(),
