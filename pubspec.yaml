@@ -11,14 +11,15 @@ dependencies:
   authentication_repo:
     path: lib/packages/authentication_repo
   bloc: ^8.1.0
+
   cached_network_image: ^3.2.3
   carousel_slider: ^4.2.1
-  cloud_firestore: ^4.5.2
+  cloud_firestore: ^4.5.3
   dots_indicator: ^2.1.0
   dropdown_button2: ^2.0.0
   emailjs: ^1.1.0
   equatable: ^2.0.3
-  file_picker: ^5.2.10
+  file_picker: ^5.2.11
   firebase_analytics: ^10.2.1
   firebase_auth: ^4.3.0
   firebase_core: ^2.9.0
@@ -38,7 +39,7 @@ dependencies:
   form_inputs:
     path: lib/packages/form_inputs
   formz: ^0.6.0
-  google_fonts: ^4.0.3
+  google_fonts: ^4.0.4
   http: ^0.13.5
   image_picker: ^0.8.6
   image_picker_web: ^3.0.0+1

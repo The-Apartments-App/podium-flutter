@@ -2,14 +2,13 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/home/view/home_page_banner.dart';
-import 'package:podium/src/home/view/home_page_menu_item.dart';
 import 'package:podium/src/login/login.dart';
+import 'package:podium/src/resident_portal/user_home/view/home_page_banner.dart';
+import 'package:podium/src/resident_portal/user_home/view/home_page_menu_item.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  static Page<void> page() => const MaterialPage<void>(child: HomePage());
+  const HomePage({super.key, required this.bossMode});
+  final bool bossMode;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -23,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   bool loginIsShowing = true;
   bool desktopIsShowing = false;
   bool mobileIsShowing = false;
+  bool hasBeenVisited = false;
   bool isLoggedIn = false;
 
   void showDesktopLogin(BuildContext context) {
@@ -98,6 +98,7 @@ class _HomePageState extends State<HomePage> {
         desktopIsShowing = false;
       });
       if (loginIsShowing) {
+        debugPrint('loginIsShowing: $loginIsShowing');
         WidgetsBinding.instance.addPostFrameCallback((_) {
           showMobileLogin(context);
         });
@@ -130,13 +131,26 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    screenSizeIsMobile =
+        WidgetsBinding.instance.window.physicalSize.width < 750;
+    screenSizeIsDesktop = !screenSizeIsMobile!;
+    closeLogin(context);
     debugPrint(
       '3. HOME PAGE BUILT - User Account Page',
     );
-    screenSizeIsMobile = MediaQuery.of(context).size.width < 750;
-    screenSizeIsDesktop = !screenSizeIsMobile!;
 
     final user = context.select((AppBloc bloc) => bloc.state.user);
+    if (user.isEmpty) {
+      debugPrint('user.isEmpty: ${user.isEmpty}');
+      setState(() {
+        isLoggedIn = false;
+      });
+      debugPrint('isLoggedIn: $isLoggedIn');
+    } else {
+      setState(() {
+        isLoggedIn = true;
+      });
+    }
 
     if (user.isNotEmpty) {
       setState(() {
@@ -156,66 +170,81 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    closeLogin(context);
+    final residentProfileMenu = [
+      const HomePageMenuItem(
+        route: 'userPayments',
+        buttonText: 'Payments',
+        icon: Icons.credit_card,
+      ),
+      const HomePageMenuItem(
+        route: 'serviceRequest',
+        buttonText: 'Service Request',
+        icon: Icons.home_repair_service,
+      ),
+      const HomePageMenuItem(
+        route: 'userDocuments',
+        buttonText: 'Documents',
+        icon: Icons.file_copy,
+      ),
+      // const HomePageMenuItem(
+      //   route: 'buildingAmenities',
+      //   buttonText: 'Amenities',
+      //   icon: Icons.apartment,
+      // )
+    ];
+
+    final ownerProfileMenu = [
+      const HomePageMenuItem(
+        route: 'ownerLedgers',
+        buttonText: 'Ledgers',
+        icon: Icons.balance,
+      ),
+      const HomePageMenuItem(
+        route: 'ownerBuildingInfo',
+        buttonText: 'Property Info',
+        icon: Icons.home_repair_service,
+      ),
+      const HomePageMenuItem(
+        route: 'ownerBuildingInspections',
+        buttonText: 'Inspection Info',
+        icon: Icons.file_copy,
+      ),
+    ];
+
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () => Future.delayed(
           Duration.zero,
           () => debugPrint('Page refreshed on pull down'),
         ),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 750),
-          child: ListView(
-            children: [
-              const HomePageBanner(),
-              Divider(
-                indent: 25,
-                endIndent: 25,
-                thickness: 1.85,
-                color: Colors.grey.shade400,
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(24, 40, 0, 40),
-                child: Text(
-                  'Settings',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w400,
-                  ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 900),
+            child: ListView(
+              children: [
+                const HomePageBanner(),
+                Divider(
+                  endIndent: MediaQuery.of(context).size.width * .6,
+                  thickness: 1.85,
+                  color: Colors.grey.shade400,
                 ),
-              ),
-              const HomePageMenuItem(
-                route: 'userPayments',
-                buttonText: 'Payments',
-                icon: Icons.credit_card,
-              ),
-              const HomePageMenuItem(
-                route: 'serviceRequest',
-                buttonText: 'Service Request',
-                icon: Icons.home_repair_service,
-              ),
-              const HomePageMenuItem(
-                route: 'userDocuments',
-                buttonText: 'Documents',
-                icon: Icons.file_copy,
-              ),
-              const HomePageMenuItem(
-                route: 'userSettings',
-                buttonText: 'Settings',
-                icon: Icons.settings,
-              ),
-              HomePageMenuItem(
-                route: 'userHome',
-                buttonText: loginOrLogout(),
-                icon: Icons.logout,
-                isLogOut: true,
-              ),
-              // const HomePageMenuItem(
-              //   route: 'buildingAmenities',
-              //   buttonText: 'Amenities',
-              //   icon: Icons.apartment,
-              // ),
-            ],
+                if (widget.bossMode)
+                  ...ownerProfileMenu
+                else
+                  ...residentProfileMenu,
+                const HomePageMenuItem(
+                  route: 'userSettings',
+                  buttonText: 'Settings',
+                  icon: Icons.settings,
+                ),
+                HomePageMenuItem(
+                  route: 'home',
+                  buttonText: loginOrLogout(),
+                  icon: Icons.logout,
+                  isLogOut: true,
+                ),
+              ],
+            ),
           ),
         ),
       ),
