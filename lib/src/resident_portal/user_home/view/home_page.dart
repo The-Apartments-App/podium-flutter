@@ -7,9 +7,8 @@ import 'package:podium/src/resident_portal/user_home/view/home_page_banner.dart'
 import 'package:podium/src/resident_portal/user_home/view/home_page_menu_item.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  static Page<void> page() => const MaterialPage<void>(child: HomePage());
+  const HomePage({super.key, required this.bossMode});
+  final bool bossMode;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -218,27 +217,35 @@ class _HomePageState extends State<HomePage> {
           Duration.zero,
           () => debugPrint('Page refreshed on pull down'),
         ),
-        child: ListView(
-          children: [
-            const HomePageBanner(),
-            Divider(
-              endIndent: MediaQuery.of(context).size.width * .6,
-              thickness: 1.85,
-              color: Colors.grey.shade400,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 900),
+            child: ListView(
+              children: [
+                const HomePageBanner(),
+                Divider(
+                  endIndent: MediaQuery.of(context).size.width * .6,
+                  thickness: 1.85,
+                  color: Colors.grey.shade400,
+                ),
+                if (widget.bossMode)
+                  ...ownerProfileMenu
+                else
+                  ...residentProfileMenu,
+                const HomePageMenuItem(
+                  route: 'userSettings',
+                  buttonText: 'Settings',
+                  icon: Icons.settings,
+                ),
+                HomePageMenuItem(
+                  route: 'home',
+                  buttonText: loginOrLogout(),
+                  icon: Icons.logout,
+                  isLogOut: true,
+                ),
+              ],
             ),
-            ...residentProfileMenu,
-            const HomePageMenuItem(
-              route: 'userSettings',
-              buttonText: 'Settings',
-              icon: Icons.settings,
-            ),
-            HomePageMenuItem(
-              route: 'userHome',
-              buttonText: loginOrLogout(),
-              icon: Icons.logout,
-              isLogOut: true,
-            ),
-          ],
+          ),
         ),
       ),
     );

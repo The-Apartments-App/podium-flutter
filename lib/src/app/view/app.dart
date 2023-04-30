@@ -57,10 +57,15 @@ class _AppViewState extends State<AppView> {
         userIsABoss = true;
       });
     }
+    if (user.isEmpty) {
+      setState(() {
+        userIsABoss = false;
+      });
+    }
     debugPrint('userIsABoss: $userIsABoss');
     final residentRoutes = {
       '/': (context) => const ComingSoon(),
-      '/userHome': (context) => const HomePage(),
+      '/home': (context) => HomePage(bossMode: userIsABoss),
       '/userPayments': (context) => const PaymentsPage(),
       '/userDocuments': (context) => const DocumentsPage(),
       '/userSettings': (context) => const UserSettingsPage(),
@@ -70,6 +75,7 @@ class _AppViewState extends State<AppView> {
 
     final ownerRoutes = {
       '/': (context) => const ComingSoon(),
+      '/home': (context) => HomePage(bossMode: userIsABoss),
       '/ownerUserProfile': (context) => const Text('OWNER USER PROFILE'),
       '/ownerLedgers': (context) => const Text('OWNER LEDGERS PAGE'),
       '/ownerBuildingInfo': (context) => const Text('OWNER BUILDING INFO PAGE'),
