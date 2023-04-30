@@ -36,7 +36,7 @@ dependencies:
   form_inputs:
     path: lib/packages/form_inputs
   formz: ^0.6.0
-  google_fonts: ^4.0.3
+  google_fonts: ^4.0.4
   http: ^0.13.5
   image_picker: ^0.8.6
   image_picker_web: ^3.0.0+1
