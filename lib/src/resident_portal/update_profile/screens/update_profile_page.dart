@@ -1,7 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/src/update_profile/update_profile.dart';
+import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
 class UpdateProfilePage extends StatelessWidget {
   const UpdateProfilePage({super.key, this.imageController});

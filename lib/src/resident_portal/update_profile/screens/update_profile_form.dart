@@ -1,12 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/update_profile/update_profile.dart';
+import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
 class UpdateProfileForm extends StatefulWidget {
   const UpdateProfileForm({super.key});
