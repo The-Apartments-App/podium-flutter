@@ -542,15 +542,19 @@ class _SplashPageState extends State<SplashPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Flexible(
+                            Flexible(
                               child: Padding(
-                                padding: EdgeInsets.fromLTRB(48, 0, 0, 32),
-                                child: Text(
-                                  'Common Questions, Clear Answers',
-                                  softWrap: true,
-                                  style: TextStyle(
-                                    fontSize: 36,
-                                    fontWeight: FontWeight.w500,
+                                padding:
+                                    const EdgeInsets.fromLTRB(48, 0, 0, 32),
+                                child: ConstrainedBox(
+                                  constraints:
+                                      const BoxConstraints(minWidth: 125),
+                                  child: const Text(
+                                    'Common Questions, Clear Answers',
+                                    style: TextStyle(
+                                      fontSize: 36,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
