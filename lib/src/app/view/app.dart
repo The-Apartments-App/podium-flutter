@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/resident_portal/building_amenities/building_amenities.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
-import 'package:podium/src/resident_portal/user_home/home.dart';
+import 'package:podium/src/home_page/home.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
 import 'package:podium/src/service_requests/service_requests.dart';

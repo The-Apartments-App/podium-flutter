@@ -32,8 +32,8 @@ class _FAQState extends State<FAQ> {
                   child: Text(
                     widget.question,
                     style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w300,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
                       letterSpacing: 1.1,
                     ),
                   ),
@@ -50,8 +50,9 @@ class _FAQState extends State<FAQ> {
                 child: Text(
                   widget.answer,
                   style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.black54,
                   ),
                 ),
               )

@@ -39,7 +39,7 @@ class _FeatureBoxState extends State<FeatureBox> {
               child: Text(
                 widget.headline,
                 style: const TextStyle(
-                  fontSize: 22,
+                  fontSize: 24,
                   fontWeight: FontWeight.w500,
                 ),
                 softWrap: true,
@@ -48,7 +48,7 @@ class _FeatureBoxState extends State<FeatureBox> {
             Text(
               widget.details,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.w300,
                 letterSpacing: 1.1,
               ),

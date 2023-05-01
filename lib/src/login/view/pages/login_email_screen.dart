@@ -117,7 +117,10 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       iconName: 'facebook-icon.svg',
                       buttonText: 'Continue with Facebook',
                       onPressed: () => {
-                        context.read<LoginCubit>().logInWithFacebook(),
+                        context.read<LoginCubit>().logInWithFacebook().then(
+                              (value) =>
+                                  Navigator.of(context).pushNamed('/home'),
+                            ),
                       },
                     ),
                     SocialSignInButton(
@@ -126,7 +129,10 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       iconName: 'google-icon.svg',
                       buttonText: 'Continue with Google',
                       onPressed: () =>
-                          context.read<LoginCubit>().logInWithGoogle(),
+                          context.read<LoginCubit>().logInWithGoogle().then(
+                                (value) =>
+                                    Navigator.of(context).pushNamed('/home'),
+                              ),
                     ),
                     SocialSignInButton(
                       height: 28,
@@ -159,9 +165,15 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       width: 28,
                       iconName: 'apple-icon.svg',
                       buttonText: 'Continue as Demo User',
-                      onPressed: () => {
-                        context.read<LoginCubit>().logInWithDemoUser(),
-                        Navigator.of(context).pop(),
+                      onPressed: () async => {
+                        await context
+                            .read<LoginCubit>()
+                            .logInWithDemoUser()
+                            .then(
+                              (value) => {
+                                Navigator.of(context).pushNamed('/home'),
+                              },
+                            )
                       },
                     ),
                   ],

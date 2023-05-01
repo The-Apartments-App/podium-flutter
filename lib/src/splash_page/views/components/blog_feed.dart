@@ -18,7 +18,7 @@ class _BlogFeedState extends State<BlogFeed> {
     final mobileBlogFeed = Column(
       children: [
         ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: 500, maxWidth: 400),
+          constraints: const BoxConstraints(maxHeight: 500, maxWidth: 400),
           child: CarouselSlider(
             carouselController: blogCarouselController,
             options: CarouselOptions(enableInfiniteScroll: false),

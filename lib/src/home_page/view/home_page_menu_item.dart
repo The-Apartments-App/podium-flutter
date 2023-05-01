@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/login/login.dart';
-import 'package:podium/src/resident_portal/user_home/view/home_page_icon.dart';
+import 'package:podium/src/home_page/view/home_page_icon.dart';
 
 class HomePageMenuItem extends StatelessWidget {
   const HomePageMenuItem({
@@ -66,8 +66,6 @@ class HomePageMenuItem extends StatelessWidget {
                   ),
                 );
               },
-            ).whenComplete(
-              () => Navigator.of(context).pop(),
             )
           : showModalBottomSheet<void>(
               isScrollControlled: true,
@@ -90,14 +88,13 @@ class HomePageMenuItem extends StatelessWidget {
                   ),
                 );
               },
-            ).whenComplete(
-              () => Navigator.of(context).pop(),
             );
     }
 
     void handleRoute(String route) {
       if (isLogOut != null) {
         FirebaseAuth.instance.signOut();
+        routeToPage(context, '');
       }
       if (user.isEmpty) {
         showLogin(context);
