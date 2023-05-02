@@ -73,7 +73,7 @@ class UserSettingsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(40),
                     ),
                     elevation: 16,
-                    child: const Placeholder(),
+                    child: const UpdateProfileDisplayNamePage(),
                   );
                 },
               );

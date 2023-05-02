@@ -1,6 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:podium/src/resident_portal/update_profile/screens/update_profile_display_name_form.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
 class UpdateProfileDisplayNamePage extends StatelessWidget {
@@ -17,9 +18,8 @@ class UpdateProfileDisplayNamePage extends StatelessWidget {
         child: BlocProvider(
         create: (_) =>
             UpdateProfileCubit(context.read<AuthenticationRepository>()),
-        child: const UpdateProfilePhotoForm (),
+        child: const UpdateProfileDisplayNameForm(),
         ),
     );
   }
-
 }

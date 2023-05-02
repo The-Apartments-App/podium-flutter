@@ -1,0 +1,51 @@
+import 'dart:io';
+import 'package:authentication_repo/authentication_repo.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:podium/src/app/app.dart';
+import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
+
+class UpdateProfileDisplayNameForm extends StatefulWidget {
+  const UpdateProfileDisplayNameForm({super.key});
+
+  @override
+  State<UpdateProfileDisplayNameForm> createState() => _UpdateProfileDisplayNameFormState(); 
+}
+
+class _UpdateProfileDisplayNameFormState extends State<UpdateProfileDisplayNameForm> {
+
+  @override
+  Widget build(BuildContext context) {
+    final user = context.select((AppBloc bloc) => bloc.state.user);
+    final currentUserName = user.name;
+    debugPrint('$currentUserName');
+
+    return SizedBox(
+      height: 300,
+      width: 300,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  Text('Current Display Name: $currentUserName'),
+                ],
+              ),
+            ],
+          ),
+          ElevatedButton(
+            onPressed: () {
+       
+            },
+            child: Row(
+              children: [Text('Change Display Name'), ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
