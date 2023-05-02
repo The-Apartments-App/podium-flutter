@@ -390,6 +390,16 @@ class AuthenticationRepository {
     }
   }
 
+  Future<void> updateDisplayName({ required String displayName }) async {
+    debugPrint('UPDATE DISPLAY NAME CALLED');
+    try {
+      await _firebaseAuth.currentUser?.updateDisplayName(displayName);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+  }
+
   Future<void> updateProfilePicture({
     File? photo,
   }) async {
