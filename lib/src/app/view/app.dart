@@ -62,7 +62,7 @@ class _AppViewState extends State<AppView> {
         userIsABoss = false;
       });
     }
-    debugPrint('userIsABoss: $userIsABoss');
+
     final residentRoutes = {
       '/': (context) => const SplashPage(),
       '/home': (context) => HomePage(bossMode: userIsABoss),

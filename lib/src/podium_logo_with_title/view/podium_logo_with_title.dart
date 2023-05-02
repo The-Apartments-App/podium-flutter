@@ -10,7 +10,7 @@ class PodiumLogoWithTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        routeToPage(context, 'home');
+        routeToPage(context, '');
       },
       child: SizedBox(
         height: height,

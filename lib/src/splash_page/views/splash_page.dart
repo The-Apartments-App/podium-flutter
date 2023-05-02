@@ -2,7 +2,6 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/components/linked_in.dart';
-import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/podium_logo_round/podium_logo_round.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
@@ -59,7 +58,7 @@ class _SplashPageState extends State<SplashPage> {
           ),
         );
       },
-    );
+    ).whenComplete(() => loginIsShowing = false);
     setState(() {
       loginIsShowing = true;
       desktopIsShowing = true;
@@ -95,20 +94,18 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void closeLogin(BuildContext context) {
-    debugPrint('closeLogin called');
     if (desktopIsShowing && (screenSizeIsMobile!)) {
-      Navigator.of(context).maybePop();
+      Navigator.of(context).pop();
       setState(() {
         desktopIsShowing = false;
       });
       if (loginIsShowing) {
-        debugPrint('loginIsShowing: $loginIsShowing');
         WidgetsBinding.instance.addPostFrameCallback((_) {
           showMobileLogin(context);
         });
       }
     } else if (mobileIsShowing && (screenSizeIsDesktop!)) {
-      Navigator.of(context).maybePop();
+      Navigator.of(context).pop();
       setState(() {
         mobileIsShowing = false;
       });
@@ -123,9 +120,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     var isMobile = MediaQuery.of(context).size.width < 650;
-    screenSizeIsMobile =
-        WidgetsBinding.instance.window.physicalSize.width < 650;
-    screenSizeIsDesktop = !screenSizeIsMobile!;
+    screenSizeIsMobile = isMobile;
+    screenSizeIsDesktop = !isMobile;
 
     final desktopSplashImage = Stack(
       alignment: AlignmentDirectional.center,
@@ -323,7 +319,7 @@ class _SplashPageState extends State<SplashPage> {
       ),
       SizedBox(height: 16),
       FeatureBox(
-        icon: Icon(Icons.key),
+        icon: Icon(Icons.trending_up_sharp),
         headline: 'Empowering Property Owners',
         details:
             '''Unlock the full potential of your property with powerful tools and real-time data that simplify management and boost returns. Our platform is designed to streamline operations and optimize performance for the modern building owner.''',
@@ -350,9 +346,9 @@ class _SplashPageState extends State<SplashPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 16, 40, 16),
+                  padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                   child: Row(
-                    children: const [PodiumLogoRound(height: 86)],
+                    children: const [PodiumLogoWithTitle(height: 150)],
                   ),
                 ),
                 // const Divider(),
@@ -539,28 +535,28 @@ class _SplashPageState extends State<SplashPage> {
                       // clickable with a short foldout answer
                       Padding(
                         padding: const EdgeInsets.only(bottom: 32),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          alignment: WrapAlignment.center,
+                          runAlignment: WrapAlignment.center,
+                          spacing: 40,
                           children: [
-                            Flexible(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(48, 0, 0, 32),
-                                child: ConstrainedBox(
-                                  constraints:
-                                      const BoxConstraints(minWidth: 125),
-                                  child: const Text(
-                                    'Common Questions, Clear Answers',
-                                    style: TextStyle(
-                                      fontSize: 36,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(48, 0, 16, 32),
+                              child: ConstrainedBox(
+                                constraints:
+                                    const BoxConstraints(minWidth: 125),
+                                child: const Text(
+                                  'Common Questions, Clear Answers',
+                                  style: TextStyle(
+                                    fontSize: 36,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
                             ),
                             ConstrainedBox(
-                              constraints: const BoxConstraints(maxWidth: 525),
+                              constraints: const BoxConstraints(maxWidth: 500),
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 32),
                                 child: Column(
