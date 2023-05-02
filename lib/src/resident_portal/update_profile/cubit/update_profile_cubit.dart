@@ -34,14 +34,14 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     );
   }
 
-  void userNameChanged(String value) {
-    final password = Password.dirty(value);
-    emit(
-      state.copyWith(
-        password: password,
-      ),
-    );
-  }
+  // void userNameChanged(String value) {
+  //   final password = Password.dirty(value);
+  //   emit(
+  //     state.copyWith(
+  //       password: password,
+  //     ),
+  //   );
+  // }
 
   // void profilePictureChanged(Image value) {
   //   final picture = ProfilePicture.dirty(value);

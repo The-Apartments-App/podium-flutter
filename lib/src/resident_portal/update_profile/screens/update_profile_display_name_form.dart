@@ -17,8 +17,6 @@ class _UpdateProfileDisplayNameFormState extends State<UpdateProfileDisplayNameF
   @override
   Widget build(BuildContext context) {
     final user = context.select((AppBloc bloc) => bloc.state.user);
-    final currentUserName = user.name;
-    debugPrint('$currentUserName');
 
     return SizedBox(
       height: 300,
@@ -29,19 +27,31 @@ class _UpdateProfileDisplayNameFormState extends State<UpdateProfileDisplayNameF
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Column(
+              Row(
                 children: [
-                  Text('Current Display Name: $currentUserName'),
+                  const Text('Current Display Name: ',
+                   style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                  ),
+                  Text(user.name ?? 'Resident',
+                        style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                  )
                 ],
               ),
             ],
           ),
           ElevatedButton(
             onPressed: () {
-       
+              
             },
             child: Row(
-              children: [Text('Change Display Name'), ],
+              children:  [ const Text('Change Display Name') ], 
+                
             ),
           ),
         ],
