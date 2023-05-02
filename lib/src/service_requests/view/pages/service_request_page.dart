@@ -1,4 +1,3 @@
-import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/appbar_back_button/appbar_back_button.dart';

@@ -11,6 +11,9 @@ dependencies:
   authentication_repo:
     path: lib/packages/authentication_repo
   bloc: ^8.1.0
+
+  cached_network_image: ^3.2.3
+  carousel_slider: ^4.2.1
   cloud_firestore: ^4.5.3
   dots_indicator: ^2.1.0
   dropdown_button2: ^2.0.0

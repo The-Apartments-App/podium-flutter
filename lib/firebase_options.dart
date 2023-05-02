@@ -70,7 +70,7 @@ class DefaultFirebaseOptions {
     databaseURL: 'https://podium-78b4e-default-rtdb.firebaseio.com',
     storageBucket: 'podium-78b4e.appspot.com',
     iosClientId:
-        '158576154553-9ubij3hn8i4uavchk5lbdar01057ge8t.apps.googleusercontent.com',
+        '''158576154553-9ubij3hn8i4uavchk5lbdar01057ge8t.apps.googleusercontent.com''',
     iosBundleId: 'com.podium',
   );
 
@@ -82,7 +82,7 @@ class DefaultFirebaseOptions {
     databaseURL: 'https://podium-78b4e-default-rtdb.firebaseio.com',
     storageBucket: 'podium-78b4e.appspot.com',
     iosClientId:
-        '158576154553-10p4tuinalhluulb2nk7hmk5elr6s4ih.apps.googleusercontent.com',
+        '''158576154553-10p4tuinalhluulb2nk7hmk5elr6s4ih.apps.googleusercontent.com''',
     iosBundleId: 'com.masterRepo.RunnerTests',
   );
 }

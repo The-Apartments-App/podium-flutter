@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/resident_portal/building_amenities/building_amenities.dart';
-import 'package:podium/src/resident_portal/coming_soon/coming_soon.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
-import 'package:podium/src/resident_portal/user_home/home.dart';
+import 'package:podium/src/home_page/home.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
 import 'package:podium/src/service_requests/service_requests.dart';
+import 'package:podium/src/splash_page/splash_page.dart';
 
 import 'package:podium/theme.dart';
 
@@ -64,7 +64,7 @@ class _AppViewState extends State<AppView> {
     }
     debugPrint('userIsABoss: $userIsABoss');
     final residentRoutes = {
-      '/': (context) => const ComingSoon(),
+      '/': (context) => const SplashPage(),
       '/home': (context) => HomePage(bossMode: userIsABoss),
       '/userPayments': (context) => const PaymentsPage(),
       '/userDocuments': (context) => const DocumentsPage(),
@@ -74,7 +74,7 @@ class _AppViewState extends State<AppView> {
     };
 
     final ownerRoutes = {
-      '/': (context) => const ComingSoon(),
+      '/': (context) => const SplashPage(),
       '/home': (context) => HomePage(bossMode: userIsABoss),
       '/ownerUserProfile': (context) => const Text('OWNER USER PROFILE'),
       '/ownerLedgers': (context) => const Text('OWNER LEDGERS PAGE'),
