@@ -94,6 +94,7 @@ class LoginCubit extends Cubit<LoginState> {
       debugPrint('after await authRepo.logInWithGoogle');
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithGoogleFailure catch (e) {
+      debugPrint(e.message);
       emit(
         state.copyWith(
           errorMessage: e.message,
@@ -101,6 +102,7 @@ class LoginCubit extends Cubit<LoginState> {
         ),
       );
     } catch (_) {
+      debugPrint('Google Sign In No Worky');
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }

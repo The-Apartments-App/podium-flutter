@@ -6,14 +6,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
-class UpdateProfileForm extends StatefulWidget {
-  const UpdateProfileForm({super.key});
+class UpdateProfilePhotoForm extends StatefulWidget {
+  const UpdateProfilePhotoForm({super.key});
 
   @override
-  State<UpdateProfileForm> createState() => _UpdateProfileFormState();
+  State<UpdateProfilePhotoForm> createState() => _UpdateProfilePhotoFormState();
 }
 
-class _UpdateProfileFormState extends State<UpdateProfileForm> {
+class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   File? fileController;
   Future<void> takePhoto(ImageSource source) async {
     final picker = ImagePicker();
@@ -45,7 +45,7 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('UPDATEPROFILEFORM LOADED');
+    debugPrint('UpdateProfilePhotoForm LOADED');
     final user = context.select((AppBloc bloc) => bloc.state.user);
     const defaultProfilePic = 'lib/src/assets/images/podium_logo.png';
     CircleAvatar getProfilePic() {
