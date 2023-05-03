@@ -41,6 +41,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
         userName: username,
       ),
     );
+    debugPrint(username.toString());
   }
 
   // void profilePictureChanged(Image value) {
