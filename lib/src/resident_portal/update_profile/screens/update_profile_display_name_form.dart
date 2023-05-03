@@ -31,6 +31,9 @@ class _UpdateProfileDisplayNameFormState
     final _formUsername = GlobalKey<FormState>();
     final changeUserNameFunction =
         context.select((UpdateProfileCubit cubit) => cubit);
+    final user = context.select((AppBloc bloc) => bloc.state.user);
+
+    debugPrint(user.toString());
 
     return SizedBox(
       height: 300,
@@ -102,8 +105,8 @@ class _UpdateProfileDisplayNameFormState
               onPressed: () {
                 if (_formUsername.currentState!.validate()) {
                   debugPrint(nameController.text);
-                  changeUserNameFunction
-                      .userNameChanged(nameController.text);
+                  changeUserNameFunction.userNameChanged(nameController.text);
+                  debugPrint(user.toString());
                 }
               },
               child: Row(

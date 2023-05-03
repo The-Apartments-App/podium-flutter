@@ -35,13 +35,14 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   }
 
   void userNameChanged(String value) {
+    debugPrint('passed value in cubit $value');
     final username = Username.dirty(value);
     emit(
       state.copyWith(
         userName: username,
       ),
     );
-    debugPrint(username.toString());
+    
   }
 
   // void profilePictureChanged(Image value) {
