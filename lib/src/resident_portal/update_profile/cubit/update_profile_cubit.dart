@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:podium/src/login/models/models.dart';
-
+import 'package:podium/src/login/models/username.dart';
 part 'update_profile_state.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
@@ -34,14 +34,14 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     );
   }
 
-  // void userNameChanged(String value) {
-  //   final password = Password.dirty(value);
-  //   emit(
-  //     state.copyWith(
-  //       password: password,
-  //     ),
-  //   );
-  // }
+  void userNameChanged(String value) {
+    final username = Username.dirty(value);
+    emit(
+      state.copyWith(
+        userName: username,
+      ),
+    );
+  }
 
   // void profilePictureChanged(Image value) {
   //   final picture = ProfilePicture.dirty(value);
