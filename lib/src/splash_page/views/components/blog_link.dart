@@ -1,16 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BlogLink extends StatefulWidget {
   const BlogLink({
     super.key,
-    required this.url,
+    required this.blogId,
     required this.imageUrl,
     required this.headline,
   });
 
-  final String url;
+  final String blogId;
   final String imageUrl;
   final String headline;
 
@@ -23,15 +22,16 @@ class _BlogLinkState extends State<BlogLink> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => {
-        launchUrl(Uri.parse(widget.url)),
+        Navigator.of(context).pushNamed('/blogs', arguments: widget.blogId),
+        // launchUrl(Uri.parse(widget.url)),
         debugPrint('blog link clicked'),
       },
       child: ConstrainedBox(
         constraints: const BoxConstraints(
-          minHeight: 190,
-          minWidth: 150,
-          maxHeight: 350,
-          maxWidth: 350,
+          minHeight: 500,
+          minWidth: 500,
+          maxHeight: 500,
+          maxWidth: 500,
         ),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * .25,
@@ -47,11 +47,14 @@ class _BlogLinkState extends State<BlogLink> {
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
-              Text(
-                widget.headline,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                child: Text(
+                  widget.headline,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ],

@@ -2,14 +2,14 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
+import 'package:podium/src/blog_story_page/blog_story_page.dart';
+import 'package:podium/src/home_page/home.dart';
 import 'package:podium/src/resident_portal/building_amenities/building_amenities.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
-import 'package:podium/src/home_page/home.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
 import 'package:podium/src/service_requests/service_requests.dart';
 import 'package:podium/src/splash_page/splash_page.dart';
-
 import 'package:podium/theme.dart';
 
 class App extends StatelessWidget {
@@ -63,30 +63,78 @@ class _AppViewState extends State<AppView> {
       });
     }
 
-    final residentRoutes = {
-      '/': (context) => const SplashPage(),
-      '/home': (context) => HomePage(bossMode: userIsABoss),
-      '/userPayments': (context) => const PaymentsPage(),
-      '/userDocuments': (context) => const DocumentsPage(),
-      '/userSettings': (context) => const UserSettingsPage(),
-      '/serviceRequest': (context) => const ServiceRequestPage(),
-      '/buildingAmenities': (context) => const BuildingAmenitiesPage(),
-    };
+    MaterialPageRoute<dynamic> buildOwnerPageRoute(
+      Widget page,
+    ) {
+      // Check if the current user has one of the allowed roles
+      if (!userIsABoss) {
+        // If the user's role is not allowed, navigate to a fallback page
+        return MaterialPageRoute(
+          builder: (_) => const HomePage(
+            bossMode: false,
+          ),
+        );
+      }
 
-    final ownerRoutes = {
-      '/': (context) => const SplashPage(),
-      '/home': (context) => HomePage(bossMode: userIsABoss),
-      '/ownerUserProfile': (context) => const Text('OWNER USER PROFILE'),
-      '/ownerLedgers': (context) => const Text('OWNER LEDGERS PAGE'),
-      '/ownerBuildingInfo': (context) => const Text('OWNER BUILDING INFO PAGE'),
-      '/ownerBuildingInspections': (context) =>
-          const Text('OWNER BUILDING INSPECTIONS PAGE'),
-    };
+      // Otherwise, show the requested page
+      return MaterialPageRoute(builder: (_) => page);
+    }
+
     debugPrint('2b. APPVIEW BUILT - MaterialApp is created here');
     return MaterialApp(
       theme: appTheme,
       initialRoute: '/',
-      routes: userIsABoss ? ownerRoutes : residentRoutes,
+      onGenerateRoute: (settings) {
+        final blogId =
+            // ignore: cast_nullable_to_non_nullable
+            settings.arguments != null ? settings.arguments as String : '';
+        switch (settings.name) {
+          case '/':
+            return MaterialPageRoute(builder: (_) => const SplashPage());
+          case '/home':
+            return MaterialPageRoute(
+              builder: (_) => HomePage(
+                bossMode: userIsABoss,
+              ),
+            );
+          case '/blogs':
+            return MaterialPageRoute(
+              builder: (_) => BlogStoryPage(blogId: blogId),
+            );
+          case '/userPayments':
+            return MaterialPageRoute(builder: (_) => const PaymentsPage());
+          case '/userDocuments':
+            return MaterialPageRoute(builder: (_) => const DocumentsPage());
+          case '/userSettings':
+            return MaterialPageRoute(builder: (_) => const UserSettingsPage());
+          case '/serviceRequest':
+            return MaterialPageRoute(
+              builder: (_) => const ServiceRequestPage(),
+            );
+          case '/buildingAmenities':
+            return MaterialPageRoute(
+              builder: (_) => const BuildingAmenitiesPage(),
+            );
+          case '/ownerUserProfile':
+            return buildOwnerPageRoute(
+              const Text('OWNER USER PROFILE'),
+            );
+          case '/ownerLedgers':
+            return buildOwnerPageRoute(
+              const Text('OWNER LEDGERS PAGE'),
+            );
+          case '/ownerBuildingInfo':
+            return buildOwnerPageRoute(
+              const Text('OWNER BUILDING INFO PAGE'),
+            );
+          case '/ownerBuildingInspections':
+            return buildOwnerPageRoute(
+              const Text('OWNER BUILDING INSPECTIONS PAGE'),
+            );
+          default:
+            throw Exception('Invalid route: ${settings.name}');
+        }
+      },
     );
   }
 }
