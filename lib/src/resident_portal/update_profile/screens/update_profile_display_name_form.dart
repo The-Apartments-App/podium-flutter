@@ -29,7 +29,7 @@ class _UpdateProfileDisplayNameFormState
   Widget build(BuildContext context) {
     final userName = context.select((AppBloc bloc) => bloc.state.user.name);
     final _formUsername = GlobalKey<FormState>();
-    final changeUserNameFunction =
+    final changeUserNameCubit =
         context.select((UpdateProfileCubit cubit) => cubit);
     final user = context.select((AppBloc bloc) => bloc.state.user);
 
@@ -105,7 +105,8 @@ class _UpdateProfileDisplayNameFormState
               onPressed: () {
                 if (_formUsername.currentState!.validate()) {
                   debugPrint(nameController.text);
-                  changeUserNameFunction.userNameChanged(nameController.text);
+                  changeUserNameCubit.updateWithNewDisplayName(nameController.text);
+                  changeUserNameCubit.userNameChanged(nameController.text);
                   // debugPrint(user.toString());
                 }
               },
