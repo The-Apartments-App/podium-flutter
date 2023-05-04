@@ -77,52 +77,52 @@ class _BlogFeedState extends State<BlogFeed> {
             if (isMobile! != false) mobileBlogFeed else desktopBlogFeed
           ],
         ),
-        if (MediaQuery.of(context).size.width < 700)
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Wrap(
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: blogCarouselController.previousPage,
-                  style: ButtonStyle(
-                    shape: const MaterialStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                      ),
-                    ),
-                    foregroundColor:
-                        const MaterialStatePropertyAll(Colors.black87),
-                    shadowColor:
-                        const MaterialStatePropertyAll(Colors.transparent),
-                    side: MaterialStatePropertyAll(
-                      BorderSide(color: Colors.grey.shade300),
-                    ),
-                    backgroundColor:
-                        const MaterialStatePropertyAll(Colors.transparent),
-                  ),
-                  child: const Text('<'),
-                ),
-                ElevatedButton(
-                  onPressed: blogCarouselController.nextPage,
-                  style: const ButtonStyle(
-                    shape: MaterialStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                      ),
-                    ),
-                    foregroundColor: MaterialStatePropertyAll(Colors.black),
-                    shadowColor: MaterialStatePropertyAll(Colors.transparent),
-                    side: MaterialStatePropertyAll(
-                      BorderSide(color: Colors.grey),
-                    ),
-                    backgroundColor:
-                        MaterialStatePropertyAll(Colors.transparent),
-                  ),
-                  child: const Text('>'),
-                ),
-              ],
-            ),
-          )
+        // if (MediaQuery.of(context).size.width < 700)
+        //   Padding(
+        //     padding: const EdgeInsets.only(top: 8),
+        //     child: Wrap(
+        //       children: <Widget>[
+        //         ElevatedButton(
+        //           onPressed: blogCarouselController.previousPage,
+        //           style: ButtonStyle(
+        //             shape: const MaterialStatePropertyAll(
+        //               RoundedRectangleBorder(
+        //                 borderRadius: BorderRadius.all(Radius.circular(100)),
+        //               ),
+        //             ),
+        //             foregroundColor:
+        //                 const MaterialStatePropertyAll(Colors.black87),
+        //             shadowColor:
+        //                 const MaterialStatePropertyAll(Colors.transparent),
+        //             side: MaterialStatePropertyAll(
+        //               BorderSide(color: Colors.grey.shade300),
+        //             ),
+        //             backgroundColor:
+        //                 const MaterialStatePropertyAll(Colors.transparent),
+        //           ),
+        //           child: const Text('<'),
+        //         ),
+        //         ElevatedButton(
+        //           onPressed: blogCarouselController.nextPage,
+        //           style: const ButtonStyle(
+        //             shape: MaterialStatePropertyAll(
+        //               RoundedRectangleBorder(
+        //                 borderRadius: BorderRadius.all(Radius.circular(100)),
+        //               ),
+        //             ),
+        //             foregroundColor: MaterialStatePropertyAll(Colors.black),
+        //             shadowColor: MaterialStatePropertyAll(Colors.transparent),
+        //             side: MaterialStatePropertyAll(
+        //               BorderSide(color: Colors.grey),
+        //             ),
+        //             backgroundColor:
+        //                 MaterialStatePropertyAll(Colors.transparent),
+        //           ),
+        //           child: const Text('>'),
+        //         ),
+        //       ],
+        //     ),
+        //   )
       ],
     );
   }
