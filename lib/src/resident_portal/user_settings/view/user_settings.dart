@@ -4,7 +4,7 @@ import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
 class UserSettingsPage extends StatelessWidget {
   const UserSettingsPage({super.key});
-
+  
   static Page<void> page() =>
       const MaterialPage<void>(child: UserSettingsPage());
 

@@ -34,7 +34,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       (user) => add(AppUserChanged(user)),
     );
   }
-
+  
   // Instance variables for the app bloc.
   final AuthenticationRepository _authenticationRepository;
   late final StreamSubscription<User> _userSubscription;
