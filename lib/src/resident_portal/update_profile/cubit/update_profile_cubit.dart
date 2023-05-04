@@ -43,12 +43,12 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     );
   }
 
-  Future<void> updateWithNewDisplayName(String value) async {
+  Future<void> updateWithNewDisplayName(String name) async {
     debugPrint('UPDATE WITH NEW DISPLAY NAME CALLED IN CUBIT DART');
-    debugPrint('UPDATE WITH NEW DISPLAY NAME $value');
+    debugPrint('UPDATE WITH NEW DISPLAY NAME $name');
 
     try {
-      await _authenticationRepository.updateDisplayName(displayName: value);
+      await _authenticationRepository.updateDisplayName(displayName: name);
     } catch (e) {
         debugPrint(e.toString());
     }

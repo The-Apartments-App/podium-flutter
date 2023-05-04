@@ -106,7 +106,7 @@ class _UpdateProfileDisplayNameFormState
                 if (_formUsername.currentState!.validate()) {
                   debugPrint(nameController.text);
                   changeUserNameCubit.updateWithNewDisplayName(nameController.text);
-                  changeUserNameCubit.userNameChanged(nameController.text);
+                  // changeUserNameCubit.userNameChanged(nameController.text);
                   // debugPrint(user.toString());
                 }
               },
