@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/components/linked_in.dart';
 import 'package:podium/src/login/login.dart';
-import 'package:podium/src/podium_logo_round/podium_logo_round.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
+import 'package:podium/src/splash_page/views/components/blog_feed.dart';
 import 'package:podium/src/splash_page/views/components/faq.dart';
 import 'package:podium/src/splash_page/views/components/feature_box.dart';
 import 'package:podium/src/waitlist_button/waitlist_button.dart';
@@ -119,7 +119,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    var isMobile = MediaQuery.of(context).size.width < 650;
+    final isMobile = MediaQuery.of(context).size.width < 650;
     screenSizeIsMobile = isMobile;
     screenSizeIsDesktop = !isMobile;
 
@@ -339,6 +339,7 @@ class _SplashPageState extends State<SplashPage> {
     }
 
     closeLogin(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -526,11 +527,11 @@ class _SplashPageState extends State<SplashPage> {
                                 children: const [...featureBoxes],
                               ),
                       ),
-                      // const Padding(
-                      //   padding:
-                      //       EdgeInsets.only(left: 48, right: 32, bottom: 96),
-                      //   child: BlogFeed(),
-                      // ),
+                      const Padding(
+                        padding:
+                            EdgeInsets.only(left: 48, right: 32, bottom: 96),
+                        child: BlogFeed(),
+                      ),
                       // This will be the FAQ section,
                       // clickable with a short foldout answer
                       Padding(
