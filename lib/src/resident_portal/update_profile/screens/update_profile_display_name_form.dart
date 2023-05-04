@@ -106,7 +106,7 @@ class _UpdateProfileDisplayNameFormState
                 if (_formUsername.currentState!.validate()) {
                   debugPrint(nameController.text);
                   changeUserNameFunction.userNameChanged(nameController.text);
-                  debugPrint(user.toString());
+                  // debugPrint(user.toString());
                 }
               },
               child: Row(

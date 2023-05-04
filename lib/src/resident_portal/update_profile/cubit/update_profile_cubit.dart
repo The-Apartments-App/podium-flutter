@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -42,7 +41,17 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
         userName: username,
       ),
     );
-    
+  }
+
+  Future<void> updateWithNewDisplayName(String value) async {
+    debugPrint('UPDATE WITH NEW DISPLAY NAME CALLED IN CUBIT DART');
+    debugPrint('UPDATE WITH NEW DISPLAY NAME $value');
+
+    try {
+      await _authenticationRepository.updateDisplayName(displayName: value);
+    } catch (e) {
+        debugPrint(e.toString());
+    }
   }
 
   // void profilePictureChanged(Image value) {
