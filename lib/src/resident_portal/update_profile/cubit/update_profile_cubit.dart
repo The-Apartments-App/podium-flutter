@@ -49,6 +49,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _authenticationRepository.updateDisplayName(displayName: name);
+      await _authenticationRepository.updateUser();
       emit(state.copyWith(
         userName: Username.dirty(name),
         status: FormzSubmissionStatus.success,),

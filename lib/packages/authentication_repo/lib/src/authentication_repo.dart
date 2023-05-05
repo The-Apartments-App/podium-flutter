@@ -188,17 +188,6 @@ class AuthenticationRepository {
     });
   }
 
-  //   Future<User?> get updateUser async {
-  //     final firebaseUser = _firebaseAuth.currentUser;
-
-  //     // if (firebaseUser != null) {
-  //       await firebaseUser?.reload();
-  //       final user = firebaseUser?.toUser;
-  //       _cache.write(key: _userCacheKey, value: user);
-  //       return user;
-  //     // }
-  // }
-
   /// Returns the current cached user.
   /// Defaults to [User.empty] if there is no cached user.
   User get currentUser {
@@ -401,7 +390,7 @@ class AuthenticationRepository {
     }
   }
 
-  Future<void> updateDisplayName({ required String displayName }) async {
+  Future<void> updateDisplayName({required String displayName}) async {
     debugPrint('UPDATE DISPLAY NAME CALLED');
     final firebaseUser = _firebaseAuth.currentUser;
     try {
@@ -416,6 +405,13 @@ class AuthenticationRepository {
       debugPrint(e.toString());
     }
     // return;
+  }
+
+  Future<void> updateUser() async {
+    final firebaseUser = _firebaseAuth.currentUser;
+    await firebaseUser?.reload();
+    final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
+    _cache.write(key: _userCacheKey, value: user);
   }
 
   Future<void> updateProfilePicture({
