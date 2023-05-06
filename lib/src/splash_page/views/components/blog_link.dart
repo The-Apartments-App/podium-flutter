@@ -28,12 +28,13 @@ class _BlogLinkState extends State<BlogLink> {
       },
       child: ConstrainedBox(
         constraints: const BoxConstraints(
-          minHeight: 500,
-          minWidth: 500,
-          maxHeight: 500,
-          maxWidth: 500,
+          minHeight: 300,
+          minWidth: 300,
+          maxHeight: 375,
+          maxWidth: 375,
         ),
         child: SizedBox(
+          height: 800,
           width: MediaQuery.of(context).size.width * .25,
           child: Column(
             children: [

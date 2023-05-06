@@ -18,7 +18,7 @@ class _BlogFeedState extends State<BlogFeed> {
     final mobileBlogFeed = Column(
       children: [
         ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 500, maxWidth: 400),
+          constraints: const BoxConstraints(maxHeight: 800, maxWidth: 600),
           child: CarouselSlider(
             carouselController: blogCarouselController,
             options: CarouselOptions(enableInfiniteScroll: false),
@@ -47,7 +47,7 @@ class _BlogFeedState extends State<BlogFeed> {
         ),
       ],
     );
-    isMobile = MediaQuery.of(context).size.width < 700;
+    isMobile = MediaQuery.of(context).size.width < 1100;
     return Wrap(
       children: [
         Column(
