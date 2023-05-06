@@ -8,6 +8,7 @@ import 'package:podium/src/resident_portal/building_amenities/building_amenities
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
+import 'package:podium/src/service_info_page/service_info_page.dart';
 import 'package:podium/src/service_requests/service_requests.dart';
 import 'package:podium/src/splash_page/splash_page.dart';
 import 'package:podium/theme.dart';
@@ -101,6 +102,8 @@ class _AppViewState extends State<AppView> {
             return MaterialPageRoute(
               builder: (_) => BlogStoryPage(blogId: blogId),
             );
+          case '/services':
+            return MaterialPageRoute(builder: (_) => const ServiceInfoPage());
           case '/userPayments':
             return MaterialPageRoute(builder: (_) => const PaymentsPage());
           case '/userDocuments':

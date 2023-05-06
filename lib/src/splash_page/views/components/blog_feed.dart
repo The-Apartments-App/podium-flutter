@@ -17,21 +17,18 @@ class _BlogFeedState extends State<BlogFeed> {
   Widget build(BuildContext context) {
     final mobileBlogFeed = Column(
       children: [
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 800, maxWidth: 600),
-          child: CarouselSlider(
-            carouselController: blogCarouselController,
-            options: CarouselOptions(enableInfiniteScroll: false),
-            items: const [
-              BlogLink(
-                blogId: 'blog1',
-                imageUrl:
-                    'https://images.unsplash.com/photo-1659621222272-f65c27b6f182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHBvZGl1bSUyMGFwYXJ0bWVudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-                headline:
-                    'Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind',
-              )
-            ],
-          ),
+        CarouselSlider(
+          carouselController: blogCarouselController,
+          options: CarouselOptions(height: 315, enableInfiniteScroll: false),
+          items: const [
+            BlogLink(
+              blogId: 'blog1',
+              imageUrl:
+                  'https://images.unsplash.com/photo-1659621222272-f65c27b6f182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHBvZGl1bSUyMGFwYXJ0bWVudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+              headline:
+                  'Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind',
+            )
+          ],
         ),
       ],
     );

@@ -240,7 +240,7 @@ class _SplashPageState extends State<SplashPage> {
       children: [
         Center(
           child: Padding(
-            padding: const EdgeInsets.all(48),
+            padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -347,7 +347,7 @@ class _SplashPageState extends State<SplashPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                  padding: const EdgeInsets.fromLTRB(32, 0, 40, 0),
                   child: Row(
                     children: const [PodiumLogoWithTitle(height: 150)],
                   ),
@@ -359,7 +359,7 @@ class _SplashPageState extends State<SplashPage> {
                     children: [
                       //Splash Photo and User Action Box
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 36, 16, 56),
+                        padding: const EdgeInsets.fromLTRB(32, 36, 16, 32),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: isMobile
@@ -369,7 +369,7 @@ class _SplashPageState extends State<SplashPage> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.all(48),
+                        padding: const EdgeInsets.all(32),
                         child: Center(
                           child: Wrap(
                             spacing: 50,
@@ -386,7 +386,7 @@ class _SplashPageState extends State<SplashPage> {
                                   const Padding(
                                     padding: EdgeInsets.only(
                                       top: 40,
-                                      bottom: 80,
+                                      bottom: 40,
                                     ),
                                     child: Text(
                                       'A Lively Atmosphere',
@@ -415,7 +415,7 @@ class _SplashPageState extends State<SplashPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(48),
+                        padding: const EdgeInsets.all(32),
                         child: Center(
                           child: Wrap(
                             spacing: 50,
@@ -433,7 +433,7 @@ class _SplashPageState extends State<SplashPage> {
                                   const Padding(
                                     padding: EdgeInsets.only(
                                       top: 40,
-                                      bottom: 80,
+                                      bottom: 40,
                                     ),
                                     child: Text(
                                       'Elevate Your Everyday',
@@ -466,7 +466,7 @@ class _SplashPageState extends State<SplashPage> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.all(48),
+                        padding: const EdgeInsets.all(32),
                         child: Center(
                           child: Wrap(
                             spacing: 50,
@@ -483,7 +483,7 @@ class _SplashPageState extends State<SplashPage> {
                                   const Padding(
                                     padding: EdgeInsets.only(
                                       top: 40,
-                                      bottom: 80,
+                                      bottom: 40,
                                     ),
                                     child: Text(
                                       'Expanding Horizons',
@@ -529,7 +529,7 @@ class _SplashPageState extends State<SplashPage> {
                       ),
                       const Padding(
                         padding:
-                            EdgeInsets.only(left: 48, right: 32, bottom: 96),
+                            EdgeInsets.only(left: 32, right: 32, bottom: 48),
                         child: BlogFeed(),
                       ),
                       // This will be the FAQ section,
@@ -543,7 +543,7 @@ class _SplashPageState extends State<SplashPage> {
                           spacing: 40,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(48, 0, 16, 32),
+                              padding: const EdgeInsets.fromLTRB(32, 0, 16, 32),
                               child: ConstrainedBox(
                                 constraints:
                                     const BoxConstraints(minWidth: 125),
@@ -559,7 +559,10 @@ class _SplashPageState extends State<SplashPage> {
                             ConstrainedBox(
                               constraints: const BoxConstraints(maxWidth: 500),
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 32),
+                                padding: const EdgeInsets.only(
+                                  left: 32,
+                                  right: 32,
+                                ),
                                 child: Column(
                                   children: const [
                                     FAQ(

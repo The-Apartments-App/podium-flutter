@@ -27,39 +27,30 @@ class _BlogLinkState extends State<BlogLink> {
         debugPrint('blog link clicked'),
       },
       child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          minHeight: 300,
-          minWidth: 300,
-          maxHeight: 375,
-          maxWidth: 375,
-        ),
-        child: SizedBox(
-          height: 800,
-          width: MediaQuery.of(context).size.width * .25,
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                child: CachedNetworkImage(
-                  fit: BoxFit.fill,
-                  imageUrl: widget.imageUrl,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+        constraints: BoxConstraints(maxHeight: 500, maxWidth: 500),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: widget.imageUrl,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
+              child: Text(
+                widget.headline,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-                child: Text(
-                  widget.headline,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

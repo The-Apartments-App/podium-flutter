@@ -21,7 +21,9 @@ class _FAQState extends State<FAQ> {
         )
       },
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * .425,
+        width: MediaQuery.of(context).size.width < 700
+            ? MediaQuery.of(context).size.width
+            : MediaQuery.of(context).size.width * .425,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
