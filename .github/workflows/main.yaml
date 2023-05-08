@@ -11,9 +11,14 @@ jobs:
         uses: dart-lang/setup-dart@v1.5.0
         with:
           sdk: '3.0.0-290.3.beta'
+      - name: Clean build directory
+        run: flutter clean
+      - name: Install dependencies
+        run: flutter pub get
           
   build:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
       flutter_channel: stable
       flutter_version: 3.3.8
+    
