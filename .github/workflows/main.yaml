@@ -11,9 +11,6 @@ jobs:
         uses: dart-lang/setup-dart@v1.5.0
      
   build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    with:
-      flutter_channel: master
-      flutter_version: 3.3.8
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@v1
     
     
