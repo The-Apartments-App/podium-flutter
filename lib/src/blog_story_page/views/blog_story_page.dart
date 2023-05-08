@@ -54,8 +54,8 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: const [PodiumLogoWithTitle(height: 150)],
+                  const Row(
+                    children: [PodiumLogoWithTitle(height: 150)],
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 8),
@@ -134,9 +134,9 @@ Our vision for the future is one where renters can trust in the consistency and 
 Join us on this journey as we challenge the status quo and work towards creating a better, brighter future for renters and landlords alike. Together, we can redefine the world of apartment living and create a new standard that truly benefits everyone.''',
                   ),
                   const Divider(),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
+                    children: [
                       PodiumLogoWithTitle(height: 80),
                       LinkedInLink(),
                       Text('© 2023 Podium Apartments Inc.')

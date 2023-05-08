@@ -21,11 +21,11 @@ class _LoginPasswordScreenState extends State<LoginPasswordScreen> {
             padding: const EdgeInsets.fromLTRB(12, 4, 12, 0),
             child: Stack(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 52,
                   child: Flex(
                     direction: Axis.horizontal,
-                    children: const [
+                    children: [
                       Expanded(
                         child: Text(
                           'Log in',
@@ -57,10 +57,10 @@ class _LoginPasswordScreenState extends State<LoginPasswordScreen> {
           Divider(
             color: Colors.grey.shade200,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 12, 20, 0),
             child: Wrap(
-              children: const [
+              children: [
                 LoginPasswordInput(),
                 SizedBox(
                   height: 70,
