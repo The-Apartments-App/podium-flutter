@@ -13,6 +13,8 @@ jobs:
         uses: dart-lang/setup-dart@v1.5.0
         with:
           sdk: '3.0.0-290.3.beta'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
