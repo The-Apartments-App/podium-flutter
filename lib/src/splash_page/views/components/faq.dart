@@ -18,7 +18,7 @@ class _FAQState extends State<FAQ> {
     return GestureDetector(
       onTap: () => {
         setState(
-          () => {answerIsRevealed = !answerIsRevealed},
+          () => answerIsRevealed = !answerIsRevealed,
         )
       },
       child: SizedBox(

@@ -4,7 +4,7 @@ version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: ">=2.18.4"
+  sdk: ">=3.0.0"
   flutter: 3.3.6
 
 dependencies:
@@ -14,13 +14,13 @@ dependencies:
 
   cached_network_image: ^3.2.3
   carousel_slider: ^4.2.1
-  cloud_firestore: ^4.5.3
-  dots_indicator: ^2.1.0
+  cloud_firestore: ^4.6.0
+  dots_indicator: ^3.0.0
   dropdown_button2: ^2.0.0
   emailjs: ^1.1.0
   equatable: ^2.0.3
   file_picker: ^5.2.11
-  firebase_analytics: ^10.2.1
+  firebase_analytics: ^10.3.0
   firebase_auth: ^4.3.0
   firebase_core: ^2.9.0
   firebase_storage: ^11.1.0
