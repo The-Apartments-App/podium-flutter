@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/components/linked_in.dart';
+import 'package:podium/shared/shared.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -42,14 +42,14 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 600;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1100),
             child: Padding(
-              padding: isMobile ? mobilePagePadding : desktopPagePadding,
+              padding:
+                  isMobile(context) ? mobilePagePadding : desktopPagePadding,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +61,7 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
                     padding: const EdgeInsets.only(top: 8, bottom: 8),
                     child: Text(
                       '''Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind''',
-                      style: isMobile
+                      style: isMobile(context)
                           ? mobileTitleTextStyle
                           : desktopTitleTextStyle,
                     ),
@@ -212,7 +212,6 @@ class BlogSection extends StatelessWidget {
         TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
     const desktopHeadlineTextStyle =
         TextStyle(fontSize: 28, fontWeight: FontWeight.w500);
-    final isMobile = MediaQuery.of(context).size.width < 600;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
@@ -224,8 +223,9 @@ class BlogSection extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 16),
             child: Text(
               headline,
-              style:
-                  isMobile ? mobileHeadlineTextStyle : desktopHeadlineTextStyle,
+              style: isMobile(context)
+                  ? mobileHeadlineTextStyle
+                  : desktopHeadlineTextStyle,
             ),
           ),
           Text(

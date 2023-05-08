@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:podium/shared/shared_functions.dart';
 
 class FeatureBox extends StatefulWidget {
   const FeatureBox({
@@ -22,7 +23,7 @@ class _FeatureBoxState extends State<FeatureBox> {
     return ConstrainedBox(
       constraints: const BoxConstraints(minWidth: 200, maxWidth: 300),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width < 700
+        width: isMobile(context)
             ? MediaQuery.of(context).size.width
             : MediaQuery.of(context).size.width * .25,
         child: Column(

@@ -27,7 +27,7 @@ class _BlogLinkState extends State<BlogLink> {
         debugPrint('blog link clicked'),
       },
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: 500, maxWidth: 500),
+        constraints: const BoxConstraints(maxHeight: 500, maxWidth: 500),
         child: Column(
           children: [
             ClipRRect(

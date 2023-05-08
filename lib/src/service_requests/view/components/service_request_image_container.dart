@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:podium/shared/shared.dart';
 
 class ServiceRequestImageContainer extends StatelessWidget {
   const ServiceRequestImageContainer({super.key, required this.child});
@@ -8,9 +9,7 @@ class ServiceRequestImageContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200,
-      width: MediaQuery.of(context).size.width < 700
-          ? MediaQuery.of(context).size.width * .28
-          : 100,
+      width: isMobile(context) ? MediaQuery.of(context).size.width * .28 : 100,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.white,

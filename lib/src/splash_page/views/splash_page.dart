@@ -1,7 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/shared/components/linked_in.dart';
+import 'package:podium/shared/shared.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:podium/src/splash_page/views/components/blog_feed.dart';
@@ -119,9 +119,8 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 650;
-    screenSizeIsMobile = isMobile;
-    screenSizeIsDesktop = !isMobile;
+    screenSizeIsMobile = isMobile(context);
+    screenSizeIsDesktop = !isMobile(context);
 
     final desktopSplashImage = Stack(
       alignment: AlignmentDirectional.center,
@@ -338,21 +337,111 @@ class _SplashPageState extends State<SplashPage> {
       );
     }
 
+    final desktopAppBar = [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(32, 0, 40, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const PodiumLogoWithTitle(height: 150),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  child: GestureDetector(
+                    onTap: () {
+                      debugPrint('Residents appbar clicked');
+                    },
+                    child: const Text(
+                      'Residents',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/services');
+                    },
+                    child: const Text(
+                      'Services',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+      const Divider()
+    ];
+
     closeLogin(context);
 
     return Scaffold(
+      appBar: isMobile(context)
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              leading: const PodiumLogoWithTitle(
+                height: kToolbarHeight,
+              ),
+              leadingWidth: 150,
+              actions: [
+                Builder(
+                  builder: (BuildContext context) {
+                    return IconButton(
+                      icon: const Icon(Icons.menu, color: Colors.black),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      tooltip: MaterialLocalizations.of(context)
+                          .openAppDrawerTooltip,
+                    );
+                  },
+                )
+              ],
+              toolbarHeight: 150,
+            )
+          : null,
+      drawer: isMobile(context)
+          ? Drawer(
+              backgroundColor: Colors.white,
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  const DrawerHeader(
+                    child: PodiumLogoWithTitle(height: 150),
+                  ),
+                  ListTile(
+                    title: const Text('Residents'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/residents');
+                    },
+                  ),
+                  ListTile(
+                    title: const Text('Services'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/services');
+                    },
+                  ),
+                ],
+              ),
+            )
+          : null,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(32, 0, 40, 0),
-                  child: Row(
-                    children: const [PodiumLogoWithTitle(height: 150)],
-                  ),
-                ),
-                // const Divider(),
+                if (!isMobile(context)) ...desktopAppBar,
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 1375),
                   child: Column(
@@ -362,7 +451,7 @@ class _SplashPageState extends State<SplashPage> {
                         padding: const EdgeInsets.fromLTRB(32, 36, 16, 32),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          child: isMobile
+                          child: isMobile(context)
                               ? mobileSplashNoImage
                               : desktopSplashImage,
                         ),
@@ -515,21 +604,21 @@ class _SplashPageState extends State<SplashPage> {
                       //These will be the feature boxes with icons and text
                       Padding(
                         padding: const EdgeInsets.fromLTRB(40, 40, 16, 64),
-                        child: MediaQuery.of(context).size.width < 850
+                        child: isMobile(context)
                             ? Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: const [...featureBoxes],
                               )
                             : Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: const [...featureBoxes],
                               ),
                       ),
                       const Padding(
-                        padding:
-                            EdgeInsets.only(left: 32, right: 32, bottom: 48),
+                        padding: EdgeInsets.only(left: 32, right: 32),
                         child: BlogFeed(),
                       ),
                       // This will be the FAQ section,
@@ -606,14 +695,27 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                 ),
                 const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    PodiumLogoWithTitle(height: 80),
-                    LinkedInLink(),
-                    Text('© 2023 Podium Apartments Inc.')
-                  ],
-                ),
+                if (MediaQuery.of(context).size.width > 320)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      PodiumLogoWithTitle(height: 80),
+                      LinkedInLink(),
+                      Text('© 2023 Podium Apartments Inc.')
+                    ],
+                  )
+                else
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      PodiumLogoWithTitle(height: 80),
+                      LinkedInLink(),
+                      Padding(
+                        padding: EdgeInsets.only(top: 24, bottom: 36),
+                        child: Text('© 2023 Podium Apartments Inc.'),
+                      )
+                    ],
+                  )
               ],
             ),
           ),

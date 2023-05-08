@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:podium/shared/shared.dart';
 import 'package:podium/src/splash_page/views/components/blog_link.dart';
 
 class BlogFeed extends StatefulWidget {
@@ -12,27 +13,31 @@ class BlogFeed extends StatefulWidget {
 class _BlogFeedState extends State<BlogFeed> {
   final blogCarouselController = CarouselController();
 
-  bool? isMobile;
   @override
   Widget build(BuildContext context) {
     final mobileBlogFeed = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CarouselSlider(
           carouselController: blogCarouselController,
-          options: CarouselOptions(height: 315, enableInfiniteScroll: false),
+          options: CarouselOptions(
+            height: 350,
+            enableInfiniteScroll: false,
+          ),
           items: const [
             BlogLink(
               blogId: 'blog1',
               imageUrl:
                   'https://images.unsplash.com/photo-1659621222272-f65c27b6f182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHBvZGl1bSUyMGFwYXJ0bWVudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
               headline:
-                  'Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind',
+                  '''Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind''',
             )
           ],
         ),
       ],
     );
     final desktopBlogFeed = Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: const [
         BlogLink(
@@ -40,15 +45,13 @@ class _BlogFeedState extends State<BlogFeed> {
           imageUrl:
               'https://images.unsplash.com/photo-1659621222272-f65c27b6f182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHBvZGl1bSUyMGFwYXJ0bWVudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
           headline:
-              'Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind',
+              '''Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind''',
         ),
       ],
     );
-    isMobile = MediaQuery.of(context).size.width < 1100;
     return Wrap(
       children: [
         Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
@@ -56,7 +59,7 @@ class _BlogFeedState extends State<BlogFeed> {
               child: Text(
                 'Blogs',
                 style: TextStyle(
-                  fontSize: isMobile! == false ? 32 : 24,
+                  fontSize: !isMobile(context) ? 32 : 24,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -71,7 +74,7 @@ class _BlogFeedState extends State<BlogFeed> {
             //     ),
             //   ),
             // ),
-            if (isMobile! != false) mobileBlogFeed else desktopBlogFeed
+            if (isMobile(context)) mobileBlogFeed else desktopBlogFeed
           ],
         ),
         // if (MediaQuery.of(context).size.width < 700)

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:podium/shared/shared_functions.dart';
 
 class FAQ extends StatefulWidget {
   const FAQ({super.key, required this.question, required this.answer});
@@ -21,7 +22,7 @@ class _FAQState extends State<FAQ> {
         )
       },
       child: SizedBox(
-        width: MediaQuery.of(context).size.width < 700
+        width: isMobile(context)
             ? MediaQuery.of(context).size.width
             : MediaQuery.of(context).size.width * .425,
         child: Column(
