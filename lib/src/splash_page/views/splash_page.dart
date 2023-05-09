@@ -351,7 +351,7 @@ class _SplashPageState extends State<SplashPage> {
                   padding: const EdgeInsets.only(left: 8, right: 8),
                   child: GestureDetector(
                     onTap: () {
-                      debugPrint('Residents appbar clicked');
+                      Navigator.pushNamed(context, '/residents');
                     },
                     child: const Text(
                       'Residents',
