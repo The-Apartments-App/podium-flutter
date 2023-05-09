@@ -7,11 +7,11 @@ import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:podium/src/login/models/models.dart';
 import 'package:podium/src/login/models/username.dart';
-part 'update_profile_state.dart';
+part 'update_profile_name_state.dart';
 
-class UpdateProfileCubit extends Cubit<UpdateProfileState> {
-  UpdateProfileCubit(this._authenticationRepository)
-      : super(const UpdateProfileState());
+class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {
+  UpdateProfileNameCubit(this._authenticationRepository)
+      : super(const UpdateProfileNameState());
 
   final AuthenticationRepository _authenticationRepository;
 

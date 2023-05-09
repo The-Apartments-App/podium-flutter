@@ -17,7 +17,7 @@ class UpdateProfileDisplayNamePage extends StatelessWidget {
       padding: const EdgeInsets.all(8),
         child: BlocProvider(
         create: (_) =>
-            UpdateProfileCubit(context.read<AuthenticationRepository>()),
+            UpdateProfileNameCubit(context.read<AuthenticationRepository>()),
         child: const UpdateProfileDisplayNameForm(),
         ),
     );

@@ -29,7 +29,7 @@ class _UpdateProfileDisplayNameFormState
   Widget build(BuildContext context) {
     final _formUsername = GlobalKey<FormState>();
     final changeUserNameCubit =
-        context.select((UpdateProfileCubit cubit) => cubit);
+        context.select((UpdateProfileNameCubit cubit) => cubit);
     final user = context.select((AppBloc bloc) => bloc.state.user);
 
     return SizedBox(
@@ -86,7 +86,7 @@ class _UpdateProfileDisplayNameFormState
                       width: 200,
                       child: TextFormField(
                         controller: nameController,
-                        onChanged: (name) => context.read<UpdateProfileCubit>().userNameChanged(name),
+                        onChanged: (name) => context.read<UpdateProfileNameCubit>().userNameChanged(name),
                         validator: (name) {
                           if (name == null || name.isEmpty) {
                             return 'Please enter a new username';
@@ -104,7 +104,7 @@ class _UpdateProfileDisplayNameFormState
                 if (_formUsername.currentState!.validate()) {
                   debugPrint(nameController.text);
                   changeUserNameCubit.updateWithNewDisplayName(nameController.text);
-                  // user.name = nameController.text;
+                  Navigator.pop(context);
                 }
               },
               child: Row(

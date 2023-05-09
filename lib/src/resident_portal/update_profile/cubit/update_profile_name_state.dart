@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'update_profile_cubit.dart';
+part of 'update_profile_name_cubit.dart';
 
-class UpdateProfileState extends Equatable {
-  const UpdateProfileState({
+class UpdateProfileNameState extends Equatable {
+  const UpdateProfileNameState({
     // this.email = const Email.pure(),
     // this.password = const Password.pure(),
     this.userName = const Username.pure(),
-    // this.profilePicture,
+    this.profilePicture,
     this.status = FormzSubmissionStatus.initial,
     this.errorMessage,
   });
@@ -14,7 +14,7 @@ class UpdateProfileState extends Equatable {
   // final Email email;
   // final Password password;
   final Username userName;
-  // final Image? profilePicture;
+  final Image? profilePicture;
   final FormzSubmissionStatus status;
   final String? errorMessage;
 
@@ -22,7 +22,7 @@ class UpdateProfileState extends Equatable {
   List<Object> get props =>
       [status, userName];
 
-  UpdateProfileState copyWith({
+  UpdateProfileNameState copyWith({
     // Email? email,
     // Password? password,
     Username? userName,
@@ -36,7 +36,7 @@ class UpdateProfileState extends Equatable {
     // debugPrint('NEW VALUE: profilePicture: $profilePicture');
     debugPrint('NEW VALUE: userName: $userName');
     debugPrint('NEW VALUE: status: $status');
-    return UpdateProfileState(
+    return UpdateProfileNameState(
       // email: email ?? this.email,
       // password: password ?? this.password,
       // profilePicture: profilePicture ?? this.profilePicture,

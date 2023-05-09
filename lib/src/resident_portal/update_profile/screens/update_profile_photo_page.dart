@@ -17,7 +17,7 @@ class UpdateProfilePhotoPage extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: BlocProvider(
         create: (_) =>
-            UpdateProfileCubit(context.read<AuthenticationRepository>()),
+            UpdateProfilePhotoCubit(context.read<AuthenticationRepository>()),
         child: const UpdateProfilePhotoForm (),
       ),
     );

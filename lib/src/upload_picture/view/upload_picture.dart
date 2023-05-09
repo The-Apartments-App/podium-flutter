@@ -21,7 +21,7 @@ class UploadPictureState extends State<UploadPicture> {
     setState(() {
       image = img;
       if (img != null) {
-        context.read<UpdateProfileCubit>();
+        context.read<UpdateProfilePhotoCubit>();
       }
     });
   }

@@ -48,6 +48,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
     debugPrint('UpdateProfilePhotoForm LOADED');
     final user = context.select((AppBloc bloc) => bloc.state.user);
     const defaultProfilePic = 'lib/src/assets/images/podium_logo.png';
+    final changeUserPhoto = context.select((UpdateProfilePhotoCubit cubit) => cubit);
     CircleAvatar getProfilePic() {
       if (user.photo != null) {
         return CircleAvatar(
@@ -104,9 +105,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
           ),
           ElevatedButton(
             onPressed: () {
-              context
-                  .read<UpdateProfileCubit>()
-                  .updateWithNewPicture(fileController);
+              changeUserPhoto.updateWithNewPicture(fileController);
               Navigator.pop(context);
             },
             child: Row(
