@@ -180,7 +180,7 @@ class AuthenticationRepository {
 
   /// Stream of [User] which will emit the current user when
   /// the authentication state or the user profile is changed.
-  /// 
+  ///
   /// Emits [User.empty] if the user is not authenticated.
   Stream<User> get user {
     return _firebaseAuth.userChanges().map((firebaseUser) {
@@ -412,22 +412,30 @@ class AuthenticationRepository {
     debugPrint('NEW PHOTO IS $photo');
     try {
       if (_firebaseAuth.currentUser != null) {
-        // debugPrint('currentUser is not null');
-        // final storageRef = FirebaseStorage.instance.ref();
-        // debugPrint('storageRef: $storageRef');
-        // final userImageRef = storageRef
-        //     .child('users/${currentUser.id}/images/photoURL.jpg');
-        // debugPrint('userImageRef: $userImageRef');
-        // if (photo != null) {
-        //   await userImageRef.putFile(photo);
-        // } else {
-        //   throw Exception('Error putting file in cloud');
-        // }
-        final profileUrl = photo?.uri.toFilePath();
-        debugPrint('profileUrl: $profileUrl');
+        if (kIsWeb) {
+          final profileUrl = photo?.uri.toFilePath();
+          debugPrint('profileUrl: $profileUrl');
 
-        await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
-        debugPrint('Firebase Auth updated ------------');
+          await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
+          debugPrint('Firebase Auth updated ------------');
+        } else {
+          debugPrint('currentUser is not null');
+          final storageRef = FirebaseStorage.instance.ref();
+          debugPrint('storageRef: $storageRef');
+          final userImageRef =
+              storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
+          debugPrint('userImageRef: $userImageRef');
+          if (photo != null) {
+            await userImageRef.putFile(photo);
+          } else {
+            throw Exception('Error putting file in cloud');
+          }
+          final profileUrl = await userImageRef.getDownloadURL();
+          debugPrint('profileUrl: $profileUrl');
+
+          await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
+          debugPrint('Firebase Auth updated ------------');
+        }
       }
     } catch (e) {
       debugPrint(e.toString());
