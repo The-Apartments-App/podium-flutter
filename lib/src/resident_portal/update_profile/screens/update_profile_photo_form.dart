@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,10 +32,10 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   }
 
   CircleAvatar getNewProfilePic() {
-    if (fileController != null) {
+    if (fileController != null && !kIsWeb ) {
       return CircleAvatar(
         radius: 50,
-        // backgroundImage: Image.file(fileController!).image,
+        backgroundImage: Image.file(fileController!).image,
       );
     } else {
       return const CircleAvatar(
