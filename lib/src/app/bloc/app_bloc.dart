@@ -21,8 +21,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           // with the current user data.
 
           // Otherwise, set the app state to unauthenticated.
-          authenticationRepository.currentUser.isNotEmpty
-              ? AppState.authenticated(authenticationRepository.currentUser)
+          authenticationRepository.currentLoggedInUser.isNotEmpty
+              ? AppState.authenticated(authenticationRepository.currentLoggedInUser)
               : const AppState.unauthenticated(),
         ) {
     // Set up event handlers for the app bloc.

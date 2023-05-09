@@ -27,7 +27,6 @@ class _UpdateProfileDisplayNameFormState
 
   @override
   Widget build(BuildContext context) {
-    final userName = context.select((AppBloc bloc) => bloc.state.user.name);
     final _formUsername = GlobalKey<FormState>();
     final changeUserNameCubit =
         context.select((UpdateProfileCubit cubit) => cubit);
@@ -54,7 +53,7 @@ class _UpdateProfileDisplayNameFormState
                       ),
                     ),
                     Text(
-                      userName ?? 'Resident',
+                      user.name ?? 'Resident',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -104,7 +103,8 @@ class _UpdateProfileDisplayNameFormState
               onPressed: () {
                 if (_formUsername.currentState!.validate()) {
                   debugPrint(nameController.text);
-                  changeUserNameCubit..updateWithNewDisplayName(nameController.text);
+                  changeUserNameCubit.updateWithNewDisplayName(nameController.text);
+                  // user.name = nameController.text;
                 }
               },
               child: Row(

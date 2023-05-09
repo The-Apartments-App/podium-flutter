@@ -44,12 +44,9 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   }
 
   Future<void> updateWithNewDisplayName(String name) async {
-    debugPrint('UPDATE WITH NEW DISPLAY NAME CALLED IN CUBIT DART');
-    debugPrint('UPDATE WITH NEW DISPLAY NAME $name');
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      await _authenticationRepository.updateDisplayName(displayName: name);
-      await _authenticationRepository.updateUser();
+      await _authenticationRepository.changeDisplayName(displayName: name);
       emit(state.copyWith(
         userName: Username.dirty(name),
         status: FormzSubmissionStatus.success,),

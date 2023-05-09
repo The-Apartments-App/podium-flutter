@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:cache/cache.dart';
+import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:podium/src/resident_portal/update_profile/screens/update_profile_display_name_page.dart';
 
 /// {@template sign_up_with_email_and_password_failure}
 /// Thrown during the sign up process if a failure occurs.
@@ -177,11 +179,11 @@ class AuthenticationRepository {
   static const _userCacheKey = '__user_cache_key__';
 
   /// Stream of [User] which will emit the current user when
-  /// the authentication state changes.
-  ///
+  /// the authentication state or the user profile is changed.
+  /// 
   /// Emits [User.empty] if the user is not authenticated.
   Stream<User> get user {
-    return _firebaseAuth.authStateChanges().map((firebaseUser) {
+    return _firebaseAuth.userChanges().map((firebaseUser) {
       final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
       _cache.write(key: _userCacheKey, value: user);
       return user;
@@ -190,7 +192,7 @@ class AuthenticationRepository {
 
   /// Returns the current cached user.
   /// Defaults to [User.empty] if there is no cached user.
-  User get currentUser {
+  User get currentLoggedInUser {
     return _cache.read<User>(key: _userCacheKey) ?? User.empty;
   }
 
@@ -390,28 +392,17 @@ class AuthenticationRepository {
     }
   }
 
-  Future<void> updateDisplayName({required String displayName}) async {
+  // change the logged in users name
+
+  Future<void> changeDisplayName({required String displayName}) async {
     debugPrint('UPDATE DISPLAY NAME CALLED');
+
     final firebaseUser = _firebaseAuth.currentUser;
     try {
-      await _firebaseAuth.currentUser?.updateDisplayName(displayName);
-      await firebaseUser?.reload();
-      // if (firebaseUser != null) {
-      // final user = firebaseUser?.toUser;
-      // debugPrint('reloaded user hopefully $user');
-      // _cache.write(key: _userCacheKey, value: user);
-      // }
+      await firebaseUser?.updateDisplayName(displayName);
     } catch (e) {
       debugPrint(e.toString());
     }
-    // return;
-  }
-
-  Future<void> updateUser() async {
-    final firebaseUser = _firebaseAuth.currentUser;
-    await firebaseUser?.reload();
-    final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
-    _cache.write(key: _userCacheKey, value: user);
   }
 
   Future<void> updateProfilePicture({
@@ -424,8 +415,8 @@ class AuthenticationRepository {
         debugPrint('currentUser is not null');
         final storageRef = FirebaseStorage.instance.ref();
         debugPrint('storageRef: $storageRef');
-        final userImageRef =
-            storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
+        final userImageRef = storageRef
+            .child('users/${currentLoggedInUser.id}/images/photoURL.jpg');
         debugPrint('userImageRef: $userImageRef');
         if (photo != null) {
           await userImageRef.putFile(photo);
