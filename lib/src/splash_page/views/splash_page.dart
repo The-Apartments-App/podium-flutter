@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/components/linked_in.dart';
 import 'package:podium/src/login/login.dart';
-import 'package:podium/src/podium_logo_round/podium_logo_round.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
+import 'package:podium/src/splash_page/views/components/blog_feed.dart';
 import 'package:podium/src/splash_page/views/components/faq.dart';
 import 'package:podium/src/splash_page/views/components/feature_box.dart';
 import 'package:podium/src/waitlist_button/waitlist_button.dart';
@@ -119,7 +119,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    var isMobile = MediaQuery.of(context).size.width < 650;
+    final isMobile = MediaQuery.of(context).size.width < 650;
     screenSizeIsMobile = isMobile;
     screenSizeIsDesktop = !isMobile;
 
@@ -339,16 +339,17 @@ class _SplashPageState extends State<SplashPage> {
     }
 
     closeLogin(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                   child: Row(
-                    children: const [PodiumLogoWithTitle(height: 150)],
+                    children: [PodiumLogoWithTitle(height: 150)],
                   ),
                 ),
                 // const Divider(),
@@ -515,22 +516,22 @@ class _SplashPageState extends State<SplashPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(40, 40, 16, 64),
                         child: MediaQuery.of(context).size.width < 850
-                            ? Column(
+                            ? const Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: const [...featureBoxes],
+                                children: [...featureBoxes],
                               )
-                            : Row(
+                            : const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: const [...featureBoxes],
+                                children: [...featureBoxes],
                               ),
                       ),
-                      // const Padding(
-                      //   padding:
-                      //       EdgeInsets.only(left: 48, right: 32, bottom: 96),
-                      //   child: BlogFeed(),
-                      // ),
+                      const Padding(
+                        padding:
+                            EdgeInsets.only(left: 48, right: 32, bottom: 96),
+                        child: BlogFeed(),
+                      ),
                       // This will be the FAQ section,
                       // clickable with a short foldout answer
                       Padding(
@@ -557,10 +558,10 @@ class _SplashPageState extends State<SplashPage> {
                             ),
                             ConstrainedBox(
                               constraints: const BoxConstraints(maxWidth: 500),
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 32),
+                              child: const Padding(
+                                padding: EdgeInsets.only(right: 32),
                                 child: Column(
-                                  children: const [
+                                  children: [
                                     FAQ(
                                       question:
                                           '''What makes Podium different from other apartment rental platforms?''',
@@ -602,9 +603,9 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                 ),
                 const Divider(),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     PodiumLogoWithTitle(height: 80),
                     LinkedInLink(),
                     Text('© 2023 Podium Apartments Inc.')

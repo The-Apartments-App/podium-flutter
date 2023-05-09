@@ -32,13 +32,13 @@ class CallSupportButton extends StatelessWidget {
             foregroundColor: MaterialStatePropertyAll(Colors.black),
           ),
           onPressed: callSupport,
-          child: Row(
+          child: const Row(
             children: [
-              const Icon(Icons.phone),
+              Icon(Icons.phone),
               Expanded(
                 child: Wrap(
                   alignment: WrapAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       'Call Support',
                       style: TextStyle(

@@ -45,8 +45,8 @@ class UploadPictureState extends State<UploadPicture> {
                     final photo = getImage(ImageSource.gallery);
                     debugPrint('photo from gallery is -> $photo');
                   },
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(Icons.image),
                       Text('From Gallery'),
                     ],
@@ -59,8 +59,8 @@ class UploadPictureState extends State<UploadPicture> {
                     final photo = getImage(ImageSource.camera);
                     debugPrint('photo from camera is -> $photo');
                   },
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(Icons.camera),
                       Text('From Camera'),
                     ],

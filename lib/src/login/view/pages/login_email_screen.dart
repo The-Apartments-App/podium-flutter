@@ -33,11 +33,11 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
             padding: const EdgeInsets.fromLTRB(12, 4, 12, 0),
             child: Stack(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 36,
                   child: Flex(
                     direction: Axis.horizontal,
-                    children: const [
+                    children: [
                       Expanded(
                         child: Text(
                           'Log in or sign up',
@@ -69,8 +69,8 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
             padding: const EdgeInsets.all(20),
             child: Wrap(
               children: [
-                Column(
-                  children: const [
+                const Column(
+                  children: [
                     SizedBox(height: 2),
                     Text(
                       'Welcome to Podium',

@@ -93,16 +93,16 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
             onPressed: () {
               takePhoto(ImageSource.camera);
             },
-            child: Row(
-              children: const [Icon(Icons.camera), Text('Camera')],
+            child: const Row(
+              children: [Icon(Icons.camera), Text('Camera')],
             ),
           ),
           ElevatedButton(
             onPressed: () {
               takePhoto(ImageSource.gallery);
             },
-            child: Row(
-              children: const [Icon(Icons.camera_roll), Text('Gallery')],
+            child: const Row(
+              children: [Icon(Icons.camera_roll), Text('Gallery')],
             ),
           ),
           ElevatedButton(
@@ -110,8 +110,8 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
               changeUserPhoto.updateWithNewPicture(fileController);
               Navigator.pop(context);
             },
-            child: Row(
-              children: const [Icon(Icons.save), Text('Save Picture')],
+            child: const Row(
+              children: [Icon(Icons.save), Text('Save Picture')],
             ),
           ),
         ],
