@@ -29,6 +29,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
     setState(() {
       fileController = xfileToFile;
     });
+    debugPrint('File in photo form is $fileController');
   }
 
   CircleAvatar getNewProfilePic() {
@@ -37,10 +38,14 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
         radius: 50,
         backgroundImage: Image.file(fileController!).image,
       );
-    } else {
-      return const CircleAvatar(
+    } else  if (fileController != null && kIsWeb ) {
+      return CircleAvatar(
         radius: 50,
-        backgroundImage: AssetImage('lib/src/assets/images/podium_logo.png'),
+        backgroundImage: Image.network(fileController!.path).image,
+      );
+    } else {
+       return const CircleAvatar(
+        radius: 50,
       );
     }
   }
