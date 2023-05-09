@@ -192,7 +192,7 @@ class AuthenticationRepository {
 
   /// Returns the current cached user.
   /// Defaults to [User.empty] if there is no cached user.
-  User get currentLoggedInUser {
+  User get currentUser {
     return _cache.read<User>(key: _userCacheKey) ?? User.empty;
   }
 
@@ -416,7 +416,7 @@ class AuthenticationRepository {
         final storageRef = FirebaseStorage.instance.ref();
         debugPrint('storageRef: $storageRef');
         final userImageRef = storageRef
-            .child('users/${currentLoggedInUser.id}/images/photoURL.jpg');
+            .child('users/${currentUser.id}/images/photoURL.jpg');
         debugPrint('userImageRef: $userImageRef');
         if (photo != null) {
           await userImageRef.putFile(photo);
