@@ -346,10 +346,10 @@ class _SplashPageState extends State<SplashPage> {
           child: Center(
             child: Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                 Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                   child: Row(
-                    children: [PodiumLogoWithTitle(height: 150)],
+                    children: const [PodiumLogoWithTitle(height: 150)],
                   ),
                 ),
                 // const Divider(),
@@ -516,12 +516,12 @@ class _SplashPageState extends State<SplashPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(40, 40, 16, 64),
                         child: MediaQuery.of(context).size.width < 850
-                            ? const Column(
+                            ? Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [...featureBoxes],
                               )
-                            : const Row(
+                            : Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [...featureBoxes],
@@ -558,10 +558,10 @@ class _SplashPageState extends State<SplashPage> {
                             ),
                             ConstrainedBox(
                               constraints: const BoxConstraints(maxWidth: 500),
-                              child: const Padding(
-                                padding: EdgeInsets.only(right: 32),
+                              child:  Padding(
+                                padding: const EdgeInsets.only(right: 32),
                                 child: Column(
-                                  children: [
+                                  children: const [
                                     FAQ(
                                       question:
                                           '''What makes Podium different from other apartment rental platforms?''',
@@ -603,9 +603,9 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                 ),
                 const Divider(),
-                const Row(
+                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
+                  children: const [
                     PodiumLogoWithTitle(height: 80),
                     LinkedInLink(),
                     Text('© 2023 Podium Apartments Inc.')

@@ -35,9 +35,9 @@ class _BlogFeedState extends State<BlogFeed> {
         ),
       ],
     );
-    const desktopBlogFeed = Row(
+    final desktopBlogFeed = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
+      children: const [
         BlogLink(
           blogId: 'blog1',
           imageUrl:
