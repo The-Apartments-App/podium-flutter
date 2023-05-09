@@ -393,7 +393,6 @@ class AuthenticationRepository {
   }
 
   // change the logged in users name
-
   Future<void> changeDisplayName({required String displayName}) async {
     debugPrint('UPDATE DISPLAY NAME CALLED');
 
@@ -405,6 +404,7 @@ class AuthenticationRepository {
     }
   }
 
+  // change the logged in users photo
   Future<void> updateProfilePicture({
     File? photo,
   }) async {

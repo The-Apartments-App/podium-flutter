@@ -44,8 +44,6 @@ class UploadPictureState extends State<UploadPicture> {
                     Navigator.pop(context);
                     final photo = getImage(ImageSource.gallery);
                     debugPrint('photo from gallery is -> $photo');
-                    // context.read<UpdateProfileCubit>()
-                    // .profilePictureChanged(photo);
                   },
                   child: Row(
                     children: const [

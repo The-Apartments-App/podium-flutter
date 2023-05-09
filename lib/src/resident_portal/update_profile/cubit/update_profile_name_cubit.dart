@@ -15,24 +15,7 @@ class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {
 
   final AuthenticationRepository _authenticationRepository;
 
-  // void emailChanged(String value) {
-  //   final email = Email.dirty(value);
-  //   emit(
-  //     state.copyWith(
-  //       email: email,
-  //     ),
-  //   );
-  // }
-
-  // void passwordChanged(String value) {
-  //   final password = Password.dirty(value);
-  //   emit(
-  //     state.copyWith(
-  //       password: password,
-  //     ),
-  //   );
-  // }
-
+  // copy to update profile name form state
   void userNameChanged(String value) {
     debugPrint('passed value in cubit $value');  
     final newUsername = Username.dirty(value);
@@ -43,6 +26,7 @@ class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {
     );
   }
 
+  // cubit function for changing name
   Future<void> updateWithNewDisplayName(String name) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
@@ -57,25 +41,12 @@ class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {
     }
   }
 
-  // void profilePictureChanged(Image value) {
-  //   final picture = ProfilePicture.dirty(value);
-  //   emit(
-  //     state.copyWith(
-  //       profilePicture: picture,
-  //     ),
-  //   );
-  // }
-
-  // Future<void> logInWithCredentials() async {
-  //   if (!state.status.isCanceled) return;
+  // Future<void> logInWithGoogle() async {
   //   emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
   //   try {
-  //     await _authenticationRepository.logInWithEmailAndPassword(
-  //       email: state.email.value,
-  //       password: state.password.value,
-  //     );
+  //     await _authenticationRepository.logInWithGoogle();
   //     emit(state.copyWith(status: FormzSubmissionStatus.success));
-  //   } on LogInWithEmailAndPasswordFailure catch (e) {
+  //   } on LogInWithGoogleFailure catch (e) {
   //     emit(
   //       state.copyWith(
   //         errorMessage: e.message,
@@ -86,33 +57,4 @@ class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {
   //     emit(state.copyWith(status: FormzSubmissionStatus.failure));
   //   }
   // }
-
-  Future<void> logInWithGoogle() async {
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    try {
-      await _authenticationRepository.logInWithGoogle();
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
-    } on LogInWithGoogleFailure catch (e) {
-      emit(
-        state.copyWith(
-          errorMessage: e.message,
-          status: FormzSubmissionStatus.failure,
-        ),
-      );
-    } catch (_) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
-    }
-  }
-
-  Future<void> updateWithNewPicture(File? picture) async {
-    debugPrint('UPDATEWITHNEWPICTURE CALLED IN UpdateProfileCubit');
-    debugPrint('picture in updateWithNewPicture: $picture');
-    try {
-      await _authenticationRepository.updateProfilePicture(
-        photo: picture,
-      );
-    } catch (_) {
-      debugPrint('ERROR');
-    }
-  }
 }
