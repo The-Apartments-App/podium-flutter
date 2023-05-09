@@ -412,27 +412,25 @@ class AuthenticationRepository {
     debugPrint('NEW PHOTO IS $photo');
     try {
       if (_firebaseAuth.currentUser != null) {
-        debugPrint('currentUser is not null');
-        final storageRef = FirebaseStorage.instance.ref();
-        debugPrint('storageRef: $storageRef');
-        final userImageRef = storageRef
-            .child('users/${currentUser.id}/images/photoURL.jpg');
-        debugPrint('userImageRef: $userImageRef');
-        if (photo != null) {
-          await userImageRef.putFile(photo);
-        } else {
-          throw Exception('Error putting file in cloud');
-        }
-        final profileUrl = await userImageRef.getDownloadURL();
+        // debugPrint('currentUser is not null');
+        // final storageRef = FirebaseStorage.instance.ref();
+        // debugPrint('storageRef: $storageRef');
+        // final userImageRef = storageRef
+        //     .child('users/${currentUser.id}/images/photoURL.jpg');
+        // debugPrint('userImageRef: $userImageRef');
+        // if (photo != null) {
+        //   await userImageRef.putFile(photo);
+        // } else {
+        //   throw Exception('Error putting file in cloud');
+        // }
+        final profileUrl = photo?.uri.toFilePath();
         debugPrint('profileUrl: $profileUrl');
 
         await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
         debugPrint('Firebase Auth updated ------------');
       }
-    } on FirebaseAuthException catch (e) {
-      throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
-    } catch (_) {
-      throw const SignUpWithEmailAndPasswordFailure();
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 }
