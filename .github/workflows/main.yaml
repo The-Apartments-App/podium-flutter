@@ -1,9 +1,13 @@
-name: podium
+name: My Flutter Workflow
 
-on: [push]
+on: push
 
 jobs:
   build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@v1
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
-      dart_sdk: '3.0.0'
+      coverage_excludes: "*.g.dart"
+      flutter_channel: "stable"
+      flutter_version: "2.8.1"
+      working_directory: "examples/my_flutter_package"
+      test_recursion: true
