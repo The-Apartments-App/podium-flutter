@@ -1,4 +1,4 @@
-name: VeryGood Flutter Package Workflow
+name: Flutter Package Workflow
 
 on:
   workflow_call:
