@@ -2,6 +2,9 @@
 
 There are not many things set in stone at Podium. We encourage you to explore, investigate, and suggest new things. Never be afraid to be ambitious!
 
+## Wiki Links 📑
+- [User Stories](https://github.com/Podium-Apartments/master_repo/wiki/User-Stories)
+
 ## Getting Started 🚀
 
 This project contains 3 flavors:
