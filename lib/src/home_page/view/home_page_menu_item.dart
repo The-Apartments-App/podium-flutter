@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/login/login.dart';
 import 'package:podium/src/home_page/view/home_page_icon.dart';
+import 'package:podium/src/login/login.dart';
 
 class HomePageMenuItem extends StatelessWidget {
   const HomePageMenuItem({

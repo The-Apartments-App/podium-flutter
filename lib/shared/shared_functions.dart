@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 void routeToPage(
   BuildContext context,
   String route,
