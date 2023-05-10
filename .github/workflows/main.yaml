@@ -3,17 +3,8 @@ name: podium
 on: [pull_request, push]
 
 jobs:
-
-  setup-dart:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@v1.5.0
-
   build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    with:
-      flutter_channel: master
-      flutter_version: 3.11.0-2.0.pre.73
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@v1
+
     
     
