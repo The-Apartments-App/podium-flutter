@@ -85,7 +85,7 @@ class _AppViewState extends State<AppView> {
     debugPrint('2b. APPVIEW BUILT - MaterialApp is created here');
     return MaterialApp(
       theme: appTheme,
-      initialRoute: '/',
+      initialRoute: '/residents',
       onGenerateRoute: (settings) {
         final blogId =
             // ignore: cast_nullable_to_non_nullable

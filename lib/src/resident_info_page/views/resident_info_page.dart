@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:podium/shared/shared.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:podium/src/splash_page/views/components/feature_box.dart';
+import 'package:podium/src/waitlist_button/view/waitlist_button.dart';
 
 class ResidentInfoPage extends StatefulWidget {
   const ResidentInfoPage({super.key});
@@ -13,20 +14,50 @@ class ResidentInfoPage extends StatefulWidget {
 class _ResidentInfoPageState extends State<ResidentInfoPage> {
   @override
   Widget build(BuildContext context) {
+    final isSmallScreen = MediaQuery.of(context).size.width < 1348;
+
     const featureBoxes = [
-      FeatureBox(
-        icon: Icon(Icons.apartment),
-        headline: 'Easy Management',
-        details:
-            '''Stay organized and in control with our user-friendly platform, simplifying your rental experience with a streamlined approach.''',
+      Padding(
+        padding: EdgeInsets.only(top: 6, bottom: 6),
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 5,
+          children: [
+            Icon(Icons.home),
+            Text(
+              'Experience peace of mind in a secure and comfortable setting',
+            ),
+          ],
+        ),
       ),
-      SizedBox(height: 16),
-      FeatureBox(
-        icon: Icon(Icons.phone_android),
-        headline: 'Safety & Comfort',
-        details:
-            '''Experience peace of mind in a secure and comfortable setting, knowing that Podium prioritizes your well-being and satisfaction.''',
+
+      Padding(
+        padding: EdgeInsets.only(top: 6, bottom: 6),
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 5,
+          children: [
+            Icon(Icons.phone_android),
+            Text(
+              'Stay organized and in control with our user-friendly platform',
+            ),
+          ],
+        ),
       ),
+
+      // FeatureBox(
+      //   icon: Icon(Icons.apartment),
+      //   headline: 'Easy Management',
+      //   details:
+      //       '''Stay organized and in control with our user-friendly platform, simplifying your rental experience with a streamlined approach.''',
+      // ),
+      // SizedBox(height: 16),
+      // FeatureBox(
+      //   icon: Icon(Icons.phone_android),
+      //   headline: 'Safety & Comfort',
+      //   details:
+      //       '''Experience peace of mind in a secure and comfortable setting, knowing that Podium prioritizes your well-being and satisfaction.''',
+      // ),
     ];
 
     Widget splashSectionImage(String fileName) {
@@ -145,17 +176,90 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
               children: [
                 if (!isMobile(context)) ...desktopAppBar,
                 ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1375),
+                  constraints: const BoxConstraints(maxWidth: 1450),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(16, 48, 16, 32),
-                        child: Text(
-                          'Welcome to Your New Home!',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.w500,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 24, 8, 24),
+                        child: Center(
+                          widthFactor: 2,
+                          child: Wrap(
+                            spacing: 160,
+                            verticalDirection: isSmallScreen
+                                ? VerticalDirection.up
+                                : VerticalDirection.down,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: isSmallScreen ? 40 : 0,
+                                      bottom: 64,
+                                    ),
+                                    child: const Text(
+                                      'Welcome Home!',
+                                      style: TextStyle(
+                                        fontSize: 48,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.fromLTRB(8, 24, 8, 24),
+                                    child: Text(
+                                      'SERVICES OFFERED',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black54,
+                                        letterSpacing: 1.1,
+                                      ),
+                                    ),
+                                  ),
+                                  ConstrainedBox(
+                                    constraints:
+                                        const BoxConstraints(maxWidth: 500),
+                                    child: const Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [...featureBoxes],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                      8,
+                                      48,
+                                      8,
+                                      48,
+                                    ),
+                                    child: SizedBox(
+                                      height: 48.5,
+                                      width: isMobile(context)
+                                          ? MediaQuery.of(context).size.width
+                                          : 390,
+                                      child: const WaitlistButton(),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  minWidth: 300,
+                                  maxWidth: 760,
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.asset(
+                                    'lib/src/assets/images/splash_page_community.png',
+                                    fit: BoxFit.cover,
+                                    height: 700,
+                                    width: MediaQuery.of(context).size.width,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -166,20 +270,22 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                           child: Wrap(
                             spacing: 50,
                             alignment: WrapAlignment.center,
+                            runAlignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               splashSectionImage(
                                 'splash_page_community.png',
                               ),
                               Column(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.only(
-                                      top: 40,
+                                      top: isSmallScreen ? 40 : 0,
                                       bottom: 40,
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Experience Seamless Living',
                                       style: TextStyle(
                                         fontSize: 36,
@@ -210,23 +316,23 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                         child: Center(
                           child: Wrap(
                             spacing: 50,
-                            runAlignment: WrapAlignment.spaceBetween,
                             alignment: WrapAlignment.center,
-                            verticalDirection:
-                                MediaQuery.of(context).size.width < 1400
-                                    ? VerticalDirection.up
-                                    : VerticalDirection.down,
+                            runAlignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            verticalDirection: isSmallScreen
+                                ? VerticalDirection.up
+                                : VerticalDirection.down,
                             children: [
                               Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.only(
-                                      top: 40,
+                                      top: isSmallScreen ? 40 : 0,
                                       bottom: 40,
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Delight in Thoughtful Amenities',
                                       style: TextStyle(
                                         fontSize: 36,
@@ -261,8 +367,9 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                         child: Center(
                           child: Wrap(
                             spacing: 50,
-                            runAlignment: WrapAlignment.spaceBetween,
                             alignment: WrapAlignment.center,
+                            runAlignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               splashSectionImage(
                                 'splash_page_city_skyline.jpeg',
@@ -271,12 +378,12 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.only(
-                                      top: 40,
+                                      top: isSmallScreen ? 40 : 0,
                                       bottom: 40,
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Join a Vibrant Community',
                                       style: TextStyle(
                                         fontSize: 36,
@@ -304,21 +411,6 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                       ),
 
                       //These will be the feature boxes with icons and text
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 40, 0, 64),
-                        child: isMobile(context)
-                            ? const Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [...featureBoxes],
-                              )
-                            : const Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [...featureBoxes],
-                              ),
-                      ),
                     ],
                   ),
                 ),
