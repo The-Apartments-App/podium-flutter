@@ -4,7 +4,7 @@ import 'package:podium/src/lease_reader/lease_reader.dart';
 
 class DocumentsPage extends StatelessWidget {
   const DocumentsPage({super.key});
-  
+
   static Page<void> page() => const MaterialPage<void>(child: DocumentsPage());
 
   @override
