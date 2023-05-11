@@ -111,7 +111,7 @@ class _BlogFeedState extends State<BlogFeed> {
         //               ),
         //             ),
         //             foregroundColor: MaterialStatePropertyAll(Colors.black),
-        //             shadowColor: MaterialStatePropertyAll(Colors.transparent),
+        //             shadowColor: MaterialStatePropertyAll(Colors.transparent)
         //             side: MaterialStatePropertyAll(
         //               BorderSide(color: Colors.grey),
         //             ),

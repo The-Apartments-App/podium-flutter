@@ -116,12 +116,11 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       width: 20,
                       iconName: 'facebook-icon.svg',
                       buttonText: 'Continue with Facebook',
-                      onPressed: () => {
-                        context.read<LoginCubit>().logInWithFacebook().then(
-                              (value) =>
-                                  Navigator.of(context).pushNamed('/home'),
-                            ),
-                      },
+                      onPressed: () =>
+                          context.read<LoginCubit>().logInWithFacebook().then(
+                                (value) =>
+                                    Navigator.of(context).pushNamed('/home'),
+                              ),
                     ),
                     SocialSignInButton(
                       height: 18,
