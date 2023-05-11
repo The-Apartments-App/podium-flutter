@@ -1,11 +1,7 @@
-import 'dart:io';
-import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
-import 'package:bloc/bloc.dart';
 
 class UpdateProfileDisplayNameForm extends StatefulWidget {
   const UpdateProfileDisplayNameForm({super.key});
@@ -27,7 +23,7 @@ class _UpdateProfileDisplayNameFormState
 
   @override
   Widget build(BuildContext context) {
-    final _formUsername = GlobalKey<FormState>();
+    final formUsername = GlobalKey<FormState>();
     final changeUserNameCubit =
         context.select((UpdateProfileNameCubit cubit) => cubit);
     final user = context.select((AppBloc bloc) => bloc.state.user);
@@ -36,7 +32,7 @@ class _UpdateProfileDisplayNameFormState
       height: 300,
       width: 300,
       child: Form(
-        key: _formUsername,
+        key: formUsername,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -66,9 +62,9 @@ class _UpdateProfileDisplayNameFormState
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     Text(
                       'New Display Name: ',
                       style: TextStyle(
@@ -81,7 +77,7 @@ class _UpdateProfileDisplayNameFormState
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
+                    SizedBox(
                       // sized box used to fix "Error: Cannot hit test a render box with no size."
                       width: 200,
                       child: TextFormField(
@@ -101,14 +97,14 @@ class _UpdateProfileDisplayNameFormState
             ),
             ElevatedButton(
               onPressed: () {
-                if (_formUsername.currentState!.validate()) {
+                if (formUsername.currentState!.validate()) {
                   debugPrint(nameController.text);
                   changeUserNameCubit.updateWithNewDisplayName(nameController.text);
                   Navigator.pop(context);
                 }
               },
-              child: Row(
-                children: const [Text('Change Display Name')],
+              child: const Row(
+                children: [Text('Change Display Name')],
               ),
             ),
           ],

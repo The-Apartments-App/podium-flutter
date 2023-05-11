@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:podium/src/login/models/models.dart';
 import 'package:podium/src/login/models/username.dart';

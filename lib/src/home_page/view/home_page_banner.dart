@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
@@ -19,7 +22,8 @@ class HomePageBanner extends StatelessWidget {
             user.photo!,
           ),
         );
-      } else {
+      }
+      else {
         return ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image.asset(
