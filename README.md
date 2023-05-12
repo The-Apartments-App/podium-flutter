@@ -43,4 +43,6 @@ Be sure to run `dart format` to get your changes to pass the workflow checks.
 
 When writing tests, using the file naming convention `*_test.dart` e.g. `waitlist_button_test.dart`, otherwise the test package may not run your tests.
 
+- Current Test Coverage: 32.28%
+
 
