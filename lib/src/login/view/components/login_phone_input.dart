@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/login/login.dart';
 
-import 'package:podium/src/login/view/components/login_country_code_dropdown_menu.dart';
-
 class LoginPhoneInput extends StatefulWidget {
   const LoginPhoneInput({super.key});
 

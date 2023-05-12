@@ -1,6 +1,6 @@
 name: podium
 
-on: [pull_request, push]
+on: push
 
 jobs:
 
@@ -15,5 +15,3 @@ jobs:
     with:
       flutter_channel: master
       flutter_version: 3.11.0-2.0.pre.73
-    
-    

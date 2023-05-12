@@ -2,3 +2,10 @@ include: package:very_good_analysis/analysis_options.3.1.0.yaml
 linter:
   rules:
     public_member_api_docs: false
+formatter:
+  enabled: true
+    # Run `dart format` instead of `flutter format`
+  command: "dart"
+  args:
+    - "format"
+    - "."
