@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   testWidgets(
-    'Test LinkedInLink widget',
+    'LinkedInLink renders correctly',
     (WidgetTester tester) async {
       // Build the widget
       await tester.pumpWidget(
