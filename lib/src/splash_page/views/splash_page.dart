@@ -1,7 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/shared/components/linked_in.dart';
+import 'package:podium/shared/components/linkedin_link.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:podium/src/splash_page/views/components/blog_feed.dart';
