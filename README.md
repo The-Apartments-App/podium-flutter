@@ -37,6 +37,10 @@ Clone down the master_repo, and create branches from here. Once your code is rea
 
 Branch Names should follow this format `[your initials]/[todays-date]/[scope-of-your-branch]` --> `DV/4-25-23/update-readme`
 
+Pull down the master branch before submitting a PR to ensure you have the most recent changes.
+
 Be sure to run `dart format` to get your changes to pass the workflow checks.
+
+When writing tests, using the file naming convention `*_test.dart` e.g. `waitlist_button_test.dart`, otherwise the test package may not run your tests.
 
 
