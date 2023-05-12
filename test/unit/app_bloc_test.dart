@@ -1,9 +1,63 @@
 import 'package:authentication_repo/authentication_repo.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:podium/src/app/app.dart';
 
 void main() {
   group('AppBloc', () {
+    late AuthenticationRepository authenticationRepository;
+
+    setUp(() {
+      authenticationRepository = MockAuthenticationRepository();
+    });
+    test('initial state is correct', () {
+      final appBloc =
+          AppBloc(authenticationRepository: authenticationRepository);
+      expect(appBloc.state, const AppState.unauthenticated());
+      appBloc.close();
+    });
+
+    blocTest<AppBloc, AppState>(
+      'emits [authenticated] when AppUserChanged with non-empty user is added',
+      build: () => AppBloc(authenticationRepository: authenticationRepository),
+      act: (bloc) => bloc.add(const AppUserChanged(User(id: '1'))),
+      expect: () => [const AppState.authenticated(User(id: '1'))],
+    );
+
+    blocTest<AppBloc, AppState>(
+      'emits [unauthenticated] when AppUserChanged with empty user is added',
+      build: () => AppBloc(authenticationRepository: authenticationRepository),
+      act: (bloc) => bloc.add(const AppUserChanged(User.empty)),
+      expect: () => [const AppState.unauthenticated()],
+    );
+
+    blocTest<AppBloc, AppState>(
+      'does not emit when AppUserChanged with same user is added',
+      build: () => AppBloc(authenticationRepository: authenticationRepository),
+      seed: () => const AppState.authenticated(User(id: '1')),
+      act: (bloc) => bloc.add(const AppUserChanged(User(id: '1'))),
+      expect: () => <dynamic>[],
+    );
+
+    blocTest<AppBloc, AppState>(
+      'does not emit when AppLogoutRequested is added',
+      build: () => AppBloc(authenticationRepository: authenticationRepository),
+      seed: () => const AppState.authenticated(User(id: '1')),
+      act: (bloc) => bloc.add(AppLogoutRequested()),
+      expect: () => <dynamic>[],
+    );
+
+    test(
+        '''calls logOut on authenticationRepository when AppLogoutRequested is added''',
+        () {
+      final appBloc =
+          AppBloc(authenticationRepository: authenticationRepository)
+            ..add(AppLogoutRequested());
+      expect(authenticationRepository.currentUser.isEmpty, isTrue);
+      appBloc.close();
+    });
+
     test('AppLogoutRequested should have empty props', () {
       final event = AppLogoutRequested();
       expect(event.props, isEmpty);
@@ -46,4 +100,19 @@ void main() {
       expect(state4.props, equals([AppStatus.unauthenticated, User.empty]));
     });
   });
+}
+
+class MockAuthenticationRepository extends Fake
+    implements AuthenticationRepository {
+  @override
+  final currentUser = User.empty;
+
+  @override
+  Stream<User> get user => const Stream.empty();
+
+  Future<void> logIn({required String username, required String password}) =>
+      Future.value();
+
+  @override
+  Future<void> logOut() => Future.value();
 }
