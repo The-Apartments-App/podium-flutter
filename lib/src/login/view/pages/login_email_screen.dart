@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/login/login.dart';
-import 'package:podium/src/login/view/components/login_continue_button.dart';
-import 'package:podium/src/login/view/components/login_email_input.dart';
-import 'package:podium/src/login/view/components/login_phone_input.dart';
-import 'package:podium/src/login/view/components/login_social_sign_in_button.dart';
 
 class LoginEmailScreen extends StatefulWidget {
   const LoginEmailScreen({super.key});
