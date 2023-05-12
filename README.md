@@ -33,6 +33,8 @@ _\*Podium works on iOS, Android, Web, and Windows._
 
 ## GitHub Notes
 
+Current Test Coverage: 4.89%
+
 Clone down the master_repo, and create branches from here. Once your code is ready for review, push it up, and create a Pull Request. Message me on Slack once you have created the Pull Request and I will get to reviewing it as soon as possible.
 
 Branch Names should follow this format `[your initials]/[todays-date]/[scope-of-your-branch]` --> `DV/4-25-23/update-readme`
