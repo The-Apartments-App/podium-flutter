@@ -1,7 +1,6 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:podium/src/app/app.dart';
 
 void main() {
