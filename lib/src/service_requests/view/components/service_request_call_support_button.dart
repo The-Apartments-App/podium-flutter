@@ -6,8 +6,19 @@ class CallSupportButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Future<void> callSupport() async {
+    //   await launchUrl(Uri.parse('tel:+16812619706'));
+    // }
+
     Future<void> callSupport() async {
-      await launchUrl(Uri.parse('tel:+16812619706'));
+      const phoneNumber = '+19173999695';
+      final uri = Uri(scheme: 'tel', path: phoneNumber);
+
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      } else {
+        throw Exception('Could not launch $uri');
+      }
     }
 
     return Padding(
