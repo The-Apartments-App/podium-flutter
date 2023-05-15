@@ -35,7 +35,7 @@ dependencies:
   flutter_stripe: ^9.0.0+1
   flutter_svg: ^2.0.5
   font_awesome_flutter: ^10.4.0
-  form_builder_image_picker: ^3.1.0
+  form_builder_image_picker: ^4.0.0
   form_inputs:
     path: lib/packages/form_inputs
   formz: ^0.6.0
