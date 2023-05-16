@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-
+// import 'dart:html' as html;
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:cache/cache.dart';
 // import 'package:equatable/equatable.dart';
@@ -11,7 +11,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:podium/src/resident_portal/update_profile/screens/update_profile_display_name_page.dart';
+// import 'package:universal_html/html.dart';
+// import 'package:podium/src/resident_portal/update_profile/screens/update_profile_display_namimport 'package:universal_html/html.dart';e_page.dart';
 
 
 /// {@template sign_up_with_email_and_password_failure}
@@ -435,7 +436,7 @@ class AuthenticationRepository {
             // debugPrint('turned into blob');
             // try{
             debugPrint('In try');             
-            await userImageRef.putBlob(photo);
+            await userImageRef.putFile(photo);
             debugPrint('second userImageRef: $userImageRef');
             // } catch (e) {
             //   debugPrint(e.toString());
@@ -454,37 +455,11 @@ class AuthenticationRepository {
       debugPrint(e.toString());
     }
   }
-
-//    Future<void> updateProfileWithBlobPicture({
-//     html.Blob? photo,
+// Idea for when universal_html works
+//    Future<void> updateProfileWithWebPicture({
+//     html.File photo,
 //   })async {
-//     debugPrint('UPDATE PROFILE PICTURE CALLED');
-//     debugPrint('NEW PHOTO IS $photo');
-//     try {
-//       if (_firebaseAuth.currentUser != null) {
-//           debugPrint('currentUser is not null');
-//           final storageRef = FirebaseStorage.instance.ref();
-//           debugPrint('storageRef: $storageRef');
-//           final userImageRef =
-//               storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
-//           debugPrint('userImageRef: $userImageRef');
-//           if (photo != null) {          
-        
-//             // await userImageRef.putString(urlFromBlob, format: PutStringFormat.dataUrl);
-//             debugPrint('second userImageRef: $userImageRef');
-//           } else {
-//             throw Exception('Error putting file in cloud');
-//           }
-//           final profileUrl = await userImageRef.getDownloadURL();
-//           debugPrint('profileUrl: $profileUrl');
-
-//           await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
-//           debugPrint('Firebase Auth updated ------------');
-//       }
-//     } 
-//     catch (e) {
-//       debugPrint(e.toString());
-//     }
+//      final storageRef = FirebaseStorage.instance.ref();
 //   }
 }
 
