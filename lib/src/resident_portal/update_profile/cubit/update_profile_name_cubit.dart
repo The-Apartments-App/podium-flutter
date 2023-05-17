@@ -35,9 +35,11 @@ class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: FormzSubmissionStatus.failure,
-      ),);
+      emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.failure,
+        ),
+      );
       throw Exception(e.toString());
     }
   }
