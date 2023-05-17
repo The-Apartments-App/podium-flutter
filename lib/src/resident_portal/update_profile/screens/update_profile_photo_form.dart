@@ -19,21 +19,6 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   String? webController;
 
   Future<void> takePhoto(ImageSource source) async {
-    if (kIsWeb) {
-      final picker = ImagePicker();
-      // ignore: omit_local_variable_types, prefer_final_locals
-      XFile? image = await picker.pickImage(
-        source: source,
-        maxWidth: 150,
-        maxHeight: 150,
-        imageQuality: 75,
-      );
-      // ignore: cast_nullable_to_non_nullable
-      final imagePath = image?.path as String;
-      setState(() {
-        webController = imagePath;
-      });
-    } else {
       final picker = ImagePicker();
       final image = await picker.pickImage(
         source: source,
@@ -41,6 +26,14 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
         maxHeight: 150,
         imageQuality: 75,
       );
+    if (kIsWeb) {
+      // ignore: omit_local_variable_types, prefer_final_locals
+      // ignore: cast_nullable_to_non_nullable
+      final imagePath = image?.path as String;
+      setState(() {
+        webController = imagePath;
+      });
+    } else {
       final xfileToFile = File(image!.path);
       setState(() {
         fileController = xfileToFile;
