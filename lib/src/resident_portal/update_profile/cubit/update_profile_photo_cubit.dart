@@ -39,8 +39,7 @@ class UpdateProfilePhotoCubit extends Cubit<UpdateProfilePhotoState> {
   }
 
   Future<void> updateWithNewPictureWeb(String path) async {
-    // ignore: omit_local_variable_types, prefer_final_locals
-    Uint8List imageData = await XFile(path).readAsBytes();
+    final imageData = await XFile(path).readAsBytes();
     try {
       await _authenticationRepository.updateProfileWithWebPicture(
         imageData: imageData,

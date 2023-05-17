@@ -392,8 +392,6 @@ class AuthenticationRepository {
 
   // change the logged in users name
   Future<void> changeDisplayName({required String displayName}) async {
-    debugPrint('UPDATE DISPLAY NAME CALLED');
-
     final firebaseUser = _firebaseAuth.currentUser;
     try {
       await firebaseUser?.updateDisplayName(displayName);
@@ -406,8 +404,6 @@ class AuthenticationRepository {
   Future<void> updateProfilePicture({
     File? photo,
   }) async {
-    debugPrint('UPDATE PROFILE PICTURE CALLED');
-    debugPrint('NEW PHOTO IS $photo');
     try {
       if (_firebaseAuth.currentUser != null) {
         final storageRef = FirebaseStorage.instance.ref();
