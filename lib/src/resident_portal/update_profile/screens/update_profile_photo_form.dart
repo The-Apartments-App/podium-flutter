@@ -17,6 +17,7 @@ class UpdateProfilePhotoForm extends StatefulWidget {
 class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   File? fileController;
   String? webController;
+  final defaultProfilePic = 'lib/src/assets/images/podium_logo_round.png';
 
   Future<void> takePhoto(ImageSource source) async {
       final picker = ImagePicker();
@@ -56,9 +57,9 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
         backgroundImage: Image.network(fakeWebControl).image,
       );
     } else {
-      return const CircleAvatar(
+      return CircleAvatar(
         radius: 50,
-        backgroundImage: AssetImage('lib/src/assets/images/podium_logo_round.png'),
+        backgroundImage: AssetImage(defaultProfilePic),
       );
     }
   }
@@ -67,7 +68,6 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   Widget build(BuildContext context) {
     debugPrint('UpdateProfilePhotoForm LOADED');
     final user = context.select((AppBloc bloc) => bloc.state.user);
-    // const defaultProfilePic = 'lib/src/assets/images/podium_logo.png';
     final changeUserPhoto =
         context.select((UpdateProfilePhotoCubit cubit) => cubit);
     CircleAvatar getProfilePic() {
@@ -77,9 +77,9 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
           backgroundImage: Image.network(user.photo!).image,
         );
       } else {
-        return const CircleAvatar(
+        return CircleAvatar(
           radius: 50,
-          backgroundImage: AssetImage('lib/src/assets/images/podium_logo_round.png'),
+          backgroundImage: AssetImage(defaultProfilePic),
         );
       }
     }

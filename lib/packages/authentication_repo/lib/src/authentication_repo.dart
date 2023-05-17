@@ -438,7 +438,7 @@ class AuthenticationRepository {
       final profileUrl = await userImageRef.getDownloadURL();
       await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
     } catch (e) {
-      debugPrint(e.toString());
+      throw Exception(e.toString());
     }
   }
 }

@@ -33,8 +33,8 @@ class UpdateProfilePhotoCubit extends Cubit<UpdateProfilePhotoState> {
       await _authenticationRepository.updateProfilePicture(
         photo: picture,
       );
-    } catch (_) {
-      debugPrint('ERROR');
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -45,8 +45,8 @@ class UpdateProfilePhotoCubit extends Cubit<UpdateProfilePhotoState> {
       await _authenticationRepository.updateProfileWithWebPicture(
         imageData: imageData,
       );
-    } catch (_) {
-      debugPrint('ERROR');
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

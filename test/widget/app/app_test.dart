@@ -1,7 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-// import 'package:mockito/mockito.dart';
+import 'package:mockito/mockito.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/blog_story_page/blog_story_page.dart';
 import 'package:podium/src/home_page/home.dart';
@@ -12,7 +12,7 @@ import 'package:podium/src/splash_page/splash_page.dart';
 
 import '../../test_helpers.dart';
 
-// class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
