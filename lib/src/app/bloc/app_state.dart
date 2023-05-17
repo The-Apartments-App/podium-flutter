@@ -1,6 +1,6 @@
 part of 'app_bloc.dart';
 
-enum AppStatus { authenticated, unauthenticated, userNameChanged }
+enum AppStatus { authenticated, unauthenticated, }
 
 // This is the AppState class, which is used to represent the state of the app
 class AppState extends Equatable {

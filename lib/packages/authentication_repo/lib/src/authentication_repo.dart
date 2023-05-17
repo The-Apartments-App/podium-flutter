@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-// import 'dart:html' as html;
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:cache/cache.dart';
-// import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -12,8 +10,6 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:universal_html/html.dart';
-// import 'package:podium/src/resident_portal/update_profile/screens/update_profile_display_namimport 'package:universal_html/html.dart';e_page.dart';
 
 /// {@template sign_up_with_email_and_password_failure}
 /// Thrown during the sign up process if a failure occurs.
@@ -417,10 +413,8 @@ class AuthenticationRepository {
         final storageRef = FirebaseStorage.instance.ref();
         final userImageRef =
             storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
-        debugPrint('userImageRef: $userImageRef');
         if (photo != null) {
           await userImageRef.putFile(photo);
-          debugPrint('second userImageRef: $userImageRef');
         } else {
           throw Exception('Error putting file in cloud');
         }
@@ -428,7 +422,7 @@ class AuthenticationRepository {
         await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
       }
     } catch (e) {
-      debugPrint(e.toString());
+      throw Exception(e.toString());
     }
   }
 

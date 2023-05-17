@@ -19,7 +19,21 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   String? webController;
 
   Future<void> takePhoto(ImageSource source) async {
-    if (!kIsWeb) {
+    if (kIsWeb) {
+      final picker = ImagePicker();
+      // ignore: omit_local_variable_types, prefer_final_locals
+      XFile? image = await picker.pickImage(
+        source: source,
+        maxWidth: 150,
+        maxHeight: 150,
+        imageQuality: 75,
+      );
+      // ignore: cast_nullable_to_non_nullable
+      final imagePath = image?.path as String;
+      setState(() {
+        webController = imagePath;
+      });
+    } else {
       final picker = ImagePicker();
       final image = await picker.pickImage(
         source: source,
@@ -31,21 +45,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
       setState(() {
         fileController = xfileToFile;
       });
-    } else {
-      final picker = ImagePicker();
-      // ignore: omit_local_variable_types, prefer_final_locals
-      XFile? image = await picker.pickImage(
-        source: source,
-        maxWidth: 150,
-        maxHeight: 150,
-        imageQuality: 75,
-      );
 
-      // ignore: cast_nullable_to_non_nullable
-      final imagePath = image?.path as String;
-      setState(() {
-        webController = imagePath;
-      });
     }
   }
 
@@ -65,6 +65,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
     } else {
       return const CircleAvatar(
         radius: 50,
+        backgroundImage: AssetImage('lib/src/assets/images/podium_logo_round.png'),
       );
     }
   }
@@ -85,7 +86,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
       } else {
         return const CircleAvatar(
           radius: 50,
-          // backgroundImage: AssetImage(defaultProfilePic),
+          backgroundImage: AssetImage('lib/src/assets/images/podium_logo_round.png'),
         );
       }
     }

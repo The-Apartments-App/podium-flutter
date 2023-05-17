@@ -11,6 +11,7 @@ class UserSettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('USER SETTINGS SCREEN LOADED');
     return Scaffold(
       appBar: AppBar(
         leading: const AppBarBackButton(),
