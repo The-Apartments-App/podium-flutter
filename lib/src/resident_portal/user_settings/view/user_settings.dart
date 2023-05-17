@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
+// import 'package:podium/src/appbar_back_button/appbar_back_button.dart';
+import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
 class UserSettingsPage extends StatelessWidget {
   const UserSettingsPage({super.key});
@@ -39,7 +41,7 @@ class UserSettingsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(40),
                     ),
                     elevation: 16,
-                    child: const Placeholder(),
+                    child: const UpdateProfilePhotoPage(),
                   );
                 },
               );
@@ -72,7 +74,7 @@ class UserSettingsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(40),
                     ),
                     elevation: 16,
-                    child: const Placeholder(),
+                    child: const UpdateProfileDisplayNamePage(),
                   );
                 },
               );

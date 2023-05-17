@@ -211,10 +211,10 @@ packages:
     dependency: transitive
     description:
       name: collection
-      sha256: "4a07be6cb69c84d677a6c3096fcf960cc3285a8330b4603e0d463d15d9bd934c"
+      sha256: f092b211a4319e98e5ff58223576de6c2803db36221657b46c82574721240687
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.1"
+    version: "1.17.2"
   convert:
     dependency: transitive
     description:
@@ -528,10 +528,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_pdfview
-      sha256: "97c26f92d32fa09ed2302156bdc234befe78478353ba5541b88e538589bcbeab"
+      sha256: d9735fd8991609910742a25c63a5f87060849e57e60112c677b802ddb64bed72
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.0"
+    version: "1.3.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -1009,10 +1009,10 @@ packages:
     dependency: transitive
     description:
       name: permission_handler_android
-      sha256: "8028362b40c4a45298f1cbfccd227c8dd6caf0e27088a69f2ba2ab15464159e2"
+      sha256: d8cc6a62ded6d0f49c6eac337e080b066ee3bce4d405bd9439a61e1f1927bfe8
       url: "https://pub.dev"
     source: hosted
-    version: "10.2.0"
+    version: "10.2.1"
   permission_handler_apple:
     dependency: transitive
     description:
@@ -1230,10 +1230,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite
-      sha256: "3a82c9a216b46b88617e3714dd74227eaca20c501c4abcc213e56db26b9caa00"
+      sha256: "41498eed139e9daadc18877cbd4c877fc184f29f08bf9fb04565c4afc6609f27"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.8+2"
+    version: "2.2.8+3"
   sqflite_common:
     dependency: transitive
     description:
@@ -1350,10 +1350,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "22f8db4a72be26e9e3a4aa3f194b1f7afbc76d20ec141f84be1d787db2155cbd"
+      sha256: "7aac14be5f4731b923cc697ae2d42043945076cd0dbb8806baecc92c1dc88891"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.31"
+    version: "6.0.33"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -1462,10 +1462,10 @@ packages:
     dependency: transitive
     description:
       name: watcher
-      sha256: "6a7f46926b01ce81bfc339da6a7f20afbe7733eff9846f6d6a5466aa4c6667c0"
+      sha256: "3d2ad6751b3c16cf07c7fca317a1413b3f26530319181b37e3b9039b84fc01d8"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.1.0"
   web_socket_channel:
     dependency: transitive
     description:

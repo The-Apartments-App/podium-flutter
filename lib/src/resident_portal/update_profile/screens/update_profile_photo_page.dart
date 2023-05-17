@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
-class UpdateProfilePage extends StatelessWidget {
-  const UpdateProfilePage({super.key, this.imageController});
+class UpdateProfilePhotoPage extends StatelessWidget {
+  const UpdateProfilePhotoPage({super.key, this.imageController});
 
   final Image? imageController;
 
   static Page<void> page() =>
-      const MaterialPage<void>(child: UpdateProfilePage());
+      const MaterialPage<void>(child: UpdateProfilePhotoPage());
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,8 @@ class UpdateProfilePage extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: BlocProvider(
         create: (_) =>
-            UpdateProfileCubit(context.read<AuthenticationRepository>()),
-        child: const UpdateProfileForm(),
+            UpdateProfilePhotoCubit(context.read<AuthenticationRepository>()),
+        child: const UpdateProfilePhotoForm(),
       ),
     );
   }
