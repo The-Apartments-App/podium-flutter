@@ -82,7 +82,9 @@ class _UpdateProfileDisplayNameFormState
                       width: 200,
                       child: TextFormField(
                         controller: nameController,
-                        onChanged: (name) => context.read<UpdateProfileNameCubit>().userNameChanged(name),
+                        onChanged: (name) => context
+                            .read<UpdateProfileNameCubit>()
+                            .userNameChanged(name),
                         validator: (name) {
                           if (name == null || name.isEmpty) {
                             return 'Please enter a new username';
@@ -99,7 +101,8 @@ class _UpdateProfileDisplayNameFormState
               onPressed: () {
                 if (formUsername.currentState!.validate()) {
                   debugPrint(nameController.text);
-                  changeUserNameCubit.updateWithNewDisplayName(nameController.text);
+                  changeUserNameCubit
+                      .updateWithNewDisplayName(nameController.text);
                   Navigator.pop(context);
                 }
               },

@@ -13,16 +13,13 @@ class UpdateProfilePhotoState extends Equatable {
   final String? errorMessage;
 
   @override
-  List<Object> get props =>
-      [status, profilePicture!];
+  List<Object> get props => [status, profilePicture!];
 
   UpdateProfilePhotoState copyWith({
     Image? profilePicture,
     FormzSubmissionStatus? status,
     String? errorMessage,
   }) {
-    debugPrint('PROFILE STATE UPDATE');
-    debugPrint('NEW VALUE: status: $status');
     return UpdateProfilePhotoState(
       profilePicture: profilePicture ?? this.profilePicture,
       status: status ?? this.status,

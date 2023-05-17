@@ -21,7 +21,7 @@ class _LoginPasswordScreenState extends State<LoginPasswordScreen> {
             padding: const EdgeInsets.fromLTRB(12, 4, 12, 0),
             child: Stack(
               children: [
-                 const SizedBox(
+                const SizedBox(
                   height: 52,
                   child: Flex(
                     direction: Axis.horizontal,

@@ -18,7 +18,7 @@ class UpdateProfilePhotoPage extends StatelessWidget {
       child: BlocProvider(
         create: (_) =>
             UpdateProfilePhotoCubit(context.read<AuthenticationRepository>()),
-        child: const UpdateProfilePhotoForm (),
+        child: const UpdateProfilePhotoForm(),
       ),
     );
   }

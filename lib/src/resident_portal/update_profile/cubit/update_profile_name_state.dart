@@ -15,17 +15,13 @@ class UpdateProfileNameState extends Equatable {
   final String? errorMessage;
 
   @override
-  List<Object> get props =>
-      [status, userName];
+  List<Object> get props => [status, userName];
 
   UpdateProfileNameState copyWith({
     Username? userName,
     FormzSubmissionStatus? status,
     String? errorMessage,
   }) {
-    debugPrint('PROFILE STATE UPDATE');
-    debugPrint('NEW VALUE: userName: $userName');
-    debugPrint('NEW VALUE: status: $status');
     return UpdateProfileNameState(
       userName: userName ?? this.userName,
       status: status ?? this.status,

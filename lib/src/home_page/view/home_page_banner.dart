@@ -21,8 +21,7 @@ class HomePageBanner extends StatelessWidget {
             user.photo!,
           ),
         );
-      }
-      else {
+      } else {
         return ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image.asset(

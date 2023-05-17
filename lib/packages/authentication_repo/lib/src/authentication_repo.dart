@@ -15,7 +15,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:universal_html/html.dart';
 // import 'package:podium/src/resident_portal/update_profile/screens/update_profile_display_namimport 'package:universal_html/html.dart';e_page.dart';
 
-
 /// {@template sign_up_with_email_and_password_failure}
 /// Thrown during the sign up process if a failure occurs.
 /// {@endtemplate}
@@ -415,57 +414,40 @@ class AuthenticationRepository {
     debugPrint('NEW PHOTO IS $photo');
     try {
       if (_firebaseAuth.currentUser != null) {
-        // if (kIsWeb) {
-        //   final profileUrl = photo?.uri.toFilePath();
-        //   debugPrint('profileUrl: $profileUrl');
-
-        //   await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
-        //   debugPrint('Firebase Auth updated ------------');
-        // } else {
-          debugPrint('currentUser is not null');
-          final storageRef = FirebaseStorage.instance.ref();
-          debugPrint('storageRef: $storageRef');
-          final userImageRef =
-              storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
-          debugPrint('userImageRef: $userImageRef');
-          if (photo != null) {
-            await userImageRef.putFile(photo);
-            debugPrint('second userImageRef: $userImageRef');
-          }  else {
-            throw Exception('Error putting file in cloud');
-          }
-          final profileUrl = await userImageRef.getDownloadURL();
-          debugPrint('profileUrl: $profileUrl');
-
-          await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
-          debugPrint('Firebase Auth updated ------------');
-        // }
+        final storageRef = FirebaseStorage.instance.ref();
+        final userImageRef =
+            storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
+        debugPrint('userImageRef: $userImageRef');
+        if (photo != null) {
+          await userImageRef.putFile(photo);
+          debugPrint('second userImageRef: $userImageRef');
+        } else {
+          throw Exception('Error putting file in cloud');
+        }
+        final profileUrl = await userImageRef.getDownloadURL();
+        await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
       }
     } catch (e) {
       debugPrint(e.toString());
     }
   }
+
 // Attempt to do XFile binary conversion
   Future<void> updateProfileWithWebPicture({
-      required Uint8List imageData,
-    })async {
-          debugPrint('UPDATE PROFILE PICTURE CALLED');
-       try {
-          final storageRef = FirebaseStorage.instance.ref();
-          final userImageRef = storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
-          await userImageRef.putData(imageData);
-          final profileUrl = await userImageRef.getDownloadURL();
-          debugPrint('profileUrl: $profileUrl');
-          await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
-          debugPrint('Firebase Auth updated ------------');
-       } catch (e) {
-        debugPrint(e.toString());
-       }
-      
+    required Uint8List imageData,
+  }) async {
+    try {
+      final storageRef = FirebaseStorage.instance.ref();
+      final userImageRef =
+          storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
+      await userImageRef.putData(imageData);
+      final profileUrl = await userImageRef.getDownloadURL();
+      await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
-
- 
+}
 
 /// This extension method adds a convenient way
 ///  to convert a [firebase_auth.User]

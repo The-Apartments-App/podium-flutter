@@ -134,7 +134,7 @@ Our vision for the future is one where renters can trust in the consistency and 
 Join us on this journey as we challenge the status quo and work towards creating a better, brighter future for renters and landlords alike. Together, we can redefine the world of apartment living and create a new standard that truly benefits everyone.''',
                   ),
                   const Divider(),
-                   const Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       PodiumLogoWithTitle(height: 80),

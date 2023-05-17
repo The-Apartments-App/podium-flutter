@@ -15,7 +15,6 @@ class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {
 
   // copy to update profile name form state
   void userNameChanged(String value) {
-    debugPrint('passed value in cubit $value');  
     final newUsername = Username.dirty(value);
     emit(
       state.copyWith(
@@ -29,30 +28,15 @@ class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _authenticationRepository.changeDisplayName(displayName: name);
-      emit(state.copyWith(
-        userName: Username.dirty(name),
-        status: FormzSubmissionStatus.success,),
-        );
+      emit(
+        state.copyWith(
+          userName: Username.dirty(name),
+          status: FormzSubmissionStatus.success,
+        ),
+      );
     } catch (e) {
-        debugPrint(e.toString());
-        emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      debugPrint(e.toString());
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }
-
-  // Future<void> logInWithGoogle() async {
-  //   emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-  //   try {
-  //     await _authenticationRepository.logInWithGoogle();
-  //     emit(state.copyWith(status: FormzSubmissionStatus.success));
-  //   } on LogInWithGoogleFailure catch (e) {
-  //     emit(
-  //       state.copyWith(
-  //         errorMessage: e.message,
-  //         status: FormzSubmissionStatus.failure,
-  //       ),
-  //     );
-  //   } catch (_) {
-  //     emit(state.copyWith(status: FormzSubmissionStatus.failure));
-  //   }
-  // }
 }

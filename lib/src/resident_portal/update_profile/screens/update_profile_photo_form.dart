@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_fi
 import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,10 +31,9 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
       setState(() {
         fileController = xfileToFile;
       });
-      debugPrint('File in photo form is $fileController');
-    }   else {
-        final picker = ImagePicker();
-        XFile? image = await picker.pickImage(
+    } else {
+      final picker = ImagePicker();
+      XFile? image = await picker.pickImage(
         source: source,
         maxWidth: 150,
         maxHeight: 150,
@@ -46,7 +44,6 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
       setState(() {
         webController = imagePath;
       });
-      debugPrint('File in photo form web is $webController');
     }
   }
 
@@ -57,7 +54,6 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
         backgroundImage: Image.file(fileController!).image,
       );
     } else if (webController != null && kIsWeb) {
-      debugPrint('img in getNewProfilePic preview function $webController');
       String fakeWebControl = webController as String;
       return CircleAvatar(
         radius: 50,
@@ -136,11 +132,10 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
               if (!kIsWeb) {
                 changeUserPhoto.updateWithNewPicture(fileController);
                 Navigator.pop(context);
-                } 
-                else {
-                  String newWebController = webController as String;
-                  changeUserPhoto.updateWithNewPictureWeb(newWebController);
-                  Navigator.pop(context);
+              } else {
+                String newWebController = webController as String;
+                changeUserPhoto.updateWithNewPictureWeb(newWebController);
+                Navigator.pop(context);
               }
             },
             child: const Row(

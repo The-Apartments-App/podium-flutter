@@ -5,13 +5,12 @@ import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
 
 class UserSettingsPage extends StatelessWidget {
   const UserSettingsPage({super.key});
-  
+
   static Page<void> page() =>
       const MaterialPage<void>(child: UserSettingsPage());
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('USER SETTINGS SCREEN LOADED');
     return Scaffold(
       appBar: AppBar(
         leading: const AppBarBackButton(),
