@@ -46,6 +46,7 @@ class _LoginPasswordScreenState extends State<LoginPasswordScreen> {
                     scale: .85,
                     child: BackButton(
                       onPressed: () {
+                        // ignore: avoid_dynamic_calls
                         widget.returnToEmail();
                       },
                     ),

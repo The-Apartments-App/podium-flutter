@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/login/login.dart';
-import 'package:podium/src/login/view/components/login_continue_button.dart';
-import 'package:podium/src/login/view/components/login_email_input.dart';
-import 'package:podium/src/login/view/components/login_phone_input.dart';
-import 'package:podium/src/login/view/components/login_social_sign_in_button.dart';
 
 class LoginEmailScreen extends StatefulWidget {
   const LoginEmailScreen({super.key});
@@ -116,12 +112,11 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       width: 20,
                       iconName: 'facebook-icon.svg',
                       buttonText: 'Continue with Facebook',
-                      onPressed: () => {
-                        context.read<LoginCubit>().logInWithFacebook().then(
-                              (value) =>
-                                  Navigator.of(context).pushNamed('/home'),
-                            ),
-                      },
+                      onPressed: () =>
+                          context.read<LoginCubit>().logInWithFacebook().then(
+                                (value) =>
+                                    Navigator.of(context).pushNamed('/home'),
+                              ),
                     ),
                     SocialSignInButton(
                       height: 18,

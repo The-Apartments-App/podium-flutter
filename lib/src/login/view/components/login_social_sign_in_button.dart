@@ -35,6 +35,7 @@ class SocialSignInButton extends StatelessWidget {
           backgroundColor: MaterialStatePropertyAll(Colors.white),
           foregroundColor: MaterialStatePropertyAll(Colors.black),
         ),
+        onPressed: onPressed as void Function()?,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
           child: Row(
@@ -66,7 +67,6 @@ class SocialSignInButton extends StatelessWidget {
             ],
           ),
         ),
-        onPressed: () => onPressed(),
       ),
     );
   }
