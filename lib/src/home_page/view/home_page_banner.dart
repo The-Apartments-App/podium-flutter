@@ -8,7 +8,6 @@ class HomePageBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.select((AppBloc bloc) => bloc.state.user);
-    debugPrint('user $user');
     const defaultProfilePic = 'lib/src/assets/images/podium_logo_square.png';
 
     Widget getProfilePic() {
