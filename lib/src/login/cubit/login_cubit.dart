@@ -98,7 +98,6 @@ class LoginCubit extends Cubit<LoginState> {
         ),
       );
     } catch (_) {
-      debugPrint('Google Sign In No Worky');
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }
