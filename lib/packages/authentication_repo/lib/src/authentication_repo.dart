@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 // import 'dart:html' as html;
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:cache/cache.dart';
@@ -427,21 +428,10 @@ class AuthenticationRepository {
           final userImageRef =
               storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
           debugPrint('userImageRef: $userImageRef');
-          if (photo != null && !kIsWeb) {
+          if (photo != null) {
             await userImageRef.putFile(photo);
             debugPrint('second userImageRef: $userImageRef');
-          } else if (photo != null && kIsWeb) {
-            debugPrint('In kIsWeb');
-            // html.Blob photoBlob = new html.Blob(await photo.readAsBytes());
-            // debugPrint('turned into blob');
-            // try{
-            debugPrint('In try');             
-            await userImageRef.putFile(photo);
-            debugPrint('second userImageRef: $userImageRef');
-            // } catch (e) {
-            //   debugPrint(e.toString());
-            // }
-          } else {
+          }  else {
             throw Exception('Error putting file in cloud');
           }
           final profileUrl = await userImageRef.getDownloadURL();
@@ -455,13 +445,25 @@ class AuthenticationRepository {
       debugPrint(e.toString());
     }
   }
-// Idea for when universal_html works
-//    Future<void> updateProfileWithWebPicture({
-//     html.File photo,
-//   })async {
-//      final storageRef = FirebaseStorage.instance.ref();
-//   }
-}
+// Attempt to do XFile binary conversion
+  Future<void> updateProfileWithWebPicture({
+      required Uint8List imageData,
+    })async {
+          debugPrint('UPDATE PROFILE PICTURE CALLED');
+       try {
+          final storageRef = FirebaseStorage.instance.ref();
+          final userImageRef = storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
+          await userImageRef.putData(imageData);
+          final profileUrl = await userImageRef.getDownloadURL();
+          debugPrint('profileUrl: $profileUrl');
+          await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
+          debugPrint('Firebase Auth updated ------------');
+       } catch (e) {
+        debugPrint(e.toString());
+       }
+      
+    }
+  }
 
  
 

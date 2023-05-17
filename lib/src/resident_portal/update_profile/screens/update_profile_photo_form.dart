@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_fi
 import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,7 @@ class UpdateProfilePhotoForm extends StatefulWidget {
 
 class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   File? fileController;
-  // late html.Blob blobController;
+  late String webController;
 
   Future<void> takePhoto(ImageSource source) async {
     if (!kIsWeb) {
@@ -32,23 +33,21 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
         fileController = xfileToFile;
       });
       debugPrint('File in photo form is $fileController');
-    } 
-    
-    // else {
-    //     final picker = ImagePicker();
-    //     final image = await picker.pickImage(
-    //     source: source,
-    //     maxWidth: 150,
-    //     maxHeight: 150,
-    //     imageQuality: 75,
-    //   );  
-    //   final imageBlob = html.Blob(await image!.readAsBytes());
-      
-    //   setState(() {
-    //     blobController = imageBlob;
-    //   });
-    //   debugPrint('File in photo form web is $fileController');
-    // }
+    }   else {
+        final picker = ImagePicker();
+        XFile? image = await picker.pickImage(
+        source: source,
+        maxWidth: 150,
+        maxHeight: 150,
+        imageQuality: 75,
+      );
+
+      String imagePath = image?.path as String;
+      setState(() {
+        webController = imagePath;
+      });
+      debugPrint('File in photo form web is $webController');
+    }
   }
 
   CircleAvatar getNewProfilePic() {
@@ -132,14 +131,14 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
           ),
           ElevatedButton(
             onPressed: () {
-              // if (!kIsWeb) {
+              if (!kIsWeb) {
                 changeUserPhoto.updateWithNewPicture(fileController);
                 Navigator.pop(context);
-                // } 
-              //   else {
-              //     changeUserPhoto.updateWithNewPictureBlob(blobController);
-              //     Navigator.pop(context);
-              // }
+                } 
+                else {
+                  changeUserPhoto.updateWithNewPictureWeb(webController);
+                  Navigator.pop(context);
+              }
             },
             child: const Row(
               children: [Icon(Icons.save), Text('Save Picture')],

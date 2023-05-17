@@ -1,4 +1,9 @@
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -47,17 +52,16 @@ class UpdateProfilePhotoCubit extends Cubit<UpdateProfilePhotoState> {
     // }
   }
 
-//     Future<void> updateWithNewPictureBlob(html.Blob? picture) async {
-//     debugPrint('UPDATEWITHNEWPICTURE CALLED IN UpdateProfileCubit');
-//     debugPrint('picture in updateWithNewPicture: $picture');
-//     // if (!kIsWeb) {
-//       try {
-//         await _authenticationRepository.updateProfileWithBlobPicture(
-//           photo: picture,
-//         );
-//       } catch (_) {
-//         debugPrint('ERROR');
-//       }
-//     // }
-//   }
+    Future<void> updateWithNewPictureWeb(String path) async {
+    debugPrint('UPDATEWITHNEWPICTURE CALLED IN UpdateProfileCubit');
+    debugPrint('picture in updateWithNewPicture: $path');
+      Uint8List imageData = await XFile(path).readAsBytes() as Uint8List;
+      try {
+        await _authenticationRepository.updateProfileWithWebPicture(
+          imageData: imageData,
+        );
+      } catch (_) {
+        debugPrint('ERROR');
+      }
+  }
 }
