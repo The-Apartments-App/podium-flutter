@@ -101,7 +101,6 @@ class _UpdateProfileDisplayNameFormState
             ElevatedButton(
               onPressed: () {
                 if (formUsername.currentState!.validate()) {
-                  debugPrint(nameController.text);
                   changeUserNameCubit
                       .updateWithNewDisplayName(nameController.text);
                   Navigator.pop(context);
