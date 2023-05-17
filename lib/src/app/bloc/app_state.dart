@@ -1,8 +1,8 @@
 part of 'app_bloc.dart';
 
 enum AppStatus { 
-  authenticated, 
-  unauthenticated, 
+  authenticated,
+  unauthenticated,
 }
 
 // This is the AppState class, which is used to represent the state of the app
