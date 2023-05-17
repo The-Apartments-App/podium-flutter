@@ -1,13 +1,13 @@
 import 'dart:io';
-import 'dart:typed_data';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:image_picker/image_picker.dart';
 
 part 'update_profile_photo_state.dart';
 
@@ -39,7 +39,8 @@ class UpdateProfilePhotoCubit extends Cubit<UpdateProfilePhotoState> {
   }
 
   Future<void> updateWithNewPictureWeb(String path) async {
-    Uint8List imageData = await XFile(path).readAsBytes() as Uint8List;
+    // ignore: omit_local_variable_types, prefer_final_locals
+    Uint8List imageData = await XFile(path).readAsBytes();
     try {
       await _authenticationRepository.updateProfileWithWebPicture(
         imageData: imageData,

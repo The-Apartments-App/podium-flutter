@@ -78,7 +78,8 @@ class _UpdateProfileDisplayNameFormState
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      // sized box used to fix "Error: Cannot hit test a render box with no size."
+                      // sized box used to fix "Error: Cannot hit test a render 
+                      //box with no size."
                       width: 200,
                       child: TextFormField(
                         controller: nameController,

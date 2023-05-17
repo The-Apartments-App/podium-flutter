@@ -33,6 +33,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
       });
     } else {
       final picker = ImagePicker();
+      // ignore: omit_local_variable_types, prefer_final_locals
       XFile? image = await picker.pickImage(
         source: source,
         maxWidth: 150,
@@ -40,7 +41,8 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
         imageQuality: 75,
       );
 
-      String imagePath = image?.path as String;
+      // ignore: cast_nullable_to_non_nullable
+      final imagePath = image?.path as String;
       setState(() {
         webController = imagePath;
       });
@@ -54,7 +56,8 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
         backgroundImage: Image.file(fileController!).image,
       );
     } else if (webController != null && kIsWeb) {
-      String fakeWebControl = webController as String;
+      // ignore: cast_nullable_to_non_nullable
+      final fakeWebControl = webController as String;
       return CircleAvatar(
         radius: 50,
         backgroundImage: Image.network(fakeWebControl).image,
@@ -133,7 +136,8 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
                 changeUserPhoto.updateWithNewPicture(fileController);
                 Navigator.pop(context);
               } else {
-                String newWebController = webController as String;
+                // ignore: cast_nullable_to_non_nullable
+                final newWebController = webController as String;
                 changeUserPhoto.updateWithNewPictureWeb(newWebController);
                 Navigator.pop(context);
               }

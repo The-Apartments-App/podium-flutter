@@ -406,7 +406,7 @@ class AuthenticationRepository {
     }
   }
 
-  // change the logged in users photo
+  // change the logged in users photo on android
   Future<void> updateProfilePicture({
     File? photo,
   }) async {
@@ -432,7 +432,7 @@ class AuthenticationRepository {
     }
   }
 
-// Attempt to do XFile binary conversion
+// change the logged in users photo on android
   Future<void> updateProfileWithWebPicture({
     required Uint8List imageData,
   }) async {
