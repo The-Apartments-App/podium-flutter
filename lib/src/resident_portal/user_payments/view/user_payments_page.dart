@@ -1,4 +1,8 @@
+import 'package:cloud_functions/cloud_functions.dart';
+// import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
@@ -11,32 +15,66 @@ class PaymentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint('PAYMENTS SCREEN LOADED');
-    // Future<void> initPaymentSheet() async {
-    //   try {
-    //     // 1. create payment intent on the server
-    //     // final data = await _createTestPaymentSheet();
 
-    //     // 2. initialize the payment sheet
-    //     await Stripe.instance.initPaymentSheet(
-    //       paymentSheetParameters: const SetupPaymentSheetParameters(
-    //         // Enable custom flow
-    //         customFlow: true,
-    //         // Main params
-    //         merchantDisplayName: 'Flutter Stripe Store Demo',
-    //         // applePay: true,
-    //         // googlePay: true,
-    //         style: ThemeMode.dark,
-    //       ),
-    //     );
-    //   } catch (e) {
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(content: Text('Error: $e')),
-    //     );
-    //     rethrow;
-    //   }
-    // }
+    Future<void> initPaymentSheet() async {
+      try {
+        // 1. create payment intent on the server
+        // final data = await _createTestPaymentSheet();
 
-    // initPaymentSheet();
+        // 2. initialize the payment sheet
+        await Stripe.instance.initPaymentSheet(
+          paymentSheetParameters: const SetupPaymentSheetParameters(
+            // Enable custom flow
+            customFlow: true,
+            // Main params
+            merchantDisplayName: 'Flutter Stripe Store Demo',
+            // applePay: true,
+            // googlePay: true,
+            style: ThemeMode.dark,
+          ),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+        rethrow;
+      }
+    }
+
+    if (!kIsWeb) {
+      initPaymentSheet();
+    }
+
+    Future<void> showWebPaymentSheet() async {
+      try {
+        //lets just try to call the cloud function. Baby steps.
+        // final stripePayEndpointIntentId =
+        //     FirebaseFunctions.instance.httpsCallable('helloWorld');
+        // debugPrint('stripePayEndpointIntentId: $stripePayEndpointIntentId');
+
+        // ignore: inference_failure_on_function_invocation
+        // final result = await stripePayEndpointIntentId.call();
+        try {
+          final result = await FirebaseFunctions.instance
+              .httpsCallable('helloWorld')
+              // ignore: inference_failure_on_function_invocation
+              .call();
+          debugPrint('result in showWebPaymentSheet: $result');
+        } on FirebaseFunctionsException catch (error) {
+          if (kDebugMode) {
+            print('error.code ${error.code}');
+            print('error.code ${error.details}');
+            print('error.code ${error.message}');
+          }
+        }
+        // final response = await redirectToCheckout(
+        //     context: context,
+        //     sessionId: sessionId,
+        //     publishableKey: publishableKey);
+      } catch (e) {
+        debugPrint('error caught and rethrown in showWebPaymentSheet: $e');
+      }
+    }
 
     //   return BlocProvider(
     //     create: (context) => PaymentBloc(),
@@ -98,7 +136,16 @@ class PaymentsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(40),
                     ),
                     elevation: 16,
-                    child: const Placeholder(),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (!kIsWeb) {
+                          await Stripe.instance.presentPaymentSheet();
+                        } else {
+                          await showWebPaymentSheet();
+                        }
+                      },
+                      child: const Text('Make A Payment'),
+                    ),
                   );
                 },
               );

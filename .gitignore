@@ -12,6 +12,8 @@
 notes.txt
 cors.json
 *.env
+env.*
+hidden.*
 
 # IntelliJ related
 *.iml
@@ -127,3 +129,4 @@ app.*.map.json
 !.idea/codeStyles/
 !.idea/dictionaries/
 !.idea/runConfigurations/
+node_modules
