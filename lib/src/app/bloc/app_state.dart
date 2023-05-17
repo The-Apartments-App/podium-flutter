@@ -1,6 +1,6 @@
 part of 'app_bloc.dart';
 
-enum AppStatus { 
+enum AppStatus {
   authenticated,
   unauthenticated,
 }

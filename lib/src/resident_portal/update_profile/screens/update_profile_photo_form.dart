@@ -19,13 +19,13 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   final defaultProfilePic = 'lib/src/assets/images/podium_logo_round.png';
 
   Future<void> takePhoto(ImageSource source) async {
-      final picker = ImagePicker();
-      final image = await picker.pickImage(
-        source: source,
-        maxWidth: 150,
-        maxHeight: 150,
-        imageQuality: 75,
-      );
+    final picker = ImagePicker();
+    final image = await picker.pickImage(
+      source: source,
+      maxWidth: 150,
+      maxHeight: 150,
+      imageQuality: 75,
+    );
     if (kIsWeb) {
       // ignore: cast_nullable_to_non_nullable
       final imagePath = image?.path as String;
@@ -37,7 +37,6 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
       setState(() {
         fileController = xfileToFile;
       });
-
     }
   }
 
