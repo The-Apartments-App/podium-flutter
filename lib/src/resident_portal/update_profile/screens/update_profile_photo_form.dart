@@ -17,7 +17,7 @@ class UpdateProfilePhotoForm extends StatefulWidget {
 
 class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   File? fileController;
-  late String webController;
+  String? webController;
 
   Future<void> takePhoto(ImageSource source) async {
     if (!kIsWeb) {
@@ -56,10 +56,12 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
         radius: 50,
         backgroundImage: Image.file(fileController!).image,
       );
-    } else if (fileController != null && kIsWeb) {
+    } else if (webController != null && kIsWeb) {
+      debugPrint('img in getNewProfilePic preview function $webController');
+      String fakeWebControl = webController as String;
       return CircleAvatar(
         radius: 50,
-        backgroundImage: Image.network(fileController!.path).image,
+        backgroundImage: Image.network(fakeWebControl).image,
       );
     } else {
       return const CircleAvatar(
@@ -136,7 +138,8 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
                 Navigator.pop(context);
                 } 
                 else {
-                  changeUserPhoto.updateWithNewPictureWeb(webController);
+                  String newWebController = webController as String;
+                  changeUserPhoto.updateWithNewPictureWeb(newWebController);
                   Navigator.pop(context);
               }
             },
