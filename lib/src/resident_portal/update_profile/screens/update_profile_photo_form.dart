@@ -1,20 +1,23 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
-class UpdateProfileForm extends StatefulWidget {
-  const UpdateProfileForm({super.key});
+class UpdateProfilePhotoForm extends StatefulWidget {
+  const UpdateProfilePhotoForm({super.key});
 
   @override
-  State<UpdateProfileForm> createState() => _UpdateProfileFormState();
+  State<UpdateProfilePhotoForm> createState() => _UpdateProfilePhotoFormState();
 }
 
-class _UpdateProfileFormState extends State<UpdateProfileForm> {
+class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   File? fileController;
+  String? webController;
+  final defaultProfilePic = 'lib/src/assets/images/podium_logo_round.png';
+
   Future<void> takePhoto(ImageSource source) async {
     final picker = ImagePicker();
     final image = await picker.pickImage(
@@ -23,31 +26,47 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
       maxHeight: 150,
       imageQuality: 75,
     );
-    final xfileToFile = File(image!.path);
-    setState(() {
-      fileController = xfileToFile;
-    });
+    if (kIsWeb) {
+      // ignore: cast_nullable_to_non_nullable
+      final imagePath = image?.path as String;
+      setState(() {
+        webController = imagePath;
+      });
+    } else {
+      final xfileToFile = File(image!.path);
+      setState(() {
+        fileController = xfileToFile;
+      });
+    }
   }
 
   CircleAvatar getNewProfilePic() {
-    if (fileController != null) {
+    if (fileController != null && !kIsWeb) {
       return CircleAvatar(
         radius: 50,
         backgroundImage: Image.file(fileController!).image,
       );
-    } else {
-      return const CircleAvatar(
+    } else if (webController != null && kIsWeb) {
+      // ignore: cast_nullable_to_non_nullable
+      final fakeWebControl = webController as String;
+      return CircleAvatar(
         radius: 50,
-        backgroundImage: AssetImage('lib/src/assets/images/podium_logo.png'),
+        backgroundImage: Image.network(fakeWebControl).image,
+      );
+    } else {
+      return CircleAvatar(
+        radius: 50,
+        backgroundImage: AssetImage(defaultProfilePic),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('UPDATEPROFILEFORM LOADED');
+    debugPrint('UpdateProfilePhotoForm LOADED');
     final user = context.select((AppBloc bloc) => bloc.state.user);
-    const defaultProfilePic = 'lib/src/assets/images/podium_logo.png';
+    final changeUserPhoto =
+        context.select((UpdateProfilePhotoCubit cubit) => cubit);
     CircleAvatar getProfilePic() {
       if (user.photo != null) {
         return CircleAvatar(
@@ -55,7 +74,7 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
           backgroundImage: Image.network(user.photo!).image,
         );
       } else {
-        return const CircleAvatar(
+        return CircleAvatar(
           radius: 50,
           backgroundImage: AssetImage(defaultProfilePic),
         );
@@ -104,10 +123,15 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
           ),
           ElevatedButton(
             onPressed: () {
-              context
-                  .read<UpdateProfileCubit>()
-                  .updateWithNewPicture(fileController);
-              Navigator.pop(context);
+              if (!kIsWeb) {
+                changeUserPhoto.updateWithNewPicture(fileController);
+                Navigator.pop(context);
+              } else {
+                // ignore: cast_nullable_to_non_nullable
+                final newWebController = webController as String;
+                changeUserPhoto.updateWithNewPictureWeb(newWebController);
+                Navigator.pop(context);
+              }
             },
             child: const Row(
               children: [Icon(Icons.save), Text('Save Picture')],

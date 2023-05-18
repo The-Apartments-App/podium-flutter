@@ -53,9 +53,6 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> logInWithCredentials() async {
-    debugPrint('loginWithCredentials called in login_cubit.dart');
-    debugPrint('state: $state');
-    debugPrint('state.status: ${state.status}');
     if (state.status.isCanceled) return;
     try {
       debugPrint('before await authRepo.logInWithEmailAndPassword');
@@ -63,7 +60,6 @@ class LoginCubit extends Cubit<LoginState> {
         email: state.email.value,
         password: state.password.value,
       );
-      debugPrint('after await authRepo.logInWithEmailAndPassword');
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithEmailAndPasswordFailure catch (e) {
       debugPrint('LogInWithEmailAndPasswordFailure.message: ${e.message}');
@@ -94,6 +90,7 @@ class LoginCubit extends Cubit<LoginState> {
       debugPrint('after await authRepo.logInWithGoogle');
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithGoogleFailure catch (e) {
+      debugPrint(e.message);
       emit(
         state.copyWith(
           errorMessage: e.message,

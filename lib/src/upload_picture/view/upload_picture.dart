@@ -21,7 +21,7 @@ class UploadPictureState extends State<UploadPicture> {
     setState(() {
       image = img;
       if (img != null) {
-        context.read<UpdateProfileCubit>();
+        context.read<UpdateProfilePhotoCubit>();
       }
     });
   }
@@ -44,8 +44,6 @@ class UploadPictureState extends State<UploadPicture> {
                     Navigator.pop(context);
                     final photo = getImage(ImageSource.gallery);
                     debugPrint('photo from gallery is -> $photo');
-                    // context.read<UpdateProfileCubit>()
-                    // .profilePictureChanged(photo);
                   },
                   child: const Row(
                     children: [
