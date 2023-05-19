@@ -188,34 +188,34 @@ class _SplashPageState extends State<SplashPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 48.5,
-                            child: ElevatedButton(
-                              style: const ButtonStyle(
-                                shadowColor: MaterialStatePropertyAll(
-                                  Colors.transparent,
-                                ),
-                                shape: MaterialStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                  ),
-                                ),
-                              ),
-                              child: const Text(
-                                'Continue to Login',
-                                style: TextStyle(
-                                  letterSpacing: .55,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              onPressed: () => {showDesktopLogin(context)},
-                            ),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(top: 16),
+                        //   child: SizedBox(
+                        //     width: MediaQuery.of(context).size.width,
+                        //     height: 48.5,
+                        //     child: ElevatedButton(
+                        //       style: const ButtonStyle(
+                        //         shadowColor: MaterialStatePropertyAll(
+                        //           Colors.transparent,
+                        //         ),
+                        //         shape: MaterialStatePropertyAll(
+                        //           RoundedRectangleBorder(
+                        //             borderRadius:
+                        //                 BorderRadius.all(Radius.circular(8)),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       child: const Text(
+                        //         'Continue to Login',
+                        //         style: TextStyle(
+                        //           letterSpacing: .55,
+                        //           fontWeight: FontWeight.w400,
+                        //         ),
+                        //       ),
+                        //       onPressed: () => {showDesktopLogin(context)},
+                        //     ),
+                        //   ),
+                        // ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: SizedBox(
@@ -240,7 +240,7 @@ class _SplashPageState extends State<SplashPage> {
       children: [
         Center(
           child: Padding(
-            padding: const EdgeInsets.all(48),
+            padding: const EdgeInsets.fromLTRB(12, 36, 32, 48),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -262,32 +262,32 @@ class _SplashPageState extends State<SplashPage> {
                     color: Colors.black54,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 48.5,
-                    child: ElevatedButton(
-                      style: const ButtonStyle(
-                        shadowColor:
-                            MaterialStatePropertyAll(Colors.transparent),
-                        shape: MaterialStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                        ),
-                      ),
-                      child: const Text(
-                        'Continue to Login',
-                        style: TextStyle(
-                          letterSpacing: .55,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      onPressed: () => {showMobileLogin(context)},
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 16),
+                //   child: SizedBox(
+                //     width: MediaQuery.of(context).size.width,
+                //     height: 48.5,
+                //     child: ElevatedButton(
+                //       style: const ButtonStyle(
+                //         shadowColor:
+                //             MaterialStatePropertyAll(Colors.transparent),
+                //         shape: MaterialStatePropertyAll(
+                //           RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.all(Radius.circular(8)),
+                //           ),
+                //         ),
+                //       ),
+                //       child: const Text(
+                //         'Continue to Login',
+                //         style: TextStyle(
+                //           letterSpacing: .55,
+                //           fontWeight: FontWeight.w400,
+                //         ),
+                //       ),
+                //       onPressed: () => {showMobileLogin(context)},
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: SizedBox(
@@ -527,11 +527,11 @@ class _SplashPageState extends State<SplashPage> {
                                 children: [...featureBoxes],
                               ),
                       ),
-                      const Padding(
-                        padding:
-                            EdgeInsets.only(left: 48, right: 32, bottom: 96),
-                        child: BlogFeed(),
-                      ),
+                      // const Padding(
+                      //   padding:
+                      //       EdgeInsets.only(left: 48, right: 32, bottom: 96),
+                      //   child: BlogFeed(),
+                      // ),
                       // This will be the FAQ section,
                       // clickable with a short foldout answer
                       Padding(
