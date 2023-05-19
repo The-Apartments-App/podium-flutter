@@ -55,16 +55,20 @@ class PaymentsPage extends StatelessWidget {
         // ignore: inference_failure_on_function_invocation
         // final result = await stripePayEndpointIntentId.call();
         try {
+          debugPrint('this is in the try of showWebPaymentSheet');
+
           final result = await FirebaseFunctions.instance
               .httpsCallable('helloWorld')
-              // ignore: inference_failure_on_function_invocation
-              .call();
+              .call<dynamic>();
+          debugPrint('we never fucking get here');
           debugPrint('result in showWebPaymentSheet: $result');
-        } on FirebaseFunctionsException catch (error) {
+        } on FirebaseFunctionsException catch (error, stackTrace) {
           if (kDebugMode) {
+            debugPrint('this is the error thrown: $error');
+            debugPrint('this is the stack trace: $stackTrace');
             print('error.code ${error.code}');
-            print('error.code ${error.details}');
-            print('error.code ${error.message}');
+            print('error.details ${error.details}');
+            print('error.message ${error.message}');
           }
         }
         // final response = await redirectToCheckout(
@@ -139,8 +143,10 @@ class PaymentsPage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (!kIsWeb) {
+                          debugPrint('!kIsWeb');
                           await Stripe.instance.presentPaymentSheet();
                         } else {
+                          debugPrint('kIsWeb');
                           await showWebPaymentSheet();
                         }
                       },
