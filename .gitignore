@@ -13,6 +13,8 @@ notes.txt
 cors.json
 *.env
 env.*
+dist/
+node_modules
 
 # IntelliJ related
 *.iml
