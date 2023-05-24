@@ -87,6 +87,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
       height: 300,
       width: 300,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
