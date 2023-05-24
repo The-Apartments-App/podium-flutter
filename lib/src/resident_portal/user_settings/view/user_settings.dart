@@ -24,10 +24,11 @@ class UserSettingsPage extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 40, 0, 40),
             child: Text(
-              'Settings',
+              'Account Settings',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w400,
+                color: Color.fromRGBO(76, 150, 111, 1),
               ),
             ),
           ),
