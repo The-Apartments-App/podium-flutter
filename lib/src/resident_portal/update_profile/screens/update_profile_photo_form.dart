@@ -111,9 +111,13 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
               takePhoto(ImageSource.camera);
             },
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                const Color.fromRGBO(76, 150, 111, 1),
-              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return const Color.fromRGBO(54, 106, 79, 1);
+                }
+                return const Color.fromRGBO(76, 150, 111, 1);
+              }),
             ),
             child: const Row(
               children: [Icon(Icons.camera), Text('Camera')],
@@ -124,9 +128,13 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
               takePhoto(ImageSource.gallery);
             },
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                const Color.fromRGBO(76, 150, 111, 1),
-              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return const Color.fromRGBO(54, 106, 79, 1);
+                }
+                return const Color.fromRGBO(76, 150, 111, 1);
+              }),
             ),
             child: const Row(
               children: [Icon(Icons.camera_roll), Text('Gallery')],
@@ -146,13 +154,12 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return const Color.fromRGBO(76, 150, 111, 1);
-                  }
-                  return null;
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return const Color.fromRGBO(54, 106, 79, 1);
                 }
-                ),
+                return const Color.fromRGBO(76, 150, 111, 1);
+              }),
             ),
             child: const Row(
               children: [Icon(Icons.save), Text('Save Picture')],
