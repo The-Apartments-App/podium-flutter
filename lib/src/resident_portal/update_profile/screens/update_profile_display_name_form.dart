@@ -106,6 +106,15 @@ class _UpdateProfileDisplayNameFormState
                   Navigator.pop(context);
                 }
               },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return const Color.fromRGBO(54, 106, 79, 1);
+                  }
+                  return const Color.fromRGBO(76, 150, 111, 1);
+                }),
+              ),
               child: const Row(
                 children: [Text('Change Display Name')],
               ),
