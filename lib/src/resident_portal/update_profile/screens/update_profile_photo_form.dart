@@ -17,7 +17,6 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   File? fileController;
   String? webController;
   final defaultProfilePic = 'lib/src/assets/images/podium_logo_round.png';
-  bool isHover = false;
 
   Future<void> takePhoto(ImageSource source) async {
     final picker = ImagePicker();
@@ -145,18 +144,15 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
                 Navigator.pop(context);
               }
             },
-            onHover: (val) {
-                setState(() {
-                  debugPrint('save has been hovered and isHover is: $isHover');
-                  isHover = val;
-                });
-            },
             style: ButtonStyle(
-              backgroundColor: isHover ? MaterialStateProperty.all(
-                      const Color.fromRGBO(54, 106, 79, 1),
-                    ) : MaterialStateProperty.all(
-                const Color.fromRGBO(76, 150, 111, 1),
-              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return const Color.fromRGBO(76, 150, 111, 1);
+                  }
+                  return null;
+                }
+                ),
             ),
             child: const Row(
               children: [Icon(Icons.save), Text('Save Picture')],
