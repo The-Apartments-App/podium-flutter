@@ -19,13 +19,13 @@ import 'package:podium/src/app/app.dart';
 Future<void> main() async {
   debugPrint('1. MAIN PRODUCTION IS RUNNING');
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   Bloc.observer = AppBlocObserver();
   Stripe.publishableKey = Env.stripePublishableKey;
   Stripe.merchantIdentifier = 'any string works';
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   final authenticationRepository = AuthenticationRepository();
   await authenticationRepository.user.first;
 

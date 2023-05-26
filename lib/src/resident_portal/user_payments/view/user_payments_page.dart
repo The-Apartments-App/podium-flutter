@@ -1,10 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
 
 class PaymentsPage extends StatelessWidget {
@@ -45,40 +42,73 @@ class PaymentsPage extends StatelessWidget {
       initPaymentSheet();
     }
 
+    Future<void> displayPaymentDetailsModal(String clientSecret) async {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 800,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: CardField(
+                      onCardChanged: (details) =>
+                          debugPrint('CardField details: $details'),
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Stripe.instance.confirmPayment(
+                      paymentIntentClientSecret: clientSecret,
+                      data: const PaymentMethodParams.card(
+                        paymentMethodData: PaymentMethodData(),
+                      ),
+                    );
+                  },
+                  child: const Text('Submit'),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+
     Future<void> showWebPaymentSheet() async {
       try {
-        //lets just try to call the cloud function. Baby steps.
-        // final stripePayEndpointIntentId =
-        //     FirebaseFunctions.instance.httpsCallable('helloWorld');
-        // debugPrint('stripePayEndpointIntentId: $stripePayEndpointIntentId');
+        // final result = await FirebaseFunctions.instance
+        //     .httpsCallable('printmessage')
+        //     .call<dynamic>(<String, dynamic>{
+        //   'text': 'text passed to firebase',
+        // });
+        // final response = result.data;
+        // debugPrint('response: $response');
+        final paymentIntent = await FirebaseFunctions.instance
+            .httpsCallable('createStripePaymentIntent')
+            // ignore: inference_failure_on_function_invocation
+            .call({'value': 'passed to firebase'});
+        debugPrint('paymentIntent.data: ${paymentIntent.data}');
 
-        // ignore: inference_failure_on_function_invocation
-        // final result = await stripePayEndpointIntentId.call();
-        try {
-          debugPrint('this is in the try of showWebPaymentSheet');
-
-          final result = await FirebaseFunctions.instance
-              .httpsCallable('helloWorld')
-              .call<dynamic>();
-          debugPrint('we never fucking get here');
-          debugPrint('result in showWebPaymentSheet: $result');
-        } on FirebaseFunctionsException catch (error, stackTrace) {
-          if (kDebugMode) {
-            debugPrint('this is the error thrown: $error');
-            debugPrint('this is the stack trace: $stackTrace');
-            print('error.code ${error.code}');
-            print('error.details ${error.details}');
-            print('error.message ${error.message}');
-          }
-        }
-        // final response = await redirectToCheckout(
-        //     context: context,
-        //     sessionId: sessionId,
-        //     publishableKey: publishableKey);
-      } catch (e) {
-        debugPrint('error caught and rethrown in showWebPaymentSheet: $e');
+        // ignore: avoid_dynamic_calls
+        final clientSecret = paymentIntent.data['client_secret'] as String;
+        await displayPaymentDetailsModal(clientSecret);
+      } on FirebaseFunctionsException catch (error) {
+        debugPrint('error.code: ${error.code}');
+        debugPrint('error.details: ${error.details}');
+        debugPrint('error.message: ${error.message}');
+      } catch (error) {
+        debugPrint('Generic error not, not a FirebaseFunctionsException');
+        debugPrint('error: $error');
       }
     }
+
+    // final response = await redirectToCheckout(
+    //     context: context,
+    //     sessionId: sessionId,
+    //     publishableKey: publishableKey);
 
     //   return BlocProvider(
     //     create: (context) => PaymentBloc(),
@@ -131,35 +161,21 @@ class PaymentsPage extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () {
-              showDialog<void>(
-                context: context,
-                builder: (context) {
-                  return Dialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    elevation: 16,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (!kIsWeb) {
-                          debugPrint('!kIsWeb');
-                          await Stripe.instance.presentPaymentSheet();
-                        } else {
-                          debugPrint('kIsWeb');
-                          await showWebPaymentSheet();
-                        }
-                      },
-                      child: const Text('Make A Payment'),
-                    ),
-                  );
-                },
-              );
+            onPressed: () async {
+              // await Stripe.instance.presentPaymentSheet();
+
+              if (!kIsWeb) {
+                debugPrint('!kIsWeb');
+                await Stripe.instance.presentPaymentSheet();
+              } else {
+                debugPrint('kIsWeb');
+                await showWebPaymentSheet();
+              }
             },
             child: const Padding(
               padding: EdgeInsets.all(12),
               child: Text(
-                'Payment methods',
+                'Make a Payment',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

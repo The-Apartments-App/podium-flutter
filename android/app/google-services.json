@@ -1,83 +1,83 @@
 {
-    "project_info": {
-      "project_number": "158576154553",
-      "firebase_url": "https://podium-78b4e-default-rtdb.firebaseio.com",
-      "project_id": "podium-78b4e",
-      "storage_bucket": "podium-78b4e.appspot.com"
-    },
-    "client": [
-      {
-        "client_info": {
-          "mobilesdk_app_id": "1:158576154553:android:234a19ec99c8b9b8bb8868",
-          "android_client_info": {
-            "package_name": "com.podium"
-          }
-        },
-        "oauth_client": [
-          {
-            "client_id": "158576154553-hrfgsjc7vcdtc9q7hp6e95pg2ij1momh.apps.googleusercontent.com",
-            "client_type": 3
-          }
-        ],
-        "api_key": [
-          {
-            "current_key": "AIzaSyAIX2ljqTjgTtFRF0jbOifVJfZXHoWoQeo"
-          }
-        ],
-        "services": {
-          "appinvite_service": {
-            "other_platform_oauth_client": [
-              {
-                "client_id": "158576154553-hrfgsjc7vcdtc9q7hp6e95pg2ij1momh.apps.googleusercontent.com",
-                "client_type": 3
-              },
-              {
-                "client_id": "158576154553-10p4tuinalhluulb2nk7hmk5elr6s4ih.apps.googleusercontent.com",
-                "client_type": 2,
-                "ios_info": {
-                  "bundle_id": "com.masterRepo.RunnerTests"
-                }
-              }
-            ]
-          }
+  "project_info": {
+    "project_number": "158576154553",
+    "firebase_url": "https://podium-78b4e-default-rtdb.firebaseio.com",
+    "project_id": "podium-78b4e",
+    "storage_bucket": "podium-78b4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:158576154553:android:234a19ec99c8b9b8bb8868",
+        "android_client_info": {
+          "package_name": "com.podium"
         }
       },
-      {
-        "client_info": {
-          "mobilesdk_app_id": "1:158576154553:android:2775b802740e5cd3bb8868",
-          "android_client_info": {
-            "package_name": "com.podium_app"
-          }
-        },
-        "oauth_client": [
-          {
-            "client_id": "158576154553-hrfgsjc7vcdtc9q7hp6e95pg2ij1momh.apps.googleusercontent.com",
-            "client_type": 3
-          }
-        ],
-        "api_key": [
-          {
-            "current_key": "AIzaSyAIX2ljqTjgTtFRF0jbOifVJfZXHoWoQeo"
-          }
-        ],
-        "services": {
-          "appinvite_service": {
-            "other_platform_oauth_client": [
-              {
-                "client_id": "158576154553-hrfgsjc7vcdtc9q7hp6e95pg2ij1momh.apps.googleusercontent.com",
-                "client_type": 3
-              },
-              {
-                "client_id": "158576154553-10p4tuinalhluulb2nk7hmk5elr6s4ih.apps.googleusercontent.com",
-                "client_type": 2,
-                "ios_info": {
-                  "bundle_id": "com.masterRepo.RunnerTests"
-                }
+      "oauth_client": [
+        {
+          "client_id": "158576154553-hrfgsjc7vcdtc9q7hp6e95pg2ij1momh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIX2ljqTjgTtFRF0jbOifVJfZXHoWoQeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "158576154553-hrfgsjc7vcdtc9q7hp6e95pg2ij1momh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "158576154553-10p4tuinalhluulb2nk7hmk5elr6s4ih.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.masterRepo.RunnerTests"
               }
-            ]
-          }
+            }
+          ]
         }
       }
-    ],
-    "configuration_version": "1"
-  }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:158576154553:android:2775b802740e5cd3bb8868",
+        "android_client_info": {
+          "package_name": "com.podium_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "158576154553-hrfgsjc7vcdtc9q7hp6e95pg2ij1momh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIX2ljqTjgTtFRF0jbOifVJfZXHoWoQeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "158576154553-hrfgsjc7vcdtc9q7hp6e95pg2ij1momh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "158576154553-10p4tuinalhluulb2nk7hmk5elr6s4ih.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.masterRepo.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
