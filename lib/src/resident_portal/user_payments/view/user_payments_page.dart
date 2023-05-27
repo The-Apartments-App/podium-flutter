@@ -1,7 +1,9 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Card;
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:flutter_stripe_web/flutter_stripe_web.dart';
+import 'package:stripe_platform_interface/src/models/payment_methods.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
 
 class PaymentsPage extends StatelessWidget {
@@ -49,13 +51,22 @@ class PaymentsPage extends StatelessWidget {
           return Dialog(
             child: Column(
               children: [
-                SizedBox(
-                  width: 800,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: SizedBox(
+                    width: 800,
                     child: CardField(
-                      onCardChanged: (details) =>
-                          debugPrint('CardField details: $details'),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      enablePostalCode: true,
+                      postalCodeHintText: 'ZIP Code',
+                      countryCode: 'US',
                     ),
                   ),
                 ),
