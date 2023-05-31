@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/shared.dart';
+import 'package:podium/shared/components/linkedin_link.dart';
+import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 

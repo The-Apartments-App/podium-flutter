@@ -2,6 +2,7 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/shared.dart';
+import 'package:podium/shared/shared_components.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:podium/src/splash_page/views/components/blog_feed.dart';
@@ -187,34 +188,34 @@ class _SplashPageState extends State<SplashPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 48.5,
-                            child: ElevatedButton(
-                              style: const ButtonStyle(
-                                shadowColor: MaterialStatePropertyAll(
-                                  Colors.transparent,
-                                ),
-                                shape: MaterialStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                  ),
-                                ),
-                              ),
-                              child: const Text(
-                                'Continue to Login',
-                                style: TextStyle(
-                                  letterSpacing: .55,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              onPressed: () => {showDesktopLogin(context)},
-                            ),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(top: 16),
+                        //   child: SizedBox(
+                        //     width: MediaQuery.of(context).size.width,
+                        //     height: 48.5,
+                        //     child: ElevatedButton(
+                        //       style: const ButtonStyle(
+                        //         shadowColor: MaterialStatePropertyAll(
+                        //           Colors.transparent,
+                        //         ),
+                        //         shape: MaterialStatePropertyAll(
+                        //           RoundedRectangleBorder(
+                        //             borderRadius:
+                        //                 BorderRadius.all(Radius.circular(8)),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       child: const Text(
+                        //         'Continue to Login',
+                        //         style: TextStyle(
+                        //           letterSpacing: .55,
+                        //           fontWeight: FontWeight.w400,
+                        //         ),
+                        //       ),
+                        //       onPressed: () => {showDesktopLogin(context)},
+                        //     ),
+                        //   ),
+                        // ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: SizedBox(
@@ -261,32 +262,32 @@ class _SplashPageState extends State<SplashPage> {
                     color: Colors.black54,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 48.5,
-                    child: ElevatedButton(
-                      style: const ButtonStyle(
-                        shadowColor:
-                            MaterialStatePropertyAll(Colors.transparent),
-                        shape: MaterialStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                        ),
-                      ),
-                      child: const Text(
-                        'Continue to Login',
-                        style: TextStyle(
-                          letterSpacing: .55,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      onPressed: () => {showMobileLogin(context)},
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 16),
+                //   child: SizedBox(
+                //     width: MediaQuery.of(context).size.width,
+                //     height: 48.5,
+                //     child: ElevatedButton(
+                //       style: const ButtonStyle(
+                //         shadowColor:
+                //             MaterialStatePropertyAll(Colors.transparent),
+                //         shape: MaterialStatePropertyAll(
+                //           RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.all(Radius.circular(8)),
+                //           ),
+                //         ),
+                //       ),
+                //       child: const Text(
+                //         'Continue to Login',
+                //         style: TextStyle(
+                //           letterSpacing: .55,
+                //           fontWeight: FontWeight.w400,
+                //         ),
+                //       ),
+                //       onPressed: () => {showMobileLogin(context)},
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: SizedBox(

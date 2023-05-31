@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'dart:typed_data';
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:cache/cache.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -177,11 +177,11 @@ class AuthenticationRepository {
   static const _userCacheKey = '__user_cache_key__';
 
   /// Stream of [User] which will emit the current user when
-  /// the authentication state changes.
+  /// the authentication state or the user profile is changed.
   ///
   /// Emits [User.empty] if the user is not authenticated.
   Stream<User> get user {
-    return _firebaseAuth.authStateChanges().map((firebaseUser) {
+    return _firebaseAuth.userChanges().map((firebaseUser) {
       final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
       _cache.write(key: _userCacheKey, value: user);
       return user;
@@ -390,34 +390,51 @@ class AuthenticationRepository {
     }
   }
 
+  // change the logged in users name
+  Future<void> changeDisplayName({required String displayName}) async {
+    final firebaseUser = _firebaseAuth.currentUser;
+    try {
+      await firebaseUser?.updateDisplayName(displayName);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // change the logged in users photo on android
   Future<void> updateProfilePicture({
     File? photo,
   }) async {
-    debugPrint('UPDATE PROFILE PICTURE CALLED');
-    debugPrint('NEW PHOTO IS $photo');
     try {
       if (_firebaseAuth.currentUser != null) {
-        debugPrint('currentUser is not null');
         final storageRef = FirebaseStorage.instance.ref();
-        debugPrint('storageRef: $storageRef');
         final userImageRef =
             storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
-        debugPrint('userImageRef: $userImageRef');
         if (photo != null) {
           await userImageRef.putFile(photo);
         } else {
           throw Exception('Error putting file in cloud');
         }
         final profileUrl = await userImageRef.getDownloadURL();
-        debugPrint('profileUrl: $profileUrl');
-
         await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
-        debugPrint('Firebase Auth updated ------------');
       }
-    } on FirebaseAuthException catch (e) {
-      throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
-    } catch (_) {
-      throw const SignUpWithEmailAndPasswordFailure();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+// change the logged in users photo on android
+  Future<void> updateProfileWithWebPicture({
+    required Uint8List imageData,
+  }) async {
+    try {
+      final storageRef = FirebaseStorage.instance.ref();
+      final userImageRef =
+          storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
+      await userImageRef.putData(imageData);
+      final profileUrl = await userImageRef.getDownloadURL();
+      await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }
