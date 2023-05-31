@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:podium/src/login/login.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginSubmitButton extends StatelessWidget {
   const LoginSubmitButton({super.key});
@@ -25,8 +26,8 @@ class LoginSubmitButton extends StatelessWidget {
                 ),
                 backgroundColor: const Color(0xFF03795D),
               ),
-              onPressed: () =>
-                  context.read<LoginCubit>().logInWithCredentials(),
+              onPressed: () => Supabase.instance.client.auth
+                  .signInWithPassword(password: state.password as String),
               child: state.status.isInProgress
                   ? DotsIndicator(
                       dotsCount: 3,

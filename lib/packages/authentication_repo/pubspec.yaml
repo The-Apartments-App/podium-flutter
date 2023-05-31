@@ -21,6 +21,7 @@ dependencies:
   google_sign_in: ^6.0.2
   image_picker: ^0.8.6
   meta: ^1.8.0
+  supabase_flutter: ^1.10.0
 
 dev_dependencies:
   flutter_test:

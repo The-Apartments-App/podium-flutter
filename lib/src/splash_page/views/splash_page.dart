@@ -4,10 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/components/linkedin_link.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
-import 'package:podium/src/splash_page/views/components/blog_feed.dart';
+// import 'package:podium/src/splash_page/views/components/blog_feed.dart';
 import 'package:podium/src/splash_page/views/components/faq.dart';
 import 'package:podium/src/splash_page/views/components/feature_box.dart';
 import 'package:podium/src/waitlist_button/waitlist_button.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -24,6 +25,25 @@ class _SplashPageState extends State<SplashPage> {
   bool mobileIsShowing = false;
   bool hasBeenVisited = false;
   bool isLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// Load auth session.
+    ///
+    /// Wait a minium `delayed` time in any case
+    /// to avoid flashing screen.
+    Future.wait([
+      SupabaseAuth.instance.initialSession,
+      Future<void>.delayed(
+        const Duration(milliseconds: 2000),
+      ),
+    ]).then((responseList) {
+      final session = responseList.first as Session?;
+      debugPrint('this is session: $session');
+    });
+  }
 
   void showDesktopLogin(BuildContext context) {
     showDialog<void>(
@@ -188,34 +208,34 @@ class _SplashPageState extends State<SplashPage> {
                             ),
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(top: 16),
-                        //   child: SizedBox(
-                        //     width: MediaQuery.of(context).size.width,
-                        //     height: 48.5,
-                        //     child: ElevatedButton(
-                        //       style: const ButtonStyle(
-                        //         shadowColor: MaterialStatePropertyAll(
-                        //           Colors.transparent,
-                        //         ),
-                        //         shape: MaterialStatePropertyAll(
-                        //           RoundedRectangleBorder(
-                        //             borderRadius:
-                        //                 BorderRadius.all(Radius.circular(8)),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       child: const Text(
-                        //         'Continue to Login',
-                        //         style: TextStyle(
-                        //           letterSpacing: .55,
-                        //           fontWeight: FontWeight.w400,
-                        //         ),
-                        //       ),
-                        //       onPressed: () => {showDesktopLogin(context)},
-                        //     ),
-                        //   ),
-                        // ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: 48.5,
+                            child: ElevatedButton(
+                              style: const ButtonStyle(
+                                shadowColor: MaterialStatePropertyAll(
+                                  Colors.transparent,
+                                ),
+                                shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                  ),
+                                ),
+                              ),
+                              child: const Text(
+                                'Continue to Login',
+                                style: TextStyle(
+                                  letterSpacing: .55,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              onPressed: () => {showDesktopLogin(context)},
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: SizedBox(
@@ -273,7 +293,7 @@ class _SplashPageState extends State<SplashPage> {
                 //             MaterialStatePropertyAll(Colors.transparent),
                 //         shape: MaterialStatePropertyAll(
                 //           RoundedRectangleBorder(
-                //             borderRadius: BorderRadius.all(Radius.circular(8)),
+                //             borderRadius: BorderRadius.all(Radius.circular(8,
                 //           ),
                 //         ),
                 //       ),

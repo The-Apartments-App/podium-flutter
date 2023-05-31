@@ -12,12 +12,12 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: SocialSignInButton(
+          body: SignInButton(
             buttonText: buttonText,
             iconName: iconName,
             onPressed: onPressedMock,
-            height: 24,
-            width: 24,
+            iconHeight: 24,
+            iconWidth: 24,
           ),
         ),
       ),

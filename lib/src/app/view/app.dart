@@ -81,10 +81,12 @@ class _AppViewState extends State<AppView> {
     }
 
     debugPrint('2b. APPVIEW BUILT - MaterialApp is created here');
+
     return MaterialApp(
       theme: appTheme,
       initialRoute: '/',
       onGenerateRoute: (settings) {
+        debugPrint('this is route settings: $settings');
         final blogId =
             // ignore: cast_nullable_to_non_nullable
             settings.arguments != null ? settings.arguments as String : '';
@@ -92,6 +94,7 @@ class _AppViewState extends State<AppView> {
           case '/':
             return MaterialPageRoute(builder: (_) => const SplashPage());
           case '/home':
+            debugPrint('we hit this route');
             return MaterialPageRoute(
               builder: (_) => HomePage(
                 bossMode: userIsABoss,

@@ -11,12 +11,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/bootstrap.dart';
 import 'package:podium/firebase_options.dart';
 import 'package:podium/src/app/app.dart';
+import 'package:podium/src/env.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   debugPrint('MAIN DEVELOPMENT IS RUNNING');
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
 
+  await Supabase.initialize(
+    url: 'https://dwulrobndxgnknmlcaoi.supabase.co',
+    anonKey: Env.supabaseKey,
+  );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

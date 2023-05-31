@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SocialSignInButton extends StatelessWidget {
-  const SocialSignInButton({
+class SignInButton extends StatelessWidget {
+  const SignInButton({
     super.key,
     required this.buttonText,
     required this.onPressed,
     required this.iconName,
-    required this.height,
-    required this.width,
+    required this.iconHeight,
+    required this.iconWidth,
   });
   final String buttonText;
   final String iconName;
   final Function onPressed;
-  final double height;
-  final double width;
+  final double iconHeight;
+  final double iconWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +42,8 @@ class SocialSignInButton extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 'lib/src/assets/images/$iconName',
-                height: height,
-                width: width,
+                height: iconHeight,
+                width: iconWidth,
               ),
               Expanded(
                 child: SizedBox(

@@ -40,10 +40,12 @@ dependencies:
   form_inputs:
     path: lib/packages/form_inputs
   formz: ^0.6.0
+  get_it: ^7.6.0
   google_fonts: ^4.0.4
   http: ^0.13.5
   image_picker: ^0.8.6
   image_picker_web: ^3.0.0+1
+  injectable: ^2.1.1
   meta: ^1.8.0
   mockito: ^5.4.0
   path_provider: ^2.0.11

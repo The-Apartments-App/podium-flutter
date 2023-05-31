@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/login/login.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginEmailScreen extends StatefulWidget {
   const LoginEmailScreen({super.key});
@@ -21,6 +21,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final supabase = Supabase.instance.client;
     return ColoredBox(
       color: const Color(0xFFFFFFFF),
       child: Column(
@@ -107,39 +108,57 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                 Wrap(
                   runSpacing: 15.5675,
                   children: [
-                    SocialSignInButton(
-                      height: 20,
-                      width: 20,
+                    SignInButton(
+                      iconHeight: 20,
+                      iconWidth: 20,
                       iconName: 'facebook-icon.svg',
                       buttonText: 'Continue with Facebook',
-                      onPressed: () =>
-                          context.read<LoginCubit>().logInWithFacebook().then(
-                                (value) =>
-                                    Navigator.of(context).pushNamed('/home'),
-                              ),
+                      onPressed: () async {
+                        await supabase.auth
+                            .signInWithOAuth(Provider.facebook)
+                            .then(
+                              (value) =>
+                                  Navigator.of(context).pushNamed('/home'),
+                            );
+                      },
                     ),
-                    SocialSignInButton(
-                      height: 18,
-                      width: 18,
+                    SignInButton(
+                      iconHeight: 18,
+                      iconWidth: 18,
                       iconName: 'google-icon.svg',
                       buttonText: 'Continue with Google',
-                      onPressed: () =>
-                          context.read<LoginCubit>().logInWithGoogle().then(
-                                (value) =>
-                                    Navigator.of(context).pushNamed('/home'),
-                              ),
+                      onPressed: () async {
+                        try {
+                          await supabase.auth.signInWithOAuth(
+                            Provider.google,
+                          );
+                          debugPrint('this is context: $context');
+                          // ignore: use_build_context_synchronously
+                          await Navigator.pushNamed(context, '/home');
+                        } catch (error) {
+                          debugPrint(
+                            'this is the sign in with Google Error: $error',
+                          );
+                        }
+                      },
                     ),
-                    SocialSignInButton(
-                      height: 28,
-                      width: 28,
+                    SignInButton(
+                      iconHeight: 28,
+                      iconWidth: 28,
                       iconName: 'apple-icon.svg',
                       buttonText: 'Continue with Apple',
-                      onPressed: () =>
-                          context.read<LoginCubit>().logInWithGoogle(),
+                      onPressed: () async {
+                        await supabase.auth
+                            .signInWithOAuth(Provider.apple)
+                            .then(
+                              (value) =>
+                                  Navigator.of(context).pushNamed('/home'),
+                            );
+                      },
                     ),
-                    SocialSignInButton(
-                      height: 19,
-                      width: 19,
+                    SignInButton(
+                      iconHeight: 19,
+                      iconWidth: 19,
                       iconName: isEmailInput != true
                           ? 'email-icon.svg'
                           : 'phone-icon.svg',
@@ -155,19 +174,20 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                         },
                       ),
                     ),
-                    SocialSignInButton(
-                      height: 28,
-                      width: 28,
+                    SignInButton(
+                      iconHeight: 28,
+                      iconWidth: 28,
                       iconName: 'apple-icon.svg',
                       buttonText: 'Continue as Demo User',
                       onPressed: () async => {
-                        await context
-                            .read<LoginCubit>()
-                            .logInWithDemoUser()
+                        await supabase.auth
+                            .signInWithPassword(
+                              email: 'demouser@demo.com',
+                              password: 'password',
+                            )
                             .then(
-                              (value) => {
-                                Navigator.of(context).pushNamed('/home'),
-                              },
+                              (value) =>
+                                  Navigator.of(context).pushNamed('/home'),
                             )
                       },
                     ),
