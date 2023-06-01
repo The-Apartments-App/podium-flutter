@@ -145,7 +145,7 @@ class _SplashPageState extends State<SplashPage> {
         ),
         Positioned(
           top: 100,
-          left: 250,
+          left: 0,
           child: Container(
             height: 400,
             width: 400,
@@ -508,7 +508,7 @@ class _SplashPageState extends State<SplashPage> {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           splashSectionImage(
-                            'splash_page_city_skyline.jpeg',
+                            'splash_page_top_image.jpg',
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
