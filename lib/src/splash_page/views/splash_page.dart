@@ -129,26 +129,26 @@ class _SplashPageState extends State<SplashPage> {
       alignment: AlignmentDirectional.center,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 160),
+          padding: const EdgeInsets.only(left: 160, right: 40),
           child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(8),
-              bottomLeft: Radius.circular(8),
-            ),
-            child: Image.asset(
-              'lib/src/assets/images/splash_page_top_image.jpg',
-              fit: BoxFit.cover,
-              height: 700,
-              width: MediaQuery.of(context).size.width,
+            borderRadius: BorderRadius.circular(8),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1000),
+              child: Image.asset(
+                'lib/src/assets/images/splash_page_top_image.jpg',
+                fit: BoxFit.cover,
+                height: 600,
+                width: MediaQuery.of(context).size.width,
+              ),
             ),
           ),
         ),
         Positioned(
-          top: 127.5,
-          left: 0,
+          top: 100,
+          left: 250,
           child: Container(
-            height: 450,
-            width: 550,
+            height: 400,
+            width: 400,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,
