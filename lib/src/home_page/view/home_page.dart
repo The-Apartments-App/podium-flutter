@@ -44,6 +44,11 @@ class _HomePageState extends State<HomePage> {
 
     final ownerProfileMenu = [
       const HomePageMenuItem(
+        route: 'ownerDashboard',
+        buttonText: 'Dashboard',
+        icon: Icons.info,
+      ),
+      const HomePageMenuItem(
         route: 'ownerLedgers',
         buttonText: 'Ledgers',
         icon: Icons.balance,

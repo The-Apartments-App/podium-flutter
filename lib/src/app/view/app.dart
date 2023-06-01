@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/blog_story_page/blog_story_page.dart';
 import 'package:podium/src/home_page/home.dart';
+import 'package:podium/src/owner_portal/owner_dashboard/owner_dashboard.dart';
 import 'package:podium/src/resident_portal/building_amenities/building_amenities.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
@@ -47,21 +48,21 @@ class AppView extends StatefulWidget {
 }
 
 class _AppViewState extends State<AppView> {
-  bool userIsABoss = false;
+  bool userIsABoss = true;
   @override
   Widget build(BuildContext context) {
     final user = context.select((AppBloc bloc) => bloc.state.user);
     final ownerIds = ['kmbvxRaTSBfcf8Xk2CwstCpNQXp1'];
-    if (ownerIds.contains(user.id)) {
-      setState(() {
-        userIsABoss = true;
-      });
-    }
-    if (user.isEmpty) {
-      setState(() {
-        userIsABoss = false;
-      });
-    }
+    // if (ownerIds.contains(user.id)) {
+    //   setState(() {
+    //     userIsABoss = true;
+    //   });
+    // }
+    // if (user.isEmpty) {
+    //   setState(() {
+    //     userIsABoss = false;
+    //   });
+    // }
 
     MaterialPageRoute<dynamic> buildOwnerPageRoute(
       Widget page,
@@ -115,9 +116,9 @@ class _AppViewState extends State<AppView> {
             return MaterialPageRoute(
               builder: (_) => const BuildingAmenitiesPage(),
             );
-          case '/ownerUserProfile':
+          case '/ownerDashboard':
             return buildOwnerPageRoute(
-              const Text('OWNER USER PROFILE'),
+              const OwnerDashboard(),
             );
           case '/ownerLedgers':
             return buildOwnerPageRoute(
