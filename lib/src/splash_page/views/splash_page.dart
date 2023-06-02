@@ -246,7 +246,7 @@ class _SplashPageState extends State<SplashPage> {
       children: [
         Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 36, 32, 48),
+            padding: const EdgeInsets.fromLTRB(36, 36, 16, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -268,38 +268,39 @@ class _SplashPageState extends State<SplashPage> {
                     color: Colors.black54,
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 16),
-                //   child: SizedBox(
-                //     width: MediaQuery.of(context).size.width,
-                //     height: 48.5,
-                //     child: ElevatedButton(
-                //       style: const ButtonStyle(
-                //         shadowColor:
-                //             MaterialStatePropertyAll(Colors.transparent),
-                //         shape: MaterialStatePropertyAll(
-                //           RoundedRectangleBorder(
-                //             borderRadius: BorderRadius.all(Radius.circular(8)),
-                //           ),
-                //         ),
-                //       ),
-                //       child: const Text(
-                //         'Continue to Login',
-                //         style: TextStyle(
-                //           letterSpacing: .55,
-                //           fontWeight: FontWeight.w400,
-                //         ),
-                //       ),
-                //       onPressed: () => {showMobileLogin(context)},
-                //     ),
-                //   ),
-                // ),
                 Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 48.5,
                     child: const WaitlistButton(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 48.5,
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                        shadowColor:
+                            MaterialStatePropertyAll(Colors.transparent),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                          ),
+                        ),
+                      ),
+                      onPressed:
+                          !weAreLive ? null : () => {showMobileLogin(context)},
+                      child: const Text(
+                        'Continue to Login',
+                        style: TextStyle(
+                          letterSpacing: .55,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -311,21 +312,21 @@ class _SplashPageState extends State<SplashPage> {
 
     const featureBoxes = [
       FeatureBox(
-        icon: Icon(Icons.apartment),
+        icon: Icons.apartment,
         headline: 'Redefining the Rental Experience',
         details:
             '''Discover a new era of apartment living with Podium's cutting-edge platform, intuitively designed to bring tenants and property owners together. Our technology-driven approach is reshaping the rental landscape, fostering innovation and setting new standards for the industry.''',
       ),
-      SizedBox(height: 16, width: 16),
+      SizedBox(height: 32, width: 32),
       FeatureBox(
-        icon: Icon(Icons.phone_android),
+        icon: Icons.phone_android,
         headline: 'Consistency at Your Fingertips',
         details:
             '''Enjoy the comfort and reliability of a consistent living experience in every Podium-managed property. Our user-friendly platform connects you to your ideal apartment, ensuring hassle-free living with a high standard of quality.''',
       ),
-      SizedBox(height: 16, width: 16),
+      SizedBox(height: 32, width: 32),
       FeatureBox(
-        icon: Icon(Icons.trending_up_sharp),
+        icon: Icons.trending_up_sharp,
         headline: 'Empowering Property Owners',
         details:
             '''Unlock the full potential of your property with powerful tools and real-time data that simplify management and boost returns. Our platform is designed to streamline operations and optimize performance for the modern building owner.''',
@@ -344,7 +345,9 @@ class _SplashPageState extends State<SplashPage> {
           child: Image.asset(
             'lib/src/assets/images/$fileName',
             fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width * .85,
+            width: isMobile
+                ? MediaQuery.of(context).size.width
+                : MediaQuery.of(context).size.width * .85,
           ),
         ),
       );
@@ -378,7 +381,7 @@ class _SplashPageState extends State<SplashPage> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.all(48),
+                    padding: EdgeInsets.all(isMobile ? 16 : 48),
                     child: Center(
                       child: Wrap(
                         spacing: 50,
@@ -426,7 +429,14 @@ class _SplashPageState extends State<SplashPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(48),
+                    padding: isMobile
+                        ? const EdgeInsets.only(
+                            left: 16,
+                            right: 16,
+                            top: 48,
+                            bottom: 48,
+                          )
+                        : const EdgeInsets.all(48),
                     child: Center(
                       child: Wrap(
                         spacing: 50,
@@ -509,7 +519,7 @@ class _SplashPageState extends State<SplashPage> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.all(48),
+                    padding: EdgeInsets.all(isMobile ? 16 : 48),
                     child: Center(
                       child: Wrap(
                         spacing: 50,
@@ -563,9 +573,13 @@ class _SplashPageState extends State<SplashPage> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(64, 40, 64, 64),
                       child: MediaQuery.of(context).size.width < 850
-                          ? const Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [...featureBoxes],
+                          ? SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: const Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [...featureBoxes],
+                              ),
                             )
                           : const Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -603,42 +617,48 @@ class _SplashPageState extends State<SplashPage> {
                           ),
                         ),
                         ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 500),
-                          child: const Padding(
-                            padding: EdgeInsets.only(right: 32),
-                            child: Column(
-                              children: [
-                                FAQ(
-                                  question:
-                                      '''What makes Podium different from other apartment rental platforms?''',
-                                  answer:
-                                      '''Podium offers a comprehensive platform that integrates every aspect of property management, unlike traditional management companies that rely on third-party payment and listing services.''',
-                                ),
-                                FAQ(
-                                  question:
-                                      '''How does Podium ensure a consistent and high-quality living experience for its residents?''',
-                                  answer:
-                                      '''Distinguishing itself from other digital rental platforms, Podium directly manages the buildings, ensuring on-site managers are available to provide support and assistance.''',
-                                ),
-                                FAQ(
-                                  question:
-                                      '''Can I list my property on Podium? What are the requirements for property owners to join the platform?''',
-                                  answer:
-                                      '''Our platform is currently not open to general property submissions as we focus on partnering with premium-level properties. If you're interested in discussing a potential partnership, please contact us at info@podiumapartments.com for more information.''',
-                                ),
-                                FAQ(
-                                  question:
-                                      '''How does Podium's platform help property owners manage their apartments more effectively?''',
-                                  answer:
-                                      '''Utilizing cutting-edge technology, Podium delivers an advanced and efficient property management experience for both tenants and property owners.''',
-                                ),
-                                FAQ(
-                                  question:
-                                      '''Are there any additional benefits or amenities for residents living in Podium-managed properties?''',
-                                  answer:
-                                      '''At Podium, our managed properties feature exclusive amenities such as complimentary cold brew and thoughtfully designed community spaces, guaranteeing a consistently high-quality living experience that fosters comfort and engagement for our residents.''',
-                                ),
-                              ],
+                          constraints: const BoxConstraints(
+                            minWidth: 400,
+                            maxWidth: 500,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(right: isMobile ? 0 : 32),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: const Column(
+                                children: [
+                                  FAQ(
+                                    question:
+                                        '''What makes Podium different from other apartment rental platforms?''',
+                                    answer:
+                                        '''Podium offers a comprehensive platform that integrates every aspect of property management, unlike traditional management companies that rely on third-party payment and listing services.''',
+                                  ),
+                                  FAQ(
+                                    question:
+                                        '''How does Podium ensure a consistent and high-quality living experience for its residents?''',
+                                    answer:
+                                        '''Distinguishing itself from other digital rental platforms, Podium directly manages the buildings, ensuring on-site managers are available to provide support and assistance.''',
+                                  ),
+                                  FAQ(
+                                    question:
+                                        '''Can I list my property on Podium? What are the requirements for property owners to join the platform?''',
+                                    answer:
+                                        '''Our platform is currently not open to general property submissions as we focus on partnering with premium-level properties. If you're interested in discussing a potential partnership, please contact us at info@podiumapartments.com for more information.''',
+                                  ),
+                                  FAQ(
+                                    question:
+                                        '''How does Podium's platform help property owners manage their apartments more effectively?''',
+                                    answer:
+                                        '''Utilizing cutting-edge technology, Podium delivers an advanced and efficient property management experience for both tenants and property owners.''',
+                                  ),
+                                  FAQ(
+                                    question:
+                                        '''Are there any additional benefits or amenities for residents living in Podium-managed properties?''',
+                                    answer:
+                                        '''At Podium, our managed properties feature exclusive amenities such as complimentary cold brew and thoughtfully designed community spaces, guaranteeing a consistently high-quality living experience that fosters comfort and engagement for our residents.''',
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

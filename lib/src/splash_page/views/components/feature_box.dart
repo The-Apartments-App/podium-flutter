@@ -8,7 +8,7 @@ class FeatureBox extends StatefulWidget {
     required this.details,
   });
 
-  final Icon icon;
+  final IconData icon;
   final String headline;
   final String details;
 
@@ -20,19 +20,19 @@ class _FeatureBoxState extends State<FeatureBox> {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(minWidth: 200, maxWidth: 300),
+      constraints: const BoxConstraints(minWidth: 200, maxWidth: 350),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * .25,
+        width: MediaQuery.of(context).size.width < 850
+            ? MediaQuery.of(context).size.width
+            : MediaQuery.of(context).size.width * .25,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: MediaQuery.of(context).size.width < 850
+              ? CrossAxisAlignment.center
+              : CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-              child: SizedBox(
-                height: 18,
-                width: 18,
-                child: widget.icon,
-              ),
+              child: Icon(widget.icon, size: 36),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
