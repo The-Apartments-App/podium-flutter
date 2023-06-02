@@ -124,31 +124,33 @@ class _SplashPageState extends State<SplashPage> {
     screenSizeIsMobile = isMobile;
     screenSizeIsDesktop = !isMobile;
     final carouselController = CarouselController();
+    const weAreLive = false;
 
     final desktopSplashImage = Stack(
       alignment: AlignmentDirectional.center,
+      clipBehavior: Clip.none,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 160, right: 40),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1000),
+              constraints: const BoxConstraints(maxWidth: 1500),
               child: Image.asset(
                 'lib/src/assets/images/splash_page_top_image.jpg',
                 fit: BoxFit.cover,
-                height: 600,
+                height: 500,
                 width: MediaQuery.of(context).size.width,
               ),
             ),
           ),
         ),
         Positioned(
-          top: 100,
-          left: 0,
+          top: 150,
+          left: MediaQuery.of(context).size.width < 1100 ? 100 : 200,
           child: Container(
             height: 400,
-            width: 400,
+            width: 500,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,
@@ -190,40 +192,42 @@ class _SplashPageState extends State<SplashPage> {
                             ),
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(top: 16),
-                        //   child: SizedBox(
-                        //     width: MediaQuery.of(context).size.width,
-                        //     height: 48.5,
-                        //     child: ElevatedButton(
-                        //       style: const ButtonStyle(
-                        //         shadowColor: MaterialStatePropertyAll(
-                        //           Colors.transparent,
-                        //         ),
-                        //         shape: MaterialStatePropertyAll(
-                        //           RoundedRectangleBorder(
-                        //             borderRadius:
-                        //                 BorderRadius.all(Radius.circular(8)),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       child: const Text(
-                        //         'Continue to Login',
-                        //         style: TextStyle(
-                        //           letterSpacing: .55,
-                        //           fontWeight: FontWeight.w400,
-                        //         ),
-                        //       ),
-                        //       onPressed: () => {showDesktopLogin(context)},
-                        //     ),
-                        //   ),
-                        // ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width,
                             height: 48.5,
                             child: const WaitlistButton(),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: 48.5,
+                            child: ElevatedButton(
+                              style: const ButtonStyle(
+                                shadowColor: MaterialStatePropertyAll(
+                                  Colors.transparent,
+                                ),
+                                shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                  ),
+                                ),
+                              ),
+                              onPressed: !weAreLive
+                                  ? null
+                                  : () => {showDesktopLogin(context)},
+                              child: const Text(
+                                'Login Coming Soon!',
+                                style: TextStyle(
+                                  letterSpacing: .55,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -312,14 +316,14 @@ class _SplashPageState extends State<SplashPage> {
         details:
             '''Discover a new era of apartment living with Podium's cutting-edge platform, intuitively designed to bring tenants and property owners together. Our technology-driven approach is reshaping the rental landscape, fostering innovation and setting new standards for the industry.''',
       ),
-      SizedBox(height: 16),
+      SizedBox(height: 16, width: 16),
       FeatureBox(
         icon: Icon(Icons.phone_android),
         headline: 'Consistency at Your Fingertips',
         details:
             '''Enjoy the comfort and reliability of a consistent living experience in every Podium-managed property. Our user-friendly platform connects you to your ideal apartment, ensuring hassle-free living with a high standard of quality.''',
       ),
-      SizedBox(height: 16),
+      SizedBox(height: 16, width: 16),
       FeatureBox(
         icon: Icon(Icons.trending_up_sharp),
         headline: 'Empowering Property Owners',
@@ -330,7 +334,11 @@ class _SplashPageState extends State<SplashPage> {
 
     Widget splashSectionImage(String fileName) {
       return ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 900, minWidth: 400),
+        constraints: const BoxConstraints(
+          maxWidth: 900,
+          minWidth: 400,
+          maxHeight: 750,
+        ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image.asset(
@@ -360,7 +368,8 @@ class _SplashPageState extends State<SplashPage> {
                 children: [
                   //Splash Photo and User Action Box
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(40, 0, 16, 56),
+                    padding:
+                        EdgeInsets.only(right: 16, bottom: isMobile ? 90 : 180),
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child:
@@ -378,7 +387,7 @@ class _SplashPageState extends State<SplashPage> {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           splashSectionImage(
-                            'splash_page_community.png',
+                            'splash_page_community.jpg',
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -440,7 +449,7 @@ class _SplashPageState extends State<SplashPage> {
                                   bottom: isMobile ? 40 : 80,
                                 ),
                                 child: Text(
-                                  'Elevate Your Everyday',
+                                  'Urban Lifestyle at Your Doorstep',
                                   style: TextStyle(
                                     fontSize: isMobile ? 30 : 36,
                                     fontWeight: FontWeight.w500,
@@ -451,7 +460,7 @@ class _SplashPageState extends State<SplashPage> {
                                 constraints:
                                     const BoxConstraints(maxWidth: 500),
                                 child: Text(
-                                  '''Indulge in the small luxuries that make a big difference in your daily routine. Our attention to detail and thoughtfully curated amenities, like complimentary cold brew, create an unparalleled living experience that goes beyond the ordinary. Experience the Podium difference and savor the moments that truly matter.''',
+                                  '''Explore the conveniences of modern living in our Podium buildings. Our prime locations feature an array of premium retail partners, bringing the best of city living right to your front door.''',
                                   style: TextStyle(
                                     fontSize: isMobile ? 18 : 22,
                                     fontWeight: FontWeight.w300,
@@ -471,6 +480,7 @@ class _SplashPageState extends State<SplashPage> {
                             child: CarouselSlider(
                               carouselController: carouselController,
                               options: CarouselOptions(
+                                initialPage: 2,
                                 autoPlayCurve: Curves.easeIn,
                                 autoPlayAnimationDuration:
                                     const Duration(milliseconds: 900),
@@ -508,7 +518,7 @@ class _SplashPageState extends State<SplashPage> {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           splashSectionImage(
-                            'splash_page_top_image.jpg',
+                            'splash_page_city_skyline.jpg',
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -558,6 +568,7 @@ class _SplashPageState extends State<SplashPage> {
                               children: [...featureBoxes],
                             )
                           : const Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [...featureBoxes],
                             ),
