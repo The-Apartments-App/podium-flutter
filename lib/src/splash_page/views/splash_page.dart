@@ -1,10 +1,13 @@
+// ignore_for_file: dead_code
+
 import 'package:authentication_repo/authentication_repo.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/components/linkedin_link.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
-import 'package:podium/src/splash_page/views/components/blog_feed.dart';
+// import 'package:podium/src/splash_page/views/components/blog_feed.dart';
 import 'package:podium/src/splash_page/views/components/faq.dart';
 import 'package:podium/src/splash_page/views/components/feature_box.dart';
 import 'package:podium/src/waitlist_button/waitlist_button.dart';
@@ -122,16 +125,19 @@ class _SplashPageState extends State<SplashPage> {
     final isMobile = MediaQuery.of(context).size.width < 650;
     screenSizeIsMobile = isMobile;
     screenSizeIsDesktop = !isMobile;
+    final carouselController = CarouselController();
+    const weAreLive = false;
 
     final desktopSplashImage = Stack(
       alignment: AlignmentDirectional.center,
+      clipBehavior: Clip.none,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 160, right: 40),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1000),
+              constraints: const BoxConstraints(maxWidth: 1500),
               child: Image.asset(
                 'lib/src/assets/images/splash_page_top_image.jpg',
                 fit: BoxFit.cover,
@@ -142,11 +148,11 @@ class _SplashPageState extends State<SplashPage> {
           ),
         ),
         Positioned(
-          top: 50,
-          left: 0,
+          top: 150,
+          left: MediaQuery.of(context).size.width < 1100 ? 100 : 200,
           child: Container(
             height: 400,
-            width: 400,
+            width: 500,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,
@@ -188,40 +194,42 @@ class _SplashPageState extends State<SplashPage> {
                             ),
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(top: 16),
-                        //   child: SizedBox(
-                        //     width: MediaQuery.of(context).size.width,
-                        //     height: 48.5,
-                        //     child: ElevatedButton(
-                        //       style: const ButtonStyle(
-                        //         shadowColor: MaterialStatePropertyAll(
-                        //           Colors.transparent,
-                        //         ),
-                        //         shape: MaterialStatePropertyAll(
-                        //           RoundedRectangleBorder(
-                        //             borderRadius:
-                        //                 BorderRadius.all(Radius.circular(8)),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       child: const Text(
-                        //         'Continue to Login',
-                        //         style: TextStyle(
-                        //           letterSpacing: .55,
-                        //           fontWeight: FontWeight.w400,
-                        //         ),
-                        //       ),
-                        //       onPressed: () => {showDesktopLogin(context)},
-                        //     ),
-                        //   ),
-                        // ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width,
                             height: 48.5,
                             child: const WaitlistButton(),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: 48.5,
+                            child: ElevatedButton(
+                              style: const ButtonStyle(
+                                shadowColor: MaterialStatePropertyAll(
+                                  Colors.transparent,
+                                ),
+                                shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                  ),
+                                ),
+                              ),
+                              onPressed: !weAreLive
+                                  ? null
+                                  : () => {showDesktopLogin(context)},
+                              child: const Text(
+                                'Login Coming Soon!',
+                                style: TextStyle(
+                                  letterSpacing: .55,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -240,60 +248,61 @@ class _SplashPageState extends State<SplashPage> {
       children: [
         Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 36, 32, 48),
+            padding: const EdgeInsets.fromLTRB(36, 36, 16, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 16),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
                   child: Text(
                     'Experience Life with Podium',
                     style: TextStyle(
-                      fontSize: 36,
+                      fontSize: isMobile ? 30 : 36,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-                const Text(
+                Text(
                   """Discover premium living spaces tailored for today's urban lifestyle""",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: isMobile ? 18 : 22,
                     fontWeight: FontWeight.w400,
                     color: Colors.black54,
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 16),
-                //   child: SizedBox(
-                //     width: MediaQuery.of(context).size.width,
-                //     height: 48.5,
-                //     child: ElevatedButton(
-                //       style: const ButtonStyle(
-                //         shadowColor:
-                //             MaterialStatePropertyAll(Colors.transparent),
-                //         shape: MaterialStatePropertyAll(
-                //           RoundedRectangleBorder(
-                //             borderRadius: BorderRadius.all(Radius.circular(8)),
-                //           ),
-                //         ),
-                //       ),
-                //       child: const Text(
-                //         'Continue to Login',
-                //         style: TextStyle(
-                //           letterSpacing: .55,
-                //           fontWeight: FontWeight.w400,
-                //         ),
-                //       ),
-                //       onPressed: () => {showMobileLogin(context)},
-                //     ),
-                //   ),
-                // ),
                 Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 48.5,
                     child: const WaitlistButton(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 48.5,
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                        shadowColor:
+                            MaterialStatePropertyAll(Colors.transparent),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                          ),
+                        ),
+                      ),
+                      onPressed:
+                          !weAreLive ? null : () => {showMobileLogin(context)},
+                      child: const Text(
+                        'Continue to Login',
+                        style: TextStyle(
+                          letterSpacing: .55,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -305,21 +314,21 @@ class _SplashPageState extends State<SplashPage> {
 
     const featureBoxes = [
       FeatureBox(
-        icon: Icon(Icons.apartment),
+        icon: Icons.apartment,
         headline: 'Redefining the Rental Experience',
         details:
             '''Discover a new era of apartment living with Podium's cutting-edge platform, intuitively designed to bring tenants and property owners together. Our technology-driven approach is reshaping the rental landscape, fostering innovation and setting new standards for the industry.''',
       ),
-      SizedBox(height: 16),
+      SizedBox(height: 32, width: 32),
       FeatureBox(
-        icon: Icon(Icons.phone_android),
+        icon: Icons.phone_android,
         headline: 'Consistency at Your Fingertips',
         details:
             '''Enjoy the comfort and reliability of a consistent living experience in every Podium-managed property. Our user-friendly platform connects you to your ideal apartment, ensuring hassle-free living with a high standard of quality.''',
       ),
-      SizedBox(height: 16),
+      SizedBox(height: 32, width: 32),
       FeatureBox(
-        icon: Icon(Icons.trending_up_sharp),
+        icon: Icons.trending_up_sharp,
         headline: 'Empowering Property Owners',
         details:
             '''Unlock the full potential of your property with powerful tools and real-time data that simplify management and boost returns. Our platform is designed to streamline operations and optimize performance for the modern building owner.''',
@@ -327,13 +336,21 @@ class _SplashPageState extends State<SplashPage> {
     ];
 
     Widget splashSectionImage(String fileName) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Image.asset(
-          'lib/src/assets/images/$fileName',
-          fit: BoxFit.cover,
-          height: 400,
-          width: 700,
+      return ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: 900,
+          minWidth: 400,
+          maxHeight: 750,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.asset(
+            'lib/src/assets/images/$fileName',
+            fit: BoxFit.cover,
+            width: isMobile
+                ? MediaQuery.of(context).size.width
+                : MediaQuery.of(context).size.width * .85,
+          ),
         ),
       );
     }
@@ -342,277 +359,326 @@ class _SplashPageState extends State<SplashPage> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
-                  child: Row(
-                    children: [PodiumLogoWithTitle(height: 150)],
-                  ),
+        child: Center(
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 40),
+                child: Row(
+                  children: [PodiumLogoWithTitle(height: 125)],
                 ),
-                // const Divider(),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1375),
-                  child: Column(
-                    children: [
-                      //Splash Photo and User Action Box
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 36, 16, 56),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: isMobile
-                              ? mobileSplashNoImage
-                              : desktopSplashImage,
-                        ),
-                      ),
+              ),
+              // const Divider(),
+              Column(
+                children: [
+                  //Splash Photo and User Action Box
+                  Padding(
+                    padding:
+                        EdgeInsets.only(right: 16, bottom: isMobile ? 90 : 180),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child:
+                          isMobile ? mobileSplashNoImage : desktopSplashImage,
+                    ),
+                  ),
 
-                      Padding(
-                        padding: const EdgeInsets.all(48),
-                        child: Center(
-                          child: Wrap(
-                            spacing: 50,
-                            runAlignment: WrapAlignment.spaceBetween,
-                            alignment: WrapAlignment.center,
-                            children: [
-                              splashSectionImage(
-                                'splash_page_community.png',
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                      top: 40,
-                                      bottom: 80,
-                                    ),
-                                    child: Text(
-                                      'A Lively Atmosphere',
-                                      style: TextStyle(
-                                        fontSize: 36,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  ConstrainedBox(
-                                    constraints:
-                                        const BoxConstraints(maxWidth: 500),
-                                    child: const Text(
-                                      '''Podium buildings create an inviting environment where residents can connect, share experiences, and feel a sense of belonging. Our properties offer a unique ambiance that adds to the overall living experience, fostering a vibrant community.''',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w300,
-                                        letterSpacing: 1.1,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                  Padding(
+                    padding: EdgeInsets.all(isMobile ? 16 : 48),
+                    child: Center(
+                      child: Wrap(
+                        spacing: 50,
+                        runAlignment: WrapAlignment.spaceBetween,
+                        alignment: WrapAlignment.center,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          splashSectionImage(
+                            'splash_page_community.jpg',
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(48),
-                        child: Center(
-                          child: Wrap(
-                            spacing: 50,
-                            runAlignment: WrapAlignment.spaceBetween,
-                            alignment: WrapAlignment.center,
-                            verticalDirection:
-                                MediaQuery.of(context).size.width < 1400
-                                    ? VerticalDirection.up
-                                    : VerticalDirection.down,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                      top: 40,
-                                      bottom: 80,
-                                    ),
-                                    child: Text(
-                                      'Elevate Your Everyday',
-                                      style: TextStyle(
-                                        fontSize: 36,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  ConstrainedBox(
-                                    constraints:
-                                        const BoxConstraints(maxWidth: 500),
-                                    child: const Text(
-                                      '''Indulge in the small luxuries that make a big difference in your daily routine. Our attention to detail and thoughtfully curated amenities, like complimentary cold brew, create an unparalleled living experience that goes beyond the ordinary. Experience the Podium difference and savor the moments that truly matter.''',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w300,
-                                        letterSpacing: 1.1,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              splashSectionImage(
-                                'splash_page_cold_brew.jpg',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.all(48),
-                        child: Center(
-                          child: Wrap(
-                            spacing: 50,
-                            runAlignment: WrapAlignment.spaceBetween,
-                            alignment: WrapAlignment.center,
-                            children: [
-                              splashSectionImage(
-                                'splash_page_city_skyline.jpeg',
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                      top: 40,
-                                      bottom: 80,
-                                    ),
-                                    child: Text(
-                                      'Expanding Horizons',
-                                      style: TextStyle(
-                                        fontSize: 36,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  ConstrainedBox(
-                                    constraints:
-                                        const BoxConstraints(maxWidth: 500),
-                                    child: const Text(
-                                      '''Join a growing network of distinctive properties that redefine urban living. With our expanding portfolio of Podium buildings, you'll be part of a thriving community that enjoys a consistent, quality experience across a diverse range of locations. Embrace the future of residential living and discover the true potential of a connected lifestyle.''',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w300,
-                                        letterSpacing: 1.1,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      //These will be the feature boxes with icons and text
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 40, 16, 64),
-                        child: MediaQuery.of(context).size.width < 850
-                            ? const Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [...featureBoxes],
-                              )
-                            : const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [...featureBoxes],
-                              ),
-                      ),
-                      // const Padding(
-                      //   padding:
-                      //       EdgeInsets.only(left: 48, right: 32, bottom: 96),
-                      //   child: BlogFeed(),
-                      // ),
-                      // This will be the FAQ section,
-                      // clickable with a short foldout answer
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 32),
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          alignment: WrapAlignment.center,
-                          runAlignment: WrapAlignment.center,
-                          spacing: 40,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(48, 0, 16, 32),
-                              child: ConstrainedBox(
-                                constraints:
-                                    const BoxConstraints(minWidth: 125),
-                                child: const Text(
-                                  'Common Questions, Clear Answers',
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.width < 1546
+                                      ? 40
+                                      : 0,
+                                  bottom: isMobile ? 40 : 80,
+                                ),
+                                child: Text(
+                                  'A Lively Atmosphere',
                                   style: TextStyle(
-                                    fontSize: 36,
+                                    fontSize: isMobile ? 30 : 36,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
-                            ),
-                            ConstrainedBox(
-                              constraints: const BoxConstraints(maxWidth: 500),
-                              child: const Padding(
-                                padding: EdgeInsets.only(right: 32),
-                                child: Column(
-                                  children: [
-                                    FAQ(
-                                      question:
-                                          '''What makes Podium different from other apartment rental platforms?''',
-                                      answer:
-                                          '''Podium offers a comprehensive platform that integrates every aspect of property management, unlike traditional management companies that rely on third-party payment and listing services.''',
-                                    ),
-                                    FAQ(
-                                      question:
-                                          '''How does Podium ensure a consistent and high-quality living experience for its residents?''',
-                                      answer:
-                                          '''Distinguishing itself from other digital rental platforms, Podium directly manages the buildings, ensuring on-site managers are available to provide support and assistance.''',
-                                    ),
-                                    FAQ(
-                                      question:
-                                          '''Can I list my property on Podium? What are the requirements for property owners to join the platform?''',
-                                      answer:
-                                          '''Our platform is currently not open to general property submissions as we focus on partnering with premium-level properties. If you're interested in discussing a potential partnership, please contact us at info@podiumapartments.com for more information.''',
-                                    ),
-                                    FAQ(
-                                      question:
-                                          '''How does Podium's platform help property owners manage their apartments more effectively?''',
-                                      answer:
-                                          '''Utilizing cutting-edge technology, Podium delivers an advanced and efficient property management experience for both tenants and property owners.''',
-                                    ),
-                                    FAQ(
-                                      question:
-                                          '''Are there any additional benefits or amenities for residents living in Podium-managed properties?''',
-                                      answer:
-                                          '''At Podium, our managed properties feature exclusive amenities such as complimentary cold brew and thoughtfully designed community spaces, guaranteeing a consistently high-quality living experience that fosters comfort and engagement for our residents.''',
-                                    ),
-                                  ],
+                              ConstrainedBox(
+                                constraints:
+                                    const BoxConstraints(maxWidth: 500),
+                                child: Text(
+                                  '''Podium buildings create an inviting environment where residents can connect, share experiences, and feel a sense of belonging. Our properties offer a unique ambiance that adds to the overall living experience, fostering a vibrant community.''',
+                                  style: TextStyle(
+                                    fontSize: isMobile ? 18 : 22,
+                                    fontWeight: FontWeight.w300,
+                                    letterSpacing: 1.1,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                const Divider(),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    PodiumLogoWithTitle(height: 80),
-                    LinkedInLink(),
-                    Text('© 2023 Podium Apartments Inc.')
-                  ],
-                ),
-              ],
-            ),
+                  Padding(
+                    padding: isMobile
+                        ? const EdgeInsets.only(
+                            left: 16,
+                            right: 16,
+                            top: 48,
+                            bottom: 48,
+                          )
+                        : const EdgeInsets.all(48),
+                    child: Center(
+                      child: Wrap(
+                        spacing: 50,
+                        runAlignment: WrapAlignment.spaceBetween,
+                        alignment: WrapAlignment.center,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        verticalDirection:
+                            MediaQuery.of(context).size.width < 1800
+                                ? VerticalDirection.up
+                                : VerticalDirection.down,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.width < 1546
+                                      ? 40
+                                      : 0,
+                                  bottom: isMobile ? 40 : 80,
+                                ),
+                                child: Text(
+                                  'Urban Lifestyle at Your Doorstep',
+                                  style: TextStyle(
+                                    fontSize: isMobile ? 30 : 36,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              ConstrainedBox(
+                                constraints:
+                                    const BoxConstraints(maxWidth: 500),
+                                child: Text(
+                                  '''Explore the conveniences of modern living in our Podium buildings. Our prime locations feature an array of premium retail partners, bringing the best of city living right to your front door.''',
+                                  style: TextStyle(
+                                    fontSize: isMobile ? 18 : 22,
+                                    fontWeight: FontWeight.w300,
+                                    letterSpacing: 1.1,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          // splashSectionImage(
+                          //   'podium.jpg',
+                          // ),
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              maxWidth: 900,
+                            ),
+                            child: CarouselSlider(
+                              carouselController: carouselController,
+                              options: CarouselOptions(
+                                initialPage: 2,
+                                autoPlayCurve: Curves.easeIn,
+                                autoPlayAnimationDuration:
+                                    const Duration(milliseconds: 900),
+                                viewportFraction: 1,
+                                autoPlay: true,
+                              ),
+                              items: [
+                                splashSectionImage(
+                                  'orange_theory_podium.jpg',
+                                ),
+                                splashSectionImage(
+                                  'chase_bank_podium.jpg',
+                                ),
+                                splashSectionImage(
+                                  'trader_joes_podium.jpg',
+                                ),
+                                splashSectionImage(
+                                  'sola_salons_podium.jpg',
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.all(isMobile ? 16 : 48),
+                    child: Center(
+                      child: Wrap(
+                        spacing: 50,
+                        runAlignment: WrapAlignment.spaceBetween,
+                        alignment: WrapAlignment.center,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          splashSectionImage(
+                            'splash_page_city_skyline.jpg',
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.width < 1546
+                                      ? 40
+                                      : 0,
+                                  bottom: isMobile ? 40 : 80,
+                                ),
+                                child: Text(
+                                  'Expanding Horizons',
+                                  style: TextStyle(
+                                    fontSize: isMobile ? 30 : 36,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              ConstrainedBox(
+                                constraints:
+                                    const BoxConstraints(maxWidth: 500),
+                                child: Text(
+                                  '''Join a growing network of distinctive properties that redefine urban living. With our expanding portfolio of Podium buildings, you'll be part of a thriving community that enjoys a consistent, quality experience across a diverse range of locations. Embrace the future of residential living and discover the true potential of a connected lifestyle.''',
+                                  style: TextStyle(
+                                    fontSize: isMobile ? 18 : 22,
+                                    fontWeight: FontWeight.w300,
+                                    letterSpacing: 1.1,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  //These will be the feature boxes with icons and text
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1375),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(64, 40, 64, 64),
+                      child: MediaQuery.of(context).size.width < 850
+                          ? SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: const Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [...featureBoxes],
+                              ),
+                            )
+                          : const Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [...featureBoxes],
+                            ),
+                    ),
+                  ),
+                  // const Padding(
+                  //   padding:
+                  //       EdgeInsets.only(left: 48, right: 32, bottom: 96),
+                  //   child: BlogFeed(),
+                  // ),
+                  // This will be the FAQ section,
+                  // clickable with a short foldout answer
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 32),
+                    child: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      alignment: WrapAlignment.center,
+                      runAlignment: WrapAlignment.center,
+                      spacing: 40,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(48, 0, 16, 32),
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(minWidth: 125),
+                            child: Text(
+                              'Common Questions, Clear Answers',
+                              style: TextStyle(
+                                fontSize: isMobile ? 30 : 36,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            minWidth: 400,
+                            maxWidth: 500,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(right: isMobile ? 0 : 32),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: const Column(
+                                children: [
+                                  FAQ(
+                                    question:
+                                        '''What makes Podium different from other apartment rental platforms?''',
+                                    answer:
+                                        '''Podium offers a comprehensive platform that integrates every aspect of property management, unlike traditional management companies that rely on third-party payment and listing services.''',
+                                  ),
+                                  FAQ(
+                                    question:
+                                        '''How does Podium ensure a consistent and high-quality living experience for its residents?''',
+                                    answer:
+                                        '''Distinguishing itself from other digital rental platforms, Podium directly manages the buildings, ensuring on-site managers are available to provide support and assistance.''',
+                                  ),
+                                  FAQ(
+                                    question:
+                                        '''Can I list my property on Podium? What are the requirements for property owners to join the platform?''',
+                                    answer:
+                                        '''Our platform is currently not open to general property submissions as we focus on partnering with premium-level properties. If you're interested in discussing a potential partnership, please contact us at info@podiumapartments.com for more information.''',
+                                  ),
+                                  FAQ(
+                                    question:
+                                        '''How does Podium's platform help property owners manage their apartments more effectively?''',
+                                    answer:
+                                        '''Utilizing cutting-edge technology, Podium delivers an advanced and efficient property management experience for both tenants and property owners.''',
+                                  ),
+                                  FAQ(
+                                    question:
+                                        '''Are there any additional benefits or amenities for residents living in Podium-managed properties?''',
+                                    answer:
+                                        '''At Podium, our managed properties feature exclusive amenities such as complimentary cold brew and thoughtfully designed community spaces, guaranteeing a consistently high-quality living experience that fosters comfort and engagement for our residents.''',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const Divider(),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  PodiumLogoWithTitle(height: 80),
+                  LinkedInLink(),
+                  Text('© 2023 Podium Apartments Inc.')
+                ],
+              ),
+            ],
           ),
         ),
       ),
