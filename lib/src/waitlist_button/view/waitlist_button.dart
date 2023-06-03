@@ -393,7 +393,7 @@ class _WaitlistButtonState extends State<WaitlistButton> {
         ),
       ),
       child: const Text(
-        'Join the waitlist',
+        'Join the Waitlist',
         style: TextStyle(
           letterSpacing: .55,
           fontWeight: FontWeight.w400,
