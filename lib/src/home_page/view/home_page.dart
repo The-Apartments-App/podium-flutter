@@ -19,6 +19,9 @@ class _HomePageState extends State<HomePage> {
       '3. HOME PAGE BUILT - User Account Page',
     );
 
+    if (widget.bossMode) {
+      Navigator.of(context).pushNamed('/ownerDashboard');
+    }
     final residentProfileMenu = [
       const HomePageMenuItem(
         route: 'userPayments',

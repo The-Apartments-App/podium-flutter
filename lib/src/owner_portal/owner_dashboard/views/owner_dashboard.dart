@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/app/app.dart';
+import 'package:podium/src/owner_portal/owner_dashboard/components/owner_dashboard_info_box.dart';
 
 class OwnerDashboard extends StatefulWidget {
   const OwnerDashboard({super.key});
@@ -10,172 +12,328 @@ class OwnerDashboard extends StatefulWidget {
 }
 
 class _OwnerDashboardState extends State<OwnerDashboard> {
+  int activeTabIndex = 0;
+  final timeLengths = [
+    'TODAY',
+    'TOMORROW',
+    'THIS WEEK',
+  ];
   @override
   Widget build(BuildContext context) {
     final user = context.select((AppBloc bloc) => bloc.state.user);
 
-    const defaultProfilePic = 'lib/src/assets/images/podium_logo_square.png';
-
-    Widget getProfilePic() {
-      // if (user.photo != null) {
-      //   return ClipRRect(
-      //     borderRadius: BorderRadius.circular(10),
-      //     child: Image.network(
-      //       user.photo!,
-      //     ),
-      //   );
-      // } else {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.asset(
-          height: 48,
-          width: 48,
-          defaultProfilePic,
-        ),
-      );
-      // }
+    void handleTabTap(int index) {
+      setState(() {
+        activeTabIndex = index;
+        debugPrint('index: $activeTabIndex');
+        debugPrint('activeTabIndex: $activeTabIndex');
+      });
     }
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(64),
-        child: Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                getProfilePic(),
-                const SizedBox(height: 36),
-                Text(
-                  'Good Afternoon, ${user.name}',
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const Column(
+      body: Row(
+        children: [
+          DecoratedBox(
+            decoration: BoxDecoration(color: Colors.grey.shade300),
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 400),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    getProfilePic(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16, bottom: 32),
+                      child: Text(
+                        'Good Afternoon, ${user.name}',
+                        style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Rental earnings for June',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Rental earnings for June',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            Text(
+                              r'$431,449',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('New residents for June'),
+                            Text('12'),
+                          ],
+                        ),
+                        SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Upcoming Inspections for June'),
+                            Text('2'),
+                          ],
+                        ),
+                        SizedBox(height: 80),
+                        Padding(
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Rental Requests',
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Icon(Icons.arrow_forward_ios_rounded)
+                            ],
                           ),
                         ),
-                        Text(
-                          r'$420,069',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
+                        Text("You're all caught up!"),
+                        SizedBox(height: 80),
+                        Padding(
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'To-dos',
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Icon(Icons.arrow_forward_ios_rounded)
+                            ],
                           ),
                         ),
+                        Text("You're all caught up!"),
                       ],
-                    ),
-                    SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('New residents for {month}'),
-                        Text('{new_residents}'),
-                      ],
-                    ),
-                    SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Upcoming Inspections for {month}'),
-                        Text('{number_of_inspections}'),
-                      ],
-                    ),
-                    SizedBox(height: 48),
-                    Text('Rental Requests'),
-                    Text("You're all caught up!"),
-                    SizedBox(height: 48),
-                    Text('To-dos'),
-                    Text("You're all caught up!"),
-                  ],
-                )
-              ],
-            ),
-            const Column(
-              children: [
-                Row(
-                  children: [
-                    Text("What's happening {time_period}"),
-                    // TabBar(
-                    //   tabs: [
-                    //     Tab(
-                    //       child: Text('TODAY'),
-                    //     ),
-                    //     Tab(
-                    //       child: Text('THIS WEEK'),
-                    //     ),
-                    //     Tab(
-                    //       child: Text('THIS MONTH'),
-                    //     ),
-                    //   ],
-                    // )
+                    )
                   ],
                 ),
-                Row(
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(100),
+              child: MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  size: MediaQuery.of(context).size,
+                ),
+                child: Column(
                   children: [
-                    SizedBox(
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          boxShadow: [BoxShadow(color: Colors.grey)],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          """What's happening ${timeLengths[activeTabIndex].toLowerCase()}""",
+                          style: const TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Row(
+                            children: [
+                              CustomTab(
+                                title: 'TODAY',
+                                tabIndex: 0,
+                                activeTabIndex: activeTabIndex,
+                                onTabSelected: handleTabTap,
+                              ),
+                              CustomTab(
+                                title: 'TOMORROW',
+                                tabIndex: 1,
+                                activeTabIndex: activeTabIndex,
+                                onTabSelected: handleTabTap,
+                              ),
+                              CustomTab(
+                                title: 'THIS WEEK',
+                                tabIndex: 2,
+                                activeTabIndex: activeTabIndex,
+                                onTabSelected: handleTabTap,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 64, bottom: 128),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          OwnerDashboardInfoBox(
+                            boxTitle: 'Move-ins',
+                            icon: Icons.key,
+                            boxInfo: '4',
+                          ),
+                          OwnerDashboardInfoBox(
+                            boxTitle: 'Move-outs',
+                            icon: Icons.exit_to_app,
+                            boxInfo: '1',
+                          ),
+                          OwnerDashboardInfoBox(
+                            boxTitle: 'Tasks in Progress',
+                            icon: Icons.handyman,
+                            boxInfo: '2',
+                          ),
+                          OwnerDashboardInfoBox(
+                            boxTitle: 'Guest Satisfaction',
+                            icon: Icons.star,
+                            boxInfo: '5',
+                          ),
+                          OwnerDashboardInfoBox(
+                            boxTitle: 'Occupancy Rate',
+                            icon: Icons.home,
+                            boxInfo: '98%',
+                          ),
+                          OwnerDashboardInfoBox(
+                            boxTitle: 'Rental Income',
+                            icon: Icons.attach_money_rounded,
+                            boxInfo: '431,449',
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 64, 16, 64),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [Icon(Icons.key), Text('0')],
+                            const Text(
+                              'Ways to get more Rentals',
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                            Text('Move-ins'),
+                            const SizedBox(height: 24),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Enroll in the new cleaning protocol',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Icon(Icons.arrow_forward_ios_rounded)
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            const Text(
+                              """We'll show a special cleaning highlight at the top of the listing you've opted in.""",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                LinearProgressIndicator(
+                                  minHeight: 2,
+                                  value: 0.5,
+                                  backgroundColor: Colors.grey.shade300,
+                                  valueColor:
+                                      const AlwaysStoppedAnimation<Color>(
+                                    Color(0xFF03795D),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: const Text(
+                                      '0/1',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [Icon(Icons.exit_to_app), Text('0')],
-                          ),
-                          Text('Move-outs'),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [Icon(Icons.handyman), Text('0')],
-                          ),
-                          Text('Tasks in Progress'),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [Icon(Icons.star), Text('5.0')],
-                          ),
-                          Text('Guest Satisfaction'),
-                        ],
-                      ),
-                    )
                   ],
                 ),
-                Divider(),
-                Text('Ways to get more rentals'),
-                Text('Enroll in our cleaning services program')
-              ],
-            )
-          ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomTab extends StatelessWidget {
+  const CustomTab({
+    super.key,
+    required this.title,
+    required this.tabIndex,
+    required this.activeTabIndex,
+    required this.onTabSelected,
+  });
+
+  final String title;
+  final int tabIndex;
+  final int activeTabIndex;
+  final Function(int) onTabSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final isSelected = tabIndex == activeTabIndex;
+
+    return InkWell(
+      onTap: () => onTabSelected(tabIndex),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF03795D) : Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
