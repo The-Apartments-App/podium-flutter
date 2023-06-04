@@ -126,7 +126,7 @@ class _SplashPageState extends State<SplashPage> {
     screenSizeIsMobile = isMobile;
     screenSizeIsDesktop = !isMobile;
     final carouselController = CarouselController();
-    const weAreLive = false;
+    const weAreLive = true;
 
     final desktopSplashImage = Stack(
       alignment: AlignmentDirectional.center,

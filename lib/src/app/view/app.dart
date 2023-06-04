@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/blog_story_page/blog_story_page.dart';
 import 'package:podium/src/home_page/home.dart';
+import 'package:podium/src/owner_portal/owner_dashboard/owner_dashboard.dart';
 import 'package:podium/src/resident_portal/building_amenities/building_amenities.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
@@ -92,11 +93,7 @@ class _AppViewState extends State<AppView> {
           case '/':
             return MaterialPageRoute(builder: (_) => const SplashPage());
           case '/home':
-            return MaterialPageRoute(
-              builder: (_) => HomePage(
-                bossMode: userIsABoss,
-              ),
-            );
+            return buildOwnerPageRoute(const OwnerDashboard());
           case '/blogs':
             return MaterialPageRoute(
               builder: (_) => BlogStoryPage(blogId: blogId),
@@ -114,10 +111,6 @@ class _AppViewState extends State<AppView> {
           case '/buildingAmenities':
             return MaterialPageRoute(
               builder: (_) => const BuildingAmenitiesPage(),
-            );
-          case '/ownerUserProfile':
-            return buildOwnerPageRoute(
-              const Text('OWNER USER PROFILE'),
             );
           case '/ownerLedgers':
             return buildOwnerPageRoute(
