@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/owner_portal/owner_dashboard/components/owner_dashboard_info_box.dart';
+import 'package:podium/src/owner_portal/owner_dashboard/components/owner_dashboard_components.dart';
 
 class OwnerDashboard extends StatefulWidget {
   const OwnerDashboard({super.key});
@@ -25,8 +25,6 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
     void handleTabTap(int index) {
       setState(() {
         activeTabIndex = index;
-        debugPrint('index: $activeTabIndex');
-        debugPrint('activeTabIndex: $activeTabIndex');
       });
     }
 
@@ -48,7 +46,7 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                       child: Text(
                         'Good Afternoon, ${user.name}',
                         style: const TextStyle(
-                          fontSize: 32,
+                          fontSize: 36,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -246,10 +244,10 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                               ],
                             ),
                             const SizedBox(height: 24),
-                            const Text(
+                            Text(
                               """We'll show a special cleaning highlight at the top of the listing you've opted in.""",
                               style: TextStyle(
-                                color: Colors.grey,
+                                color: Colors.grey.shade600,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w300,
                               ),
@@ -314,6 +312,7 @@ class CustomTab extends StatelessWidget {
   final String title;
   final int tabIndex;
   final int activeTabIndex;
+  // ignore: inference_failure_on_function_return_type
   final Function(int) onTabSelected;
 
   @override

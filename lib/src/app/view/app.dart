@@ -48,21 +48,21 @@ class AppView extends StatefulWidget {
 }
 
 class _AppViewState extends State<AppView> {
-  bool userIsABoss = true;
+  bool userIsABoss = false;
   @override
   Widget build(BuildContext context) {
     final user = context.select((AppBloc bloc) => bloc.state.user);
     final ownerIds = ['kmbvxRaTSBfcf8Xk2CwstCpNQXp1'];
-    // if (ownerIds.contains(user.id)) {
-    //   setState(() {
-    //     userIsABoss = true;
-    //   });
-    // }
-    // if (user.isEmpty) {
-    //   setState(() {
-    //     userIsABoss = false;
-    //   });
-    // }
+    if (ownerIds.contains(user.id)) {
+      setState(() {
+        userIsABoss = true;
+      });
+    }
+    if (user.isEmpty) {
+      setState(() {
+        userIsABoss = false;
+      });
+    }
 
     MaterialPageRoute<dynamic> buildOwnerPageRoute(
       Widget page,
@@ -93,11 +93,7 @@ class _AppViewState extends State<AppView> {
           case '/':
             return MaterialPageRoute(builder: (_) => const SplashPage());
           case '/home':
-            return MaterialPageRoute(
-              builder: (_) => HomePage(
-                bossMode: userIsABoss,
-              ),
-            );
+            return buildOwnerPageRoute(const OwnerDashboard());
           case '/blogs':
             return MaterialPageRoute(
               builder: (_) => BlogStoryPage(blogId: blogId),
@@ -115,10 +111,6 @@ class _AppViewState extends State<AppView> {
           case '/buildingAmenities':
             return MaterialPageRoute(
               builder: (_) => const BuildingAmenitiesPage(),
-            );
-          case '/ownerDashboard':
-            return buildOwnerPageRoute(
-              const OwnerDashboard(),
             );
           case '/ownerLedgers':
             return buildOwnerPageRoute(
