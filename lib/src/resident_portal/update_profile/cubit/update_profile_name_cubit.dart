@@ -27,7 +27,7 @@ class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {
   Future<void> updateWithNewDisplayName(String name) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      await _authenticationRepository.changeDisplayName(displayName: name);
+      // await _authenticationRepository.changeDisplayName(displayName: name);
       emit(
         state.copyWith(
           userName: Username.dirty(name),

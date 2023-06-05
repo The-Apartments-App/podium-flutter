@@ -1,15 +1,7 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:typed_data';
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:cache/cache.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 
 /// {@template sign_up_with_email_and_password_failure}
@@ -159,38 +151,27 @@ class AuthenticationRepository {
   /// {@macro authentication_repository}
   AuthenticationRepository({
     CacheClient? cache,
-    firebase_auth.FirebaseAuth? firebaseAuth,
-    GoogleSignIn? googleSignIn,
     Supabase? supabase,
   })  : _cache = cache ?? CacheClient(),
-        _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
         _supabase = supabase ?? Supabase.instance;
 
   final CacheClient _cache;
-  final firebase_auth.FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
   final Supabase _supabase;
-
-  /// Whether or not the current environment is web
-  /// Should only be overriden for testing purposes. Otherwise,
-  /// defaults to [kIsWeb]
-  final bool _isWeb = kIsWeb;
 
   /// User cache key.
   static const _userCacheKey = '__user_cache_key__';
 
-  /// Stream of [User] which will emit the current user when
-  /// the authentication state or the user profile is changed.
-  ///
-  /// Emits [User.empty] if the user is not authenticated.
-  Stream<User> get user {
-    return _firebaseAuth.userChanges().map((firebaseUser) {
-      final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
-      _cache.write(key: _userCacheKey, value: user);
-      return user;
-    });
-  }
+  // Stream<User> get user {
+  //   debugPrint('this line is executed');
+  //   return _supabase.client.auth.onAuthStateChange.map((event) {
+  //     debugPrint('but we never get here......');
+  //     final supabaseUser = event.session?.user;
+  //     debugPrint('supabaseUser: $supabaseUser');
+  //     final user = supabaseUser ?? User.empty;
+  //     _cache.write(key: _userCacheKey, value: user);
+  //     return user as User;
+  //   });
+  // }
 
   /// Returns the current cached user.
   /// Defaults to [User.empty] if there is no cached user.
@@ -218,94 +199,26 @@ class AuthenticationRepository {
     }
   }
 
-  /// Starts the Sign In with Google Flow.
-  ///
-  /// Throws a [LogInWithGoogleFailure] if an exception occurs.
-  Future<void> logInWithGoogle() async {
-    try {
-      late final firebase_auth.AuthCredential credential;
-
-      // Check if app is running on web or mobile
-      if (_isWeb) {
-        // Use Firebase GoogleAuthProvider to authenticate user via popup
-        final googleProvider = firebase_auth.GoogleAuthProvider();
-        final userCredential = await _firebaseAuth.signInWithPopup(
-          googleProvider,
-        );
-        credential = userCredential.credential!;
-      } else {
-        // Use GoogleSignIn to authenticate user on mobile
-        final googleUser = await _googleSignIn.signIn();
-
-        // Print information about the Google user for debugging purposes
-        debugPrint('this is googleUser: $googleUser');
-
-        // Obtain user's authentication information
-        final googleAuth = await googleUser!.authentication;
-
-        // Use Firebase GoogleAuthProvider to create AuthCredential
-        credential = firebase_auth.GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
-      }
-
-      // Sign in with Firebase AuthCredential
-      await _firebaseAuth.signInWithCredential(credential);
-    } // Handle Firebase Authentication exceptions if they occur
-    on FirebaseAuthException catch (e) {
-      // Output the error message to the console for debugging purposes
-      debugPrint('error in loginwithgoogle: $e');
-      // Throw a custom exception with the same error code to
-      // handle it in a more user-friendly way
-      throw LogInWithGoogleFailure.fromCode(e.code);
-    }
-// Handle other exceptions if they occur
-    catch (_) {
-      // Throw a custom exception to handle it in a more user-friendly way
-      throw const LogInWithGoogleFailure();
-    }
-  }
-
-  /// Starts the Sign In with Facebook flow.
-  ///
-  /// Throws an exception if an error occurs during the sign in process.
-  Future<void> signInWithFacebook() async {
-    try {
-      final result = await FacebookAuth.instance.login();
-      if (result.status == LoginStatus.success) {
-        debugPrint('result.status is success');
-        final credential = firebase_auth.FacebookAuthProvider.credential(
-          result.accessToken!.token,
-        );
-        await _firebaseAuth.signInWithCredential(credential);
-      }
-    } on Exception catch (e) {
-      debugPrint('this is the error: $e');
-      // Catching any exceptions that occur during the Facebook sign in process.
-    }
-  }
-
-  /// Checks if the [email] provided is already in use by another account
-  ///
-  /// If the email is already in use, it attempts to sign in the user using the
-  /// corresponding authentication provider. If the sign-in fails, an error is
-  /// logged.
-  ///
-  /// Throws an error if the operation fails.
   Future<void> checkEmailValidity({required String email}) async {
     try {
-      final data = await _firebaseAuth.fetchSignInMethodsForEmail(email);
+      final response = await _supabase.client
+          .from('users')
+          .select()
+          .eq('email', email)
+          .limit(1);
+
+      final data = response.data as List<dynamic>;
+
       if (data.isNotEmpty) {
         final signInMethod = data[0];
         switch (signInMethod) {
           case 'facebook.com':
             debugPrint('Signing in with Facebook');
-            await signInWithFacebook();
+            await _supabase.client.auth.signInWithOAuth(Provider.facebook);
             break;
           case 'google.com':
             debugPrint('Signing in with Google');
-            await logInWithGoogle();
+            await _supabase.client.auth.signInWithOAuth(Provider.google);
             break;
           case 'apple.com':
             debugPrint('Signing in with Apple');
@@ -327,12 +240,10 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      await _supabase.client.auth.signInWithPassword(
         email: email,
         password: password,
       );
-    } on FirebaseAuthException catch (e) {
-      throw LogInWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (_) {
       throw const LogInWithEmailAndPasswordFailure();
     }
@@ -344,11 +255,9 @@ class AuthenticationRepository {
   /// Throws a [LogOutFailure] if an exception occurs.
   Future<void> logOut() async {
     try {
-      await Future.wait([
-        _firebaseAuth.signOut(),
-        _googleSignIn.signOut(),
-      ]);
+      await _supabase.client.auth.signOut();
     } catch (_) {
+      debugPrint('Error signing out.');
       throw LogOutFailure();
     }
   }
@@ -368,87 +277,21 @@ class AuthenticationRepository {
   }) async {
     debugPrint('UPDATE PROFILE CALLED');
     try {
-      if (_firebaseAuth.currentUser != null) {
-        // Update the current user's email
-        await _firebaseAuth.currentUser?.updateEmail(email);
-
-        // Update the current user's password
-        await _firebaseAuth.currentUser?.updatePassword(password);
-
-        // Update the current user's display name
-        await _firebaseAuth.currentUser?.updateDisplayName(displayName);
-
-        // Update the current user's photo URL
-        await _firebaseAuth.currentUser?.updatePhotoURL(photoURL);
+      if (_supabase.client.auth.currentUser != null) {
+        await _supabase.client.auth.updateUser(
+          UserAttributes(
+            email: email,
+            password: password,
+            data: {
+              'profilePicture': photoURL,
+              'displayName': displayName,
+            },
+          ),
+        );
       }
-    } on FirebaseAuthException catch (e) {
-      // If an exception occurs while updating the user profile,
-      // throw a SignUpWithEmailAndPasswordFailure
-      throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
-    } catch (_) {
-      // If an unknown exception occurs while updating the user profile,
-      // throw a SignUpWithEmailAndPasswordFailure
-      throw const SignUpWithEmailAndPasswordFailure();
+    } catch (error) {
+      debugPrint('An error occured attempting to update the user profile.');
+      debugPrint('Error: $error');
     }
-  }
-
-  // change the logged in users name
-  Future<void> changeDisplayName({required String displayName}) async {
-    final firebaseUser = _firebaseAuth.currentUser;
-    try {
-      await firebaseUser?.updateDisplayName(displayName);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
-
-  // change the logged in users photo on android
-  Future<void> updateProfilePicture({
-    File? photo,
-  }) async {
-    try {
-      if (_firebaseAuth.currentUser != null) {
-        final storageRef = FirebaseStorage.instance.ref();
-        final userImageRef =
-            storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
-        if (photo != null) {
-          await userImageRef.putFile(photo);
-        } else {
-          throw Exception('Error putting file in cloud');
-        }
-        final profileUrl = await userImageRef.getDownloadURL();
-        await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
-      }
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
-
-// change the logged in users photo on android
-  Future<void> updateProfileWithWebPicture({
-    required Uint8List imageData,
-  }) async {
-    try {
-      final storageRef = FirebaseStorage.instance.ref();
-      final userImageRef =
-          storageRef.child('users/${currentUser.id}/images/photoURL.jpg');
-      await userImageRef.putData(imageData);
-      final profileUrl = await userImageRef.getDownloadURL();
-      await _firebaseAuth.currentUser?.updatePhotoURL(profileUrl);
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
-}
-
-/// This extension method adds a convenient way
-///  to convert a [firebase_auth.User]
-/// object to a [User] object in our application domain model.
-///
-/// The [toUser] method returns a new [User] object that contains the user's
-/// ID, email, display name, and photo URL.
-extension on firebase_auth.User {
-  User get toUser {
-    return User(id: uid, email: email, name: displayName, photo: photoURL);
   }
 }

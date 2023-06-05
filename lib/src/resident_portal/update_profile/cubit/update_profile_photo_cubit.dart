@@ -29,9 +29,9 @@ class UpdateProfilePhotoCubit extends Cubit<UpdateProfilePhotoState> {
   // Function to update profile using the picture in form state
   Future<void> updateWithNewPicture(File? picture) async {
     try {
-      await _authenticationRepository.updateProfilePicture(
-        photo: picture,
-      );
+      // await _authenticationRepository.updateProfilePicture(
+      //   photo: picture,
+      // );
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -40,9 +40,9 @@ class UpdateProfilePhotoCubit extends Cubit<UpdateProfilePhotoState> {
   Future<void> updateWithNewPictureWeb(String path) async {
     final imageData = await XFile(path).readAsBytes();
     try {
-      await _authenticationRepository.updateProfileWithWebPicture(
-        imageData: imageData,
-      );
+      // await _authenticationRepository.updateProfileWithWebPicture(
+      //   imageData: imageData,
+      // );
     } catch (e) {
       throw Exception(e.toString());
     }

@@ -81,47 +81,6 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
-  Future<void> logInWithGoogle() async {
-    debugPrint('loginWithGoogle called in login_cubit.dart');
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    try {
-      debugPrint('before await authRepo.logInWithGoogle');
-      await _authenticationRepository.logInWithGoogle();
-      debugPrint('after await authRepo.logInWithGoogle');
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
-    } on LogInWithGoogleFailure catch (e) {
-      debugPrint(e.message);
-      emit(
-        state.copyWith(
-          errorMessage: e.message,
-          status: FormzSubmissionStatus.failure,
-        ),
-      );
-    } catch (_) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
-    }
-  }
-
-  Future<void> logInWithFacebook() async {
-    debugPrint('loginWithFacebook called in login_cubit.dart');
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    try {
-      debugPrint('before await authRepo.logInWithFacebook');
-      await _authenticationRepository.signInWithFacebook();
-      debugPrint('after await authRepo.logInWithFacebook');
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
-    } on LogInWithGoogleFailure catch (e) {
-      emit(
-        state.copyWith(
-          errorMessage: e.message,
-          status: FormzSubmissionStatus.failure,
-        ),
-      );
-    } catch (_) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
-    }
-  }
-
   Future<void> logOut() async {
     await _authenticationRepository.logOut();
   }
