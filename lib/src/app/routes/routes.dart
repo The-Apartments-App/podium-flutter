@@ -6,10 +6,10 @@ import 'package:podium/src/home_page/home.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/owner_dashboard.dart';
 // import 'package:podium/src/redirect_page/view/redirect_page.dart';
 import 'package:podium/src/resident_portal/building_amenities/building_amenities.dart';
+import 'package:podium/src/resident_portal/service_requests/service_requests.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
-import 'package:podium/src/service_requests/service_requests.dart';
 import 'package:podium/src/splash_page/splash_page.dart';
 
 class RouterClass {

@@ -17,21 +17,23 @@ class CallSupportButton extends StatelessWidget {
         height: 48.675,
         width: MediaQuery.of(context).size.width,
         child: PlatformElevatedButton(
-          // style: const ButtonStyle(
-          //   shadowColor: MaterialStatePropertyAll(Colors.transparent),
-          //   shape: MaterialStatePropertyAll(
-          //     RoundedRectangleBorder(
-          //       borderRadius: BorderRadius.all(Radius.circular(4)),
-          //     ),
-          //   ),
-          //   side: MaterialStatePropertyAll(
-          //     BorderSide(
-          //       color: Colors.grey,
-          //     ),
-          //   ),
-          //   backgroundColor: MaterialStatePropertyAll(Colors.white),
-          //   foregroundColor: MaterialStatePropertyAll(Colors.black),
-          // ),
+          material: (_, __) => MaterialElevatedButtonData(
+            style: const ButtonStyle(
+              shadowColor: MaterialStatePropertyAll(Colors.transparent),
+              shape: MaterialStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                ),
+              ),
+              side: MaterialStatePropertyAll(
+                BorderSide(
+                  color: Colors.grey,
+                ),
+              ),
+              backgroundColor: MaterialStatePropertyAll(Colors.white),
+              foregroundColor: MaterialStatePropertyAll(Colors.black),
+            ),
+          ),
           color: Colors.white,
           onPressed: callSupport,
           child: const Row(

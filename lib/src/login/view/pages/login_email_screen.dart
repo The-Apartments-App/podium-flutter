@@ -152,7 +152,8 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                               // context.push('/home'),
                               loginAuth(user),
                               debugPrint(
-                                  'Successfully navigated to /ownerHome'),
+                                'Successfully navigated to /ownerHome',
+                              ),
                             },
                           ),
                     ),
@@ -199,18 +200,10 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     PlatformElevatedButton(
-                                      // style: PlatformElevatedButton.styleFrom(
-                                      //   backgroundColor:
-                                      //       const Color(0xff098d69),
-                                      //   shape: RoundedRectangleBorder(
-                                      //     borderRadius:
-                                      //         BorderRadius.circular(10),
-                                      //   ),
-                                      //   padding: const EdgeInsets.symmetric(
-                                      //     vertical: 20,
-                                      //     horizontal: 30,
-                                      //   ),
-                                      // ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 20,
+                                        horizontal: 30,
+                                      ),
                                       color: const Color(0xFF03795D),
                                       child: const Text('Resident Login'),
                                       onPressed: () async {
@@ -244,18 +237,10 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                     ),
                                     const SizedBox(height: 16),
                                     PlatformElevatedButton(
-                                      // style: PlatformElevatedButton.styleFrom(
-                                      //   backgroundColor:
-                                      //       const Color(0xff098d69),
-                                      //   shape: RoundedRectangleBorder(
-                                      //     borderRadius:
-                                      //         BorderRadius.circular(10),
-                                      //   ),
-                                      //   padding: const EdgeInsets.symmetric(
-                                      //     vertical: 20,
-                                      //     horizontal: 35,
-                                      //   ),
-                                      // ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 20,
+                                        horizontal: 35,
+                                      ),
                                       color: const Color(0xFF03795D),
                                       child: const Text('Admin Login'),
                                       onPressed: () async {

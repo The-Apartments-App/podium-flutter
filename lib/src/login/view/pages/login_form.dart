@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:go_router/go_router.dart';
 import 'package:podium/src/login/cubit/login_cubit.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/login/view/pages/login_email_screen.dart';

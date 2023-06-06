@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
-import 'package:podium/src/service_requests/service_requests.dart';
+import 'package:podium/src/resident_portal/service_requests/service_requests.dart';
 
 class ServiceRequestPage extends StatelessWidget {
   const ServiceRequestPage({super.key});

@@ -6,11 +6,11 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:formz/formz.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:podium/src/app_bar_back_button/view/app_bar_back_button.dart';
-import 'package:podium/src/service_requests/cubit/service_request_cubit.dart';
-import 'package:podium/src/service_requests/view/components/service_request_call_support_button.dart';
-import 'package:podium/src/service_requests/view/components/service_request_details_input.dart';
-import 'package:podium/src/service_requests/view/components/service_request_image.dart';
-import 'package:podium/src/service_requests/view/components/service_request_image_container.dart';
+import 'package:podium/src/resident_portal/service_requests/cubit/service_request_cubit.dart';
+import 'package:podium/src/resident_portal/service_requests/view/components/service_request_call_support_button.dart';
+import 'package:podium/src/resident_portal/service_requests/view/components/service_request_details_input.dart';
+import 'package:podium/src/resident_portal/service_requests/view/components/service_request_image.dart';
+import 'package:podium/src/resident_portal/service_requests/view/components/service_request_image_container.dart';
 
 // Define a custom Form widget.
 class ServiceRequestForm extends StatefulWidget {
@@ -163,10 +163,10 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
         extendBodyBehindAppBar: true,
         body: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
+            constraints: const BoxConstraints(maxWidth: 700),
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: ListView(
+              child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
@@ -261,7 +261,10 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                             );
                           sendServiceRequest(context);
                         },
-                        child: const Text('Submit'),
+                        child: const Text(
+                          'Submit',
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ),
                     ),
                   ),
