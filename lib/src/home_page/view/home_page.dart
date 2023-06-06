@@ -3,8 +3,7 @@ import 'package:podium/src/home_page/view/home_page_banner.dart';
 import 'package:podium/src/home_page/view/home_page_menu_item.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.bossMode});
-  final bool bossMode;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -44,6 +43,11 @@ class _HomePageState extends State<HomePage> {
 
     final ownerProfileMenu = [
       const HomePageMenuItem(
+        route: 'home',
+        buttonText: 'Dashboard',
+        icon: Icons.info,
+      ),
+      const HomePageMenuItem(
         route: 'ownerLedgers',
         buttonText: 'Ledgers',
         icon: Icons.balance,
@@ -68,7 +72,7 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 900),
+            constraints: const BoxConstraints(maxWidth: 700),
             child: ListView(
               children: [
                 const HomePageBanner(),
@@ -77,7 +81,8 @@ class _HomePageState extends State<HomePage> {
                   thickness: 1.85,
                   color: Colors.grey.shade400,
                 ),
-                if (widget.bossMode)
+                if (false)
+                  // ignore: dead_code
                   ...ownerProfileMenu
                 else
                   ...residentProfileMenu,

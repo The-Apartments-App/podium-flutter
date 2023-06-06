@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/shared_functions.dart';
+import 'package:go_router/go_router.dart';
 
 class PodiumLogoSquare extends StatelessWidget {
   const PodiumLogoSquare({super.key, this.height, this.width});
@@ -11,7 +11,7 @@ class PodiumLogoSquare extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        routeToPage(context, '');
+        context.push('/');
       },
       child: SizedBox(
         height: height,

@@ -19,20 +19,10 @@ class _DetailsInputState extends State<DetailsInput> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 8, 0, 20),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-              borderRadius: const BorderRadius.all(
-                Radius.circular(12),
-              ),
+          child: Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12), // Add border radius
             ),
             child: const TextField(
               minLines: 4,

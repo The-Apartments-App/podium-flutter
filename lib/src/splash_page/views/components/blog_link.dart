@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BlogLink extends StatefulWidget {
   const BlogLink({
@@ -22,9 +23,7 @@ class _BlogLinkState extends State<BlogLink> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => {
-        Navigator.of(context).pushNamed('/blogs', arguments: widget.blogId),
-        // launchUrl(Uri.parse(widget.url)),
-        debugPrint('blog link clicked'),
+        context.push('/blogs/${widget.blogId}'),
       },
       child: ConstrainedBox(
         constraints: const BoxConstraints(

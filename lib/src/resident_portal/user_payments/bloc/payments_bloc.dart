@@ -69,7 +69,6 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       if (paymentIntent.status == PaymentIntentsStatus.RequiresConfirmation) {
         final results =
             await _callPayEndpointIntent(paymentIntentId: paymentIntent.id);
-        debugPrint(results.toString());
         if (results['error'] != null) {
           emit(state.copyWith(status: PaymentStatus.failure));
         } else {
@@ -102,7 +101,6 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         'rentBill': rentBill,
       }),
     );
-    debugPrint('response.body: ${response.body}');
     return json.decode(response.body) as Map<String, dynamic>;
   }
 
@@ -119,7 +117,6 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         'paymentIntentId': paymentIntentId,
       }),
     );
-    debugPrint('response.body: ${response.body}');
     return json.decode(response.body) as Map<String, dynamic>;
   }
 }

@@ -1,9 +1,7 @@
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Card;
+import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:flutter_stripe_web/flutter_stripe_web.dart';
-import 'package:stripe_platform_interface/src/models/payment_methods.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
 
 class PaymentsPage extends StatelessWidget {
@@ -141,7 +139,7 @@ class PaymentsPage extends StatelessWidget {
     //                 height: 32,
     //                 width: MediaQuery.of(context).size.width,
     //               ),
-    //               ElevatedButton(
+    //               PlatformElevatedButton(
     //                 onPressed: Stripe.instance.presentPaymentSheet,
     //                 child: const Text('Open Payment Sheet'),
     //               ),
@@ -153,11 +151,13 @@ class PaymentsPage extends StatelessWidget {
     //   );
     // }
     return Scaffold(
-      appBar: AppBar(
-        leading: const AppBarBackButton(),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      appBar: !kIsWeb
+          ? AppBar(
+              leading: const AppBarBackButton(route: '/residentHome'),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            )
+          : null,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -187,6 +187,33 @@ class PaymentsPage extends StatelessWidget {
               padding: EdgeInsets.all(12),
               child: Text(
                 'Make a Payment',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    elevation: 16,
+                    child: const Placeholder(),
+                  );
+                },
+              );
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(12),
+              child: Text(
+                'Payment methods',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

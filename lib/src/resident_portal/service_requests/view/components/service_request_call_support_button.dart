@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CallSupportButton extends StatelessWidget {
@@ -15,22 +16,25 @@ class CallSupportButton extends StatelessWidget {
       child: SizedBox(
         height: 48.675,
         width: MediaQuery.of(context).size.width,
-        child: ElevatedButton(
-          style: const ButtonStyle(
-            shadowColor: MaterialStatePropertyAll(Colors.transparent),
-            shape: MaterialStatePropertyAll(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
+        child: PlatformElevatedButton(
+          material: (_, __) => MaterialElevatedButtonData(
+            style: const ButtonStyle(
+              shadowColor: MaterialStatePropertyAll(Colors.transparent),
+              shape: MaterialStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                ),
               ),
-            ),
-            side: MaterialStatePropertyAll(
-              BorderSide(
-                color: Colors.grey,
+              side: MaterialStatePropertyAll(
+                BorderSide(
+                  color: Colors.grey,
+                ),
               ),
+              backgroundColor: MaterialStatePropertyAll(Colors.white),
+              foregroundColor: MaterialStatePropertyAll(Colors.black),
             ),
-            backgroundColor: MaterialStatePropertyAll(Colors.white),
-            foregroundColor: MaterialStatePropertyAll(Colors.black),
           ),
+          color: Colors.white,
           onPressed: callSupport,
           child: const Row(
             children: [

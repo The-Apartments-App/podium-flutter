@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
@@ -98,7 +99,7 @@ class _UpdateProfileDisplayNameFormState
                 )
               ],
             ),
-            ElevatedButton(
+            PlatformElevatedButton(
               onPressed: () {
                 if (formUsername.currentState!.validate()) {
                   changeUserNameCubit

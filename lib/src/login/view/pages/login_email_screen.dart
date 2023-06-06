@@ -1,5 +1,8 @@
+import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/src/login/login.dart';
 
 class LoginEmailScreen extends StatefulWidget {
@@ -11,6 +14,7 @@ class LoginEmailScreen extends StatefulWidget {
 
 class _LoginEmailScreenState extends State<LoginEmailScreen> {
   bool isEmailInput = true;
+  bool userIsABoss = false;
   Widget emailOrPhone() {
     if (isEmailInput == false) {
       return const LoginPhoneInput();
@@ -19,8 +23,19 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
     }
   }
 
+  void loginAuth(User user) {
+    final ownerIds = ['kmbvxRaTSBfcf8Xk2CwstCpNQXp1'];
+    userIsABoss = ownerIds.contains(user.id);
+    if (userIsABoss) {
+      context.push('/ownerHome');
+    } else {
+      context.push('/residentHome');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    User user;
     return ColoredBox(
       color: const Color(0xFFFFFFFF),
       child: Column(
@@ -114,8 +129,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       buttonText: 'Continue with Facebook',
                       onPressed: () =>
                           context.read<LoginCubit>().logInWithFacebook().then(
-                                (value) =>
-                                    Navigator.of(context).pushNamed('/home'),
+                                (_) => context.push('/home'),
                               ),
                     ),
                     SocialSignInButton(
@@ -125,8 +139,12 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       buttonText: 'Continue with Google',
                       onPressed: () =>
                           context.read<LoginCubit>().logInWithGoogle().then(
-                                (value) =>
-                                    Navigator.of(context).pushNamed('/home'),
+                                (_) => {
+                                  user = context
+                                      .read<AuthenticationRepository>()
+                                      .currentUser,
+                                  loginAuth(user),
+                                },
                               ),
                     ),
                     SocialSignInButton(
@@ -160,17 +178,85 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       width: 28,
                       iconName: 'apple-icon.svg',
                       buttonText: 'Continue as Demo User',
-                      onPressed: () async => {
-                        await context
-                            .read<LoginCubit>()
-                            .logInWithDemoUser()
-                            .then(
-                              (value) => {
-                                Navigator.of(context).pushNamed('/home'),
-                              },
-                            )
+                      onPressed: () async {
+                        await showDialog<void>(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              title: const Text('Choose User Type'),
+                              content: SizedBox(
+                                height: 125,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    PlatformElevatedButton(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 20,
+                                        horizontal: 30,
+                                      ),
+                                      color: const Color(0xFF03795D),
+                                      child: const Text('Resident Login'),
+                                      onPressed: () async {
+                                        Navigator.of(context).pop();
+                                        try {
+                                          await context
+                                              .read<LoginCubit>()
+                                              .logInWithDemoResidentUser()
+                                              .then(
+                                                (value) => {
+                                                  if (mounted)
+                                                    {
+                                                      context.push(
+                                                        '/residentHome',
+                                                      ),
+                                                    }
+                                                },
+                                              );
+                                        } catch (e) {
+                                          debugPrint(
+                                            '''Error while logging in with demo resident user: $e''',
+                                          );
+                                        }
+                                      },
+                                    ),
+                                    const SizedBox(height: 16),
+                                    PlatformElevatedButton(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 20,
+                                        horizontal: 35,
+                                      ),
+                                      color: const Color(0xFF03795D),
+                                      child: const Text('Admin Login'),
+                                      onPressed: () async {
+                                        Navigator.of(context).pop();
+                                        try {
+                                          await context
+                                              .read<LoginCubit>()
+                                              .logInWithDemoAdminUser()
+                                              .then(
+                                                (value) => {
+                                                  if (mounted)
+                                                    {
+                                                      context
+                                                          .push('/ownerHome'),
+                                                    }
+                                                },
+                                              );
+                                        } catch (e) {
+                                          debugPrint(
+                                            '''Error while logging in with demo admin user: $e''',
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
                       },
-                    ),
+                    )
                   ],
                 )
               ],

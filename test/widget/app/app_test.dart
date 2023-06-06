@@ -54,7 +54,7 @@ void main() {
 
       await tester.pumpWidget(
         const MaterialApp(
-          home: HomePage(bossMode: false),
+          home: HomePage(),
         ),
       );
 

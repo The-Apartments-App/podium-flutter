@@ -2,7 +2,7 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/shared/shared_functions.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/home_page/view/home_page_icon.dart';
 import 'package:podium/src/login/login.dart';
@@ -94,12 +94,12 @@ class HomePageMenuItem extends StatelessWidget {
     void handleRoute(String route) {
       if (isLogOut != null) {
         FirebaseAuth.instance.signOut();
-        routeToPage(context, '');
+        context.push('/');
       }
       if (user.isEmpty) {
         showLogin(context);
       } else {
-        routeToPage(context, route);
+        context.push('/$route');
       }
     }
 

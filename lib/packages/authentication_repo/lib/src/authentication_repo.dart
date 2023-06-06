@@ -235,9 +235,6 @@ class AuthenticationRepository {
         // Use GoogleSignIn to authenticate user on mobile
         final googleUser = await _googleSignIn.signIn();
 
-        // Print information about the Google user for debugging purposes
-        debugPrint('this is googleUser: $googleUser');
-
         // Obtain user's authentication information
         final googleAuth = await googleUser!.authentication;
 
@@ -272,7 +269,6 @@ class AuthenticationRepository {
     try {
       final result = await FacebookAuth.instance.login();
       if (result.status == LoginStatus.success) {
-        debugPrint('result.status is success');
         final credential = firebase_auth.FacebookAuthProvider.credential(
           result.accessToken!.token,
         );
@@ -298,15 +294,12 @@ class AuthenticationRepository {
         final signInMethod = data[0];
         switch (signInMethod) {
           case 'facebook.com':
-            debugPrint('Signing in with Facebook');
             await signInWithFacebook();
             break;
           case 'google.com':
-            debugPrint('Signing in with Google');
             await logInWithGoogle();
             break;
           case 'apple.com':
-            debugPrint('Signing in with Apple');
             break;
           default:
             debugPrint('Invalid sign-in method');
@@ -364,7 +357,6 @@ class AuthenticationRepository {
     required String displayName,
     required String photoURL,
   }) async {
-    debugPrint('UPDATE PROFILE CALLED');
     try {
       if (_firebaseAuth.currentUser != null) {
         // Update the current user's email
