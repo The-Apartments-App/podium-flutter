@@ -135,7 +135,6 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
         ),
       );
     } catch (error) {
-      
       debugPrint(error.toString());
     }
   }
@@ -236,18 +235,6 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                       height: 48.675,
                       width: MediaQuery.of(context).size.width,
                       child: PlatformElevatedButton(
-                        // style: ButtonStyle(
-                        //   shadowColor: MaterialStateProperty.all<Color?>(
-                        //     Colors.transparent,
-                        //   ),
-                        //   shape:
-                        //       MaterialStateProperty.all<RoundedRectangleBorder>(
-                        //     RoundedRectangleBorder(
-                        //       borderRadius: BorderRadius.circular(4),
-                        //     ),
-                        //   ),
-                        // ),
-
                         onPressed: () {
                           ScaffoldMessenger.of(context)
                             ..hideCurrentSnackBar()
