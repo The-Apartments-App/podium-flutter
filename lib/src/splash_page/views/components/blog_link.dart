@@ -24,8 +24,6 @@ class _BlogLinkState extends State<BlogLink> {
     return GestureDetector(
       onTap: () => {
         context.push('/blogs/${widget.blogId}'),
-        // launchUrl(Uri.parse(widget.url)),
-        debugPrint('blog link clicked'),
       },
       child: ConstrainedBox(
         constraints: const BoxConstraints(

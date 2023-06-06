@@ -64,7 +64,6 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('UpdateProfilePhotoForm LOADED');
     final user = context.select((AppBloc bloc) => bloc.state.user);
     final changeUserPhoto =
         context.select((UpdateProfilePhotoCubit cubit) => cubit);

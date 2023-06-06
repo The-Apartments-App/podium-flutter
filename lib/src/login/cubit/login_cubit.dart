@@ -39,14 +39,12 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> checkEmailValidity() async {
-    debugPrint('checkEmail validity called in login_cubit.dart');
     if (state.email.isNotValid) return;
     try {
       await _authenticationRepository.checkEmailValidity(
         email: state.email.value,
       );
       emit(state.copyWith(emailIsValid: true));
-      debugPrint('state in checkEmailValidity: ${state.emailIsValid}');
     } catch (error) {
       debugPrint('error in checkEmailValidity: $error');
     }
@@ -55,14 +53,12 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> logInWithCredentials() async {
     if (state.status.isCanceled) return;
     try {
-      debugPrint('before await authRepo.logInWithEmailAndPassword');
       await _authenticationRepository.logInWithEmailAndPassword(
         email: state.email.value,
         password: state.password.value,
       );
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithEmailAndPasswordFailure catch (e) {
-      debugPrint('LogInWithEmailAndPasswordFailure.message: ${e.message}');
       emit(
         state.copyWith(
           errorMessage: e.message,
@@ -89,17 +85,11 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> logInWithGoogle() async {
-    debugPrint('loginWithGoogle called in login_cubit.dart');
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      debugPrint('before await authRepo.logInWithGoogle');
       await _authenticationRepository.logInWithGoogle();
-      final user = _authenticationRepository.currentUser;
-      debugPrint('user after login with google: $user');
-      debugPrint('after await authRepo.logInWithGoogle');
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithGoogleFailure catch (e) {
-      debugPrint(e.message);
       emit(
         state.copyWith(
           errorMessage: e.message,
@@ -108,17 +98,13 @@ class LoginCubit extends Cubit<LoginState> {
       );
     } catch (error) {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
-      debugPrint('something bad happened.: $error');
     }
   }
 
   Future<void> logInWithFacebook() async {
-    debugPrint('loginWithFacebook called in login_cubit.dart');
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      debugPrint('before await authRepo.logInWithFacebook');
       await _authenticationRepository.signInWithFacebook();
-      debugPrint('after await authRepo.logInWithFacebook');
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithGoogleFailure catch (e) {
       emit(

@@ -17,7 +17,6 @@ class _LoginFormState extends State<LoginForm> {
   bool emailIsValid = false;
 
   void returnToEmail() {
-    debugPrint('returnToEmail is called in login_form.dart');
     setState(() {
       emailIsValid = false;
     });
@@ -37,9 +36,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
             );
         } else if (state.status.isSuccess) {
-          debugPrint('state.status.isSuccess == true');
         } else if (state.emailIsValid == true) {
-          debugPrint('state.emailIsValid == true');
           setState(() {
             emailIsValid = true;
           });

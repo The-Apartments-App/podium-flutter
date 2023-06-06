@@ -43,8 +43,7 @@ class UploadPictureState extends State<UploadPicture> {
                   //if you click this button, user can upload image from gallery
                   onPressed: () {
                     Navigator.pop(context);
-                    final photo = getImage(ImageSource.gallery);
-                    debugPrint('photo from gallery is -> $photo');
+                    getImage(ImageSource.gallery);
                   },
                   child: const Row(
                     children: [
@@ -57,8 +56,7 @@ class UploadPictureState extends State<UploadPicture> {
                   //if user click this button. user can upload image from camera
                   onPressed: () {
                     Navigator.pop(context);
-                    final photo = getImage(ImageSource.camera);
-                    debugPrint('photo from camera is -> $photo');
+                    getImage(ImageSource.camera);
                   },
                   child: const Row(
                     children: [

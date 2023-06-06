@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/shared/components/linkedin_link.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/login/login.dart';
@@ -130,7 +131,6 @@ class _SplashPageState extends State<SplashPage> {
     final carouselController = CarouselController();
     const weAreLive = true;
     final user = context.select((AppBloc bloc) => bloc.state.user);
-    debugPrint('this is user: $user');
 
     final desktopSplashImage = Stack(
       alignment: AlignmentDirectional.center,
@@ -288,25 +288,10 @@ class _SplashPageState extends State<SplashPage> {
                     width: MediaQuery.of(context).size.width,
                     height: 48.5,
                     child: PlatformElevatedButton(
-                      // style: const ButtonStyle(
-                      //   shadowColor:
-                      //       MaterialStatePropertyAll(Colors.transparent),
-                      //   shape: MaterialStatePropertyAll(
-                      //     RoundedRectangleBorder(
-                      //       borderRadius: BorderRadius.all(Radius.circular(8)),
-                      //     ),
-                      //   ),
-                      // ),
                       onPressed: !weAreLive
                           ? null
                           : () => {
-                                if (user.isEmpty)
-                                  {
-                                    debugPrint('user is empty'),
-                                    showMobileLogin(context)
-                                  }
-                                else
-                                  {Navigator.pushNamed(context, '/home')}
+                                if (user.isEmpty) {showMobileLogin(context)}
                               },
                       child: const Text(
                         'Continue to Login',

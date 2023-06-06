@@ -137,25 +137,15 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       width: 18,
                       iconName: 'google-icon.svg',
                       buttonText: 'Continue with Google',
-                      onPressed: () => context
-                          .read<LoginCubit>()
-                          .logInWithGoogle()
-                          .then(
-                            (_) => {
-                              debugPrint('Successfully logged in with Google'),
-                              user = context
-                                  .read<AuthenticationRepository>()
-                                  .currentUser,
-                              debugPrint(
-                                'this is user after login with google: $user',
+                      onPressed: () =>
+                          context.read<LoginCubit>().logInWithGoogle().then(
+                                (_) => {
+                                  user = context
+                                      .read<AuthenticationRepository>()
+                                      .currentUser,
+                                  loginAuth(user),
+                                },
                               ),
-                              // context.push('/home'),
-                              loginAuth(user),
-                              debugPrint(
-                                'Successfully navigated to /ownerHome',
-                              ),
-                            },
-                          ),
                     ),
                     SocialSignInButton(
                       height: 28,
@@ -214,16 +204,10 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                               .logInWithDemoResidentUser()
                                               .then(
                                                 (value) => {
-                                                  debugPrint(
-                                                    '''Successfully logged in with demo resident user''',
-                                                  ),
                                                   if (mounted)
                                                     {
                                                       context.push(
                                                         '/residentHome',
-                                                      ),
-                                                      debugPrint(
-                                                        'Successfully navigated to /residentHome',
                                                       ),
                                                     }
                                                 },
@@ -251,16 +235,10 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                               .logInWithDemoAdminUser()
                                               .then(
                                                 (value) => {
-                                                  debugPrint(
-                                                    '''Successfully logged in with demo admin user''',
-                                                  ),
                                                   if (mounted)
                                                     {
                                                       context
                                                           .push('/ownerHome'),
-                                                      debugPrint(
-                                                        'Successfully navigated to /ownerHome',
-                                                      ),
                                                     }
                                                 },
                                               );

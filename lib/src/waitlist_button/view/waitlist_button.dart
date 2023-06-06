@@ -58,7 +58,6 @@ class _WaitlistButtonState extends State<WaitlistButton> {
           privateKey: privateKey,
         ),
       );
-      debugPrint('SUCCESS!');
       // ignore: use_build_context_synchronously
       await showDialog<void>(
         context: context,
@@ -76,9 +75,6 @@ class _WaitlistButtonState extends State<WaitlistButton> {
         ),
       );
     } catch (error) {
-      if (error is EmailJSResponseStatus) {
-        debugPrint('ERROR... ${error.status}: ${error.text}');
-      }
       debugPrint(error.toString());
     }
   }
