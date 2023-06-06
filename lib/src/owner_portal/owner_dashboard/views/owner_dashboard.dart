@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/shared_functions.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/components/owner_dashboard_components.dart';
+import 'package:podium/src/owner_portal/owner_dashboard/modal_content/modal_content.dart';
 
 class OwnerDashboard extends StatefulWidget {
   const OwnerDashboard({super.key});
@@ -186,31 +187,37 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                             boxTitle: 'Move-ins',
                             icon: Icons.key,
                             boxInfo: '4',
+                            modalContent: MoveInsModal(),
                           ),
                           OwnerDashboardInfoBox(
                             boxTitle: 'Move-outs',
                             icon: Icons.exit_to_app,
                             boxInfo: '1',
+                            modalContent: MoveOutsModal(),
                           ),
                           OwnerDashboardInfoBox(
                             boxTitle: 'Tasks in Progress',
                             icon: Icons.handyman,
                             boxInfo: '2',
+                            modalContent: TasksInProgressModal(),
                           ),
                           OwnerDashboardInfoBox(
                             boxTitle: 'Guest Satisfaction',
                             icon: Icons.star,
                             boxInfo: '5',
+                            modalContent: GuestSatisfactionModal(),
                           ),
                           OwnerDashboardInfoBox(
                             boxTitle: 'Occupancy Rate',
                             icon: Icons.home,
                             boxInfo: '98%',
+                            modalContent: OccupancyRateModal(),
                           ),
                           OwnerDashboardInfoBox(
                             boxTitle: 'Rental Income',
                             icon: Icons.attach_money_rounded,
                             boxInfo: '431,449',
+                            modalContent: RentalIncomeModal(),
                           ),
                         ],
                       ),
