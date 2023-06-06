@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 900),
+            constraints: const BoxConstraints(maxWidth: 700),
             child: ListView(
               children: [
                 const HomePageBanner(),

@@ -23,8 +23,8 @@ class DocumentsPage extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final maxWidth = (MediaQuery.of(context).size.width > 900
-                    ? 900
+            final maxWidth = (MediaQuery.of(context).size.width > 700
+                    ? 700
                     : MediaQuery.of(context).size.width)
                 .toDouble();
             return ConstrainedBox(
