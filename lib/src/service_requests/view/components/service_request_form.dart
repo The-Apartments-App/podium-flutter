@@ -27,12 +27,13 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
   int activeFile = 0;
 
   TextEditingController detailsInputController = TextEditingController();
+
   Future<void> takePhoto() async {
     final picker = ImagePicker();
     final image = await picker.pickImage(
       source: ImageSource.camera,
       maxWidth: 200,
-      maxHeight: 250,
+      maxHeight: 300,
       imageQuality: 75,
     );
     final imageBytes = await image!.readAsBytes();
@@ -82,11 +83,6 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
   }
 
   Future<void> sendServiceRequest(BuildContext context) async {
-    // final privateKey = dotenv.env['EMAILJS_PRIVATE_KEY'];
-    // final serviceID =
-    //     dotenv.env['EMAILJS_SERVICE_ID'] ?? 'No service ID available';
-    // final templateID =
-    //     dotenv.env['EMAILJS_TEMPLATE_ID'] ?? 'No template ID available';
     const privateKey = 'tkDacOuC2kK9X6eBYw6LA';
     const serviceID = 'service_lslzt23';
     const templateID = 'template_xz7u84j';
@@ -165,7 +161,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
         extendBodyBehindAppBar: true,
         body: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 800),
+            constraints: const BoxConstraints(maxWidth: 600),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: ListView(
@@ -181,13 +177,11 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                     ),
                   ),
                   const CallSupportButton(),
-                  const SizedBox(
-                    height: 60,
-                  ),
+                  const SizedBox(height: 30),
+                  const Divider(),
+                  const SizedBox(height: 30),
                   const DetailsInput(),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -200,12 +194,8 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                         },
                         child: ServiceRequestImageContainer(
                           child: imageBytes0 == null
-                              ? const Center(
-                                  child: Icon(Icons.camera_alt),
-                                )
-                              : ServiceRequestImage(
-                                  bytes: imageBytes0!,
-                                ),
+                              ? const Center(child: Icon(Icons.camera_alt))
+                              : ServiceRequestImage(bytes: imageBytes0!),
                         ),
                       ),
                       GestureDetector(
@@ -242,33 +232,31 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                       height: 48.675,
                       width: MediaQuery.of(context).size.width,
                       child: ElevatedButton(
-                        style: const ButtonStyle(
-                          shadowColor:
-                              MaterialStatePropertyAll(Colors.transparent),
-                          shape: MaterialStatePropertyAll(
+                        style: ButtonStyle(
+                          shadowColor: MaterialStateProperty.all<Color?>(
+                            Colors.transparent,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
+                              borderRadius: BorderRadius.circular(4),
                             ),
                           ),
                         ),
-                        onPressed: () => {
-                          if (true)
-                            {
-                              ScaffoldMessenger.of(context)
-                                ..hideCurrentSnackBar()
-                                ..showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Service Request Submitted'),
-                                  ),
-                                ),
-                              sendServiceRequest(context),
-                            }
+                        onPressed: () {
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(
+                              const SnackBar(
+                                content: Text('Service Request Submitted'),
+                              ),
+                            );
+                          sendServiceRequest(context);
                         },
                         child: const Text('Submit'),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/shared/components/linkedin_link.dart';
+import 'package:podium/src/app/app.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 // import 'package:podium/src/splash_page/views/components/blog_feed.dart';
@@ -127,6 +128,8 @@ class _SplashPageState extends State<SplashPage> {
     screenSizeIsDesktop = !isMobile;
     final carouselController = CarouselController();
     const weAreLive = true;
+    final user = context.select((AppBloc bloc) => bloc.state.user);
+    debugPrint('this is user: $user');
 
     final desktopSplashImage = Stack(
       alignment: AlignmentDirectional.center,
@@ -293,8 +296,17 @@ class _SplashPageState extends State<SplashPage> {
                           ),
                         ),
                       ),
-                      onPressed:
-                          !weAreLive ? null : () => {showMobileLogin(context)},
+                      onPressed: !weAreLive
+                          ? null
+                          : () => {
+                                if (user.isEmpty)
+                                  {
+                                    debugPrint('user is empty'),
+                                    showMobileLogin(context)
+                                  }
+                                else
+                                  {Navigator.pushNamed(context, '/home')}
+                              },
                       child: const Text(
                         'Continue to Login',
                         style: TextStyle(

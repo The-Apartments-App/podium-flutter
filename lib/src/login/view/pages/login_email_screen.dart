@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/src/login/login.dart';
 
 class LoginEmailScreen extends StatefulWidget {
@@ -114,8 +115,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       buttonText: 'Continue with Facebook',
                       onPressed: () =>
                           context.read<LoginCubit>().logInWithFacebook().then(
-                                (value) =>
-                                    Navigator.of(context).pushNamed('/home'),
+                                (value) => context.push('/home'),
                               ),
                     ),
                     SocialSignInButton(
@@ -123,11 +123,16 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       width: 18,
                       iconName: 'google-icon.svg',
                       buttonText: 'Continue with Google',
-                      onPressed: () =>
-                          context.read<LoginCubit>().logInWithGoogle().then(
-                                (value) =>
-                                    Navigator.of(context).pushNamed('/home'),
-                              ),
+                      onPressed: () => context
+                          .read<LoginCubit>()
+                          .logInWithGoogle()
+                          .then(
+                            (value) => {
+                              debugPrint('Successfully logged in with Google'),
+                              context.push('/home'),
+                              debugPrint('Successfully navigated to /home'),
+                            },
+                          ),
                     ),
                     SocialSignInButton(
                       height: 28,
@@ -160,17 +165,85 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       width: 28,
                       iconName: 'apple-icon.svg',
                       buttonText: 'Continue as Demo User',
-                      onPressed: () async => {
-                        await context
-                            .read<LoginCubit>()
-                            .logInWithDemoUser()
-                            .then(
-                              (value) => {
-                                Navigator.of(context).pushNamed('/home'),
-                              },
-                            )
+                      onPressed: () async {
+                        await showDialog<void>(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              title: const Text('Choose User Type'),
+                              content: SizedBox(
+                                height: 100,
+                                child: Column(
+                                  children: [
+                                    ElevatedButton(
+                                      child: const Text('Resident Login'),
+                                      onPressed: () async {
+                                        Navigator.of(context).pop();
+                                        try {
+                                          await context
+                                              .read<LoginCubit>()
+                                              .logInWithDemoResidentUser()
+                                              .then(
+                                                (value) => {
+                                                  debugPrint(
+                                                    '''Successfully logged in with demo resident user''',
+                                                  ),
+                                                  if (mounted)
+                                                    {
+                                                      context.push(
+                                                        '/residentHome',
+                                                      ),
+                                                      debugPrint(
+                                                        'Successfully navigated to /residentHome',
+                                                      ),
+                                                    }
+                                                },
+                                              );
+                                        } catch (e) {
+                                          debugPrint(
+                                            '''Error while logging in with demo resident user: $e''',
+                                          );
+                                        }
+                                      },
+                                    ),
+                                    ElevatedButton(
+                                      child: const Text('Admin Login'),
+                                      onPressed: () async {
+                                        Navigator.of(context).pop();
+                                        try {
+                                          await context
+                                              .read<LoginCubit>()
+                                              .logInWithDemoAdminUser()
+                                              .then(
+                                                (value) => {
+                                                  debugPrint(
+                                                    '''Successfully logged in with demo admin user''',
+                                                  ),
+                                                  if (mounted)
+                                                    {
+                                                      context
+                                                          .push('/ownerHome'),
+                                                      debugPrint(
+                                                        'Successfully navigated to /ownerHome',
+                                                      ),
+                                                    }
+                                                },
+                                              );
+                                        } catch (e) {
+                                          debugPrint(
+                                            '''Error while logging in with demo admin user: $e''',
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
                       },
-                    ),
+                    )
                   ],
                 )
               ],

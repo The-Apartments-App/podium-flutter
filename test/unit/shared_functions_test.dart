@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:podium/shared/shared_functions.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   testWidgets('routeToPage should navigate to the correct page',
@@ -10,7 +10,7 @@ void main() {
     final widget = MaterialApp(
       home: Builder(
         builder: (context) => ElevatedButton(
-          onPressed: () => routeToPage(context, 'my_page'),
+          onPressed: () => context.push('/my_page'),
           child: const Text('Navigate'),
         ),
       ),

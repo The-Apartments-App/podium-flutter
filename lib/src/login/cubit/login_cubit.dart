@@ -74,10 +74,17 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Future<void> logInWithDemoUser() async {
+  Future<void> logInWithDemoResidentUser() async {
     await _authenticationRepository.logInWithEmailAndPassword(
       email: 'demouser@podiumapartments.com',
       password: 'demopassword',
+    );
+  }
+
+  Future<void> logInWithDemoAdminUser() async {
+    await _authenticationRepository.logInWithEmailAndPassword(
+      email: 'demoadminuser@podiumapartments.com',
+      password: 'demoadminpassword',
     );
   }
 
@@ -97,8 +104,9 @@ class LoginCubit extends Cubit<LoginState> {
           status: FormzSubmissionStatus.failure,
         ),
       );
-    } catch (_) {
+    } catch (error) {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      debugPrint('something bad happened.: $error');
     }
   }
 

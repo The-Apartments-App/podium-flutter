@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/src/login/cubit/login_cubit.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/login/view/pages/login_email_screen.dart';
@@ -38,7 +39,7 @@ class _LoginFormState extends State<LoginForm> {
             );
         } else if (state.status.isSuccess) {
           debugPrint('state.status.isSuccess == true');
-          Navigator.of(context).maybePop();
+          context.push('/home');
         } else if (state.emailIsValid == true) {
           debugPrint('state.emailIsValid == true');
           setState(() {
@@ -54,18 +55,3 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 }
-
-// class _SignUpButton extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = Theme.of(context);
-//     return TextButton(
-//       key: const Key('loginForm_createAccount_flatButton'),
-//       onPressed: () => Navigator.of(context).push<void>(SignUpPage.route()),
-//       child: Text(
-//         'CREATE ACCOUNT',
-//         style: TextStyle(color: theme.primaryColor),
-//       ),
-//     );
-//   }
-// }

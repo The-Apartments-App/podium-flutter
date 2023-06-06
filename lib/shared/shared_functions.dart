@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 
-void routeToPage(
-  BuildContext context,
-  String route,
-) {
-  Navigator.of(context).pushNamed('/$route');
-}
 
 Widget getProfilePic() {
   const defaultProfilePic = 'lib/src/assets/images/podium_logo_square.png';

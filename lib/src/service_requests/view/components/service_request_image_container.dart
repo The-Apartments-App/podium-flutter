@@ -6,24 +6,16 @@ class ServiceRequestImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      width: MediaQuery.of(context).size.width < 700
-          ? MediaQuery.of(context).size.width * .28
-          : 100,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
+    return Card(
+      elevation: 10, // Adjust this value for desired shadow effect
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), // Add border radius
+      ),
+      child: SizedBox(
+        height: 200,
+        width: MediaQuery.of(context).size.width < 700
+            ? MediaQuery.of(context).size.width * .28
+            : 150,
         child: child,
       ),
     );

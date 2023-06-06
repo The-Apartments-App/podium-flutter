@@ -325,10 +325,12 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
+      debugPrint('before the await in signInWithEmail');
       await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      debugPrint('after the await in signInWithEmail');
     } on FirebaseAuthException catch (e) {
       throw LogInWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (_) {

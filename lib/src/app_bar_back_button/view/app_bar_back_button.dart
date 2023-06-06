@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/shared_functions.dart';
+import 'package:go_router/go_router.dart';
 
 class AppBarBackButton extends StatelessWidget {
   const AppBarBackButton({super.key});
@@ -8,7 +8,7 @@ class AppBarBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-      onPressed: () => routeToPage(context, 'home'),
+      onPressed: () => context.pop(),
     );
   }
 }
