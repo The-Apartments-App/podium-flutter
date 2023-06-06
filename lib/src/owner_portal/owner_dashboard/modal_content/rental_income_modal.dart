@@ -9,13 +9,25 @@ class RentalIncomeModal extends StatelessWidget {
   List<Map<String, dynamic>> _generateFakeData() {
     final data = <Map<String, dynamic>>[];
     final random = Random();
+    final fakePropertyNames = [
+      'Maple Grove Apartments',
+      'Willowbrook Heights',
+      'Pinecrest Residences',
+      'Oakwood Place',
+      'Cedar Ridge Estates',
+      'Birchwood Apartments',
+      'Aspen Meadows',
+      'Sycamore Terrace',
+      'Juniper Park Apartments',
+      'Cypress Gardens',
+    ];
 
     for (var i = 0; i < 10; i++) {
       final rentalIncome =
           random.nextInt(5000) + 1000; // random income between $1000 and $6000
 
       data.add({
-        'property': 'Property ${i + 1}',
+        'property': fakePropertyNames[i],
         'income': rentalIncome,
       });
     }

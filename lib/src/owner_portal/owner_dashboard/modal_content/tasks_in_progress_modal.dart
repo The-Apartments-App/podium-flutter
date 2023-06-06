@@ -11,12 +11,25 @@ class TasksInProgressModal extends StatelessWidget {
     final data = <Map<String, dynamic>>[];
     final random = Random();
 
-    for (var i = 0; i < 10; i++) {
+    final fakeMaintenanceTasks = [
+      'Fix leaky faucet in kitchen',
+      'Replace light bulb in bedroom',
+      'Unclog bathroom drain',
+      'Repair broken window in living room',
+      'Inspect and service HVAC system',
+      'Paint walls in hallway',
+      'Clean gutters',
+      'Replace broken doorknob',
+      'Fix electrical outlet in bathroom',
+      'Repair squeaky floorboard in dining room',
+    ];
+
+    for (var i = 0; i < 2; i++) {
       final daysBefore = random.nextInt(30); // a random number of days up to 30
       final dueDate = DateTime.now().add(Duration(days: daysBefore));
 
       data.add({
-        'taskName': 'Task ${i + 1}',
+        'taskName': fakeMaintenanceTasks[i],
         'dueDate': DateFormat('yMMMd').format(dueDate),
       });
     }

@@ -10,12 +10,24 @@ class GuestSatisfactionModal extends StatelessWidget {
     final data = <Map<String, dynamic>>[];
     final random = Random();
 
+    final fakeNames = [
+      'Emma Johnson',
+      'Liam Smith',
+      'Olivia Williams',
+      'Noah Brown',
+      'Ava Jones',
+      'Isabella Taylor',
+      'Sophia Davis',
+      'Mia Miller',
+      'Jackson Wilson',
+      'Aiden Anderson',
+    ];
+
     for (var i = 0; i < 10; i++) {
-      final satisfactionRating =
-          random.nextInt(5) + 1; // random rating between 1 and 5
+      const satisfactionRating = 5;
 
       data.add({
-        'guestName': 'Guest ${i + 1}',
+        'guestName': fakeNames[i],
         'satisfactionRating': satisfactionRating,
       });
     }

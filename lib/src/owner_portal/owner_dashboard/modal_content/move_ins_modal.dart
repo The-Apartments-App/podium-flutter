@@ -10,13 +10,25 @@ class MoveInsModal extends StatelessWidget {
   List<Map<String, dynamic>> _generateFakeData() {
     final data = <Map<String, dynamic>>[];
     final random = Random();
+    final fakeNames = [
+      'Emma Johnson',
+      'Liam Smith',
+      'Olivia Williams',
+      'Noah Brown',
+      'Ava Jones',
+      'Isabella Taylor',
+      'Sophia Davis',
+      'Mia Miller',
+      'Jackson Wilson',
+      'Aiden Anderson',
+    ];
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 4; i++) {
       final daysBefore = random.nextInt(60); // a random number of days up to 60
       final moveInDate = DateTime.now().subtract(Duration(days: daysBefore));
 
       data.add({
-        'name': 'Tenant ${i + 1}',
+        'name': fakeNames[i],
         'moveInDate': DateFormat('yMMMd').format(moveInDate),
       });
     }
