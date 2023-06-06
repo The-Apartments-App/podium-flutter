@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 Widget getProfilePic() {
   const defaultProfilePic = 'lib/src/assets/images/podium_logo_square.png';
   // if (user.photo != null) {
