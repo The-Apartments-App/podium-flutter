@@ -67,6 +67,7 @@ class RouterClass {
       GoRoute(
         path: '/buildingAmenities',
         pageBuilder: (context, state) =>
+            // const MaterialPage(child: BuildingAmenitiesPage()),
             const MaterialPage(child: BuildingAmenitiesPage()),
       ),
       GoRoute(

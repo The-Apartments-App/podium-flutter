@@ -94,6 +94,8 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       debugPrint('before await authRepo.logInWithGoogle');
       await _authenticationRepository.logInWithGoogle();
+      final user = _authenticationRepository.currentUser;
+      debugPrint('user after login with google: $user');
       debugPrint('after await authRepo.logInWithGoogle');
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithGoogleFailure catch (e) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,7 +10,7 @@ void main() {
     final navigatorKey = GlobalKey<NavigatorState>();
     final widget = MaterialApp(
       home: Builder(
-        builder: (context) => ElevatedButton(
+        builder: (context) => PlatformElevatedButton(
           onPressed: () => context.push('/my_page'),
           child: const Text('Navigate'),
         ),

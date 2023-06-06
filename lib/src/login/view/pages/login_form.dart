@@ -39,7 +39,6 @@ class _LoginFormState extends State<LoginForm> {
             );
         } else if (state.status.isSuccess) {
           debugPrint('state.status.isSuccess == true');
-          context.push('/home');
         } else if (state.emailIsValid == true) {
           debugPrint('state.emailIsValid == true');
           setState(() {

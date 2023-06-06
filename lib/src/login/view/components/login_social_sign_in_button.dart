@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SocialSignInButton extends StatelessWidget {
@@ -21,19 +22,22 @@ class SocialSignInButton extends StatelessWidget {
     return SizedBox(
       height: 48.675,
       width: MediaQuery.of(context).size.width,
-      child: ElevatedButton(
-        style: const ButtonStyle(
-          shadowColor: MaterialStatePropertyAll(Colors.transparent),
-          shape: MaterialStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+      child: PlatformElevatedButton(
+        color: Colors.white,
+        material: (_, __) => MaterialElevatedButtonData(
+          style: const ButtonStyle(
+            shadowColor: MaterialStatePropertyAll(Colors.transparent),
+            shape: MaterialStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
             ),
+            side: MaterialStatePropertyAll(
+              BorderSide(),
+            ),
+            backgroundColor: MaterialStatePropertyAll(Colors.white),
+            foregroundColor: MaterialStatePropertyAll(Colors.black),
           ),
-          side: MaterialStatePropertyAll(
-            BorderSide(),
-          ),
-          backgroundColor: MaterialStatePropertyAll(Colors.white),
-          foregroundColor: MaterialStatePropertyAll(Colors.black),
         ),
         onPressed: onPressed as void Function()?,
         child: Padding(
@@ -56,6 +60,7 @@ class SocialSignInButton extends StatelessWidget {
                       Text(
                         buttonText,
                         style: const TextStyle(
+                          color: Colors.black,
                           letterSpacing: .55,
                           fontWeight: FontWeight.w400,
                         ),

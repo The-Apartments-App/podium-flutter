@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
@@ -105,7 +106,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
               ),
             ],
           ),
-          ElevatedButton(
+          PlatformElevatedButton(
             onPressed: () {
               takePhoto(ImageSource.camera);
             },
@@ -113,7 +114,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
               children: [Icon(Icons.camera), Text('Camera')],
             ),
           ),
-          ElevatedButton(
+          PlatformElevatedButton(
             onPressed: () {
               takePhoto(ImageSource.gallery);
             },
@@ -121,7 +122,7 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
               children: [Icon(Icons.camera_roll), Text('Gallery')],
             ),
           ),
-          ElevatedButton(
+          PlatformElevatedButton(
             onPressed: () {
               if (!kIsWeb) {
                 changeUserPhoto.updateWithNewPicture(fileController);

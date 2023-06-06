@@ -4,6 +4,7 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:podium/shared/components/linkedin_link.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/login/login.dart';
@@ -210,18 +211,18 @@ class _SplashPageState extends State<SplashPage> {
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width,
                             height: 48.5,
-                            child: ElevatedButton(
-                              style: const ButtonStyle(
-                                shadowColor: MaterialStatePropertyAll(
-                                  Colors.transparent,
-                                ),
-                                shape: MaterialStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                  ),
-                                ),
-                              ),
+                            child: PlatformElevatedButton(
+                              // style: const ButtonStyle(
+                              //   shadowColor: MaterialStatePropertyAll(
+                              //     Colors.transparent,
+                              //   ),
+                              //   shape: MaterialStatePropertyAll(
+                              //     RoundedRectangleBorder(
+                              //       borderRadius:
+                              //           BorderRadius.all(Radius.circular(8)),
+                              //     ),
+                              //   ),
+                              // ),
                               onPressed: !weAreLive
                                   ? null
                                   : () => {showDesktopLogin(context)},
@@ -286,16 +287,16 @@ class _SplashPageState extends State<SplashPage> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 48.5,
-                    child: ElevatedButton(
-                      style: const ButtonStyle(
-                        shadowColor:
-                            MaterialStatePropertyAll(Colors.transparent),
-                        shape: MaterialStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                        ),
-                      ),
+                    child: PlatformElevatedButton(
+                      // style: const ButtonStyle(
+                      //   shadowColor:
+                      //       MaterialStatePropertyAll(Colors.transparent),
+                      //   shape: MaterialStatePropertyAll(
+                      //     RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.all(Radius.circular(8)),
+                      //     ),
+                      //   ),
+                      // ),
                       onPressed: !weAreLive
                           ? null
                           : () => {

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
@@ -14,13 +15,13 @@ class ServiceRequestPage extends StatelessWidget {
     return BlocProvider<ServiceRequestCubit>(
       create: (_) => ServiceRequestCubit(),
       child: Scaffold(
-        appBar: AppBar(
-          leading: const AppBarBackButton(
-            route: '/residentHome',
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
+        appBar: !kIsWeb
+            ? AppBar(
+                leading: const AppBarBackButton(route: '/residentHome'),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              )
+            : null,
         body: const ServiceRequestForm(),
       ),
     );

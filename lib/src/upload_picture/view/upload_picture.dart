@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
 
@@ -38,7 +39,7 @@ class UploadPictureState extends State<UploadPicture> {
             height: MediaQuery.of(context).size.height / 6,
             child: Column(
               children: [
-                ElevatedButton(
+                PlatformElevatedButton(
                   //if you click this button, user can upload image from gallery
                   onPressed: () {
                     Navigator.pop(context);
@@ -52,7 +53,7 @@ class UploadPictureState extends State<UploadPicture> {
                     ],
                   ),
                 ),
-                ElevatedButton(
+                PlatformElevatedButton(
                   //if user click this button. user can upload image from camera
                   onPressed: () {
                     Navigator.pop(context);
@@ -80,7 +81,7 @@ class UploadPictureState extends State<UploadPicture> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
+          PlatformElevatedButton(
             onPressed: myAlert,
             child: const Text('Upload Photo'),
           ),

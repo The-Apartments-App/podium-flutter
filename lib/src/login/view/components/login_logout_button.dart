@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:podium/src/app/app.dart';
 
 class LogOutButton extends StatelessWidget {
@@ -16,7 +17,7 @@ class LogOutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return PlatformElevatedButton(
       onPressed: () => onButtonTapped(context),
       child: const Text('Log Out'),
     );

@@ -1,5 +1,7 @@
+import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:podium/src/login/login.dart';
 
@@ -12,6 +14,7 @@ class LoginEmailScreen extends StatefulWidget {
 
 class _LoginEmailScreenState extends State<LoginEmailScreen> {
   bool isEmailInput = true;
+  bool userIsABoss = false;
   Widget emailOrPhone() {
     if (isEmailInput == false) {
       return const LoginPhoneInput();
@@ -20,8 +23,19 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
     }
   }
 
+  void loginAuth(User user) {
+    final ownerIds = ['kmbvxRaTSBfcf8Xk2CwstCpNQXp1'];
+    userIsABoss = ownerIds.contains(user.id);
+    if (userIsABoss) {
+      context.push('/ownerHome');
+    } else {
+      context.push('/residentHome');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    User user;
     return ColoredBox(
       color: const Color(0xFFFFFFFF),
       child: Column(
@@ -115,7 +129,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       buttonText: 'Continue with Facebook',
                       onPressed: () =>
                           context.read<LoginCubit>().logInWithFacebook().then(
-                                (value) => context.push('/home'),
+                                (_) => context.push('/home'),
                               ),
                     ),
                     SocialSignInButton(
@@ -127,10 +141,18 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                           .read<LoginCubit>()
                           .logInWithGoogle()
                           .then(
-                            (value) => {
+                            (_) => {
                               debugPrint('Successfully logged in with Google'),
-                              context.push('/home'),
-                              debugPrint('Successfully navigated to /home'),
+                              user = context
+                                  .read<AuthenticationRepository>()
+                                  .currentUser,
+                              debugPrint(
+                                'this is user after login with google: $user',
+                              ),
+                              // context.push('/home'),
+                              loginAuth(user),
+                              debugPrint(
+                                  'Successfully navigated to /ownerHome'),
                             },
                           ),
                     ),
@@ -176,19 +198,20 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xff098d69),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 20,
-                                          horizontal: 30,
-                                        ),
-                                      ),
+                                    PlatformElevatedButton(
+                                      // style: PlatformElevatedButton.styleFrom(
+                                      //   backgroundColor:
+                                      //       const Color(0xff098d69),
+                                      //   shape: RoundedRectangleBorder(
+                                      //     borderRadius:
+                                      //         BorderRadius.circular(10),
+                                      //   ),
+                                      //   padding: const EdgeInsets.symmetric(
+                                      //     vertical: 20,
+                                      //     horizontal: 30,
+                                      //   ),
+                                      // ),
+                                      color: const Color(0xFF03795D),
                                       child: const Text('Resident Login'),
                                       onPressed: () async {
                                         Navigator.of(context).pop();
@@ -220,19 +243,20 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                       },
                                     ),
                                     const SizedBox(height: 16),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xff098d69),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 20,
-                                          horizontal: 35,
-                                        ),
-                                      ),
+                                    PlatformElevatedButton(
+                                      // style: PlatformElevatedButton.styleFrom(
+                                      //   backgroundColor:
+                                      //       const Color(0xff098d69),
+                                      //   shape: RoundedRectangleBorder(
+                                      //     borderRadius:
+                                      //         BorderRadius.circular(10),
+                                      //   ),
+                                      //   padding: const EdgeInsets.symmetric(
+                                      //     vertical: 20,
+                                      //     horizontal: 35,
+                                      //   ),
+                                      // ),
+                                      color: const Color(0xFF03795D),
                                       child: const Text('Admin Login'),
                                       onPressed: () async {
                                         Navigator.of(context).pop();

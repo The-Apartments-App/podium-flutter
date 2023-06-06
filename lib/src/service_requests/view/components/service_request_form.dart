@@ -2,8 +2,10 @@ import 'package:emailjs/emailjs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:formz/formz.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:podium/src/app_bar_back_button/view/app_bar_back_button.dart';
 import 'package:podium/src/service_requests/cubit/service_request_cubit.dart';
 import 'package:podium/src/service_requests/view/components/service_request_call_support_button.dart';
 import 'package:podium/src/service_requests/view/components/service_request_details_input.dart';
@@ -166,14 +168,19 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
               padding: const EdgeInsets.all(20),
               child: ListView(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 16),
-                    child: Text(
-                      'Service Requests',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w400,
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Row(
+                      children: const [
+                        if (kIsWeb) AppBarBackButton(route: '/residentHome'),
+                        Text(
+                          'Service Requests',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const CallSupportButton(),
@@ -231,18 +238,19 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                     child: SizedBox(
                       height: 48.675,
                       width: MediaQuery.of(context).size.width,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shadowColor: MaterialStateProperty.all<Color?>(
-                            Colors.transparent,
-                          ),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                        ),
+                      child: PlatformElevatedButton(
+                        // style: ButtonStyle(
+                        //   shadowColor: MaterialStateProperty.all<Color?>(
+                        //     Colors.transparent,
+                        //   ),
+                        //   shape:
+                        //       MaterialStateProperty.all<RoundedRectangleBorder>(
+                        //     RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.circular(4),
+                        //     ),
+                        //   ),
+                        // ),
+
                         onPressed: () {
                           ScaffoldMessenger.of(context)
                             ..hideCurrentSnackBar()
