@@ -172,10 +172,23 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                             return AlertDialog(
                               title: const Text('Choose User Type'),
                               content: SizedBox(
-                                height: 100,
+                                height: 125,
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xff098d69),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 20,
+                                          horizontal: 30,
+                                        ),
+                                      ),
                                       child: const Text('Resident Login'),
                                       onPressed: () async {
                                         Navigator.of(context).pop();
@@ -206,7 +219,20 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                         }
                                       },
                                     ),
+                                    const SizedBox(height: 16),
                                     ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xff098d69),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 20,
+                                          horizontal: 35,
+                                        ),
+                                      ),
                                       child: const Text('Admin Login'),
                                       onPressed: () async {
                                         Navigator.of(context).pop();

@@ -12,7 +12,7 @@ class DocumentsPage extends StatelessWidget {
     debugPrint('DOCUMENTS SCREEN LOADED');
     return Scaffold(
       appBar: AppBar(
-        leading: const AppBarBackButton(),
+        leading: const AppBarBackButton(route: '/residentHome'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

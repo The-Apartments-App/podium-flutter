@@ -15,7 +15,9 @@ class ServiceRequestPage extends StatelessWidget {
       create: (_) => ServiceRequestCubit(),
       child: Scaffold(
         appBar: AppBar(
-          leading: const AppBarBackButton(),
+          leading: const AppBarBackButton(
+            route: '/residentHome',
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
