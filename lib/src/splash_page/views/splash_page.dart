@@ -4,7 +4,9 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:podium/shared/components/linkedin_link.dart';
+import 'package:podium/src/app/app.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 // import 'package:podium/src/splash_page/views/components/blog_feed.dart';
@@ -127,6 +129,7 @@ class _SplashPageState extends State<SplashPage> {
     screenSizeIsDesktop = !isMobile;
     final carouselController = CarouselController();
     const weAreLive = true;
+    final user = context.select((AppBloc bloc) => bloc.state.user);
 
     final desktopSplashImage = Stack(
       alignment: AlignmentDirectional.center,
@@ -207,18 +210,18 @@ class _SplashPageState extends State<SplashPage> {
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width,
                             height: 48.5,
-                            child: ElevatedButton(
-                              style: const ButtonStyle(
-                                shadowColor: MaterialStatePropertyAll(
-                                  Colors.transparent,
-                                ),
-                                shape: MaterialStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                  ),
-                                ),
-                              ),
+                            child: PlatformElevatedButton(
+                              // style: const ButtonStyle(
+                              //   shadowColor: MaterialStatePropertyAll(
+                              //     Colors.transparent,
+                              //   ),
+                              //   shape: MaterialStatePropertyAll(
+                              //     RoundedRectangleBorder(
+                              //       borderRadius:
+                              //           BorderRadius.all(Radius.circular(8)),
+                              //     ),
+                              //   ),
+                              // ),
                               onPressed: !weAreLive
                                   ? null
                                   : () => {showDesktopLogin(context)},
@@ -283,18 +286,12 @@ class _SplashPageState extends State<SplashPage> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 48.5,
-                    child: ElevatedButton(
-                      style: const ButtonStyle(
-                        shadowColor:
-                            MaterialStatePropertyAll(Colors.transparent),
-                        shape: MaterialStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                        ),
-                      ),
-                      onPressed:
-                          !weAreLive ? null : () => {showMobileLogin(context)},
+                    child: PlatformElevatedButton(
+                      onPressed: !weAreLive
+                          ? null
+                          : () => {
+                                if (user.isEmpty) {showMobileLogin(context)}
+                              },
                       child: const Text(
                         'Continue to Login',
                         style: TextStyle(

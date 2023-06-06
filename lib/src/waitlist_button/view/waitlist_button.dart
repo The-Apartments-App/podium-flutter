@@ -1,5 +1,6 @@
 import 'package:emailjs/emailjs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -57,7 +58,6 @@ class _WaitlistButtonState extends State<WaitlistButton> {
           privateKey: privateKey,
         ),
       );
-      debugPrint('SUCCESS!');
       // ignore: use_build_context_synchronously
       await showDialog<void>(
         context: context,
@@ -75,9 +75,6 @@ class _WaitlistButtonState extends State<WaitlistButton> {
         ),
       );
     } catch (error) {
-      if (error is EmailJSResponseStatus) {
-        debugPrint('ERROR... ${error.status}: ${error.text}');
-      }
       debugPrint(error.toString());
     }
   }
@@ -177,9 +174,9 @@ class _WaitlistButtonState extends State<WaitlistButton> {
     //                           maxLines: 5,
     //                         ),
     //                         const SizedBox(height: 20),
-    //                         ElevatedButton(
+    //                         PlatformElevatedButton(
     //                           onPressed: () => sendEmail(context),
-    //                           style: ElevatedButton.styleFrom(
+    //                           style: PlatformElevatedButton.styleFrom(
     //                             backgroundColor: const Color(0xff098d69),
     //                             shape: RoundedRectangleBorder(
     //                               borderRadius: BorderRadius.circular(10),
@@ -337,7 +334,7 @@ class _WaitlistButtonState extends State<WaitlistButton> {
     //                           ),
     //                           Padding(
     //                             padding: const EdgeInsets.all(16),
-    //                             child: ElevatedButton(
+    //                             child: PlatformElevatedButton(
     //                               onPressed: () => sendEmail(context),
     //                               style: const ButtonStyle(
     //                                 shadowColor: MaterialStatePropertyAll(
@@ -382,16 +379,16 @@ class _WaitlistButtonState extends State<WaitlistButton> {
       );
     }
 
-    return ElevatedButton(
+    return PlatformElevatedButton(
       onPressed: goToTypeForm,
-      style: const ButtonStyle(
-        shadowColor: MaterialStatePropertyAll(Colors.transparent),
-        shape: MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-        ),
-      ),
+      // style: const ButtonStyle(
+      //   shadowColor: MaterialStatePropertyAll(Colors.transparent),
+      //   shape: MaterialStatePropertyAll(
+      //     RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.all(Radius.circular(8)),
+      //     ),
+      //   ),
+      // ),
       child: const Text(
         'Join the Waitlist',
         style: TextStyle(

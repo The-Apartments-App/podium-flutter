@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class GuestSatisfactionModal extends StatelessWidget {
@@ -8,7 +6,6 @@ class GuestSatisfactionModal extends StatelessWidget {
   // A simple method to generate fake guest satisfaction data
   List<Map<String, dynamic>> _generateFakeData() {
     final data = <Map<String, dynamic>>[];
-    final random = Random();
 
     final fakeNames = [
       'Emma Johnson',

@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:formz/formz.dart';
 import 'package:podium/src/login/login.dart';
 
@@ -17,14 +18,15 @@ class LoginSubmitButton extends StatelessWidget {
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.all(2),
-            child: ElevatedButton(
+            child: PlatformElevatedButton(
               key: const Key('loginForm_continue_raisedButton'),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                backgroundColor: const Color(0xFF03795D),
-              ),
+              // style: PlatformElevatedButton.styleFrom(
+              //   shape: RoundedRectangleBorder(
+              //     borderRadius: BorderRadius.circular(10),
+              //   ),
+              //   backgroundColor: const Color(0xFF03795D),
+              // ),
+              color: const Color(0xFF03795D),
               onPressed: () =>
                   context.read<LoginCubit>().logInWithCredentials(),
               child: state.status.isInProgress

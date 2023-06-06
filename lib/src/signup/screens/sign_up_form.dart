@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:formz/formz.dart';
 import 'package:podium/src/signup/sign_up.dart';
 
@@ -117,14 +118,15 @@ class _SignUpButton extends StatelessWidget {
       builder: (context, state) {
         return state.status.isInProgress
             ? const CircularProgressIndicator()
-            : ElevatedButton(
+            : PlatformElevatedButton(
                 key: const Key('signUpForm_continue_raisedButton'),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  backgroundColor: Colors.orangeAccent,
-                ),
+                // style: PlatformElevatedButton.styleFrom(
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(30),
+                //   ),
+                //   backgroundColor: Colors.orangeAccent,
+                // ),
+                color: Colors.orangeAccent,
                 onPressed: state.status.isSuccess
                     ? () => context.read<SignUpCubit>().signUpFormSubmitted()
                     : null,

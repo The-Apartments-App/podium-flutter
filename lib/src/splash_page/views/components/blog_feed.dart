@@ -82,7 +82,7 @@ class _BlogFeedState extends State<BlogFeed> {
         //     padding: const EdgeInsets.only(top: 8),
         //     child: Wrap(
         //       children: <Widget>[
-        //         ElevatedButton(
+        //         PlatformElevatedButton(
         //           onPressed: blogCarouselController.previousPage,
         //           style: ButtonStyle(
         //             shape: const MaterialStatePropertyAll(
@@ -102,7 +102,7 @@ class _BlogFeedState extends State<BlogFeed> {
         //           ),
         //           child: const Text('<'),
         //         ),
-        //         ElevatedButton(
+        //         PlatformElevatedButton(
         //           onPressed: blogCarouselController.nextPage,
         //           style: const ButtonStyle(
         //             shape: MaterialStatePropertyAll(

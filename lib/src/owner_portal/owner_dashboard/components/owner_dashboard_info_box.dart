@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class OwnerDashboardInfoBox extends StatefulWidget {
   const OwnerDashboardInfoBox({
@@ -63,7 +64,7 @@ class OwnerDashboardInfoBoxState extends State<OwnerDashboardInfoBox> {
                     Expanded(child: widget.modalContent),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 32),
-                      child: ElevatedButton(
+                      child: PlatformElevatedButton(
                         onPressed: () {
                           _overlayEntry?.remove();
                           _overlayEntry = null;

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_stripe/flutter_stripe.dart';
@@ -58,7 +59,7 @@ class PaymentsPage extends StatelessWidget {
     //                 height: 32,
     //                 width: MediaQuery.of(context).size.width,
     //               ),
-    //               ElevatedButton(
+    //               PlatformElevatedButton(
     //                 onPressed: Stripe.instance.presentPaymentSheet,
     //                 child: const Text('Open Payment Sheet'),
     //               ),
@@ -70,91 +71,103 @@ class PaymentsPage extends StatelessWidget {
     //   );
     // }
     return Scaffold(
-      appBar: AppBar(
-        leading: const AppBarBackButton(),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 40, 0, 40),
-            child: Text(
-              'Payments',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              showDialog<void>(
-                context: context,
-                builder: (context) {
-                  return Dialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
+      appBar: !kIsWeb
+          ? AppBar(
+              leading: const AppBarBackButton(route: '/residentHome'),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            )
+          : null,
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 700),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 40, 0, 40),
+                child: Row(
+                  children: const [
+                    if (kIsWeb) AppBarBackButton(route: '/residentHome'),
+                    Text(
+                      'Payments',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                    elevation: 16,
-                    child: const Placeholder(),
-                  );
-                },
-              );
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(12),
-              child: Text(
-                'Payment methods',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
+                  ],
                 ),
               ),
-            ),
-          ),
-          Divider(
-            indent: 25,
-            endIndent: 25,
-            thickness: 0,
-            color: Colors.grey.shade400,
-          ),
-          TextButton(
-            onPressed: () {
-              showDialog<void>(
-                context: context,
-                builder: (context) {
-                  return Dialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    elevation: 16,
-                    child: const Placeholder(),
+              TextButton(
+                onPressed: () {
+                  showDialog<void>(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        elevation: 16,
+                        child: const Placeholder(),
+                      );
+                    },
                   );
                 },
-              );
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(12),
-              child: Text(
-                'Statement history',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
+                child: const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text(
+                    'Payment methods',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Divider(
+                indent: 25,
+                endIndent: 25,
+                thickness: 0,
+                color: Colors.grey.shade400,
+              ),
+              TextButton(
+                onPressed: () {
+                  showDialog<void>(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        elevation: 16,
+                        child: const Placeholder(),
+                      );
+                    },
+                  );
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text(
+                    'Statement history',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Divider(
+                indent: 25,
+                endIndent: 25,
+                thickness: 0,
+                color: Colors.grey.shade400,
+              ),
+            ],
           ),
-          Divider(
-            indent: 25,
-            endIndent: 25,
-            thickness: 0,
-            color: Colors.grey.shade400,
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:emailjs/emailjs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PartnershipsButton extends StatefulWidget {
@@ -53,7 +54,6 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
           privateKey: privateKey,
         ),
       );
-      debugPrint('SUCCESS!');
       // ignore: use_build_context_synchronously
       await showDialog<void>(
         context: context,
@@ -71,16 +71,13 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
         ),
       );
     } catch (error) {
-      if (error is EmailJSResponseStatus) {
-        debugPrint('ERROR... ${error.status}: ${error.text}');
-      }
       debugPrint(error.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return PlatformElevatedButton(
       onPressed: () {
         showModalBottomSheet<void>(
           isScrollControlled: true,
@@ -173,16 +170,17 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
                               maxLines: 5,
                             ),
                             const SizedBox(height: 20),
-                            ElevatedButton(
+                            PlatformElevatedButton(
                               onPressed: () => sendEmail(context),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xff098d69),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                              ),
+                              // style: PlatformElevatedButton.styleFrom(
+                              //   backgroundColor: const Color(0xff098d69),
+                              //   shape: RoundedRectangleBorder(
+                              //     borderRadius: BorderRadius.circular(10),
+                              //   ),
+                              //   padding:
+                              //       const EdgeInsets.symmetric(vertical: 10),
+                              // ),
+                              color: const Color(0xFF03795D),
                               child: const Text(
                                 'Submit',
                                 style: TextStyle(
@@ -203,17 +201,18 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
           },
         );
       },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        side: const BorderSide(
-          color: Color(0xff098d69),
-          width: 3,
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
+      // style: PlatformElevatedButton.styleFrom(
+      //   backgroundColor: Colors.white,
+      //   side: const BorderSide(
+      //     color: Color(0xff098d69),
+      //     width: 3,
+      //   ),
+      //   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.circular(10),
+      //   ),
+      // ),
+      color: Colors.white,
       child: const Text(
         'Partnerships',
         style: TextStyle(

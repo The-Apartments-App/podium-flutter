@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
 import 'package:podium/src/lease_reader/lease_reader.dart';
@@ -11,17 +12,19 @@ class DocumentsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     debugPrint('DOCUMENTS SCREEN LOADED');
     return Scaffold(
-      appBar: AppBar(
-        leading: const AppBarBackButton(),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      appBar: !kIsWeb
+          ? AppBar(
+              leading: const AppBarBackButton(route: '/residentHome'),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            )
+          : null,
       body: Align(
         alignment: Alignment.topCenter,
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final maxWidth = (MediaQuery.of(context).size.width > 900
-                    ? 900
+            final maxWidth = (MediaQuery.of(context).size.width > 700
+                    ? 700
                     : MediaQuery.of(context).size.width)
                 .toDouble();
             return ConstrainedBox(
@@ -31,14 +34,19 @@ class DocumentsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(16, 40, 0, 40),
-                      child: Text(
-                        'Documents',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w400,
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 40, 0, 40),
+                      child: Row(
+                        children: const [
+                          if (kIsWeb) AppBarBackButton(route: '/residentHome'),
+                          Text(
+                            'Documents',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     TextButton(

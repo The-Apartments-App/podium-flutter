@@ -45,7 +45,7 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                     Padding(
                       padding: const EdgeInsets.only(top: 16, bottom: 32),
                       child: Text(
-                        'Good Afternoon, ${user.name}',
+                        'Good Afternoon, ${user.name ?? ''}',
                         style: const TextStyle(
                           fontSize: 36,
                           fontWeight: FontWeight.w600,
