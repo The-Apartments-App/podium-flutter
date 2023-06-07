@@ -19,23 +19,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
 
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  } catch (e) {
-    throw Exception('Error initializing Firebase: $e');
-  }
-  try {
-    await FacebookAuth.instance.webAndDesktopInitialize(
-      appId: Env.facebookAppId,
-      cookie: true,
-      xfbml: true,
-      version: 'v15.0',
-    );
-  } catch (e) {
-    throw Exception('Error initializing Facebook Authentication: $e');
-  }
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FacebookAuth.instance.webAndDesktopInitialize(
+    appId: Env.facebookAppId,
+    cookie: true,
+    xfbml: true,
+    version: 'v15.0',
+  );
 
   final authenticationRepository = AuthenticationRepository();
   await authenticationRepository.user.first;
