@@ -14,23 +14,15 @@ class LoginEmailScreen extends StatefulWidget {
 
 class _LoginEmailScreenState extends State<LoginEmailScreen> {
   bool isEmailInput = true;
-  bool userIsABoss = false;
   Widget emailOrPhone() {
-    if (isEmailInput == false) {
-      return const LoginPhoneInput();
-    } else {
-      return const LoginEmailInput();
-    }
+    return isEmailInput ? const LoginEmailInput() : const LoginPhoneInput();
   }
 
   void loginAuth(User user) {
+    var userIsABoss = false;
     final ownerIds = ['kmbvxRaTSBfcf8Xk2CwstCpNQXp1'];
     userIsABoss = ownerIds.contains(user.id);
-    if (userIsABoss) {
-      context.push('/ownerHome');
-    } else {
-      context.push('/residentHome');
-    }
+    userIsABoss ? context.push('/ownerHome') : context.push('/residentHome');
   }
 
   @override
@@ -185,7 +177,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                             return AlertDialog(
                               title: const Text('Choose User Type'),
                               content: SizedBox(
-                                height: 125,
+                                height: 150,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

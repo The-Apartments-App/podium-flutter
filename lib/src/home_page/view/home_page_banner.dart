@@ -1,3 +1,4 @@
+import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
@@ -5,28 +6,28 @@ import 'package:podium/src/app/app.dart';
 class HomePageBanner extends StatelessWidget {
   const HomePageBanner({super.key});
 
+  static Widget getProfilePic(User user) {
+    const defaultProfilePic = 'lib/src/assets/images/podium_logo_square.png';
+    if (user.photo != null) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image.network(
+          user.photo!,
+        ),
+      );
+    } else {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image.asset(
+          defaultProfilePic,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.select((AppBloc bloc) => bloc.state.user);
-    const defaultProfilePic = 'lib/src/assets/images/podium_logo_square.png';
-
-    Widget getProfilePic() {
-      if (user.photo != null) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.network(
-            user.photo!,
-          ),
-        );
-      } else {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            defaultProfilePic,
-          ),
-        );
-      }
-    }
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 60, 0, 24),
@@ -48,7 +49,7 @@ class HomePageBanner extends StatelessWidget {
               SizedBox(
                 height: 60,
                 width: 60,
-                child: getProfilePic(),
+                child: getProfilePic(user),
               ),
               Column(
                 children: [

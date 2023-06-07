@@ -13,7 +13,7 @@ class SocialSignInButton extends StatelessWidget {
   });
   final String buttonText;
   final String iconName;
-  final Function onPressed;
+  final VoidCallback onPressed;
   final double height;
   final double width;
 
@@ -39,7 +39,7 @@ class SocialSignInButton extends StatelessWidget {
             foregroundColor: MaterialStatePropertyAll(Colors.black),
           ),
         ),
-        onPressed: onPressed as void Function()?,
+        onPressed: onPressed,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
           child: Row(

@@ -36,5 +36,10 @@ class User extends Equatable {
   bool get isNotEmpty => this != User.empty;
 
   @override
+  String toString() {
+    return 'User { email: $email, id: $id, name: $name, photo: $photo }';
+  }
+
+  @override
   List<Object?> get props => [email, id, name, photo];
 }

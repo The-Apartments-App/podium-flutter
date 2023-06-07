@@ -52,9 +52,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   // Callback function to be executed when a logout requested event is received.
-  void _onLogoutRequested(AppLogoutRequested event, Emitter<AppState> emit) {
+  Future<void> _onLogoutRequested(
+    AppLogoutRequested event,
+    Emitter<AppState> emit,
+  ) async {
     // Log the user out of the app and return to the login page.
-    unawaited(_authenticationRepository.logOut());
+    await _authenticationRepository.logOut();
   }
 
   // Clean up resources when the app bloc is closed.
