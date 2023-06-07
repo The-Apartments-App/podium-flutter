@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:podium/src/login/cubit/login_cubit.dart';
-import 'package:podium/src/login/login.dart';
 import 'package:podium/src/login/view/pages/login_email_screen.dart';
 import 'package:podium/src/login/view/pages/login_password_screen.dart';
 
@@ -14,15 +13,6 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  bool emailIsValid = false;
-
-  void returnToEmail() {
-    setState(() {
-      emailIsValid = false;
-    });
-    context.read<LoginCubit>().returnToEmail();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
@@ -35,18 +25,20 @@ class _LoginFormState extends State<LoginForm> {
                 content: Text(state.errorMessage ?? 'Authentication Failure'),
               ),
             );
-        } else if (state.status.isSuccess) {
-        } else if (state.emailIsValid == true) {
-          setState(() {
-            emailIsValid = true;
-          });
         }
+        // Here you can handle other state.status cases if needed
       },
-      child: emailIsValid == false
-          ? const LoginEmailScreen()
-          : LoginPasswordScreen(
-              returnToEmail: returnToEmail,
-            ),
+      child: BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) {
+          return state.emailIsValid == false
+              ? const LoginEmailScreen()
+              : LoginPasswordScreen(
+                  returnToEmail: () {
+                    context.read<LoginCubit>().returnToEmail();
+                  },
+                );
+        },
+      ),
     );
   }
 }

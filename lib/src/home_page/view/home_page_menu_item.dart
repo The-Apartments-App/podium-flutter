@@ -35,8 +35,7 @@ class HomePageMenuItem extends StatelessWidget {
     }
 
     void handleRoute(String route) {
-      // ignore: use_if_null_to_convert_nulls_to_bools
-      if (isLogOut == true) {
+      if (isLogOut ?? false) {
         signOut();
       }
       if (user.isEmpty) {
