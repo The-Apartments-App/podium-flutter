@@ -19,7 +19,7 @@ class _SplashPageCarouselState extends State<SplashPageCarousel> {
         maxWidth: 900,
       ),
       child: ClipRRect(
-        borderRadius: const  BorderRadius.all(Radius.circular(8)),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
         child: CarouselSlider(
           carouselController: carouselController,
           options: CarouselOptions(
