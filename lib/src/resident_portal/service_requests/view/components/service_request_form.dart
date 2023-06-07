@@ -1,7 +1,7 @@
-import 'package:emailjs/emailjs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:formz/formz.dart';
 import 'package:image_picker/image_picker.dart';
@@ -84,59 +84,32 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
     }
   }
 
-  Future<void> sendServiceRequest(BuildContext context) async {
-    const privateKey = 'tkDacOuC2kK9X6eBYw6LA';
-    const serviceID = 'service_lslzt23';
-    const templateID = 'template_xz7u84j';
+  Future<void> sendServiceRequest() async {
+    final email = Email(
+      body: detailsInputController.text,
+      subject: 'Podium Service Request',
+      recipients: ['maintenance@podiumapartments.com'],
+    );
+
+    String platformResponse;
+
     try {
-      if (detailsInputController.text.isEmpty) {
-        await showDialog<void>(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Failure.'),
-            content: const Text('Your message has not been sent.'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        );
-        return;
-      }
-      await EmailJS.send(
-        serviceID,
-        templateID,
-        {
-          'message': detailsInputController.text,
-        },
-        const Options(
-          publicKey: 'MmTXgvYuIKZsRmifl',
-          privateKey: privateKey,
-        ),
-      );
-      // ignore: use_build_context_synchronously
-      await showDialog<void>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Success!'),
-          content: const Text('Your message has been sent.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-      );
+      await FlutterEmailSender.send(email);
+      platformResponse = 'success';
     } catch (error) {
-      debugPrint(error.toString());
+      if (kDebugMode) {
+        print(error);
+      }
+      platformResponse = error.toString();
     }
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(platformResponse),
+      ),
+    );
   }
 
   @override
@@ -243,7 +216,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                                 content: Text('Service Request Submitted'),
                               ),
                             );
-                          sendServiceRequest(context);
+                          sendServiceRequest();
                         },
                         child: const Text(
                           'Submit',
