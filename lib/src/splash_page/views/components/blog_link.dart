@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,12 +37,17 @@ class _BlogLinkState extends State<BlogLink> {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
-                child: CachedNetworkImage(
+                child: Image(
                   fit: BoxFit.fill,
-                  imageUrl: widget.imageUrl,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  image: NetworkImage(widget.imageUrl),
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.error),
                 ),
               ),
               Padding(
