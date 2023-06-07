@@ -1,11 +1,8 @@
-import 'package:authentication_repo/authentication_repo.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/home_page/view/home_page_icon.dart';
-import 'package:podium/src/login/login.dart';
 
 class HomePageMenuItem extends StatelessWidget {
   const HomePageMenuItem({
@@ -23,7 +20,8 @@ class HomePageMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select((AppBloc bloc) => bloc.state.user);
+    final appBloc = context.select((AppBloc bloc) => bloc);
+    final user = appBloc.state.user;
 
     const homePageMenuItemTextStyle = TextStyle(
       color: Colors.black,
@@ -31,73 +29,18 @@ class HomePageMenuItem extends StatelessWidget {
       fontSize: 14,
     );
 
-    void showLogin(BuildContext context) {
-      MediaQuery.of(context).size.width >= 750
-          ? showDialog<void>(
-              context: context,
-              builder: (_) {
-                return ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: Dialog(
-                    backgroundColor: Colors.transparent,
-                    child: BlocProvider(
-                      create: (_) =>
-                          LoginCubit(context.read<AuthenticationRepository>()),
-                      child: Wrap(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                            child: SizedBox(
-                              width: 575,
-                              child: Container(
-                                constraints:
-                                    const BoxConstraints(minHeight: 400),
-                                child: const LoginForm(),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            )
-          : showModalBottomSheet<void>(
-              isScrollControlled: true,
-              context: context,
-              builder: (_) {
-                return ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  ),
-                  child: BlocProvider(
-                    create: (_) =>
-                        LoginCubit(context.read<AuthenticationRepository>()),
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: const [
-                        LoginForm(),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            );
+    void signOut() {
+      appBloc.add(AppLogoutRequested());
+      context.push('/');
     }
 
     void handleRoute(String route) {
-      if (isLogOut != null) {
-        FirebaseAuth.instance.signOut();
-        context.push('/');
+      // ignore: use_if_null_to_convert_nulls_to_bools
+      if (isLogOut == true) {
+        signOut();
       }
       if (user.isEmpty) {
-        showLogin(context);
+        context.push('/');
       } else {
         context.push('/$route');
       }
@@ -106,7 +49,7 @@ class HomePageMenuItem extends StatelessWidget {
     return Column(
       children: [
         TextButton(
-          onPressed: () => {handleRoute(route)},
+          onPressed: () => handleRoute(route),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 6, 12, 6),
             child: Row(

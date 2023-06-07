@@ -185,7 +185,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                             return AlertDialog(
                               title: const Text('Choose User Type'),
                               content: SizedBox(
-                                height: 125,
+                                height: 150,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

@@ -1,68 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:podium/src/home_page/view/home_page_banner.dart';
 import 'package:podium/src/home_page/view/home_page_menu_item.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  _HomePageState();
-
-  @override
   Widget build(BuildContext context) {
-    debugPrint(
-      '3. HOME PAGE BUILT - User Account Page',
-    );
-
-    final residentProfileMenu = [
-      const HomePageMenuItem(
-        route: 'userPayments',
-        buttonText: 'Payments',
-        icon: Icons.credit_card,
-      ),
-      const HomePageMenuItem(
-        route: 'serviceRequest',
-        buttonText: 'Service Request',
-        icon: Icons.home_repair_service,
-      ),
-      const HomePageMenuItem(
-        route: 'userDocuments',
-        buttonText: 'Documents',
-        icon: Icons.file_copy,
-      ),
-      // const HomePageMenuItem(
-      //   route: 'buildingAmenities',
-      //   buttonText: 'Amenities',
-      //   icon: Icons.apartment,
-      // )
-    ];
-
-    final ownerProfileMenu = [
-      const HomePageMenuItem(
-        route: 'home',
-        buttonText: 'Dashboard',
-        icon: Icons.info,
-      ),
-      const HomePageMenuItem(
-        route: 'ownerLedgers',
-        buttonText: 'Ledgers',
-        icon: Icons.balance,
-      ),
-      const HomePageMenuItem(
-        route: 'ownerBuildingInfo',
-        buttonText: 'Property Info',
-        icon: Icons.home_repair_service,
-      ),
-      const HomePageMenuItem(
-        route: 'ownerBuildingInspections',
-        buttonText: 'Inspection Info',
-        icon: Icons.file_copy,
-      ),
-    ];
+    if (kDebugMode) {
+      print('3. HOME PAGE BUILT - User Account Page');
+    }
 
     return Scaffold(
       body: RefreshIndicator(
@@ -83,9 +31,9 @@ class _HomePageState extends State<HomePage> {
                 ),
                 if (false)
                   // ignore: dead_code
-                  ...ownerProfileMenu
+                  ..._buildOwnerProfileMenu()
                 else
-                  ...residentProfileMenu,
+                  ..._buildResidentProfileMenu(),
                 const HomePageMenuItem(
                   route: 'userSettings',
                   buttonText: 'Settings',
@@ -104,4 +52,49 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+List<HomePageMenuItem> _buildResidentProfileMenu() {
+  return [
+    const HomePageMenuItem(
+      route: 'userPayments',
+      buttonText: 'Payments',
+      icon: Icons.credit_card,
+    ),
+    const HomePageMenuItem(
+      route: 'serviceRequest',
+      buttonText: 'Service Request',
+      icon: Icons.home_repair_service,
+    ),
+    const HomePageMenuItem(
+      route: 'userDocuments',
+      buttonText: 'Documents',
+      icon: Icons.file_copy,
+    ),
+  ];
+}
+
+List<HomePageMenuItem> _buildOwnerProfileMenu() {
+  return [
+    const HomePageMenuItem(
+      route: 'home',
+      buttonText: 'Dashboard',
+      icon: Icons.info,
+    ),
+    const HomePageMenuItem(
+      route: 'ownerLedgers',
+      buttonText: 'Ledgers',
+      icon: Icons.balance,
+    ),
+    const HomePageMenuItem(
+      route: 'ownerBuildingInfo',
+      buttonText: 'Property Info',
+      icon: Icons.home_repair_service,
+    ),
+    const HomePageMenuItem(
+      route: 'ownerBuildingInspections',
+      buttonText: 'Inspection Info',
+      icon: Icons.file_copy,
+    ),
+  ];
 }
