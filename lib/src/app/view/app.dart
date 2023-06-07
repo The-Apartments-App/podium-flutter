@@ -5,8 +5,8 @@ import 'package:podium/src/app/app.dart';
 import 'package:podium/src/app/routes/routes.dart';
 import 'package:podium/theme.dart';
 
-class App extends StatelessWidget {
-  const App({
+class PodiumApp extends StatelessWidget {
+  const PodiumApp({
     super.key,
     required AuthenticationRepository authenticationRepository,
   }) : _authenticationRepository = authenticationRepository;
