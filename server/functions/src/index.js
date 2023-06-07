@@ -28,6 +28,27 @@ exports.createStripePaymentIntent = onCall(async (req) => {
   return paymentIntent;
 });
 
+
+exports.routeToStripeCheckout = onCall(async (req) => {
+  const price = await stripe.prices.create({
+    currency: 'usd',
+    unit_amount: 1000,
+    product: 'Rent Payment',
+  });
+
+  const paymentLink = await stripe.paymentLinks.create({
+    line_items: [
+      {
+        price: price.id,
+        quantity: 1,
+      },
+    ],
+  });
+
+  console.log('price $price');
+  console.log('paymentLink: $paymentLink');
+})
+
 //~~~~ This is just a test function. Use this to experiment. ~~~~
 exports.printmessage = onCall((req) => {
 

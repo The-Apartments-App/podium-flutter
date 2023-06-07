@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' hide Card;
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
+import 'package:stripe_checkout/stripe_checkout.dart';
 
 class PaymentsPage extends StatelessWidget {
   const PaymentsPage({super.key});
@@ -96,15 +97,21 @@ class PaymentsPage extends StatelessWidget {
         // });
         // final response = result.data;
         // debugPrint('response: $response');
-        final paymentIntent = await FirebaseFunctions.instance
-            .httpsCallable('createStripePaymentIntent')
-            // ignore: inference_failure_on_function_invocation
-            .call({'value': 'passed to firebase'});
-        debugPrint('paymentIntent.data: ${paymentIntent.data}');
+        // final paymentIntent = await FirebaseFunctions.instance
+        //     .httpsCallable('createStripePaymentIntent')
+        //     // ignore: inference_failure_on_function_invocation
+        //     .call({'value': 'passed to firebase'});
+        // debugPrint('paymentIntent.data: ${paymentIntent.data}');
 
         // ignore: avoid_dynamic_calls
-        final clientSecret = paymentIntent.data['client_secret'] as String;
-        await displayPaymentDetailsModal(clientSecret);
+        // final clientSecret = paymentIntent.data['client_secret'] as String;
+        // await displayPaymentDetailsModal(clientSecret);
+        final paymentScreen = await FirebaseFunctions.instance
+            .httpsCallable('routeToStripeCheckout')
+            // ignore: inference_failure_on_function_invocation
+            .call({'value': 'passed to firebase'});
+        debugPrint('paymentScreen: $paymentScreen');
+        // debugPrint('paymentIntent.data: ${paymentIntent.data}');
       } on FirebaseFunctionsException catch (error) {
         debugPrint('error.code: ${error.code}');
         debugPrint('error.details: ${error.details}');
@@ -114,11 +121,6 @@ class PaymentsPage extends StatelessWidget {
         debugPrint('error: $error');
       }
     }
-
-    // final response = await redirectToCheckout(
-    //     context: context,
-    //     sessionId: sessionId,
-    //     publishableKey: publishableKey);
 
     //   return BlocProvider(
     //     create: (context) => PaymentBloc(),
@@ -159,110 +161,124 @@ class PaymentsPage extends StatelessWidget {
               elevation: 0,
             )
           : null,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 40, 0, 40),
-            child: Text(
-              'Payments',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () async {
-              // await Stripe.instance.presentPaymentSheet();
-
-              if (!kIsWeb) {
-                debugPrint('!kIsWeb');
-                await Stripe.instance.presentPaymentSheet();
-              } else {
-                debugPrint('kIsWeb');
-                await showWebPaymentSheet();
-              }
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(12),
-              child: Text(
-                'Make a Payment',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 700),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 40, 0, 40),
+                child: Row(
+                  children: const [
+                    if (kIsWeb) AppBarBackButton(route: '/residentHome'),
+                    Text(
+                      'Payments',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              showDialog<void>(
-                context: context,
-                builder: (context) {
-                  return Dialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
+              TextButton(
+                onPressed: () async {
+                  if (!kIsWeb) {
+                    debugPrint('!kIsWeb');
+                    await Stripe.instance.presentPaymentSheet();
+                  } else {
+                    debugPrint('kIsWeb');
+                    await showWebPaymentSheet();
+                  }
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text(
+                    'Make a Payment',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
                     ),
-                    elevation: 16,
-                    child: const Placeholder(),
+                  ),
+                ),
+              ),
+              Divider(
+                indent: 25,
+                endIndent: 25,
+                thickness: 0,
+                color: Colors.grey.shade400,
+              ),
+              TextButton(
+                onPressed: () {
+                  showDialog<void>(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        elevation: 16,
+                        child: const Placeholder(),
+                      );
+                    },
                   );
                 },
-              );
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(12),
-              child: Text(
-                'Payment methods',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
+                child: const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text(
+                    'Payment methods',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          Divider(
-            indent: 25,
-            endIndent: 25,
-            thickness: 0,
-            color: Colors.grey.shade400,
-          ),
-          TextButton(
-            onPressed: () {
-              showDialog<void>(
-                context: context,
-                builder: (context) {
-                  return Dialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    elevation: 16,
-                    child: const Placeholder(),
+              Divider(
+                indent: 25,
+                endIndent: 25,
+                thickness: 0,
+                color: Colors.grey.shade400,
+              ),
+              TextButton(
+                onPressed: () {
+                  showDialog<void>(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        elevation: 16,
+                        child: const Placeholder(),
+                      );
+                    },
                   );
                 },
-              );
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(12),
-              child: Text(
-                'Statement history',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
+                child: const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text(
+                    'Statement history',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Divider(
+                indent: 25,
+                endIndent: 25,
+                thickness: 0,
+                color: Colors.grey.shade400,
+              ),
+            ],
           ),
-          Divider(
-            indent: 25,
-            endIndent: 25,
-            thickness: 0,
-            color: Colors.grey.shade400,
-          ),
-        ],
+        ),
       ),
     );
   }
