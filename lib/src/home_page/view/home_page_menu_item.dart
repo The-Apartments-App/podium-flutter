@@ -36,9 +36,11 @@ class HomePageMenuItem extends StatelessWidget {
 
     void handleRoute(String route) {
       if (isLogOut ?? false) {
+        debugPrint('User Signed Out');
         signOut();
       }
       if (user.isEmpty) {
+        debugPrint('user is empty, routing home.');
         context.push('/');
       } else {
         context.push('/$route');

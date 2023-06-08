@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:podium/src/app/app.dart';
 import 'package:podium/src/login/login.dart';
 
 class LoginEmailScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
   }
 
   void loginAuth(User user) {
+    debugPrint('user in loginAuth');
     var userIsABoss = false;
     final ownerIds = ['kmbvxRaTSBfcf8Xk2CwstCpNQXp1'];
     userIsABoss = ownerIds.contains(user.id);
@@ -28,6 +30,9 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
   @override
   Widget build(BuildContext context) {
     User user;
+    final appBloc = context.select((AppBloc bloc) => bloc);
+    final signedInUser = appBloc.state.user;
+    debugPrint('signInUser: $signedInUser');
     return ColoredBox(
       color: const Color(0xFFFFFFFF),
       child: Column(
@@ -132,10 +137,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       onPressed: () =>
                           context.read<LoginCubit>().logInWithGoogle().then(
                                 (_) => {
-                                  user = context
-                                      .read<AuthenticationRepository>()
-                                      .currentUser,
-                                  loginAuth(user),
+                                  loginAuth(signedInUser),
                                 },
                               ),
                     ),
@@ -189,26 +191,19 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                       color: const Color(0xFF03795D),
                                       child: const Text('Resident Login'),
                                       onPressed: () async {
-                                        Navigator.of(context).pop();
-                                        try {
-                                          await context
-                                              .read<LoginCubit>()
-                                              .logInWithDemoResidentUser()
-                                              .then(
-                                                (value) => {
-                                                  if (mounted)
-                                                    {
-                                                      context.push(
-                                                        '/residentHome',
-                                                      ),
-                                                    }
-                                                },
-                                              );
-                                        } catch (e) {
-                                          debugPrint(
-                                            '''Error while logging in with demo resident user: $e''',
-                                          );
-                                        }
+                                        await context
+                                            .read<LoginCubit>()
+                                            .logInWithDemoResidentUser()
+                                            .then(
+                                              (value) => {
+                                                if (mounted)
+                                                  {
+                                                    context.push(
+                                                      '/residentHome',
+                                                    ),
+                                                  }
+                                              },
+                                            );
                                       },
                                     ),
                                     const SizedBox(height: 16),

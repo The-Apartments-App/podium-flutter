@@ -122,37 +122,6 @@ class PaymentsPage extends StatelessWidget {
       }
     }
 
-    //   return BlocProvider(
-    //     create: (context) => PaymentBloc(),
-    //     child: Scaffold(
-    //       appBar: AppBar(
-    //         leading: const AppBarBackButton(),
-    //         backgroundColor: Colors.transparent,
-    //         elevation: 0,
-    //       ),
-    //       body: BlocBuilder<PaymentBloc, PaymentState>(
-    //         builder: (context, state) {
-    //           return Column(
-    //             children: [
-    //               const Text(
-    //                 r'Amount Due: $0',
-    //                 style: textStyle,
-    //               ),
-    //               SizedBox(
-    //                 height: 32,
-    //                 width: MediaQuery.of(context).size.width,
-    //               ),
-    //               PlatformElevatedButton(
-    //                 onPressed: Stripe.instance.presentPaymentSheet,
-    //                 child: const Text('Open Payment Sheet'),
-    //               ),
-    //             ],
-    //           );
-    //         },
-    //       ),
-    //     ),
-    //   );
-    // }
     return Scaffold(
       appBar: !kIsWeb
           ? AppBar(

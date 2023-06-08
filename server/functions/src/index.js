@@ -2,7 +2,7 @@ const {initializeApp} = require("firebase-admin/app");
 const {logger} = require("firebase-functions");
 const { HttpsError, onCall} = require("firebase-functions/v2/https");
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')('sk_test_51LxiI2FvdtE6BFaUeYbounOqjjNdoHkJhPQomXFMHrAwoIfO2C0AlnIeLSet3C65f0dBE9vKuMopyqd2V18KOeST006GPKClNM');
 
 const app = initializeApp({
   apiKey: "AIzaSyAbqW7X77MZBrVI5I2CJd0GfQQJ2uhfH0c",
@@ -15,25 +15,29 @@ const app = initializeApp({
   measurementId: "G-NG6RZE5X1N",
 });
 
-exports.createStripePaymentIntent = onCall(async (req) => {
+exports.createStripePaymentIntent = onCall(async (data, context) => {
 
-  const rentAmount = req.data.rentAmount;
+  const rentAmount = data.rentAmount;
   const paymentIntent = await stripe.paymentIntents.create({
     amount: 100,
     currency: 'usd',
-    automatic_payment_methods: {
-      enabled: true,
-    },
+    payment_method_types: ['card'],
   });
   return paymentIntent;
 });
 
+exports.routeToStripeCheckout = onCall(async (data, context) => {
+  
+  // Create a product first
+  const product = await stripe.products.create({
+    name: 'Rent Payment',
+  });
 
-exports.routeToStripeCheckout = onCall(async (req) => {
+  // Then create a price using the product's id
   const price = await stripe.prices.create({
     currency: 'usd',
     unit_amount: 1000,
-    product: 'Rent Payment',
+    product: product.id,
   });
 
   const paymentLink = await stripe.paymentLinks.create({
@@ -45,14 +49,15 @@ exports.routeToStripeCheckout = onCall(async (req) => {
     ],
   });
 
-  console.log('price $price');
-  console.log('paymentLink: $paymentLink');
-})
+  console.log(`price:`, price);
+  console.log(`paymentLink:`, paymentLink);
+  return {'response': paymentLink};
+});
 
 //~~~~ This is just a test function. Use this to experiment. ~~~~
-exports.printmessage = onCall((req) => {
+exports.printmessage = onCall((data, context) => {
 
-  const text = req.data.text;
+  const text = data.text;
   logger.debug(`this is text ${text}`)
   if (!(typeof text === "string") || text.length === 0) {
     // Throwing an HttpsError so that the client gets the error details.
