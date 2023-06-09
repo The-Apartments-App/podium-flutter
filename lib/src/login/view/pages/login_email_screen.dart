@@ -29,7 +29,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    User user;
+    // User user;
     final appBloc = context.select((AppBloc bloc) => bloc);
     final signedInUser = appBloc.state.user;
     debugPrint('signInUser: $signedInUser');

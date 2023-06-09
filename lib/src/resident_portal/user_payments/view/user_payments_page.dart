@@ -13,7 +13,7 @@ class PaymentsPage extends StatelessWidget {
   static Page<void> page() => const MaterialPage<void>(child: PaymentsPage());
 
   // Function to launch URL
-  void _launchUrl(String url) async {
+  Future<void> _launchUrl(String url) async {
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {
@@ -54,49 +54,49 @@ class PaymentsPage extends StatelessWidget {
       initPaymentSheet();
     }
 
-    Future<void> displayPaymentDetailsModal(String clientSecret) async {
-      return showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: SizedBox(
-                    width: 800,
-                    child: CardField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Colors.grey,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      enablePostalCode: true,
-                      postalCodeHintText: 'ZIP Code',
-                      countryCode: 'US',
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Stripe.instance.confirmPayment(
-                      paymentIntentClientSecret: clientSecret,
-                      data: const PaymentMethodParams.card(
-                        paymentMethodData: PaymentMethodData(),
-                      ),
-                    );
-                  },
-                  child: const Text('Submit'),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-    }
+    // Future<void> displayPaymentDetailsModal(String clientSecret) async {
+    //   return showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return Dialog(
+    //         child: Column(
+    //           children: [
+    //             Padding(
+    //               padding: const EdgeInsets.all(16),
+    //               child: SizedBox(
+    //                 width: 800,
+    //                 child: CardField(
+    //                   decoration: InputDecoration(
+    //                     border: OutlineInputBorder(
+    //                       borderSide: const BorderSide(
+    //                         color: Colors.grey,
+    //                       ),
+    //                       borderRadius: BorderRadius.circular(8),
+    //                     ),
+    //                   ),
+    //                   enablePostalCode: true,
+    //                   postalCodeHintText: 'ZIP Code',
+    //                   countryCode: 'US',
+    //                 ),
+    //               ),
+    //             ),
+    //             ElevatedButton(
+    //               onPressed: () {
+    //                 Stripe.instance.confirmPayment(
+    //                   paymentIntentClientSecret: clientSecret,
+    //                   data: const PaymentMethodParams.card(
+    //                     paymentMethodData: PaymentMethodData(),
+    //                   ),
+    //                 );
+    //               },
+    //               child: const Text('Submit'),
+    //             ),
+    //           ],
+    //         ),
+    //       );
+    //     },
+    //   );
+    // }
 
     Future<void> showWebPaymentSheet() async {
       try {
@@ -123,7 +123,7 @@ class PaymentsPage extends StatelessWidget {
         // ignore: avoid_dynamic_calls
         debugPrint('paymentScreen: ${paymentScreen.data}');
         // ignore: avoid_dynamic_calls
-        _launchUrl(paymentScreen.data['url'] as String);
+        await _launchUrl(paymentScreen.data['url'] as String);
         // debugPrint('paymentIntent.data: ${paymentIntent.data}');
       } on FirebaseFunctionsException catch (error) {
         debugPrint('error.code: ${error.code}');
