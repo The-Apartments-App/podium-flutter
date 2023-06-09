@@ -2,7 +2,7 @@ const {initializeApp} = require("firebase-admin/app");
 const {logger} = require("firebase-functions");
 const { HttpsError, onCall} = require("firebase-functions/v2/https");
 
-const stripe = require('stripe')('sk_test_51LxiI2FvdtE6BFaUeYbounOqjjNdoHkJhPQomXFMHrAwoIfO2C0AlnIeLSet3C65f0dBE9vKuMopyqd2V18KOeST006GPKClNM');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = initializeApp({
   apiKey: "AIzaSyAbqW7X77MZBrVI5I2CJd0GfQQJ2uhfH0c",
@@ -15,51 +15,50 @@ const app = initializeApp({
   measurementId: "G-NG6RZE5X1N",
 });
 
-const handleStripeError = (error, res) => {
+const handleStripeError = (error) => {
+  let message;
+
   switch (error.type) {
     case 'StripeCardError':
-      // A declined card error
-      res.status(400).send({ message: 'Your card has been declined.' });
+      message = 'Your card has been declined.';
       break;
     case 'RateLimitError':
-      // Too many requests made to the API too quickly
-      res.status(429).send({ message: 'Too many requests. Please try again later.' });
+      message = 'Too many requests. Please try again later.';
       break;
     case 'InvalidRequestError':
-      // Invalid parameters were supplied to Stripe's API
-      res.status(400).send({ message: 'Invalid parameters.' });
+      message = 'Invalid parameters.';
       break;
     case 'APIError':
-      // An error occurred internally with Stripe's API
-      res.status(500).send({ message: 'Internal error. Please try again later.' });
+      message = 'Internal error. Please try again later.';
       break;
     case 'AuthenticationError':
-      // Authentication with Stripe's API failed
-      res.status(401).send({ message: 'Not authenticated. Please check your API keys.' });
+      message = 'Not authenticated. Please check your API keys.';
       break;
     default:
-      // Handle any other types of unexpected errors
-      res.status(500).send({ message: 'An unexpected error occurred.' });
+      message = 'An unexpected error occurred. Actually, no. I fully expected this to happen so fuck you.';
       break;
   }
+
+  throw new HttpsError('invalid-argument', message);
 };
 
-exports.createStripePaymentIntent = onCall(async (data, context) => {
 
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: data.amount,  // Pass the correct amount
-      currency: 'usd',
-      // Add more options as needed
-    });
+// exports.createStripePaymentIntent = onCall(async (data, context) => {
 
-    return {
-      clientSecret: paymentIntent.client_secret
-    };
-  } catch (error) {
-    handleStripeError(error, response);
-  }
-});
+//   try {
+//     const paymentIntent = await stripe.paymentIntents.create({
+//       amount: data.amount,  // Pass the correct amount
+//       currency: 'usd',
+//       // Add more options as needed
+//     });
+
+//     return {
+//       clientSecret: paymentIntent.client_secret
+//     };
+//   } catch (error) {
+//     handleStripeError(error, response);
+//   }
+// });
 
 exports.routeToStripeCheckout = onCall(async (data, context) => {
   
@@ -68,46 +67,27 @@ exports.routeToStripeCheckout = onCall(async (data, context) => {
     const product = await stripe.products.create({
       name: 'Rent Payment',
     });
-  
-    // Then create a price using the product's id
-    const price = await stripe.prices.create({
-      currency: 'usd',
-      unit_amount: 1000,
-      product: product.id,
-    });
-  
-    const paymentLink = await stripe.paymentLinks.create({
-      line_items: [
-        {
-          price: price.id,
-          quantity: 1,
-        },
-      ],
-    });
 
-    const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'T-shirt',
-            },
-            unit_amount: 2000,
-          },
-          quantity: 1,
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        price_data: {
+          product: product.id,
+          unit_amount: 1000,
+          currency: 'usd',
         },
-      ],
-      mode: 'payment',
-      success_url: 'https://podiumapartments.com/success',
-      cancel_url: 'https://podiumapartments.com/failure',
-    });
-    console.log(`session:`, session);
-    console.log(`price:`, price);
-    console.log(`paymentLink:`, paymentLink);
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: 'https://podiumapartments.com/success',
+    cancel_url: 'https://podiumapartments.com/failure',
+  });
+
     return session;
+
   } catch (error) {
-    handleStripeError(error, response);
+    handleStripeError(error);
     
   }
 
