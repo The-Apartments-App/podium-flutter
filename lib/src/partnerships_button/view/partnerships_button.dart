@@ -1,7 +1,7 @@
-import 'package:emailjs/emailjs.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PartnershipsButton extends StatefulWidget {
   const PartnershipsButton({super.key});
@@ -11,68 +11,53 @@ class PartnershipsButton extends StatefulWidget {
 }
 
 class _PartnershipsButtonState extends State<PartnershipsButton> {
-  final emailTextController = TextEditingController();
-  final messageTextController = TextEditingController();
+  final emailAddressController = TextEditingController();
+  final emailBodyController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  Future<void> sendEmail(BuildContext context) async {
-    // final privateKey = dotenv.env['EMAILJS_PRIVATE_KEY'];
-    // final serviceID =
-    //     dotenv.env['EMAILJS_SERVICE_ID'] ?? 'No service ID available';
-    // final templateID =
-    //     dotenv.env['EMAILJS_TEMPLATE_ID'] ?? 'No template ID available';
-    const privateKey = 'tkDacOuC2kK9X6eBYw6LA';
-    const serviceID = 'service_lslzt23';
-    const templateID = 'template_y5ke9zn';
+
+  Future<void> sendEmail() async {
+    final email = Email(
+      body: emailBodyController.text,
+      subject: 'Podium Partnership',
+      recipients: [emailAddressController.text],
+    );
+
+    String platformResponse;
+
     try {
-      if (emailTextController.text.isEmpty) {
-        await showDialog<void>(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Failure.'),
-            content: const Text('Your message has not been sent.'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        );
-        return;
-      }
-      await EmailJS.send(
-        serviceID,
-        templateID,
-        {
-          'user_email': emailTextController.text,
-          'message': messageTextController.text,
-        },
-        const Options(
-          publicKey: 'MmTXgvYuIKZsRmifl',
-          privateKey: privateKey,
-        ),
-      );
-      // ignore: use_build_context_synchronously
-      await showDialog<void>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Success!'),
-          content: const Text('Your message has been sent.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-      );
+      await FlutterEmailSender.send(email);
+      platformResponse = 'success';
     } catch (error) {
-      debugPrint(error.toString());
+      if (kDebugMode) {
+        print(error);
+      }
+      platformResponse = error.toString();
     }
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(platformResponse),
+      ),
+    );
+
+    // ignore: use_build_context_synchronously
+    await showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Success!'),
+        content: const Text('Your message has been sent.'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -137,7 +122,7 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             TextFormField(
-                              controller: emailTextController,
+                              controller: emailAddressController,
                               decoration: InputDecoration(
                                 hintText: 'Email',
                                 filled: true,
@@ -152,7 +137,7 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
                             ),
                             const SizedBox(height: 20),
                             TextFormField(
-                              controller: messageTextController,
+                              controller: emailBodyController,
                               decoration: InputDecoration(
                                 hintText: 'Message',
                                 filled: true,
@@ -171,15 +156,7 @@ class _PartnershipsButtonState extends State<PartnershipsButton> {
                             ),
                             const SizedBox(height: 20),
                             PlatformElevatedButton(
-                              onPressed: () => sendEmail(context),
-                              // style: PlatformElevatedButton.styleFrom(
-                              //   backgroundColor: const Color(0xff098d69),
-                              //   shape: RoundedRectangleBorder(
-                              //     borderRadius: BorderRadius.circular(10),
-                              //   ),
-                              //   padding:
-                              //       const EdgeInsets.symmetric(vertical: 10),
-                              // ),
+                              onPressed: sendEmail,
                               color: const Color(0xFF03795D),
                               child: const Text(
                                 'Submit',
