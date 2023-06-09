@@ -100,28 +100,10 @@ class PaymentsPage extends StatelessWidget {
 
     Future<void> showWebPaymentSheet() async {
       try {
-        // final result = await FirebaseFunctions.instance
-        //     .httpsCallable('printmessage')
-        //     .call<dynamic>(<String, dynamic>{
-        //   'text': 'text passed to firebase',
-        // });
-        // final response = result.data;
-        // debugPrint('response: $response');
-        // final paymentIntent = await FirebaseFunctions.instance
-        //     .httpsCallable('createStripePaymentIntent')
-        //     // ignore: inference_failure_on_function_invocation
-        //     .call({'value': 'passed to firebase'});
-        // debugPrint('paymentIntent.data: ${paymentIntent.data}');
-
-        // ignore: avoid_dynamic_calls
-        // final clientSecret = paymentIntent.data['client_secret'] as String;
-        // await displayPaymentDetailsModal(clientSecret);
         final paymentScreen = await FirebaseFunctions.instance
             .httpsCallable('routeToStripeCheckout')
             // ignore: inference_failure_on_function_invocation
             .call({'value': 'passed to firebase'});
-        // ignore: avoid_dynamic_calls
-        debugPrint('paymentScreen: ${paymentScreen.data}');
         // ignore: avoid_dynamic_calls
         await _launchUrl(paymentScreen.data['url'] as String);
         // debugPrint('paymentIntent.data: ${paymentIntent.data}');
@@ -192,39 +174,39 @@ class PaymentsPage extends StatelessWidget {
                 thickness: 0,
                 color: Colors.grey.shade400,
               ),
-              TextButton(
-                onPressed: () {
-                  showDialog<void>(
-                    context: context,
-                    builder: (context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        elevation: 16,
-                        child: const Placeholder(),
-                      );
-                    },
-                  );
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(12),
-                  child: Text(
-                    'Payment methods',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-              Divider(
-                indent: 25,
-                endIndent: 25,
-                thickness: 0,
-                color: Colors.grey.shade400,
-              ),
+              // TextButton(
+              //   onPressed: () {
+              //     showDialog<void>(
+              //       context: context,
+              //       builder: (context) {
+              //         return Dialog(
+              //           shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(40),
+              //           ),
+              //           elevation: 16,
+              //           child: const Placeholder(),
+              //         );
+              //       },
+              //     );
+              //   },
+              //   child: const Padding(
+              //     padding: EdgeInsets.all(12),
+              //     child: Text(
+              //       'Payment methods',
+              //       style: TextStyle(
+              //         fontSize: 14,
+              //         fontWeight: FontWeight.w400,
+              //         color: Colors.black,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Divider(
+              //   indent: 25,
+              //   endIndent: 25,
+              //   thickness: 0,
+              //   color: Colors.grey.shade400,
+              // ),
               TextButton(
                 onPressed: () {
                   showDialog<void>(
