@@ -12,9 +12,11 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:podium/env.dart';
 import 'package:podium/firebase_options.dart';
 import 'package:podium/src/app/app.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

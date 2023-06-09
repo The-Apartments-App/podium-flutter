@@ -4,12 +4,22 @@ import 'package:flutter/material.dart' hide Card;
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
-import 'package:stripe_checkout/stripe_checkout.dart';
+// import 'package:stripe_checkout/stripe_checkout.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PaymentsPage extends StatelessWidget {
   const PaymentsPage({super.key});
 
   static Page<void> page() => const MaterialPage<void>(child: PaymentsPage());
+
+  // Function to launch URL
+  void _launchUrl(String url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +120,10 @@ class PaymentsPage extends StatelessWidget {
             .httpsCallable('routeToStripeCheckout')
             // ignore: inference_failure_on_function_invocation
             .call({'value': 'passed to firebase'});
-        debugPrint('paymentScreen: $paymentScreen');
+        // ignore: avoid_dynamic_calls
+        debugPrint('paymentScreen: ${paymentScreen.data}');
+        // ignore: avoid_dynamic_calls
+        _launchUrl(paymentScreen.data['url'] as String);
         // debugPrint('paymentIntent.data: ${paymentIntent.data}');
       } on FirebaseFunctionsException catch (error) {
         debugPrint('error.code: ${error.code}');

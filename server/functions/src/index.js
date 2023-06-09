@@ -15,43 +15,102 @@ const app = initializeApp({
   measurementId: "G-NG6RZE5X1N",
 });
 
+const handleStripeError = (error, res) => {
+  switch (error.type) {
+    case 'StripeCardError':
+      // A declined card error
+      res.status(400).send({ message: 'Your card has been declined.' });
+      break;
+    case 'RateLimitError':
+      // Too many requests made to the API too quickly
+      res.status(429).send({ message: 'Too many requests. Please try again later.' });
+      break;
+    case 'InvalidRequestError':
+      // Invalid parameters were supplied to Stripe's API
+      res.status(400).send({ message: 'Invalid parameters.' });
+      break;
+    case 'APIError':
+      // An error occurred internally with Stripe's API
+      res.status(500).send({ message: 'Internal error. Please try again later.' });
+      break;
+    case 'AuthenticationError':
+      // Authentication with Stripe's API failed
+      res.status(401).send({ message: 'Not authenticated. Please check your API keys.' });
+      break;
+    default:
+      // Handle any other types of unexpected errors
+      res.status(500).send({ message: 'An unexpected error occurred.' });
+      break;
+  }
+};
+
 exports.createStripePaymentIntent = onCall(async (data, context) => {
 
-  const rentAmount = data.rentAmount;
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: 100,
-    currency: 'usd',
-    payment_method_types: ['card'],
-  });
-  return paymentIntent;
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: data.amount,  // Pass the correct amount
+      currency: 'usd',
+      // Add more options as needed
+    });
+
+    return {
+      clientSecret: paymentIntent.client_secret
+    };
+  } catch (error) {
+    handleStripeError(error, response);
+  }
 });
 
 exports.routeToStripeCheckout = onCall(async (data, context) => {
   
   // Create a product first
-  const product = await stripe.products.create({
-    name: 'Rent Payment',
-  });
+  try {
+    const product = await stripe.products.create({
+      name: 'Rent Payment',
+    });
+  
+    // Then create a price using the product's id
+    const price = await stripe.prices.create({
+      currency: 'usd',
+      unit_amount: 1000,
+      product: product.id,
+    });
+  
+    const paymentLink = await stripe.paymentLinks.create({
+      line_items: [
+        {
+          price: price.id,
+          quantity: 1,
+        },
+      ],
+    });
 
-  // Then create a price using the product's id
-  const price = await stripe.prices.create({
-    currency: 'usd',
-    unit_amount: 1000,
-    product: product.id,
-  });
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'T-shirt',
+            },
+            unit_amount: 2000,
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: 'https://podiumapartments.com/success',
+      cancel_url: 'https://podiumapartments.com/failure',
+    });
+    console.log(`session:`, session);
+    console.log(`price:`, price);
+    console.log(`paymentLink:`, paymentLink);
+    return session;
+  } catch (error) {
+    handleStripeError(error, response);
+    
+  }
 
-  const paymentLink = await stripe.paymentLinks.create({
-    line_items: [
-      {
-        price: price.id,
-        quantity: 1,
-      },
-    ],
-  });
-
-  console.log(`price:`, price);
-  console.log(`paymentLink:`, paymentLink);
-  return {'response': paymentLink};
 });
 
 //~~~~ This is just a test function. Use this to experiment. ~~~~
