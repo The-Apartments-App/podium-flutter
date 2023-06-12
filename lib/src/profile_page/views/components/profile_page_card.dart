@@ -59,7 +59,7 @@ class ProfilePageCard extends StatelessWidget {
                     Text(
                       user.name!,
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 28,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -74,6 +74,7 @@ class ProfilePageCard extends StatelessWidget {
               ),
               const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '2',
@@ -82,10 +83,9 @@ class ProfilePageCard extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 8),
                   Text(
                     'Years on Podium',
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 10),
                   ),
                 ],
               )
