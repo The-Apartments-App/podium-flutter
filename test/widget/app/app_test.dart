@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/blog_story_page/blog_story_page.dart';
-import 'package:podium/src/home_page/home.dart';
+import 'package:podium/src/profile_page/profile_page_index.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
@@ -54,11 +54,11 @@ void main() {
 
       await tester.pumpWidget(
         const MaterialApp(
-          home: HomePage(),
+          home: ProfilePage(),
         ),
       );
 
-      expect(find.byType(HomePage), findsOneWidget);
+      expect(find.byType(ProfilePage), findsOneWidget);
     });
 
     testWidgets('BlogStoryPage renders correctly', (tester) async {

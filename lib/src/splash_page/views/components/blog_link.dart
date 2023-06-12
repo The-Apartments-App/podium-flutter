@@ -22,7 +22,7 @@ class _BlogLinkState extends State<BlogLink> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => {
-        context.push('/blogs/${widget.blogId}'),
+        context.go('/blogs/${widget.blogId}'),
       },
       child: ConstrainedBox(
         constraints: const BoxConstraints(

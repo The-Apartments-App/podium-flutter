@@ -52,48 +52,54 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     if (_isLargeScreen) {
       showDialog<void>(
         context: context,
-        builder: (context) => Dialog(
-          backgroundColor: Colors.transparent,
-          child: BlocProvider(
-            create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
-            child: Wrap(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: SizedBox(
-                    width: 575,
-                    child: Container(
-                      constraints: const BoxConstraints(minHeight: 400),
-                      child: const LoginForm(),
+        builder: (_) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: BlocProvider(
+              create: (_) =>
+                  LoginCubit(context.read<AuthenticationRepository>()),
+              child: Wrap(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                    child: SizedBox(
+                      width: 575,
+                      child: Container(
+                        constraints: const BoxConstraints(minHeight: 400),
+                        child: const LoginForm(),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       );
     } else {
       showModalBottomSheet<void>(
         isScrollControlled: true,
         context: context,
-        builder: (context) => ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-          ),
-          child: BlocProvider(
-            create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
-            child: ListView(
-              shrinkWrap: true,
-              children: const [
-                LoginForm(),
-              ],
+        builder: (_) {
+          return ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
             ),
-          ),
-        ),
+            child: BlocProvider(
+              create: (_) =>
+                  LoginCubit(context.read<AuthenticationRepository>()),
+              child: ListView(
+                shrinkWrap: true,
+                children: const [
+                  LoginForm(),
+                ],
+              ),
+            ),
+          );
+        },
       );
     }
   }

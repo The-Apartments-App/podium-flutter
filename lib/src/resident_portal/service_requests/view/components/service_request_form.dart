@@ -141,7 +141,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                     padding: const EdgeInsets.only(bottom: 16),
                     child: Row(
                       children: const [
-                        if (kIsWeb) AppBarBackButton(route: '/residentHome'),
+                        if (kIsWeb) AppBarBackButton(route: '/residentProfile'),
                         Text(
                           'Service Requests',
                           style: TextStyle(

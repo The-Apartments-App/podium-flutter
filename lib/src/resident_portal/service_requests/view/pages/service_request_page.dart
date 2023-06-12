@@ -17,7 +17,7 @@ class ServiceRequestPage extends StatelessWidget {
       child: Scaffold(
         appBar: !kIsWeb
             ? AppBar(
-                leading: const AppBarBackButton(route: '/residentHome'),
+                leading: const AppBarBackButton(route: '/residentProfile'),
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               )

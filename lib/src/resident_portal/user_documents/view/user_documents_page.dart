@@ -14,7 +14,7 @@ class DocumentsPage extends StatelessWidget {
     return Scaffold(
       appBar: !kIsWeb
           ? AppBar(
-              leading: const AppBarBackButton(route: '/residentHome'),
+              leading: const AppBarBackButton(route: '/residentProfile'),
               backgroundColor: Colors.transparent,
               elevation: 0,
             )
@@ -38,7 +38,8 @@ class DocumentsPage extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 40, 0, 40),
                       child: Row(
                         children: const [
-                          if (kIsWeb) AppBarBackButton(route: '/residentHome'),
+                          if (kIsWeb)
+                            AppBarBackButton(route: '/residentProfile'),
                           Text(
                             'Documents',
                             style: TextStyle(

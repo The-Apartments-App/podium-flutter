@@ -24,7 +24,14 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
     var userIsABoss = false;
     final ownerIds = ['kmbvxRaTSBfcf8Xk2CwstCpNQXp1'];
     userIsABoss = ownerIds.contains(user.id);
-    userIsABoss ? context.push('/ownerHome') : context.push('/residentHome');
+    userIsABoss ? context.go('/ownerHome') : context.go('/residentProfile');
+  }
+
+  //PLEASE REFACTOR ME
+  void closeModalAndRoute(String route) {
+    Navigator.pop(context);
+    Navigator.pop(context);
+    context.go(route);
   }
 
   @override
@@ -126,7 +133,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                       buttonText: 'Continue with Facebook',
                       onPressed: () =>
                           context.read<LoginCubit>().logInWithFacebook().then(
-                                (_) => context.push('/home'),
+                                (_) => context.go('/home'),
                               ),
                     ),
                     SocialSignInButton(
@@ -195,14 +202,9 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                             .read<LoginCubit>()
                                             .logInWithDemoResidentUser()
                                             .then(
-                                              (value) => {
-                                                if (mounted)
-                                                  {
-                                                    context.push(
-                                                      '/residentHome',
-                                                    ),
-                                                  }
-                                              },
+                                              (value) => closeModalAndRoute(
+                                                '/residentProfile',
+                                              ),
                                             );
                                       },
                                     ),
@@ -215,25 +217,14 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                                       color: const Color(0xFF03795D),
                                       child: const Text('Admin Login'),
                                       onPressed: () async {
-                                        Navigator.of(context).pop();
-                                        try {
-                                          await context
-                                              .read<LoginCubit>()
-                                              .logInWithDemoAdminUser()
-                                              .then(
-                                                (value) => {
-                                                  if (mounted)
-                                                    {
-                                                      context
-                                                          .push('/ownerHome'),
-                                                    }
-                                                },
-                                              );
-                                        } catch (e) {
-                                          debugPrint(
-                                            '''Error while logging in with demo admin user: $e''',
-                                          );
-                                        }
+                                        await context
+                                            .read<LoginCubit>()
+                                            .logInWithDemoAdminUser()
+                                            .then(
+                                              (value) => closeModalAndRoute(
+                                                '/ownerHome',
+                                              ),
+                                            );
                                       },
                                     ),
                                   ],

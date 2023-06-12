@@ -11,7 +11,7 @@ void main() {
     final widget = MaterialApp(
       home: Builder(
         builder: (context) => PlatformElevatedButton(
-          onPressed: () => context.push('/my_page'),
+          onPressed: () => context.go('/my_page'),
           child: const Text('Navigate'),
         ),
       ),
