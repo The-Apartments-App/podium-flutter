@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:podium/src/blog_story_page/blog_story_page.dart';
 import 'package:podium/src/error_page/error_page.dart';
-import 'package:podium/src/home_page/home.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/owner_dashboard.dart';
+import 'package:podium/src/profile_page/profile_page_index.dart';
 import 'package:podium/src/resident_portal/building_amenities/building_amenities.dart';
 import 'package:podium/src/resident_portal/service_requests/service_requests.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
@@ -32,9 +32,9 @@ class RouterClass {
             const MaterialPage(child: SplashPage()),
       ),
       GoRoute(
-        path: '/residentHome',
+        path: '/residentProfile',
         pageBuilder: (context, state) => const MaterialPage(
-          child: HomePage(),
+          child: ProfilePage(),
         ),
       ),
       GoRoute(
