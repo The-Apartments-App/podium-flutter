@@ -25,8 +25,8 @@ class ProfilePageMenuItem extends StatelessWidget {
 
     const profilePageMenuItemTextStyle = TextStyle(
       color: Colors.black,
-      fontWeight: FontWeight.w400,
-      fontSize: 14,
+      fontWeight: FontWeight.w300,
+      fontSize: 16,
     );
 
     void signOut() {
@@ -47,31 +47,20 @@ class ProfilePageMenuItem extends StatelessWidget {
       }
     }
 
-    return Column(
-      children: [
-        TextButton(
-          onPressed: () => handleRoute(route),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 6, 12, 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  buttonText,
-                  style: profilePageMenuItemTextStyle,
-                ),
-                ProfilePageIcon(icon: icon)
-              ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 12, bottom: 12),
+      child: TextButton(
+        onPressed: () => handleRoute(route),
+        child: Row(
+          children: [
+            ProfilePageIcon(icon: icon),
+            Text(
+              buttonText,
+              style: profilePageMenuItemTextStyle,
             ),
-          ),
+          ],
         ),
-        Divider(
-          indent: 25,
-          endIndent: 25,
-          thickness: 0,
-          color: Colors.grey.shade400,
-        )
-      ],
+      ),
     );
   }
 }

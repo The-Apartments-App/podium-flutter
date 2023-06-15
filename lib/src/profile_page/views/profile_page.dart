@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:podium/src/podium_desktop_app_bar/podium_desktop_app_bar_index.dart';
+import 'package:podium/src/profile_page/views/components/profile_page_about_me.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_card.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_menu_item.dart';
 
@@ -18,39 +20,103 @@ class ProfilePage extends StatelessWidget {
           Duration.zero,
           () => debugPrint('Page refreshed on pull down'),
         ),
-        child: Wrap(
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 700),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Divider(
-                    endIndent: MediaQuery.of(context).size.width * .6,
-                    thickness: 1.85,
-                    color: Colors.grey.shade400,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              if (MediaQuery.of(context).size.width > 700)
+                const PodiumDesktopAppBar(),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Center(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    children: [
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        verticalDirection:
+                            MediaQuery.of(context).size.width < 978
+                                ? VerticalDirection.up
+                                : VerticalDirection.down,
+                        children: [
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 600),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.fromLTRB(12, 24, 0, 24),
+                                  child: Text(
+                                    'My Profile',
+                                    style: TextStyle(
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                if (false)
+                                  // ignore: dead_code
+                                  ..._buildOwnerProfileMenu()
+                                else
+                                  ..._buildResidentProfileMenu(),
+                                const ProfilePageMenuItem(
+                                  route: 'userSettings',
+                                  buttonText: 'Settings',
+                                  icon: Icons.settings,
+                                ),
+                                const ProfilePageMenuItem(
+                                  route: '',
+                                  buttonText: 'Log Out',
+                                  icon: Icons.logout,
+                                  isLogOut: true,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const ProfilePageCard(),
+                        ],
+                      ),
+                      Divider(
+                        endIndent: MediaQuery.of(context).size.width * .6,
+                        thickness: .5,
+                        color: Colors.grey.shade400,
+                      ),
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1400),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(12, 24, 0, 24),
+                              child: Text(
+                                'About Me',
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            ProfilePageAboutMe(
+                              biographyTitle: '',
+                              favoriteSong: '',
+                              funFact: '',
+                              language: '',
+                              obsession: '',
+                              residence: '',
+                              school: '',
+                              spendTime: '',
+                              uselessSkill: '',
+                              userBirthday: '',
+                              userWork: '',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  if (false)
-                    // ignore: dead_code
-                    ..._buildOwnerProfileMenu()
-                  else
-                    ..._buildResidentProfileMenu(),
-                  const ProfilePageMenuItem(
-                    route: 'userSettings',
-                    buttonText: 'Settings',
-                    icon: Icons.settings,
-                  ),
-                  const ProfilePageMenuItem(
-                    route: '',
-                    buttonText: 'Log Out',
-                    icon: Icons.logout,
-                    isLogOut: true,
-                  ),
-                ],
+                ),
               ),
-            ),
-            const ProfilePageCard(),
-          ],
+            ],
+          ),
         ),
       ),
     );

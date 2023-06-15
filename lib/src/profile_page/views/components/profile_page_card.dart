@@ -34,8 +34,8 @@ class ProfilePageCard extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(24)),
       ),
-      shadowColor: Colors.grey.shade200,
-      elevation: 15,
+      shadowColor: Colors.black,
+      elevation: 20,
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: SizedBox(

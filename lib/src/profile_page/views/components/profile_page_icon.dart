@@ -4,7 +4,7 @@ class ProfilePageIcon extends StatelessWidget {
   const ProfilePageIcon({
     super.key,
     required this.icon,
-    this.size = 20,
+    this.size = 32,
     this.color = Colors.black,
   });
 
@@ -14,10 +14,14 @@ class ProfilePageIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      icon,
-      size: size,
-      color: color,
+    return Padding(
+      padding: const EdgeInsets.only(right: 12),
+      child: Icon(
+        icon,
+        size: size,
+        color: color,
+        weight: .1,
+      ),
     );
   }
 }
