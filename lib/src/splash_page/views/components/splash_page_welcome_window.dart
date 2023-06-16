@@ -104,7 +104,7 @@ class SplashPageWelcomeWindow extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: 48.5,
             child: PlatformElevatedButton(
-              // ignore: dead_code
+              // ignore: dead_code, avoid_redundant_argument_values
               onPressed: true ? null : () => displayModal(context),
               child: const Text(
                 'Login Coming Soon!',

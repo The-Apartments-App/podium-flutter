@@ -29,14 +29,6 @@ class _BlogFeedState extends State<BlogFeed> {
               subtext:
                   '''Discover how architectural innovations are bringing about a renaissance of the 'Main Street' ethos. Dive into the rise of Podium Buildings and their role in creating vibrant, sustainable urban communities.''',
             ),
-            // BlogLink(
-            //   blogId: 'blog1',
-            //   imageUrl: 'lib/src/assets/images/blog_story1_image3.jpg',
-            //   headline:
-            //       '''The Future of Urban Living: How Podium Buildings are Reviving the Spirit of 'Main Street' ''',
-            //   subtext:
-            //       '''Discover how architectural innovations are bringing about a renaissance of the 'Main Street' ethos. Dive into the rise of Podium Buildings and their role in creating vibrant, sustainable urban communities.''',
-            // ),
           ],
         ),
       ],
