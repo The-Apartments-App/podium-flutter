@@ -22,7 +22,7 @@ class SocialMediaBar extends StatelessWidget {
         IconButton(
           icon: Icon(FontAwesomeIcons.facebook, color: Colors.blue.shade900),
           onPressed: () => launchURL(
-              'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpodiumapartments.com%2Fblogs%2F1'), // put your Facebook URL here
+              'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpodiumapartments.com%2Fblogs%2F1',),
         ),
         IconButton(
           icon: const Icon(FontAwesomeIcons.twitter, color: Colors.lightBlue),
@@ -48,12 +48,12 @@ class SocialMediaBar extends StatelessWidget {
           icon: const Icon(
             FontAwesomeIcons.link,
             size: 16,
-          ), // You can replace with a chain icon if you have one
+          ), 
           onPressed: () {
             Clipboard.setData(
               const ClipboardData(text: 'https://podiumapartments.com/blogs/1'),
             );
-            // Optionally, show a confirmation to the user
+         
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Link copied to clipboard'),
