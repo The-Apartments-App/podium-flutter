@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/components/linkedin_link.dart';
+import 'package:podium/shared/shared_components.dart';
+import 'package:podium/src/blog_story_page/views/components/blog_story_image.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -60,88 +61,114 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 8),
                     child: Text(
-                      '''Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind''',
+                      '''The Future of Urban Living: How Podium Buildings are Reviving the Spirit of 'Main Street' ''',
                       style: isMobile
                           ? mobileTitleTextStyle
                           : desktopTitleTextStyle,
                     ),
                   ),
-                  const BlogAuthor(),
+                  Wrap(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 10,
+                          right: 24,
+                          left: MediaQuery.of(context).size.width < 700 ? 4 : 0,
+                        ),
+                        child: const BlogAuthor(),
+                      ),
+                      const SocialMediaBar(),
+                    ],
+                  ),
+                  const SizedBox(height: 32),
+                  const BlogStoryImage(blogImageName: 'blog_story1_image1'),
+                  const SizedBox(height: 32),
                   Text(
                     '''
-Imagine a world where you walk into your favorite coffee shop, and no matter which city you're in, you know exactly what to expect. Trusting the brand and the experience is second nature. But when it comes to residential living, there's no such nationwide trusted brand to ensure a consistent experience. 
-
-That's where Podium steps in, ready to revolutionize the way we live and rent. Drawing inspiration from personal apartment hunting experiences, we've seen the struggles firsthand - third-party websites, outdated communication methods, and endless phone calls. Social distancing measures have only exacerbated these issues, with self-guided tours and little interaction with leasing agents.
-
-We knew there had to be a better way, and so the idea for Podium was born. By recognizing the misallocation of resources in traditional management companies, we decided to shift the focus to what really matters - the tenant experience and landlord efficiency.
-
-Our tech-driven approach streamlines the entire rental process, bringing it into the modern era and making it more enjoyable for both parties. Podium is all about offering world-class designed apartments with a consistent feel from city to city. Our tech platform and management operations enable residents to know what to expect, no matter where they live.
-
-This consistency is key to building trust and ensuring a seamless experience. At the heart of Podium's mission is a desire to understand and tackle the fragmentation and outdated practices in the apartment rental market.
-
-We're here to shake things up, make a real difference, and disrupt the legacy real estate industry. By doing so, we aim to create a new era of residential living that benefits everyone. Addressing the housing affordability crisis is also on our agenda.
-
-By promoting an efficient building style, we plan to expand our Podium network from city to city, making a lasting impact on the lives of renters. Through our innovative approach, we're on a mission to redefine the renter-landlord relationship. Podium is here to save tenants from the old ways and create a new standard in residential living that's long overdue.
-
-Join us on this journey as we disrupt the status quo and bring you the apartment living experience you truly deserve.''',
+A cursory glance at the name 'Podium' might prompt questions about its connection with apartments. Yet, envisioning a thriving cityscape soon elucidates this relationship. Imagine towering buildings, their ground floors alive with retail activity, the stories above populated by residential apartments. This coexistence of commerce and residence, vital to the pulse of a city, is reflected in the very DNA of America's urbanization, coined famously as 'Main Street'.''',
+                    style: mainTextStyle,
+                    softWrap: true,
+                  ),
+                  const SizedBox(height: 32),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 8),
+                    child: Text(
+                      '''The Birth and Lifeblood of Main Street''',
+                      style: isMobile
+                          ? mobileTitleTextStyle
+                          : desktopTitleTextStyle,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  const BlogStoryImage(blogImageName: 'blog_story1_image2'),
+                  const SizedBox(height: 32),
+                  Text(
+                    '''
+This ‘Main Street’ spirit, woven into every town across America, symbolized much more than geographical locations—it represented an ethos. It was the cradle where small businesses thrived, families grew, and the local community vibrated with life and activity.''',
                     style: mainTextStyle,
                     softWrap: true,
                   ),
                   const SizedBox(height: 32),
                   const BlogSection(
-                    headline: 'The Need for Disruption',
-                    body: '''
-The rental market has long been plagued by inefficiencies, miscommunications, and a lack of transparency. Tenants often feel powerless, and landlords struggle to keep up with rapidly changing tenant expectations. In this environment, the need for disruption becomes clear.
-                        
-Podium aims to be the catalyst for change, introducing a new standard that promotes a higher quality of life for tenants while ensuring landlords can effectively manage their properties. By embracing technology and cutting-edge design, we're on the path to create a nationwide network of exceptional living spaces that cater to the needs of modern renters.''',
-                  ),
-                  const BlogSection(
-                    headline: 'Innovation at Every Step',
+                    headline: 'The Downfall of Main Street',
                     body:
-                        '''At Podium, we believe that innovation is key to driving positive change in the rental market. We've developed a suite of tools and services that streamline the entire renting process, from searching for an apartment to signing a lease and beyond.''',
+                        '''However, the decay of Main Street was a cascade effect triggered by the deterioration of residential units above the retail spaces. The diminishing population density led to decreased foot traffic, resulting in the gradual closure of small businesses.''',
                   ),
+                  const SizedBox(height: 32),
+                  const BlogStoryImage(blogImageName: 'blog_story1_image4'),
+                  const SizedBox(height: 32),
                   const BlogSection(
-                    headline: 'The Power of Consistency',
+                    headline: 'The Resilience of the Main Street Concept',
                     body:
-                        '''Consistency is at the core of the Podium experience. We believe that by providing a uniform experience across our properties, we can build trust with tenants and create a sense of familiarity no matter where they choose to live. This consistency extends to the design of our apartments, the amenities offered, and the overall living environment.''',
+                        '''The concept of combining residential living with retail accessibility, despite this decline, remains vibrant in urban landscapes. The future of Main Street lies in the revival of these mixed-use communities, and the key to this revival is an architectural innovation known as 'Podium' buildings.''',
                   ),
+                  // const SizedBox(height: 32),
+                  // const BlogStoryImage(blogImageName: 'blog_story1_image3'),
+                  // const SizedBox(height: 32),
                   const BlogSection(
-                    headline:
-                        'Introducing the 5-over-1 Podium Building Concept',
-                    body: '''
-A key element of Podium's innovative approach to apartment living lies in the adoption of the 5-over-1 building concept. This modern architectural style combines the best of both worlds – the efficient use of space and the creation of high-quality living environments for tenants.
-
-The 5-over-1 building concept, also known as "podium buildings," features a ground floor made of concrete or steel, designed for commercial or retail spaces, with five floors of wood-framed residential units above. This design maximizes the use of available space and allows for the integration of essential amenities within the building itself. 
-
-The benefits of the 5-over-1 building concept extend beyond efficient space utilization. By combining commercial and residential spaces in the same building, we foster a sense of community and encourage local businesses to thrive. This integration of mixed-use spaces contributes to the creation of vibrant, walkable neighborhoods that benefit both renters and the surrounding community.
-
-Furthermore, the 5-over-1 design enables Podium to offer a more affordable living experience without sacrificing quality. The use of wood framing for the residential floors is not only more cost-effective but also environmentally friendly, as it has a lower carbon footprint than traditional concrete or steel construction.''',
+                    headline: 'The Rise of Podium Buildings',
+                    body:
+                        '''Typically featuring a retail concourse under five residential stories, these 'Podium' buildings have become a common sight in major American cities over the past decade. They evoke the spirit of a bygone era, recreating the buzz of community and commerce reminiscent of Main Street's heyday.''',
                   ),
+                  const SizedBox(height: 32),
+                  const BlogStoryImage(blogImageName: 'blog_story1_image5'),
+                  const SizedBox(height: 32),
                   const BlogSection(
-                    headline: 'A New Renter-Landlord Relationship',
-                    body: '''
-Podium is committed to transforming the renter-landlord relationship by fostering open communication and promoting transparency. Our platform facilitates seamless interactions between tenants and landlords, ensuring that both parties feel supported and informed throughout the rental process.
-
-By streamlining communication and providing easy access to essential information, we aim to create a rental experience that is free from the frustrations and uncertainties often associated with traditional property management methods.''',
+                    headline: 'Podium Buildings: Reviving Main Street',
+                    body:
+                        '''These modern edifices have begun to mirror the Main Street ethos, fostering an environment that cultivates a symbiotic relationship between residence and commerce. With the convenience of retail outlets nestled right below their homes, residents are participating in a vibrant community life—reminiscent of the early days of Main Street.''',
                   ),
+                  const SizedBox(height: 32),
+                  const BlogStoryImage(blogImageName: 'blog_story1_image6'),
+                  const SizedBox(height: 32),
                   const BlogSection(
-                    headline: 'The Future of Apartment Living',
+                    headline: 'Looking Ahead',
                     body: '''
-At Podium, we're passionate about disrupting the status quo and ushering in a new era of apartment living. We believe that by combining cutting-edge technology, innovative design, and a focus on the needs of modern renters, we can create a nationwide network of exceptional living spaces that redefine the rental experience.
-
-Our vision for the future is one where renters can trust in the consistency and quality of the Podium brand, knowing that no matter where they choose to live, they'll be met with the same exceptional standard of living. As we continue to grow and expand our reach, we remain committed to our core values of innovation, transparency, and tenant satisfaction. By staying true to these principles, we're confident that we can disrupt the old ways of the rental market and deliver the apartment living experience you deserve.
-
-Join us on this journey as we challenge the status quo and work towards creating a better, brighter future for renters and landlords alike. Together, we can redefine the world of apartment living and create a new standard that truly benefits everyone.''',
+The future lies in leveraging these lessons from Main Street to shape the future of urban living. We believe in more than just the construction of physical structures; we are keen on curating spaces that foster community, just as Main Street once did. This endeavor extends beyond traditional property management and aims to revive the Main Street ethos, one Podium building at a time.''',
                   ),
+                  const SizedBox(height: 32),
+                  const BlogStoryImage(blogImageName: 'blog_story1_image7'),
+                  const SizedBox(height: 32),
+                  const SizedBox(height: 32),
+                  Text(
+                    '''
+By curating environments that encourage interaction and shared experiences, we're dedicated to recreating that sense of belonging and unity that once was the essence of Main Street. We see ourselves as architects of community, combining the traditions of Main Street with the promise of the Podium model.
+
+Our vision reflects a future pulsating with the vibrant rhythm of community and commerce—a future echoing the bustling energy of Main Street while looking forward to the dynamic potential of Podium communities. We believe that by respecting the past and embracing the future, we can spark a renaissance of the Main Street spirit, creating thriving, sustainable urban communities that resonate with the vitality and warmth of the cities we love.''',
+                    style: mainTextStyle,
+                    softWrap: true,
+                  ),
+                  const SizedBox(height: 32),
                   const Divider(),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      PodiumLogoWithTitle(height: 80),
-                      LinkedInLink(),
-                      Text('© 2023 Podium Apartments Inc.')
-                    ],
-                  ),
+                  if (MediaQuery.of(context).size.width > 340)
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        PodiumLogoWithTitle(height: 80),
+                        LinkedInLink(),
+                        Text('© 2023 Podium Apartments Inc.')
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -182,7 +209,7 @@ class BlogAuthor extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 4),
-          const Text('May 2nd, 2023')
+          const Text('June 14th, 2023')
         ],
       ),
     );

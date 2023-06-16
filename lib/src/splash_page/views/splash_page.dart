@@ -205,23 +205,27 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         '''Join a growing network of distinctive properties that redefine urban living. With our expanding portfolio of Podium buildings, you'll be part of a thriving community that enjoys a consistent, quality experience across a diverse range of locations. Embrace the future of residential living and discover the true potential of a connected lifestyle.''',
                   ),
                   const SplashPageFeatureBoxSection(),
-                  // const Padding(
-                  //   padding:
-                  //       EdgeInsets.only(left: 48, right: 32, bottom: 96),
-                  //   child: BlogFeed(),
-                  // ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: isMobile ? 16 : 72,
+                      right: isMobile ? 16 : 32,
+                      bottom: isMobile ? 32 : 72,
+                    ),
+                    child: const BlogFeed(),
+                  ),
                   const SplashPageQuestionsSection(),
                 ],
               ),
               const Divider(),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  PodiumLogoWithTitle(height: 80),
-                  LinkedInLink(),
-                  Text('© 2023 Podium Apartments Inc.')
-                ],
-              ),
+              if (MediaQuery.of(context).size.width > 340)
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    PodiumLogoWithTitle(height: 80),
+                    LinkedInLink(),
+                    Text('© 2023 Podium Apartments Inc.')
+                  ],
+                ),
             ],
           ),
         ),

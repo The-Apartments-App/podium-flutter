@@ -17,21 +17,19 @@ class _BlogFeedState extends State<BlogFeed> {
   Widget build(BuildContext context) {
     final mobileBlogFeed = Column(
       children: [
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 500, maxWidth: 400),
-          child: CarouselSlider(
-            carouselController: blogCarouselController,
-            options: CarouselOptions(enableInfiniteScroll: false),
-            items: const [
-              BlogLink(
-                blogId: 'blog1',
-                imageUrl:
-                    'https://images.unsplash.com/photo-1659621222272-f65c27b6f182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHBvZGl1bSUyMGFwYXJ0bWVudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-                headline:
-                    '''Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind''',
-              )
-            ],
-          ),
+        CarouselSlider(
+          carouselController: blogCarouselController,
+          options: CarouselOptions(enableInfiniteScroll: false, height: 400),
+          items: const [
+            BlogLink(
+              blogId: 'blog1',
+              imageUrl: 'lib/src/assets/images/blog_story1_image3.jpg',
+              headline:
+                  '''The Future of Urban Living: How Podium Buildings are Reviving the Spirit of 'Main Street' ''',
+              subtext:
+                  '''Discover how architectural innovations are bringing about a renaissance of the 'Main Street' ethos. Dive into the rise of Podium Buildings and their role in creating vibrant, sustainable urban communities.''',
+            ),
+          ],
         ),
       ],
     );
@@ -40,10 +38,11 @@ class _BlogFeedState extends State<BlogFeed> {
       children: [
         BlogLink(
           blogId: 'blog1',
-          imageUrl:
-              'https://images.unsplash.com/photo-1659621222272-f65c27b6f182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHBvZGl1bSUyMGFwYXJ0bWVudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+          imageUrl: 'lib/src/assets/images/blog_story1_image3.jpg',
           headline:
-              '''Introducing Podium: Revolutionizing Apartment Living and Leaving the Old Ways Behind''',
+              '''The Future of Urban Living: How Podium Buildings are Reviving the Spirit of 'Main Street' ''',
+          subtext:
+              '''Discover how architectural innovations are bringing about a renaissance of the 'Main Street' ethos. Dive into the rise of Podium Buildings and their role in creating vibrant, sustainable urban communities.''',
         ),
       ],
     );
@@ -64,17 +63,7 @@ class _BlogFeedState extends State<BlogFeed> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.only(bottom: 20),
-            //   child: Text(
-            //     'These blogs are getting lots of attention on Podium.',
-            //     style: TextStyle(
-            //       fontSize: isMobile! == false ? 18 : 14,
-            //       fontWeight: FontWeight.w300,
-            //     ),
-            //   ),
-            // ),
-            if (isMobile! != false) mobileBlogFeed else desktopBlogFeed
+            if (isMobile ?? false) mobileBlogFeed else desktopBlogFeed
           ],
         ),
         // if (MediaQuery.of(context).size.width < 700)
