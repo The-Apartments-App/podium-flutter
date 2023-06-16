@@ -76,6 +76,10 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
 
     return Scaffold(
       appBar: AppBar(
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Divider(),
+        ),
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         title: !isMobile
@@ -224,21 +228,22 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                   )
                                 ],
                               ),
-                              ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  minWidth: 300,
-                                  maxWidth: 760,
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.asset(
-                                    'lib/src/assets/images/splash_page_community.png',
-                                    fit: BoxFit.cover,
-                                    height: 700,
-                                    width: MediaQuery.of(context).size.width,
-                                  ),
-                                ),
-                              )
+                              // ConstrainedBox(
+                              //   constraints: const BoxConstraints(
+                              //     minWidth: 300,
+                              //     maxWidth: 760,
+                              //   ),
+                              //   child: ClipRRect(
+                              //     borderRadius: BorderRadius.circular(8),
+                              //     child: Image.asset(
+                              //       'lib/src/assets/images/splash_page_community.png',
+                              //       fit: BoxFit.cover,
+                              //       height: 700,
+                              //       width: MediaQuery.of(context).size.width,
+                              //     ),
+                              //   ),
+                              // )
+                              splashSectionImage('splash_page_community.png')
                             ],
                           ),
                         ),
@@ -402,18 +407,6 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                       PodiumLogoWithTitle(height: 80),
                       LinkedInLink(),
                       Text('© 2023 Podium Apartments Inc.')
-                    ],
-                  )
-                else
-                  const Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      PodiumLogoWithTitle(height: 80),
-                      LinkedInLink(),
-                      Padding(
-                        padding: EdgeInsets.only(top: 24, bottom: 36),
-                        child: Text('© 2023 Podium Apartments Inc.'),
-                      )
                     ],
                   )
               ],
