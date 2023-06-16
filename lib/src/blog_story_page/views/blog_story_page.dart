@@ -67,13 +67,17 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
                           : desktopTitleTextStyle,
                     ),
                   ),
-                  const Row(
+                  Wrap(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 10, right: 24),
-                        child: BlogAuthor(),
+                        padding: EdgeInsets.only(
+                          top: 10,
+                          right: 24,
+                          left: MediaQuery.of(context).size.width < 700 ? 4 : 0,
+                        ),
+                        child: const BlogAuthor(),
                       ),
-                      SocialMediaBar(),
+                      const SocialMediaBar(),
                     ],
                   ),
                   const SizedBox(height: 32),

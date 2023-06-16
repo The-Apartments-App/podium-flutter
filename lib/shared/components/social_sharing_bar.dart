@@ -17,7 +17,9 @@ class SocialMediaBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MediaQuery.of(context).size.width < 700
+          ? MainAxisAlignment.start
+          : MainAxisAlignment.center,
       children: <Widget>[
         IconButton(
           icon: Icon(FontAwesomeIcons.facebook, color: Colors.blue.shade900),
