@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:podium/shared/shared_variables.dart';
 import 'package:podium/src/splash_page/views/components/blog_link.dart';
 
 class BlogFeed extends StatefulWidget {
@@ -12,7 +13,6 @@ class BlogFeed extends StatefulWidget {
 class _BlogFeedState extends State<BlogFeed> {
   final blogCarouselController = CarouselController();
 
-  bool? isMobile;
   @override
   Widget build(BuildContext context) {
     final mobileBlogFeed = Column(
@@ -46,7 +46,6 @@ class _BlogFeedState extends State<BlogFeed> {
         ),
       ],
     );
-    isMobile = MediaQuery.of(context).size.width < 700;
     return Wrap(
       children: [
         Column(
@@ -58,12 +57,12 @@ class _BlogFeedState extends State<BlogFeed> {
               child: Text(
                 'Blogs',
                 style: TextStyle(
-                  fontSize: isMobile! == false ? 32 : 24,
+                  fontSize: isMobile(context) ? 32 : 24,
                   fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            if (isMobile ?? false) mobileBlogFeed else desktopBlogFeed
+            if (isMobile(context)) mobileBlogFeed else desktopBlogFeed
           ],
         ),
         // if (MediaQuery.of(context).size.width < 700)

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:podium/shared/shared_index.dart';
 import 'package:podium/src/podium_desktop_app_bar/podium_desktop_app_bar_index.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_about_me.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_card.dart';
@@ -15,6 +16,7 @@ class ProfilePage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: isMobile(context) ? AppBar() : null,
       body: RefreshIndicator(
         onRefresh: () => Future.delayed(
           Duration.zero,
@@ -23,8 +25,7 @@ class ProfilePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              if (MediaQuery.of(context).size.width > 700)
-                const PodiumDesktopAppBar(),
+              if (!isMobile(context)) const PodiumDesktopAppBar(),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Center(

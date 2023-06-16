@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:podium/shared/shared_index.dart';
 import 'package:podium/src/splash_page/splash_page_index.dart';
 
 class SplashPageMainSection extends StatelessWidget {
@@ -15,10 +16,8 @@ class SplashPageMainSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 650;
-
     return Padding(
-      padding: EdgeInsets.all(isMobile ? 16 : 64),
+      padding: EdgeInsets.all(isMobile(context) ? 16 : 64),
       child: Center(
         child: Wrap(
           spacing: 50,
@@ -36,12 +35,12 @@ class SplashPageMainSection extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.width < 1546 ? 40 : 0,
-                    bottom: isMobile ? 40 : 80,
+                    bottom: isMobile(context) ? 40 : 80,
                   ),
                   child: Text(
                     title,
                     style: TextStyle(
-                      fontSize: isMobile ? 30 : 36,
+                      fontSize: isMobile(context) ? 30 : 36,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -51,7 +50,7 @@ class SplashPageMainSection extends StatelessWidget {
                   child: Text(
                     body,
                     style: TextStyle(
-                      fontSize: isMobile ? 18 : 22,
+                      fontSize: isMobile(context) ? 18 : 22,
                       fontWeight: FontWeight.w300,
                       letterSpacing: 1.1,
                     ),

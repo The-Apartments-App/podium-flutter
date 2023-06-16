@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/shared_components.dart';
+import 'package:podium/shared/shared_index.dart';
 import 'package:podium/src/blog_story_page/views/components/blog_story_image.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -43,14 +43,14 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 600;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1100),
             child: Padding(
-              padding: isMobile ? mobilePagePadding : desktopPagePadding,
+              padding:
+                  isMobile(context) ? mobilePagePadding : desktopPagePadding,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +62,7 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
                     padding: const EdgeInsets.only(top: 8, bottom: 8),
                     child: Text(
                       '''The Future of Urban Living: How Podium Buildings are Reviving the Spirit of 'Main Street' ''',
-                      style: isMobile
+                      style: isMobile(context)
                           ? mobileTitleTextStyle
                           : desktopTitleTextStyle,
                     ),
@@ -73,7 +73,7 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
                         padding: EdgeInsets.only(
                           top: 10,
                           right: 24,
-                          left: MediaQuery.of(context).size.width < 700 ? 4 : 0,
+                          left: isMobile(context) ? 4 : 0,
                         ),
                         child: const BlogAuthor(),
                       ),
@@ -94,7 +94,7 @@ A cursory glance at the name 'Podium' might prompt questions about its connectio
                     padding: const EdgeInsets.only(top: 8, bottom: 8),
                     child: Text(
                       '''The Birth and Lifeblood of Main Street''',
-                      style: isMobile
+                      style: isMobile(context)
                           ? mobileTitleTextStyle
                           : desktopTitleTextStyle,
                     ),
@@ -239,7 +239,6 @@ class BlogSection extends StatelessWidget {
         TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
     const desktopHeadlineTextStyle =
         TextStyle(fontSize: 28, fontWeight: FontWeight.w500);
-    final isMobile = MediaQuery.of(context).size.width < 600;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
@@ -252,7 +251,7 @@ class BlogSection extends StatelessWidget {
             child: Text(
               headline,
               style:
-                  isMobile ? mobileHeadlineTextStyle : desktopHeadlineTextStyle,
+                  isMobile(context) ? mobileHeadlineTextStyle : desktopHeadlineTextStyle,
             ),
           ),
           Text(

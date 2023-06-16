@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:podium/shared/shared_components.dart';
+import 'package:podium/shared/shared_index.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:podium/src/waitlist_button/view/waitlist_button.dart';
 
@@ -57,8 +57,6 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
       );
     }
 
-    final isMobile = MediaQuery.of(context).size.width < 650;
-
     return Scaffold(
       appBar: AppBar(
         bottom: const PreferredSize(
@@ -67,7 +65,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
         ),
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
-        title: !isMobile
+        title: !isMobile(context)
             ? Padding(
                 padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width * .1,
@@ -78,7 +76,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
               )
             : null,
         actions: [
-          if (isMobile)
+          if (isMobile(context))
             Builder(
               builder: (BuildContext context) {
                 return IconButton(
@@ -112,7 +110,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
         ],
         toolbarHeight: 150,
       ),
-      drawer: isMobile
+      drawer: isMobile(context)
           ? Drawer(
               backgroundColor: Colors.white,
               child: ListView(
@@ -205,7 +203,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                                     ),
                                     child: SizedBox(
                                       height: 48.5,
-                                      width: isMobile
+                                      width: isMobile(context)
                                           ? MediaQuery.of(context).size.width
                                           : 390,
                                       child: const WaitlistButton(),

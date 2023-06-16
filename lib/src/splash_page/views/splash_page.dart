@@ -1,7 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/shared/components/linkedin_link.dart';
+import 'package:podium/shared/shared_index.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:podium/src/splash_page/splash_page_index.dart';
@@ -106,8 +106,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 650;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -146,7 +144,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         '''Podium buildings create an inviting environment where residents can connect, share experiences, and feel a sense of belonging. Our properties offer a unique ambiance that adds to the overall living experience, fostering a vibrant community.''',
                   ),
                   Padding(
-                    padding: EdgeInsets.all(isMobile ? 16 : 64),
+                    padding: EdgeInsets.all(isMobile(context) ? 16 : 64),
                     child: Center(
                       child: Wrap(
                         spacing: 50,
@@ -166,12 +164,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                                   top: MediaQuery.of(context).size.width < 1546
                                       ? 40
                                       : 0,
-                                  bottom: isMobile ? 40 : 80,
+                                  bottom: isMobile(context) ? 40 : 80,
                                 ),
                                 child: Text(
                                   'Urban Lifestyle at Your Doorstep',
                                   style: TextStyle(
-                                    fontSize: isMobile ? 30 : 36,
+                                    fontSize: isMobile(context) ? 30 : 36,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -182,7 +180,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                                 child: Text(
                                   '''Explore the conveniences of modern living in our Podium buildings. Our prime locations feature an array of premium retail partners, bringing the best of city living right to your front door.''',
                                   style: TextStyle(
-                                    fontSize: isMobile ? 18 : 22,
+                                    fontSize: isMobile(context) ? 18 : 22,
                                     fontWeight: FontWeight.w300,
                                     letterSpacing: 1.1,
                                   ),
@@ -207,9 +205,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   const SplashPageFeatureBoxSection(),
                   Padding(
                     padding: EdgeInsets.only(
-                      left: isMobile ? 16 : 72,
-                      right: isMobile ? 16 : 32,
-                      bottom: isMobile ? 32 : 72,
+                      left: isMobile(context) ? 16 : 72,
+                      right: isMobile(context) ? 16 : 32,
+                      bottom: isMobile(context) ? 32 : 72,
                     ),
                     child: const BlogFeed(),
                   ),

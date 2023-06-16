@@ -39,8 +39,8 @@ class ProfilePageAboutMeInfoItem extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 450),
-          child: Wrap(
-            alignment: WrapAlignment.spaceBetween,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [

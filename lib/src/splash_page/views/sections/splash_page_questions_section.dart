@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:podium/shared/shared_variables.dart';
 import 'package:podium/src/splash_page/views/components/splash_page_faq.dart';
 
 class SplashPageQuestionsSection extends StatelessWidget {
@@ -6,10 +7,8 @@ class SplashPageQuestionsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 650;
-
     return Padding(
-      padding: EdgeInsets.all(isMobile ? 24 : 48),
+      padding: EdgeInsets.all(isMobile(context) ? 24 : 48),
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         alignment: WrapAlignment.spaceBetween,
@@ -24,7 +23,7 @@ class SplashPageQuestionsSection extends StatelessWidget {
                 'Common Questions, Clear Answers',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: isMobile ? 30 : 36,
+                  fontSize: isMobile(context) ? 30 : 36,
                   fontWeight: FontWeight.w500,
                 ),
               ),
