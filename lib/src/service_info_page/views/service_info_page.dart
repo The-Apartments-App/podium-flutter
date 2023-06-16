@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/shared/shared.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
-import 'package:podium/src/splash_page/views/components/feature_box.dart';
 import 'package:podium/src/waitlist_button/view/waitlist_button.dart';
 
 class ServiceInfoPage extends StatefulWidget {
@@ -72,77 +72,58 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
       );
     }
 
-    final desktopAppBar = [
-      Padding(
-        padding: const EdgeInsets.fromLTRB(32, 0, 40, 0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const PodiumLogoWithTitle(height: 150),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/residents');
-                    },
-                    child: const Text(
-                      'Residents',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/services');
-                    },
-                    child: const Text(
-                      'Services',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-      const Divider()
-    ];
+    final isMobile = MediaQuery.of(context).size.width < 650;
 
     return Scaffold(
-      appBar: isMobile(context)
-          ? AppBar(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              leading: const PodiumLogoWithTitle(
-                height: kToolbarHeight,
-              ),
-              leadingWidth: 150,
-              actions: [
-                Builder(
-                  builder: (BuildContext context) {
-                    return IconButton(
-                      icon: const Icon(Icons.menu, color: Colors.black),
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                      tooltip: MaterialLocalizations.of(context)
-                          .openAppDrawerTooltip,
-                    );
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        title: !isMobile
+            ? Padding(
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * .1,
+                ),
+                child: const PodiumLogoWithTitle(
+                  height: 150,
+                ),
+              )
+            : null,
+        actions: [
+          if (isMobile)
+            Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  icon: const Icon(Icons.menu, color: Colors.black),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
                   },
-                )
-              ],
-              toolbarHeight: 150,
+                  tooltip:
+                      MaterialLocalizations.of(context).openAppDrawerTooltip,
+                );
+              },
             )
-          : null,
-      drawer: isMobile(context)
+          else
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () => context.go('/residents'),
+                  child: const Text(
+                    'Residents',
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => context.go('/services'),
+                  child: const Text(
+                    'Services',
+                  ),
+                ),
+                SizedBox(width: MediaQuery.of(context).size.width * .1),
+              ],
+            ),
+        ],
+        toolbarHeight: 150,
+      ),
+      drawer: isMobile
           ? Drawer(
               backgroundColor: Colors.white,
               child: ListView(
@@ -155,14 +136,14 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                     title: const Text('Residents'),
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.pushNamed(context, '/residents');
+                      context.go('/residents');
                     },
                   ),
                   ListTile(
                     title: const Text('Services'),
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.pushNamed(context, '/services');
+                      context.go('/services');
                     },
                   ),
                 ],
@@ -174,7 +155,6 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
           child: Center(
             child: Column(
               children: [
-                if (!isMobile(context)) ...desktopAppBar,
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 1450),
                   child: Column(
@@ -236,7 +216,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                     ),
                                     child: SizedBox(
                                       height: 48.5,
-                                      width: isMobile(context)
+                                      width: isMobile
                                           ? MediaQuery.of(context).size.width
                                           : 390,
                                       child: const WaitlistButton(),
@@ -372,7 +352,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                             crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               splashSectionImage(
-                                'splash_page_city_skyline.jpeg',
+                                'splash_page_city_skyline.jpg',
                               ),
                               Column(
                                 mainAxisAlignment:

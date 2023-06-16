@@ -1,6 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/shared/shared.dart';
 import 'package:podium/shared/shared_components.dart';
 import 'package:podium/src/login/login.dart';
@@ -104,31 +105,54 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     final isMobile = MediaQuery.of(context).size.width < 650;
 
     return Scaffold(
-      appBar: isMobile
-          ? AppBar(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              leading: const PodiumLogoWithTitle(
-                height: kToolbarHeight,
-              ),
-              leadingWidth: 150,
-              actions: [
-                Builder(
-                  builder: (BuildContext context) {
-                    return IconButton(
-                      icon: const Icon(Icons.menu, color: Colors.black),
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                      tooltip: MaterialLocalizations.of(context)
-                          .openAppDrawerTooltip,
-                    );
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        title: !isMobile
+            ? Padding(
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * .1,
+                ),
+                child: const PodiumLogoWithTitle(
+                  height: 150,
+                ),
+              )
+            : null,
+        actions: [
+          if (isMobile)
+            Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  icon: const Icon(Icons.menu, color: Colors.black),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
                   },
-                )
-              ],
-              toolbarHeight: 150,
+                  tooltip:
+                      MaterialLocalizations.of(context).openAppDrawerTooltip,
+                );
+              },
             )
-          : null,
+          else
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () => context.go('/residents'),
+                  child: const Text(
+                    'Residents',
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => context.go('/services'),
+                  child: const Text(
+                    'Services',
+                  ),
+                ),
+                SizedBox(width: MediaQuery.of(context).size.width * .1),
+              ],
+            ),
+        ],
+        toolbarHeight: 150,
+      ),
       drawer: isMobile
           ? Drawer(
               backgroundColor: Colors.white,
@@ -142,14 +166,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     title: const Text('Residents'),
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.pushNamed(context, '/residents');
+                      context.go('/residents');
                     },
                   ),
                   ListTile(
                     title: const Text('Services'),
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.pushNamed(context, '/services');
+                      context.go('/residents');
                     },
                   ),
                 ],
@@ -160,12 +184,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         child: Center(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 40),
-                child: Row(
-                  children: [PodiumLogoWithTitle(height: 125)],
-                ),
-              ),
               Column(
                 children: [
                   //Splash Photo and User Action Box

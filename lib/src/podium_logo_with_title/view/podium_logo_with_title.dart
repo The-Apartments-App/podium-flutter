@@ -10,7 +10,7 @@ class PodiumLogoWithTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/');
+        context.go('/');
       },
       child: Image.asset(
         fit: BoxFit.cover,

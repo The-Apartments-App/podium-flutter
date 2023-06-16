@@ -4,11 +4,13 @@ import 'package:podium/src/blog_story_page/blog_story_page.dart';
 import 'package:podium/src/error_page/error_page.dart';
 import 'package:podium/src/home_page/home.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/owner_dashboard.dart';
+import 'package:podium/src/resident_info_page/views/resident_info_page.dart';
 import 'package:podium/src/resident_portal/building_amenities/building_amenities.dart';
 import 'package:podium/src/resident_portal/service_requests/service_requests.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
+import 'package:podium/src/service_info_page/service_info_page.dart';
 import 'package:podium/src/splash_page/splash_page_index.dart';
 import 'package:podium/src/stripe_web_widgets/stripe_web_widgets.dart';
 
@@ -26,11 +28,24 @@ class RouterClass {
 
   static List<GoRoute> getRoutes() {
     return [
+      //Splash Page Routes
       GoRoute(
         path: '/',
         pageBuilder: (context, state) =>
             const MaterialPage(child: SplashPage()),
       ),
+      GoRoute(
+        path: '/residents',
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: ResidentInfoPage()),
+      ),
+      GoRoute(
+        path: '/services',
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: ServiceInfoPage()),
+      ),
+
+      //Resident Portal Routes
       GoRoute(
         path: '/residentHome',
         pageBuilder: (context, state) => const MaterialPage(
@@ -70,6 +85,8 @@ class RouterClass {
             // const MaterialPage(child: BuildingAmenitiesPage()),
             const MaterialPage(child: BuildingAmenitiesPage()),
       ),
+
+      //Management Portal Routes
       GoRoute(
         path: '/ownerHome',
         pageBuilder: (context, state) => const MaterialPage(
