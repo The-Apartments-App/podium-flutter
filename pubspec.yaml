@@ -47,7 +47,7 @@ dependencies:
   go_router: ^8.0.5
   google_fonts: ^4.0.4
   http: ^0.13.0
-  image_picker: ^0.8.6
+  image_picker: ^0.8.9
   image_picker_web: ^3.0.0+1
   intl: ^0.18.1
   meta: ^1.8.0
