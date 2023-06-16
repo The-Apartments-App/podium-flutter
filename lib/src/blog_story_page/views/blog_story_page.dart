@@ -132,24 +132,31 @@ This ‘Main Street’ spirit, woven into every town across America, symbolized 
                   const BlogSection(
                     headline: 'Looking Ahead',
                     body: '''
-The future lies in leveraging these lessons from Main Street to shape the future of urban living. We believe in more than just the construction of physical structures; we are keen on curating spaces that foster community, just as Main Street once did. This endeavor extends beyond traditional property management and aims to revive the Main Street ethos, one Podium building at a time.
-
-By curating environments that encourage interaction and shared experiences, we're dedicated to recreating that sense of belonging and unity that once was the essence of Main Street. We see ourselves as architects of community, combining the traditions of Main Street with the promise of the Podium model.
-
-Our vision reflects a future pulsating with the vibrant rhythm of community and commerce—a future echoing the bustling energy of Main Street while looking forward to the dynamic potential of Podium communities. We believe that by respecting the past and embracing the future, we can spark a renaissance of the Main Street spirit, creating thriving, sustainable urban communities that resonate with the vitality and warmth of the cities we love.''',
+The future lies in leveraging these lessons from Main Street to shape the future of urban living. We believe in more than just the construction of physical structures; we are keen on curating spaces that foster community, just as Main Street once did. This endeavor extends beyond traditional property management and aims to revive the Main Street ethos, one Podium building at a time.''',
                   ),
                   const SizedBox(height: 32),
                   const BlogStoryImage(blogImageName: 'blog_story1_image7'),
                   const SizedBox(height: 32),
-                  const Divider(),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      PodiumLogoWithTitle(height: 80),
-                      LinkedInLink(),
-                      Text('© 2023 Podium Apartments Inc.')
-                    ],
+                  const SizedBox(height: 32),
+                  Text(
+                    '''
+By curating environments that encourage interaction and shared experiences, we're dedicated to recreating that sense of belonging and unity that once was the essence of Main Street. We see ourselves as architects of community, combining the traditions of Main Street with the promise of the Podium model.
+
+Our vision reflects a future pulsating with the vibrant rhythm of community and commerce—a future echoing the bustling energy of Main Street while looking forward to the dynamic potential of Podium communities. We believe that by respecting the past and embracing the future, we can spark a renaissance of the Main Street spirit, creating thriving, sustainable urban communities that resonate with the vitality and warmth of the cities we love.''',
+                    style: mainTextStyle,
+                    softWrap: true,
                   ),
+                  const SizedBox(height: 32),
+                  const Divider(),
+                  if (MediaQuery.of(context).size.width > 340)
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        PodiumLogoWithTitle(height: 80),
+                        LinkedInLink(),
+                        Text('© 2023 Podium Apartments Inc.')
+                      ],
+                    ),
                 ],
               ),
             ),
