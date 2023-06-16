@@ -43,14 +43,14 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 700;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1100),
             child: Padding(
-              padding:
-                  isMobile(context) ? mobilePagePadding : desktopPagePadding,
+              padding: isMobile ? mobilePagePadding : desktopPagePadding,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,6 +239,7 @@ class BlogSection extends StatelessWidget {
         TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
     const desktopHeadlineTextStyle =
         TextStyle(fontSize: 28, fontWeight: FontWeight.w500);
+    final isMobile = MediaQuery.of(context).size.width < 700;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
@@ -250,9 +251,8 @@ class BlogSection extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 16),
             child: Text(
               headline,
-              style: isMobile(context)
-                  ? mobileHeadlineTextStyle
-                  : desktopHeadlineTextStyle,
+              style:
+                  isMobile ? mobileHeadlineTextStyle : desktopHeadlineTextStyle,
             ),
           ),
           Text(

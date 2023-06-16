@@ -30,7 +30,6 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
           ],
         ),
       ),
-
       Padding(
         padding: EdgeInsets.only(top: 6, bottom: 6),
         child: Wrap(
@@ -44,20 +43,6 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
           ],
         ),
       ),
-
-      // FeatureBox(
-      //   icon: Icon(Icons.apartment),
-      //   headline: 'Easy Management',
-      //   details:
-      //       '''Stay organized and in control with our user-friendly platform, simplifying your rental experience with a streamlined approach.''',
-      // ),
-      // SizedBox(height: 16),
-      // FeatureBox(
-      //   icon: Icon(Icons.phone_android),
-      //   headline: 'Safety & Comfort',
-      //   details:
-      //       '''Experience peace of mind in a secure and comfortable setting, knowing that Podium prioritizes your well-being and satisfaction.''',
-      // ),
     ];
 
     Widget splashSectionImage(String fileName) {
