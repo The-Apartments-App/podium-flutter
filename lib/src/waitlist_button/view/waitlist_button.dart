@@ -14,7 +14,7 @@ class _WaitlistButtonState extends State<WaitlistButton> {
   Widget build(BuildContext context) {
     Future<void> goToTypeForm() async {
       await launchUrl(
-        Uri.parse('https://xhy4plsbs2i.typeform.com/to/k9E5sWoH'),
+        Uri.parse('https://form.typeform.com/to/k9E5sWoH'),
       );
     }
 
