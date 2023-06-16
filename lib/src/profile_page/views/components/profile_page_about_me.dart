@@ -400,6 +400,7 @@ class ProfilePageAboutMeState extends State<ProfilePageAboutMe> {
           onTap: _updateField,
           modalHeadline: 'If your life was a book, what would be the title?',
           modalSubtext:
+              // ignore: lines_longer_than_80_chars
               'Titles can be intriguing, mysterious, or plain fun. Surprise us!',
         ),
         ProfilePageAboutMeInfoItem(
