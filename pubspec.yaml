@@ -56,7 +56,7 @@ dependencies:
   permission_handler: ^10.3.0
   provider: ^6.0.5
   sign_in_button: ^3.2.0
-  sign_in_with_apple: ^4.3.0
+  sign_in_with_apple: ^5.0.0
   stripe_checkout: ^1.0.0
   url_launcher: ^6.1.11
   url_strategy: ^0.2.0
