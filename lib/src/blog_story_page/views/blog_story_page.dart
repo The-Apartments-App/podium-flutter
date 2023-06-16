@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/components/linkedin_link.dart';
+import 'package:podium/shared/shared_components.dart';
 import 'package:podium/src/blog_story_page/views/components/blog_story_image.dart';
 import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -61,13 +61,21 @@ class _BlogStoryPageState extends State<BlogStoryPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 8),
                     child: Text(
-                      '''The Future of Urban Living: How Podium Buildings are Reviving the Spirit of 'Main Street''',
+                      '''The Future of Urban Living: How Podium Buildings are Reviving the Spirit of 'Main Street' ''',
                       style: isMobile
                           ? mobileTitleTextStyle
                           : desktopTitleTextStyle,
                     ),
                   ),
-                  const BlogAuthor(),
+                  const Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 10, right: 24),
+                        child: BlogAuthor(),
+                      ),
+                      SocialMediaBar(),
+                    ],
+                  ),
                   const SizedBox(height: 32),
                   const BlogStoryImage(blogImageName: 'blog_story1_image1'),
                   const SizedBox(height: 32),
