@@ -8,7 +8,7 @@ import 'package:podium/src/home_page/home.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
-import 'package:podium/src/splash_page/splash_page.dart';
+import 'package:podium/src/splash_page/splash_page_index.dart';
 
 import '../../test_helpers.dart';
 
@@ -25,7 +25,7 @@ void main() {
     testWidgets('renders AppView', (tester) async {
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        App(
+        PodiumApp(
           authenticationRepository: authenticationRepository,
         ),
       );
@@ -36,7 +36,7 @@ void main() {
     testWidgets('navigates to SplashPage on initial route', (tester) async {
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        App(
+        PodiumApp(
           authenticationRepository: authenticationRepository,
         ),
       );
@@ -47,14 +47,14 @@ void main() {
     testWidgets('HomePage renders correctly', (tester) async {
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        App(
+        PodiumApp(
           authenticationRepository: authenticationRepository,
         ),
       );
 
       await tester.pumpWidget(
         const MaterialApp(
-          home: HomePage(bossMode: false),
+          home: HomePage(),
         ),
       );
 
@@ -64,7 +64,7 @@ void main() {
     testWidgets('BlogStoryPage renders correctly', (tester) async {
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        App(
+        PodiumApp(
           authenticationRepository: authenticationRepository,
         ),
       );
@@ -83,7 +83,7 @@ void main() {
     testWidgets('PaymentsPage renders correctly', (tester) async {
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        App(
+        PodiumApp(
           authenticationRepository: authenticationRepository,
         ),
       );
@@ -100,7 +100,7 @@ void main() {
     testWidgets('DocumentsPage renders correctly', (tester) async {
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        App(
+        PodiumApp(
           authenticationRepository: authenticationRepository,
         ),
       );
@@ -117,7 +117,7 @@ void main() {
     testWidgets('UserSettingsPage renders correctly', (tester) async {
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        App(
+        PodiumApp(
           authenticationRepository: authenticationRepository,
         ),
       );

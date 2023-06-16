@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:podium/src/login/login.dart';
 
 class LoginContinueButton extends StatelessWidget {
@@ -12,7 +13,7 @@ class LoginContinueButton extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 48.5,
-        child: ElevatedButton(
+        child: PlatformElevatedButton(
           onPressed: () => {context.read<LoginCubit>().checkEmailValidity()},
           child: const Text(
             'Continue',
