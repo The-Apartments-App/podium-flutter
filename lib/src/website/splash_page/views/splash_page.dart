@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/shared/components/podium_footer.dart';
 import 'package:podium/src/shared/shared_index.dart';
-import 'package:podium/src/splash_page/splash_page_index.dart';
-import 'package:podium/src/splash_page/views/components/splash_page_mobile_banner.dart';
+import 'package:podium/src/website/splash_page/views/components/splash_page_mobile_banner.dart';
+import 'package:podium/src/website/website_pages_index.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

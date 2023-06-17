@@ -9,8 +9,8 @@ import 'package:podium/src/resident_portal/service_requests/service_requests.dar
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
-import 'package:podium/src/splash_page/splash_page_index.dart';
 import 'package:podium/src/stripe_web_widgets/stripe_web_widgets.dart';
+import 'package:podium/src/website/website_pages_index.dart';
 
 class RouterClass {
   RouterClass()

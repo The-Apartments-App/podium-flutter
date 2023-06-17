@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/src/splash_page/views/components/splash_page_welcome_window.dart';
+import 'package:podium/src/website/website_pages_index.dart';
 
 class SplashPageDesktopBanner extends StatefulWidget {
   const SplashPageDesktopBanner({super.key});

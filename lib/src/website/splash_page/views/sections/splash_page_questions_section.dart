@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:podium/src/shared/variables/shared_variables.dart';
-import 'package:podium/src/splash_page/views/components/splash_page_faq.dart';
+import 'package:podium/src/website/website_pages_index.dart';
 
 class SplashPageQuestionsSection extends StatelessWidget {
   const SplashPageQuestionsSection({super.key});

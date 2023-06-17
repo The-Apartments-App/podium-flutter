@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:podium/src/shared/variables/shared_variables.dart';
-import 'package:podium/src/splash_page/views/components/blog_link.dart';
+import 'package:podium/src/website/splash_page/views/components/blog_link.dart';
 
 class BlogFeed extends StatefulWidget {
   const BlogFeed({super.key});

@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:podium/src/splash_page/splash_page_index.dart';
+import 'package:podium/src/website/website_pages_index.dart';
 
 class SplashPageCarousel extends StatefulWidget {
   const SplashPageCarousel({super.key});

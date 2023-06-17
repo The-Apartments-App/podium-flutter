@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/src/splash_page/views/components/splash_page_feature_box.dart';
+import 'package:podium/src/website/website_pages_index.dart';
 
 class SplashPageFeatureBoxSection extends StatelessWidget {
   const SplashPageFeatureBoxSection({super.key});
