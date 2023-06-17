@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/components/owner_dashboard_components.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/modal_content/modal_content.dart';
-import 'package:podium/src/shared/shared_functions.dart';
+import 'package:podium/src/shared/functions/shared_functions.dart';
 
 class OwnerDashboard extends StatefulWidget {
   const OwnerDashboard({super.key});
