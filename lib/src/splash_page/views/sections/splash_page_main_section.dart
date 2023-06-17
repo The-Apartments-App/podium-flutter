@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/shared_index.dart';
+import 'package:podium/src/shared/shared_index.dart';
 import 'package:podium/src/splash_page/splash_page_index.dart';
 
 class SplashPageMainSection extends StatelessWidget {

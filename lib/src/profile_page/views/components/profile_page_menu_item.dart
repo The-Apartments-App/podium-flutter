@@ -10,17 +10,16 @@ class ProfilePageMenuItem extends StatelessWidget {
     required this.route,
     required this.buttonText,
     required this.icon,
-    this.isLogOut,
   });
 
   final String route;
   final String buttonText;
   final IconData icon;
-  final bool? isLogOut;
 
   @override
   Widget build(BuildContext context) {
     final appBloc = context.select((AppBloc bloc) => bloc);
+
     final user = appBloc.state.user;
 
     const profilePageMenuItemTextStyle = TextStyle(
@@ -29,16 +28,7 @@ class ProfilePageMenuItem extends StatelessWidget {
       fontSize: 16,
     );
 
-    void signOut() {
-      appBloc.add(AppLogoutRequested());
-      context.go('/');
-    }
-
     void handleRoute(String route) {
-      if (isLogOut ?? false) {
-        debugPrint('User Signed Out');
-        signOut();
-      }
       if (user.isEmpty) {
         debugPrint('user is empty, routing home.');
         context.go('/');

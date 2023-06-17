@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 final ThemeData appTheme = buildAppTheme();
-
 ThemeData buildAppTheme() {
   final base = ThemeData.light();
   return base.copyWith(
@@ -16,9 +15,10 @@ ThemeData buildAppTheme() {
     ),
     canvasColor: Colors.transparent,
     textTheme: _appTextTheme(base.textTheme),
+    appBarTheme: _appBarTheme(base.appBarTheme),
     colorScheme:
         ColorScheme.fromSwatch().copyWith(primary: const Color(0xFF03795D)),
-    scaffoldBackgroundColor: const Color(0XFFFFFFFF),
+    scaffoldBackgroundColor: Colors.white,
   );
 }
 
@@ -28,4 +28,13 @@ TextTheme _appTextTheme(TextTheme base) {
         bodyColor: Colors.black,
         fontFamily: 'Roboto',
       );
+}
+
+AppBarTheme _appBarTheme(AppBarTheme base) {
+  return base.copyWith(
+    backgroundColor: Colors.white,
+    elevation: 0,
+    titleTextStyle: const TextStyle(color: Colors.black, fontSize: 20),
+    iconTheme: const IconThemeData(color: Colors.black),
+  );
 }

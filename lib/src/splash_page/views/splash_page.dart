@@ -1,9 +1,9 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/shared/shared_index.dart';
 import 'package:podium/src/login/login.dart';
-import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
+import 'package:podium/src/shared/components/podium_footer.dart';
+import 'package:podium/src/shared/shared_index.dart';
 import 'package:podium/src/splash_page/splash_page_index.dart';
 import 'package:podium/src/splash_page/views/components/splash_page_mobile_banner.dart';
 
@@ -215,15 +215,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 ],
               ),
               const Divider(),
-              if (MediaQuery.of(context).size.width > 340)
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    PodiumLogoWithTitle(height: 80),
-                    LinkedInLink(),
-                    Text('© 2023 Podium Apartments Inc.')
-                  ],
-                ),
+              if (MediaQuery.of(context).size.width > 340) const PodiumFooter(),
             ],
           ),
         ),

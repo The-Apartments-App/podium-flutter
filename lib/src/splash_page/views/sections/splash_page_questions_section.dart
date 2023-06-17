@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/shared_variables.dart';
+import 'package:podium/src/shared/shared_variables.dart';
 import 'package:podium/src/splash_page/views/components/splash_page_faq.dart';
 
 class SplashPageQuestionsSection extends StatelessWidget {

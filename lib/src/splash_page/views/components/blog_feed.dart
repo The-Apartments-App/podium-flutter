@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:podium/shared/shared_variables.dart';
+import 'package:podium/src/shared/shared_variables.dart';
 import 'package:podium/src/splash_page/views/components/blog_link.dart';
 
 class BlogFeed extends StatefulWidget {

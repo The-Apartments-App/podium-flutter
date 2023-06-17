@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/shared_index.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 Widget splashSectionImage(String fileName, BuildContext context) {
   return ConstrainedBox(

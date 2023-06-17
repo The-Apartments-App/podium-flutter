@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:podium/shared/shared_index.dart';
 import 'package:podium/src/blog_story_page/views/components/blog_story_image.dart';
-import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
+import 'package:podium/src/shared/components/podium_footer.dart';
+import 'package:podium/src/shared/shared_index.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BlogStoryPage extends StatefulWidget {
@@ -161,14 +161,7 @@ Our vision reflects a future pulsating with the vibrant rhythm of community and 
                   const SizedBox(height: 32),
                   const Divider(),
                   if (MediaQuery.of(context).size.width > 340)
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        PodiumLogoWithTitle(height: 80),
-                        LinkedInLink(),
-                        Text('© 2023 Podium Apartments Inc.')
-                      ],
-                    ),
+                    const PodiumFooter(),
                 ],
               ),
             ),
@@ -250,8 +243,9 @@ class BlogSection extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 16),
             child: Text(
               headline,
-              style:
-                  isMobile(context) ? mobileHeadlineTextStyle : desktopHeadlineTextStyle,
+              style: isMobile(context)
+                  ? mobileHeadlineTextStyle
+                  : desktopHeadlineTextStyle,
             ),
           ),
           Text(
