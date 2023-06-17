@@ -18,7 +18,9 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
             preferredSize: Size.fromHeight(40),
             child: Divider(),
           ),
-          title: const BackButton(),
+          title: const AppBarBackButton(
+            route: '/',
+          ),
           actions: [
             IconButton(
               onPressed: () {

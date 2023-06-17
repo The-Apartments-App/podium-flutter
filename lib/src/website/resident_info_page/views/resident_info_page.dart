@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:podium/src/shared/components/podium_footer.dart';
 import 'package:podium/src/shared/shared_index.dart';
 import 'package:podium/src/waitlist_button/view/waitlist_button.dart';
 

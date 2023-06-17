@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/app_bar_back_button/view/app_bar_back_button.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_about_me.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_card.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_menu_item.dart';
-import 'package:podium/src/shared/components/podium_footer.dart';
 import 'package:podium/src/shared/shared_index.dart';
 
 class ProfilePage extends StatelessWidget {

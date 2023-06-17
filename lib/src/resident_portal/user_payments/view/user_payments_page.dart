@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Card;
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
+import 'package:podium/src/shared/shared_index.dart';
 // import 'package:stripe_checkout/stripe_checkout.dart';
 import 'package:url_launcher/url_launcher.dart';
 

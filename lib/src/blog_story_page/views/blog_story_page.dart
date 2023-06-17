@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:podium/src/blog_story_page/views/components/blog_story_image.dart';
-import 'package:podium/src/shared/components/podium_footer.dart';
 import 'package:podium/src/shared/shared_index.dart';
 import 'package:url_launcher/url_launcher.dart';
 

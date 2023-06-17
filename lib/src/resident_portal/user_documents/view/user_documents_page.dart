@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
 import 'package:podium/src/lease_reader/lease_reader.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 class DocumentsPage extends StatelessWidget {
   const DocumentsPage({super.key});
