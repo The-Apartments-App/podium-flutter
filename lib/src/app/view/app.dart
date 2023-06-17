@@ -47,6 +47,7 @@ class _AppViewState extends State<AppView> {
     debugPrint('2b. APPVIEW - MaterialApp.router built here');
     return MaterialApp.router(
       theme: appTheme,
+      debugShowCheckedModeBanner: false,
       routeInformationParser: router.goRouter.routeInformationParser,
       routerDelegate: router.goRouter.routerDelegate,
       routeInformationProvider: router.goRouter.routeInformationProvider,

@@ -62,7 +62,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
 
   Widget pictureBox1Child() {
     if (imageBytes0 != null && imageBytes1 == null) {
-      return const Icon(Icons.add);
+      return const Icon(Icons.add_a_photo);
     } else if (imageBytes1 != null) {
       return ServiceRequestImage(
         bytes: imageBytes1!,
@@ -74,7 +74,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
 
   Widget pictureBox2Child() {
     if (imageBytes0 != null && imageBytes1 != null && imageBytes2 == null) {
-      return const Icon(Icons.add);
+      return const Icon(Icons.add_a_photo);
     } else if (imageBytes2 != null) {
       return ServiceRequestImage(
         bytes: imageBytes2!,
