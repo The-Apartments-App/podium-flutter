@@ -6,12 +6,23 @@ class PodiumFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Column(
       children: [
-        PodiumLogoWithTitle(height: 80),
-        LinkedInLink(),
-        Text('© 2023 Podium Apartments Inc.')
+        Padding(
+          padding: const EdgeInsets.all(12),
+          child: Divider(
+            thickness: 0,
+            color: Colors.grey.shade200,
+          ),
+        ),
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            PodiumLogoWithTitle(height: 80),
+            LinkedInLink(),
+            Text('© 2023 Podium Apartments Inc.')
+          ],
+        ),
       ],
     );
   }

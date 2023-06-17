@@ -53,60 +53,66 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
           ],
         )
       : AppBar(
+          toolbarHeight: 700,
           backgroundColor: Colors.white,
           bottom: const PreferredSize(
             preferredSize: Size.fromHeight(40),
             child: Divider(),
           ),
-          title: const PodiumLogoRound(height: kToolbarHeight),
+          title: const PodiumLogoRound(height: 500),
           actions: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
-                  width: .5,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(30)),
-              ),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.menu),
-                    onPressed: () {
-                      // handle hamburger menu button press here
-                    },
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: .5,
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
                   ),
-                  PopupMenuButton<String>(
-                    onSelected: (String result) {
-                      if (result == 'Home') {
-                        // Handle navigation to home
-                      } else if (result == 'Logout') {
-                        // Handle logout
-                      }
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<String>>[
-                      const PopupMenuItem<String>(
-                        value: 'Home',
-                        child: Text('Home'),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.menu),
+                        onPressed: () {
+                          // handle hamburger menu button press here
+                        },
                       ),
-                      const PopupMenuItem<String>(
-                        value: 'Logout',
-                        child: Text('Logout'),
+                      PopupMenuButton<String>(
+                        onSelected: (String result) {
+                          if (result == 'Home') {
+                            // Handle navigation to home
+                          } else if (result == 'Logout') {
+                            // Handle logout
+                          }
+                        },
+                        itemBuilder: (BuildContext context) =>
+                            <PopupMenuEntry<String>>[
+                          const PopupMenuItem<String>(
+                            value: 'Home',
+                            child: Text('Home'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'Logout',
+                            child: Text('Logout'),
+                          ),
+                        ],
+                        child: const Padding(
+                          padding: EdgeInsets.all(8),
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage(
+                              'lib/src/assets/images/podium_logo_round.png',
+                            ), // Your user's profile picture here
+                          ),
+                        ),
                       ),
                     ],
-                    child: const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage(
-                          'lib/src/assets/images/podium_logo_round.png',
-                        ), // Your user's profile picture here
-                      ),
-                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         );

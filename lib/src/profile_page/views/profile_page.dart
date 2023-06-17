@@ -7,6 +7,7 @@ import 'package:podium/src/app_bar_back_button/view/app_bar_back_button.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_about_me.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_card.dart';
 import 'package:podium/src/profile_page/views/components/profile_page_menu_item.dart';
+import 'package:podium/src/shared/components/podium_footer.dart';
 import 'package:podium/src/shared/shared_index.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -69,9 +70,10 @@ class ProfilePage extends StatelessWidget {
               ],
             )
           : AppBar(
+              toolbarHeight: 80,
               backgroundColor: Colors.white,
               bottom: const PreferredSize(
-                preferredSize: Size.fromHeight(80),
+                preferredSize: Size.fromHeight(40),
                 child: Divider(),
               ),
               title: const Padding(
@@ -79,20 +81,26 @@ class ProfilePage extends StatelessWidget {
                 child: PodiumLogoWithTitle(height: 125),
               ),
               actions: [
-                Container(
-                  alignment: Alignment.center,
+                Padding(
+                  padding: const EdgeInsets.only(top: 32, right: 32),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.grey,
+                        color: Colors.grey.shade400,
                         width: .5,
                       ),
-                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(30),
+                      ),
                     ),
                     child: Row(
                       children: [
                         IconButton(
-                          icon: const Icon(Icons.menu),
+                          icon: const Icon(
+                            Icons.menu,
+                            size: 20,
+                            color: Colors.black87,
+                          ),
                           onPressed: () {
                             // handle hamburger menu button press here
                           },
@@ -118,14 +126,17 @@ class ProfilePage extends StatelessWidget {
                               child: Text('Logout'),
                             ),
                           ],
-                          child: const Padding(
-                            padding: EdgeInsets.only(left: 8),
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 35,
-                              backgroundImage: AssetImage(
-                                'lib/src/assets/images/podium_logo_round.png',
-                              ), // Your user's profile picture here
+                          child: Container(
+                            width: 55,
+                            height: 55,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  'lib/src/assets/images/podium_logo_round.png',
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -235,37 +246,57 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    side: MaterialStateProperty.all(
-                      const BorderSide(width: 2),
-                    ), // Heavy border
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ), // Shape
-                    padding: MaterialStateProperty.all(
-                      const EdgeInsets.all(10),
-                    ), // Inner padding
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.white), // Button color
-                  ),
-                  onPressed: signOut,
-                  child: const Row(
-                    children: [
-                      Icon(Icons.logout, color: Colors.black), // Icon
-                      SizedBox(width: 8), // Spacing
-                      Text(
-                        'Log Out',
-                        style: TextStyle(color: Colors.black),
-                      ), // Text
-                    ],
+              if (isMobile(context))
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Divider(
+                    thickness: 0,
+                    color: Colors.grey.shade200,
                   ),
                 ),
-              )
+              if (isMobile(context))
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: 500,
+                      minHeight: 64,
+                    ),
+                    child: OutlinedButton(
+                      style: ButtonStyle(
+                        side: MaterialStateProperty.all(
+                          const BorderSide(width: 1.25),
+                        ), // Heavy border
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ), // Shape
+                        padding: MaterialStateProperty.all(
+                          const EdgeInsets.all(10),
+                        ), // Inner padding
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                      ),
+                      onPressed: signOut,
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Icon // Spacing
+                          Text(
+                            'Log out',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ), // Text
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              const PodiumFooter()
             ],
           ),
         ),
