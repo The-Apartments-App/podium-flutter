@@ -27,6 +27,7 @@ dependencies:
   firebase_auth: ^4.6.1
   firebase_core: ^2.13.0
   firebase_storage: ^11.2.1
+  fl_chart: ^0.63.0
   flow_builder: ^0.0.9
   flutter:
     sdk: flutter
@@ -54,10 +55,12 @@ dependencies:
   mockito: ^5.4.2
   path_provider: ^2.0.11
   permission_handler: ^10.3.0
+  progressive_image: ^2.0.1
   provider: ^6.0.5
   sign_in_button: ^3.2.0
   sign_in_with_apple: ^4.3.0
   stripe_checkout: ^1.0.0
+  syncfusion_flutter_charts: ^21.2.10
   url_launcher: ^6.1.11
   url_strategy: ^0.2.0
 

@@ -23,31 +23,24 @@ class OwnerDashboardInfoBoxState extends State<OwnerDashboardInfoBox> {
 
   void _showOverlay(BuildContext context) {
     _overlayEntry = OverlayEntry(
-      builder: (context) => Positioned.fill(
-        top: 50,
-        right: 50,
-        bottom: 50,
-        left: 50,
-        child: DecoratedBox(
-          decoration: const BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black54,
-                blurRadius: 10,
-                spreadRadius: 500,
-              ),
-            ],
+      builder: (context) => Stack(
+        children: [
+          // This creates a backdrop
+          Positioned.fill(
+            child: Container(
+              color: Colors.black54,
+            ),
           ),
-          child: Material(
-            animationDuration: const Duration(milliseconds: 500),
-            elevation: 10,
-            shadowColor: Colors.black54,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              child: Container(
+          // This is your modal dialog
+          Center(
+            child: Card(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+              ),
+              elevation: 10,
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.8,
-                width: MediaQuery.of(context).size.width * 0.8,
-                color: Colors.white,
+                width: MediaQuery.of(context).size.width * 0.5,
                 child: Column(
                   children: [
                     Padding(
@@ -77,7 +70,7 @@ class OwnerDashboardInfoBoxState extends State<OwnerDashboardInfoBox> {
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
 

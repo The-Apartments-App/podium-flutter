@@ -323,10 +323,10 @@ packages:
     dependency: "direct main"
     description:
       name: dropdown_button2
-      sha256: "374f2390161bf782b4896f0b1b24cbb2b5daaa1cfb11047c3307461dcdf44e07"
+      sha256: "107444581478342c6511040c2eb52850748400df4f3295df3da8be75693180a5"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.3"
+    version: "2.1.4"
   envied:
     dependency: "direct main"
     description:
@@ -527,6 +527,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  fl_chart:
+    dependency: "direct main"
+    description:
+      name: fl_chart
+      sha256: c1e26c7e48496be85104c16c040950b0436674cdf0737f3f6e95511b2529b592
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.63.0"
   flow_builder:
     dependency: "direct main"
     description:
@@ -672,18 +680,18 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_stripe
-      sha256: "317be4a0c5bbc02170449d62615c0667d018a16fdd43e7e8dbf7cb121ea6f5fd"
+      sha256: fb1a0647867a26b1fced98706ef96c664a5ae2579e29b67af5ddd054e01d83df
       url: "https://pub.dev"
     source: hosted
-    version: "9.2.1"
+    version: "9.2.2"
   flutter_stripe_web:
     dependency: "direct main"
     description:
       name: flutter_stripe_web
-      sha256: a108d14725cbdcd0516ac6143fe0eddb86ef44dc0ba067a8a5c6c1e97190e175
+      sha256: e6ffc95641914706d5967922053be7c14647ed2b3f751cc0b2056654950c7a5b
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.1"
+    version: "4.2.0"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -1189,6 +1197,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  progressive_image:
+    dependency: "direct main"
+    description:
+      name: progressive_image
+      sha256: "62f3f4d01e5ee5f08827d45df2bac4f4df702034fe0de0c56bbf3afd4925817d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   provider:
     dependency: "direct main"
     description:
@@ -1382,18 +1398,34 @@ packages:
     dependency: transitive
     description:
       name: stripe_js
-      sha256: aa2d08f65724e39227d5346af8418cf3cc37613c95f04d5e6db029a21df0df2e
+      sha256: ea4e917ac81ab4590e4464975fdf5d7eb50a0eeb267d532ada0d8515c8790be9
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "3.1.0"
   stripe_platform_interface:
     dependency: transitive
     description:
       name: stripe_platform_interface
-      sha256: "8148f5fb15ed7fd9236559edfd72260657c03904cfe67d3ebba7eeaa20bb4261"
+      sha256: "321de409f41088e842140a8e8b334b1111cc6072dfb2fa9e6452155187e8ff2d"
       url: "https://pub.dev"
     source: hosted
-    version: "9.2.1"
+    version: "9.2.2"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      sha256: "5f868f5a82380ef1b3de416b7812e1ac7acce6a629f9281618adee81d90716cc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "8db8f55c77f56968681447d3837c10f27a9e861e238a898fda116c7531def979"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
   term_glyph:
     dependency: transitive
     description:
@@ -1486,10 +1518,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_platform_interface
-      sha256: "6c9ca697a5ae218ce56cece69d46128169a58aa8653c1b01d26fcd4aad8c4370"
+      sha256: bfdfa402f1f3298637d71ca8ecfe840b4696698213d5346e9d12d4ab647ee2ea
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.2"
+    version: "2.1.3"
   url_launcher_web:
     dependency: transitive
     description:
@@ -1622,10 +1654,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "7dacfda1edcca378031db9905ad7d7bd56b29fd1a90b0908b71a52a12c41e36b"
+      sha256: "1414f27dd781737e51afa9711f2ac2ace6ab4498ee98e20863fa5505aa00c58c"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.3"
+    version: "5.0.4"
   xdg_directories:
     dependency: transitive
     description:

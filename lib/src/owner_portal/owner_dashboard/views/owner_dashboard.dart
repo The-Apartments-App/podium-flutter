@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/components/owner_dashboard_components.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/modal_content/modal_content.dart';
-import 'package:podium/src/shared/functions/shared_functions.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 class OwnerDashboard extends StatefulWidget {
   const OwnerDashboard({super.key});
@@ -22,6 +23,11 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
   @override
   Widget build(BuildContext context) {
     final user = context.select((AppBloc bloc) => bloc.state.user);
+    final appBloc = context.select((AppBloc bloc) => bloc);
+    void signOut() {
+      appBloc.add(AppLogoutRequested());
+      context.go('/');
+    }
 
     void handleTabTap(int index) {
       setState(() {
@@ -125,7 +131,50 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                         ),
                         Text("You're all caught up!"),
                       ],
-                    )
+                    ),
+                    const Expanded(child: SizedBox()),
+                    Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: 500,
+                          minHeight: 64,
+                        ),
+                        child: OutlinedButton(
+                          style: ButtonStyle(
+                            side: MaterialStateProperty.all(
+                              const BorderSide(width: 1.25),
+                            ), // Heavy border
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ), // Shape
+                            padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(10),
+                            ), // Inner padding
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                          ),
+                          onPressed: signOut,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Icon // Spacing
+                              Text(
+                                'Log out',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ), // Text
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const PodiumFooter(),
                   ],
                 ),
               ),
@@ -196,10 +245,10 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                             modalContent: MoveOutsModal(),
                           ),
                           OwnerDashboardInfoBox(
-                            boxTitle: 'Tasks in Progress',
+                            boxTitle: 'Maintenance',
                             icon: Icons.handyman,
                             boxInfo: '2',
-                            modalContent: TasksInProgressModal(),
+                            modalContent: MaintenanceModal(),
                           ),
                           OwnerDashboardInfoBox(
                             boxTitle: 'Guest Satisfaction',
