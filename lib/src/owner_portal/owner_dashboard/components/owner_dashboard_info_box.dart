@@ -25,47 +25,55 @@ class OwnerDashboardInfoBoxState extends State<OwnerDashboardInfoBox> {
     _overlayEntry = OverlayEntry(
       builder: (context) => Stack(
         children: [
-          // This creates a backdrop
-          Positioned.fill(
+          GestureDetector(
+            onTap: () {
+              _overlayEntry?.remove();
+              _overlayEntry = null;
+            },
             child: Container(
               color: Colors.black54,
             ),
           ),
           // This is your modal dialog
-          Center(
-            child: Card(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-              ),
-              elevation: 10,
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.8,
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(24),
-                      child: Text(
-                        widget.boxTitle,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
+          GestureDetector(
+            onTap: () {},
+            child: Center(
+              child: Card(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                ),
+                elevation: 10,
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: CloseButton(
+                              onPressed: () {
+                                _overlayEntry?.remove();
+                                _overlayEntry = null;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(child: widget.modalContent),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 32),
+                        child: PlatformElevatedButton(
+                          onPressed: () {
+                            _overlayEntry?.remove();
+                            _overlayEntry = null;
+                          },
+                          child: const Text('Close'),
                         ),
                       ),
-                    ),
-                    const Divider(),
-                    Expanded(child: widget.modalContent),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 32),
-                      child: PlatformElevatedButton(
-                        onPressed: () {
-                          _overlayEntry?.remove();
-                          _overlayEntry = null;
-                        },
-                        child: const Text('Close'),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

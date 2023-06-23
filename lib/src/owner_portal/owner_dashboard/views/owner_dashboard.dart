@@ -251,10 +251,10 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                             modalContent: MaintenanceModal(),
                           ),
                           OwnerDashboardInfoBox(
-                            boxTitle: 'Guest Satisfaction',
+                            boxTitle: 'Guest Reviews',
                             icon: Icons.star,
-                            boxInfo: '5',
-                            modalContent: GuestSatisfactionModal(),
+                            boxInfo: '4.97',
+                            modalContent: GuestReviewsModal(),
                           ),
                           OwnerDashboardInfoBox(
                             boxTitle: 'Occupancy Rate',
