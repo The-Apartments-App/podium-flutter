@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class OwnerDashboardInfoBox extends StatefulWidget {
   const OwnerDashboardInfoBox({
@@ -52,26 +51,24 @@ class OwnerDashboardInfoBoxState extends State<OwnerDashboardInfoBox> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(12),
-                            child: CloseButton(
-                              onPressed: () {
-                                _overlayEntry?.remove();
-                                _overlayEntry = null;
-                              },
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  width: 2,
+                                ),
+                              ),
+                              child: CloseButton(
+                                onPressed: () {
+                                  _overlayEntry?.remove();
+                                  _overlayEntry = null;
+                                },
+                              ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                       Expanded(child: widget.modalContent),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 32),
-                        child: PlatformElevatedButton(
-                          onPressed: () {
-                            _overlayEntry?.remove();
-                            _overlayEntry = null;
-                          },
-                          child: const Text('Close'),
-                        ),
-                      ),
                     ],
                   ),
                 ),

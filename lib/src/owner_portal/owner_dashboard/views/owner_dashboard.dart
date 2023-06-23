@@ -20,6 +20,20 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
     'TOMORROW',
     'THIS WEEK',
   ];
+  void handleTabTap(int index) {
+    setState(() {
+      activeTabIndex = index;
+    });
+  }
+
+  String currentBuilding = 'Maple Heights Residences';
+
+  void updateBuilding(String selectedBuilding) {
+    setState(() {
+      currentBuilding = selectedBuilding;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.select((AppBloc bloc) => bloc.state.user);
@@ -27,12 +41,6 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
     void signOut() {
       appBloc.add(AppLogoutRequested());
       context.go('/');
-    }
-
-    void handleTabTap(int index) {
-      setState(() {
-        activeTabIndex = index;
-      });
     }
 
     return Scaffold(
@@ -193,37 +201,43 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          """What's happening ${timeLengths[activeTabIndex].toLowerCase()}""",
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
-                          child: Row(
-                            children: [
-                              CustomTab(
-                                title: 'TODAY',
-                                tabIndex: 0,
-                                activeTabIndex: activeTabIndex,
-                                onTabSelected: handleTabTap,
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(minWidth: 710),
+                            child: Text(
+                              """What's happening ${timeLengths[activeTabIndex].toLowerCase()} at $currentBuilding""",
+                              style: const TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.w500,
                               ),
-                              CustomTab(
-                                title: 'TOMORROW',
-                                tabIndex: 1,
-                                activeTabIndex: activeTabIndex,
-                                onTabSelected: handleTabTap,
-                              ),
-                              CustomTab(
-                                title: 'THIS WEEK',
-                                tabIndex: 2,
-                                activeTabIndex: activeTabIndex,
-                                onTabSelected: handleTabTap,
-                              ),
-                            ],
+                            ),
                           ),
+                        ),
+                        Row(
+                          children: [
+                            CustomTab(
+                              title: 'TODAY',
+                              tabIndex: 0,
+                              activeTabIndex: activeTabIndex,
+                              onTabSelected: handleTabTap,
+                            ),
+                            CustomTab(
+                              title: 'TOMORROW',
+                              tabIndex: 1,
+                              activeTabIndex: activeTabIndex,
+                              onTabSelected: handleTabTap,
+                            ),
+                            CustomTab(
+                              title: 'THIS WEEK',
+                              tabIndex: 2,
+                              activeTabIndex: activeTabIndex,
+                              onTabSelected: handleTabTap,
+                            ),
+                          ],
+                        ),
+                        OwnerDashboardBuildingSelector(
+                          onBuildingSelected: updateBuilding,
                         ),
                       ],
                     ),
@@ -265,7 +279,7 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                           OwnerDashboardInfoBox(
                             boxTitle: 'Rental Income',
                             icon: Icons.attach_money_rounded,
-                            boxInfo: '431,449',
+                            boxInfo: '452,719',
                             modalContent: RentalIncomeModal(),
                           ),
                         ],
@@ -378,10 +392,10 @@ class CustomTab extends StatelessWidget {
     return InkWell(
       onTap: () => onTabSelected(tabIndex),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFF03795D) : Colors.transparent,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Text(
           title,

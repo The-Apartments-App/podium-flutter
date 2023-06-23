@@ -26,46 +26,57 @@ class MoveInsModal extends StatelessWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 800, maxWidth: 800),
             child: Center(
-              child: SfCartesianChart(
-                legend: Legend(isVisible: true),
-                primaryXAxis: CategoryAxis(),
-                primaryYAxis: NumericAxis(interval: 1),
-                series: <ChartSeries<ChartData, String>>[
-                  LineSeries<ChartData, String>(
-                    dataSource: chartData,
-                    xValueMapper: (ChartData data, _) => data.x,
-                    yValueMapper: (ChartData data, _) => data.y,
-
-                    // Legend item text
-                    legendItemText: 'Move-ins',
-
-                    // Color of the line
-                    color: Colors.greenAccent,
-
-                    // Width of the line
-                    width: 2,
-
-                    // Setting the style for data labels
-                    // dataLabelSettings: const DataLabelSettings(
-                    //   isVisible: true,
-                    //   color: Colors.black,
-                    //   labelAlignment: ChartDataLabelAlignment.top,
-                    //   labelPosition: ChartDataLabelPosition.outside,
-                    // ),
-
-                    // Setting the style for marker
-                    markerSettings: const MarkerSettings(
-                      isVisible: true,
-                      height: 10,
-                      width: 10,
-                      shape: DataMarkerType.circle,
-                      color: Colors.greenAccent,
-                    ),
-
-                    // Enable Tooltip
-                    enableTooltip: true,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: SfCartesianChart(
+                  legend: Legend(isVisible: true),
+                  primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Months')),
+                  primaryYAxis: NumericAxis(
+                    interval: 1,
+                    title: AxisTitle(text: 'Move-ins per month'),
                   ),
-                ],
+                  series: <ChartSeries<ChartData, String>>[
+                    LineSeries<ChartData, String>(
+                      dataSource: chartData,
+                      dataLabelSettings:
+                          const DataLabelSettings(isVisible: true),
+
+                      xValueMapper: (ChartData data, _) => data.x,
+                      yValueMapper: (ChartData data, _) => data.y,
+                      xAxisName: 'Number of Move-ins per month',
+                      yAxisName: 'Months of the year',
+
+                      // Legend item text
+                      legendItemText: 'Move-ins',
+
+                      // Color of the line
+                      color: Colors.greenAccent,
+
+                      // Width of the line
+                      width: 2,
+
+                      // Setting the style for data labels
+                      // dataLabelSettings: const DataLabelSettings(
+                      //   isVisible: true,
+                      //   color: Colors.black,
+                      //   labelAlignment: ChartDataLabelAlignment.top,
+                      //   labelPosition: ChartDataLabelPosition.outside,
+                      // ),
+
+                      // Setting the style for marker
+                      markerSettings: const MarkerSettings(
+                        isVisible: true,
+                        height: 10,
+                        width: 10,
+                        shape: DataMarkerType.circle,
+                        color: Colors.greenAccent,
+                      ),
+
+                      // Enable Tooltip
+                      enableTooltip: true,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
