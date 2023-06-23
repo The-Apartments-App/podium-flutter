@@ -51,7 +51,7 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 400),
+                constraints: const BoxConstraints(maxWidth: 404),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

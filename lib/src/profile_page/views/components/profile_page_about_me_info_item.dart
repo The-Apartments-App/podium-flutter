@@ -42,14 +42,18 @@ class ProfilePageAboutMeInfoItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  ProfilePageIcon(icon: icon),
-                  Text(
-                    '$fieldName: $fieldValue',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    ProfilePageIcon(icon: icon),
+                    Flexible(
+                      child: Text(
+                        '$fieldName: $fieldValue',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const Icon(Icons.arrow_forward_ios_rounded)
             ],

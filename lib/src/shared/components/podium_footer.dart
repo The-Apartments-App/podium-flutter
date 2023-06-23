@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:podium/src/shared/shared_index.dart';
 
 class PodiumFooter extends StatelessWidget {
@@ -15,13 +16,34 @@ class PodiumFooter extends StatelessWidget {
             color: Colors.grey.shade200,
           ),
         ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            PodiumLogoWithTitle(height: 80),
-            LinkedInLink(),
-            Text('© 2023 Podium Apartments Inc.')
-          ],
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 901),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              PodiumLogoWithTitle(height: 80),
+              Row(
+                children: [
+                  SocialMediaLink(
+                    socialUrl:
+                        'https://www.linkedin.com/company/podium-apartments/',
+                    socialIcon: FontAwesomeIcons.linkedin,
+                  ),
+                  SocialMediaLink(
+                    socialUrl:
+                        'https://www.linkedin.com/company/podium-apartments/',
+                    socialIcon: FontAwesomeIcons.facebook,
+                  ),
+                  SocialMediaLink(
+                    socialUrl:
+                        'https://www.linkedin.com/company/podium-apartments/',
+                    socialIcon: FontAwesomeIcons.twitter,
+                  ),
+                ],
+              ),
+              Text('© 2023 Podium Apartments Inc.')
+            ],
+          ),
         ),
       ],
     );
