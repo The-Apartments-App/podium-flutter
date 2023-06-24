@@ -15,14 +15,19 @@ class _DetailsInputState extends State<DetailsInput> {
       children: [
         const Text(
           'Details',
-          style: TextStyle(fontSize: 14, color: Colors.black87),
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.black87,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 8, 0, 20),
           child: Card(
-            elevation: 5,
+            elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12), // Add border radius
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: Colors.grey.shade300),
             ),
             child: const TextField(
               minLines: 4,

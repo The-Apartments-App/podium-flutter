@@ -1,66 +1,83 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:podium/src/owner_portal/owner_dashboard/modal_content/move_outs_modal.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MoveInsModal extends StatelessWidget {
   const MoveInsModal({super.key});
 
-  // A simple method to generate fake move-ins data
-  List<Map<String, dynamic>> _generateFakeData() {
-    final data = <Map<String, dynamic>>[];
-    final random = Random();
-    final fakeNames = [
-      'Emma Johnson',
-      'Liam Smith',
-      'Olivia Williams',
-      'Noah Brown',
-      'Ava Jones',
-      'Isabella Taylor',
-      'Sophia Davis',
-      'Mia Miller',
-      'Jackson Wilson',
-      'Aiden Anderson',
-    ];
-
-    for (var i = 0; i < 4; i++) {
-      final daysBefore = random.nextInt(60); // a random number of days up to 60
-      final moveInDate = DateTime.now().subtract(Duration(days: daysBefore));
-
-      data.add({
-        'name': fakeNames[i],
-        'moveInDate': DateFormat('yMMMd').format(moveInDate),
-      });
-    }
-
-    return data;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final moveInsData = _generateFakeData();
+    final groupedData = <String, double>{
+      'Jan': 0,
+      'Feb': 1,
+      'Mar': 2,
+      'Apr': 4,
+      'May': 7,
+    };
+
+    final chartData = groupedData.entries
+        .map((entry) => ChartData(entry.key, entry.value))
+        .toList();
 
     return LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: ConstrainedBox(
-            constraints: BoxConstraints(minWidth: constraints.maxWidth),
-            child: DataTable(
-              columns: const [
-                DataColumn(label: Text('Name', style: TextStyle(fontSize: 20))),
-                DataColumn(
-                  label: Text('Move-in Date', style: TextStyle(fontSize: 20)),
-                ),
-              ],
-              rows: moveInsData.map((entry) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(entry['name'] as String)),
-                    DataCell(Text(entry['moveInDate'] as String)),
+            constraints: const BoxConstraints(maxHeight: 800, maxWidth: 800),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: SfCartesianChart(
+                  legend: Legend(isVisible: true),
+                  primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Months')),
+                  primaryYAxis: NumericAxis(
+                    interval: 1,
+                    title: AxisTitle(text: 'Move-ins per month'),
+                  ),
+                  series: <ChartSeries<ChartData, String>>[
+                    LineSeries<ChartData, String>(
+                      dataSource: chartData,
+                      dataLabelSettings:
+                          const DataLabelSettings(isVisible: true),
+
+                      xValueMapper: (ChartData data, _) => data.x,
+                      yValueMapper: (ChartData data, _) => data.y,
+                      xAxisName: 'Number of Move-ins per month',
+                      yAxisName: 'Months of the year',
+
+                      // Legend item text
+                      legendItemText: 'Move-ins',
+
+                      // Color of the line
+                      color: Colors.greenAccent,
+
+                      // Width of the line
+                      width: 2,
+
+                      // Setting the style for data labels
+                      // dataLabelSettings: const DataLabelSettings(
+                      //   isVisible: true,
+                      //   color: Colors.black,
+                      //   labelAlignment: ChartDataLabelAlignment.top,
+                      //   labelPosition: ChartDataLabelPosition.outside,
+                      // ),
+
+                      // Setting the style for marker
+                      markerSettings: const MarkerSettings(
+                        isVisible: true,
+                        height: 10,
+                        width: 10,
+                        shape: DataMarkerType.circle,
+                        color: Colors.greenAccent,
+                      ),
+
+                      // Enable Tooltip
+                      enableTooltip: true,
+                    ),
                   ],
-                );
-              }).toList(),
+                ),
+              ),
             ),
           ),
         );

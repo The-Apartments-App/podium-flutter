@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CallSupportButton extends StatelessWidget {
@@ -12,47 +11,40 @@ class CallSupportButton extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 16, 0, 20),
-      child: SizedBox(
-        height: 48.675,
-        width: MediaQuery.of(context).size.width,
-        child: PlatformElevatedButton(
-          material: (_, __) => MaterialElevatedButtonData(
-            style: const ButtonStyle(
-              shadowColor: MaterialStatePropertyAll(Colors.transparent),
-              shape: MaterialStatePropertyAll(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                ),
+      padding: const EdgeInsets.all(12),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: 700,
+          minHeight: 64,
+        ),
+        child: OutlinedButton(
+          style: ButtonStyle(
+            side: MaterialStateProperty.all(
+              const BorderSide(width: 1.25),
+            ), // Heavy border
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
-              side: MaterialStatePropertyAll(
-                BorderSide(
-                  color: Colors.grey,
-                ),
-              ),
-              backgroundColor: MaterialStatePropertyAll(Colors.white),
-              foregroundColor: MaterialStatePropertyAll(Colors.black),
-            ),
+            ), // Shape
+            padding: MaterialStateProperty.all(
+              const EdgeInsets.all(10),
+            ), // Inner padding
+            backgroundColor: MaterialStateProperty.all(Colors.white),
           ),
-          color: Colors.white,
           onPressed: callSupport,
           child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.phone),
-              Expanded(
-                child: Wrap(
-                  alignment: WrapAlignment.center,
-                  children: [
-                    Text(
-                      'Call Support',
-                      style: TextStyle(
-                        letterSpacing: .55,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
+              // Icon // Spacing
+              Text(
+                'Call support',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
-              ),
+              ), // Text
             ],
           ),
         ),

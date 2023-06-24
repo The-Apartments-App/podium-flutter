@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
-// import 'package:podium/src/appbar_back_button/appbar_back_button.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 class UserSettingsPage extends StatelessWidget {
   const UserSettingsPage({super.key});
@@ -16,7 +15,7 @@ class UserSettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: !kIsWeb
           ? AppBar(
-              leading: const AppBarBackButton(route: '/residentHome'),
+              leading: const AppBarBackButton(route: '/residentProfile'),
               backgroundColor: Colors.transparent,
               elevation: 0,
             )
@@ -31,7 +30,7 @@ class UserSettingsPage extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 40, 0, 40),
                 child: Row(
                   children: const [
-                    if (kIsWeb) AppBarBackButton(route: '/residentHome'),
+                    if (kIsWeb) AppBarBackButton(route: '/residentProfile'),
                     Text(
                       'Settings',
                       style: TextStyle(
