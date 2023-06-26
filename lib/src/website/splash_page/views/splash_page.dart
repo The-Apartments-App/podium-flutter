@@ -121,20 +121,20 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               )
             : null,
         actions: [
-          if (isMobile(context))
-            Builder(
-              builder: (BuildContext context) {
-                return IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.black),
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  tooltip:
-                      MaterialLocalizations.of(context).openAppDrawerTooltip,
-                );
-              },
-            )
-          else
+          if (!isMobile(context))
+            // Builder(
+            //   builder: (BuildContext context) {
+            //     return IconButton(
+            //       icon: const Icon(Icons.menu, color: Colors.black),
+            //       onPressed: () {
+            //         Scaffold.of(context).openDrawer();
+            //       },
+            //       tooltip:
+            //           MaterialLocalizations.of(context).openAppDrawerTooltip,
+            //     );
+            //   },
+            // )
+            // else
             Row(
               children: [
                 TextButton(
