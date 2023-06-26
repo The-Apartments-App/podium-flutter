@@ -1,6 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/src/login/login.dart';
 import 'package:podium/src/shared/shared_index.dart';
 import 'package:podium/src/website/splash_page/views/components/splash_page_mobile_banner.dart';
@@ -109,7 +110,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
-        title: !isMobile
+        title: !isMobile(context)
             ? Padding(
                 padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width * .1,
@@ -120,7 +121,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               )
             : null,
         actions: [
-          if (isMobile)
+          if (isMobile(context))
             Builder(
               builder: (BuildContext context) {
                 return IconButton(
@@ -154,7 +155,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ],
         toolbarHeight: 150,
       ),
-      drawer: isMobile
+      drawer: isMobile(context)
           ? Drawer(
               backgroundColor: Colors.white,
               child: ListView(

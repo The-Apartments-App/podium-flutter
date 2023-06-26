@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:podium/shared/shared.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 class SocialSignInButton extends StatelessWidget {
   const SocialSignInButton({

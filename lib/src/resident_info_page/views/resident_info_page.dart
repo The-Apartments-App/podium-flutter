@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:podium/shared/shared.dart';
-import 'package:podium/src/podium_logo_with_title/podium_logo_with_title.dart';
+import 'package:podium/src/shared/shared_index.dart';
 import 'package:podium/src/waitlist_button/view/waitlist_button.dart';
 
 class ResidentInfoPage extends StatefulWidget {
@@ -369,16 +368,8 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
                     ],
                   ),
                 ),
-                const Divider(),
                 if (MediaQuery.of(context).size.width > 320)
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      PodiumLogoWithTitle(height: 80),
-                      LinkedInLink(),
-                      Text('© 2023 Podium Apartments Inc.')
-                    ],
-                  )
+                  const PodiumFooter()
               ],
             ),
           ),
