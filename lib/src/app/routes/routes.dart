@@ -33,6 +33,16 @@ class RouterClass {
             const MaterialPage(child: SplashPage()),
       ),
       GoRoute(
+        path: '/residents',
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: ResidentInfoPage()),
+      ),
+      GoRoute(
+        path: '/services',
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: ServiceInfoPage()),
+      ),
+      GoRoute(
         path: '/residentProfile',
         pageBuilder: (context, state) => const MaterialPage(
           child: ProfilePage(),
