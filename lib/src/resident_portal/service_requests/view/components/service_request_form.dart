@@ -5,12 +5,12 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:formz/formz.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:podium/src/app_bar_back_button/view/app_bar_back_button.dart';
 import 'package:podium/src/resident_portal/service_requests/cubit/service_request_cubit.dart';
 import 'package:podium/src/resident_portal/service_requests/view/components/service_request_call_support_button.dart';
 import 'package:podium/src/resident_portal/service_requests/view/components/service_request_details_input.dart';
 import 'package:podium/src/resident_portal/service_requests/view/components/service_request_image.dart';
 import 'package:podium/src/resident_portal/service_requests/view/components/service_request_image_container.dart';
+import 'package:podium/src/shared/components/app_bar_back_button.dart';
 
 // Define a custom Form widget.
 class ServiceRequestForm extends StatefulWidget {
@@ -62,7 +62,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
 
   Widget pictureBox1Child() {
     if (imageBytes0 != null && imageBytes1 == null) {
-      return const Icon(Icons.add);
+      return const Icon(Icons.add_a_photo);
     } else if (imageBytes1 != null) {
       return ServiceRequestImage(
         bytes: imageBytes1!,
@@ -74,7 +74,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
 
   Widget pictureBox2Child() {
     if (imageBytes0 != null && imageBytes1 != null && imageBytes2 == null) {
-      return const Icon(Icons.add);
+      return const Icon(Icons.add_a_photo);
     } else if (imageBytes2 != null) {
       return ServiceRequestImage(
         bytes: imageBytes2!,
@@ -141,7 +141,7 @@ class ServiceRequestFormState extends State<ServiceRequestForm> {
                     padding: const EdgeInsets.only(bottom: 16),
                     child: Row(
                       children: const [
-                        if (kIsWeb) AppBarBackButton(route: '/residentHome'),
+                        if (kIsWeb) AppBarBackButton(route: '/residentProfile'),
                         Text(
                           'Service Requests',
                           style: TextStyle(

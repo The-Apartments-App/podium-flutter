@@ -1,78 +1,95 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+
+final List<RentalData> chartData = [
+  RentalData('Jan', 83706),
+  RentalData('Feb', 87692),
+  RentalData('Mar', 89685),
+  RentalData('Apr', 92405),
+  RentalData('May', 96589),
+  RentalData('Jun', 99231),
+  // RentalData('Jul', 4000),
+  // RentalData('Aug', 4100),
+  // RentalData('Sep', 4200),
+  // RentalData('Oct', 4300),
+  // RentalData('Nov', 4500),
+  // RentalData('Dec', 5000),
+];
 
 class RentalIncomeModal extends StatelessWidget {
   const RentalIncomeModal({super.key});
 
-  // A simple method to generate fake rental income data
-  List<Map<String, dynamic>> _generateFakeData() {
-    final data = <Map<String, dynamic>>[];
-    final random = Random();
-    final fakePropertyNames = [
-      'Maple Grove Apartments',
-      'Willowbrook Heights',
-      'Pinecrest Residences',
-      'Oakwood Place',
-      'Cedar Ridge Estates',
-      'Birchwood Apartments',
-      'Aspen Meadows',
-      'Sycamore Terrace',
-      'Juniper Park Apartments',
-      'Cypress Gardens',
-    ];
-
-    for (var i = 0; i < 10; i++) {
-      final rentalIncome =
-          random.nextInt(5000) + 1000; // random income between $1000 and $6000
-
-      data.add({
-        'property': fakePropertyNames[i],
-        'income': rentalIncome,
-      });
-    }
-
-    return data;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final rentalIncomeData = _generateFakeData();
+    final minY = chartData.map((data) => data.income).reduce(min) - 1000;
+    final maxY = chartData.map((data) => data.income).reduce(max) + 1000;
 
     return LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: ConstrainedBox(
-            constraints: BoxConstraints(minWidth: constraints.maxWidth),
-            child: DataTable(
-              columns: const [
-                DataColumn(
-                  label: Text('Property', style: TextStyle(fontSize: 20)),
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: SfCartesianChart(
+                primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Months')),
+                primaryYAxis: NumericAxis(
+                  minimum: minY,
+                  maximum: maxY,
+                  interval: 2000,
+                  title: AxisTitle(text: r'Rental Income in $'),
                 ),
-                DataColumn(
-                  label: Text('Income', style: TextStyle(fontSize: 20)),
-                ),
-              ],
-              rows: rentalIncomeData.map((entry) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(entry['property'] as String)),
-                    DataCell(
-                      Text(
-                        '\$${entry['income'] as int}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                title: ChartTitle(text: 'Monthly Rental Income'),
+                legend: Legend(isVisible: false),
+                series: <ChartSeries<RentalData, String>>[
+                  LineSeries<RentalData, String>(
+                    dataSource: chartData,
+                    xValueMapper: (RentalData rent, _) => rent.month,
+                    yValueMapper: (RentalData rent, _) => rent.income,
+                    name: 'Income',
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                    // Color of the line
+                    color: Colors.greenAccent,
+
+                    // Width of the line
+                    width: 2,
+
+                    // Setting the style for data labels
+                    // dataLabelSettings: const DataLabelSettings(
+                    //   isVisible: true,
+                    //   color: Colors.black,
+                    //   labelAlignment: ChartDataLabelAlignment.top,
+                    //   labelPosition: ChartDataLabelPosition.outside,
+                    // ),
+
+                    // Setting the style for marker
+                    markerSettings: const MarkerSettings(
+                      isVisible: true,
+                      height: 10,
+                      width: 10,
+                      shape: DataMarkerType.circle,
+                      color: Colors.greenAccent,
                     ),
-                  ],
-                );
-              }).toList(),
+
+                    // Enable Tooltip
+                    enableTooltip: true,
+                  ),
+                ],
+              ),
             ),
           ),
         );
       },
     );
   }
+}
+
+class RentalData {
+  RentalData(this.month, this.income);
+
+  final String month;
+  final double income;
 }

@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Card;
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:podium/src/app_bar_back_button/app_bar_back_button.dart';
+import 'package:podium/src/shared/shared_index.dart';
 // import 'package:stripe_checkout/stripe_checkout.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -120,7 +120,7 @@ class PaymentsPage extends StatelessWidget {
     return Scaffold(
       appBar: !kIsWeb
           ? AppBar(
-              leading: const AppBarBackButton(route: '/residentHome'),
+              leading: const AppBarBackButton(route: '/residentProfile'),
               backgroundColor: Colors.transparent,
               elevation: 0,
             )
@@ -135,7 +135,7 @@ class PaymentsPage extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 40, 0, 40),
                 child: Row(
                   children: const [
-                    if (kIsWeb) AppBarBackButton(route: '/residentHome'),
+                    if (kIsWeb) AppBarBackButton(route: '/residentProfile'),
                     Text(
                       'Payments',
                       style: TextStyle(

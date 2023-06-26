@@ -11,7 +11,7 @@ To run the project either use the launch configuration in VSCode/Android Studio 
 
 ```sh
 
-$ flutter run  --target lib/main.dart
+$ flutter run
 
 ```
 

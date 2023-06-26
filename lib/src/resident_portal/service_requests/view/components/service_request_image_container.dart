@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 class ServiceRequestImageContainer extends StatelessWidget {
   const ServiceRequestImageContainer({super.key, required this.child});
@@ -7,15 +8,15 @@ class ServiceRequestImageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10, // Adjust this value for desired shadow effect
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), // Add border radius
+        side: BorderSide(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: SizedBox(
-        height: 200,
-        width: MediaQuery.of(context).size.width < 700
-            ? MediaQuery.of(context).size.width * .28
-            : 150,
+        height: 350,
+        width:
+            isMobile(context) ? MediaQuery.of(context).size.width * .28 : 200,
         child: child,
       ),
     );

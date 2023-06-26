@@ -14,7 +14,7 @@ class OccupancyRateModal extends StatelessWidget {
       final isAvailable = random.nextBool();
 
       data.add({
-        'unitNumber': 'Unit ${i + 1}',
+        'unitNumber': 'Apt. ${i + 10}',
         'status': isAvailable ? 'Available to Rent' : 'Occupied',
       });
     }

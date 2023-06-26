@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/shared/shared_functions.dart';
+import 'package:go_router/go_router.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/components/owner_dashboard_components.dart';
 import 'package:podium/src/owner_portal/owner_dashboard/modal_content/modal_content.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 class OwnerDashboard extends StatefulWidget {
   const OwnerDashboard({super.key});
@@ -19,14 +20,27 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
     'TOMORROW',
     'THIS WEEK',
   ];
+  void handleTabTap(int index) {
+    setState(() {
+      activeTabIndex = index;
+    });
+  }
+
+  String currentBuilding = 'Maple Heights Residences';
+
+  void updateBuilding(String selectedBuilding) {
+    setState(() {
+      currentBuilding = selectedBuilding;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.select((AppBloc bloc) => bloc.state.user);
-
-    void handleTabTap(int index) {
-      setState(() {
-        activeTabIndex = index;
-      });
+    final appBloc = context.select((AppBloc bloc) => bloc);
+    void signOut() {
+      appBloc.add(AppLogoutRequested());
+      context.go('/');
     }
 
     return Scaffold(
@@ -37,7 +51,7 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 400),
+                constraints: const BoxConstraints(maxWidth: 404),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -125,7 +139,50 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                         ),
                         Text("You're all caught up!"),
                       ],
-                    )
+                    ),
+                    const Expanded(child: SizedBox()),
+                    Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: 500,
+                          minHeight: 64,
+                        ),
+                        child: OutlinedButton(
+                          style: ButtonStyle(
+                            side: MaterialStateProperty.all(
+                              const BorderSide(width: 1.25),
+                            ), // Heavy border
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ), // Shape
+                            padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(10),
+                            ), // Inner padding
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                          ),
+                          onPressed: signOut,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Icon // Spacing
+                              Text(
+                                'Log out',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ), // Text
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const PodiumFooter(),
                   ],
                 ),
               ),
@@ -144,37 +201,43 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          """What's happening ${timeLengths[activeTabIndex].toLowerCase()}""",
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
-                          child: Row(
-                            children: [
-                              CustomTab(
-                                title: 'TODAY',
-                                tabIndex: 0,
-                                activeTabIndex: activeTabIndex,
-                                onTabSelected: handleTabTap,
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(minWidth: 710),
+                            child: Text(
+                              """What's happening ${timeLengths[activeTabIndex].toLowerCase()} at $currentBuilding""",
+                              style: const TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.w500,
                               ),
-                              CustomTab(
-                                title: 'TOMORROW',
-                                tabIndex: 1,
-                                activeTabIndex: activeTabIndex,
-                                onTabSelected: handleTabTap,
-                              ),
-                              CustomTab(
-                                title: 'THIS WEEK',
-                                tabIndex: 2,
-                                activeTabIndex: activeTabIndex,
-                                onTabSelected: handleTabTap,
-                              ),
-                            ],
+                            ),
                           ),
+                        ),
+                        Row(
+                          children: [
+                            CustomTab(
+                              title: 'TODAY',
+                              tabIndex: 0,
+                              activeTabIndex: activeTabIndex,
+                              onTabSelected: handleTabTap,
+                            ),
+                            CustomTab(
+                              title: 'TOMORROW',
+                              tabIndex: 1,
+                              activeTabIndex: activeTabIndex,
+                              onTabSelected: handleTabTap,
+                            ),
+                            CustomTab(
+                              title: 'THIS WEEK',
+                              tabIndex: 2,
+                              activeTabIndex: activeTabIndex,
+                              onTabSelected: handleTabTap,
+                            ),
+                          ],
+                        ),
+                        OwnerDashboardBuildingSelector(
+                          onBuildingSelected: updateBuilding,
                         ),
                       ],
                     ),
@@ -196,16 +259,16 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                             modalContent: MoveOutsModal(),
                           ),
                           OwnerDashboardInfoBox(
-                            boxTitle: 'Tasks in Progress',
+                            boxTitle: 'Maintenance',
                             icon: Icons.handyman,
                             boxInfo: '2',
-                            modalContent: TasksInProgressModal(),
+                            modalContent: MaintenanceModal(),
                           ),
                           OwnerDashboardInfoBox(
-                            boxTitle: 'Guest Satisfaction',
+                            boxTitle: 'Guest Reviews',
                             icon: Icons.star,
-                            boxInfo: '5',
-                            modalContent: GuestSatisfactionModal(),
+                            boxInfo: '4.97',
+                            modalContent: GuestReviewsModal(),
                           ),
                           OwnerDashboardInfoBox(
                             boxTitle: 'Occupancy Rate',
@@ -216,7 +279,7 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                           OwnerDashboardInfoBox(
                             boxTitle: 'Rental Income',
                             icon: Icons.attach_money_rounded,
-                            boxInfo: '431,449',
+                            boxInfo: '452,719',
                             modalContent: RentalIncomeModal(),
                           ),
                         ],
@@ -329,10 +392,10 @@ class CustomTab extends StatelessWidget {
     return InkWell(
       onTap: () => onTabSelected(tabIndex),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFF03795D) : Colors.transparent,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Text(
           title,

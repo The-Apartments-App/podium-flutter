@@ -10,7 +10,7 @@ class ServiceRequestImage extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Image.memory(
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
         bytes,
       ),
     );
