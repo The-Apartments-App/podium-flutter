@@ -46,6 +46,10 @@ class _SplashPageCarouselState extends State<SplashPageCarousel> {
               'sola_salons_podium.jpg',
               context,
             ),
+            splashSectionImage(
+              'whole_foods_podium.jpg',
+              context,
+            ),
           ],
         ),
       ),
