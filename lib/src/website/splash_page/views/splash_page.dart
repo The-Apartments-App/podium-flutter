@@ -213,7 +213,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   const SplashPageQuestionsSection(),
                 ],
               ),
-              const Divider(),
               if (MediaQuery.of(context).size.width > 340) const PodiumFooter(),
             ],
           ),

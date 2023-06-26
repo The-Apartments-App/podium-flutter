@@ -16,8 +16,7 @@ class SocialMediaLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () async {
-        const url = 'https://www.linkedin.com/company/podium-apartments/';
-        await launchUrl(Uri.parse(url));
+        await launchUrl(Uri.parse(socialUrl));
       },
       icon: FaIcon(socialIcon),
     );

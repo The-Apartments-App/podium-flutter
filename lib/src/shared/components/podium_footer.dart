@@ -30,13 +30,11 @@ class PodiumFooter extends StatelessWidget {
                     socialIcon: FontAwesomeIcons.linkedin,
                   ),
                   SocialMediaLink(
-                    socialUrl:
-                        'https://www.linkedin.com/company/podium-apartments/',
+                    socialUrl: 'https://www.facebook.com/podiumapts',
                     socialIcon: FontAwesomeIcons.facebook,
                   ),
                   SocialMediaLink(
-                    socialUrl:
-                        'https://www.linkedin.com/company/podium-apartments/',
+                    socialUrl: 'https://twitter.com/PodiumApts',
                     socialIcon: FontAwesomeIcons.twitter,
                   ),
                 ],
