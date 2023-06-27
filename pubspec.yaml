@@ -45,7 +45,7 @@ dependencies:
   form_inputs:
     path: lib/packages/form_inputs
   formz: ^0.6.0
-  go_router: ^8.2.0
+  go_router: ^9.0.0
   google_fonts: ^4.0.4
   http: ^0.13.0
   image_picker: ^0.8.9
@@ -60,7 +60,7 @@ dependencies:
   sign_in_button: ^3.2.0
   sign_in_with_apple: ^5.0.0
   stripe_checkout: ^1.0.0
-  syncfusion_flutter_charts: ^21.2.10
+  syncfusion_flutter_charts: ^22.1.34
   url_launcher: ^6.1.11
   url_strategy: ^0.2.0
 

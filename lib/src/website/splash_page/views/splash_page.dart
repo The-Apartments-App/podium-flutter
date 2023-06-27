@@ -31,7 +31,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
   @override
   void didChangeMetrics() {
-    _updateScreenSize();
+    // _updateScreenSize();
   }
 
   void _updateScreenSize() {

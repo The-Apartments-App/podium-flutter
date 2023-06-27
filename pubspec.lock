@@ -769,10 +769,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "2cb236ba3f923043fdbe14a6a3a796b8c250e85658e28caee3e86c0c275847e5"
+      sha256: "1531542666c2d052c44bbf6e2b48011bf3771da0404b94c60eabec1228a62906"
       url: "https://pub.dev"
     source: hosted
-    version: "8.2.0"
+    version: "9.0.0"
   google_fonts:
     dependency: "direct main"
     description:
@@ -1414,18 +1414,18 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_charts
-      sha256: "5f868f5a82380ef1b3de416b7812e1ac7acce6a629f9281618adee81d90716cc"
+      sha256: "806ee3e7b4870e37afde0ee29294d0d5b687d469715fd63ae8fa39d6503b0c23"
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.10"
+    version: "22.1.34"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "8db8f55c77f56968681447d3837c10f27a9e861e238a898fda116c7531def979"
+      sha256: "952f5ee970bc3fba2db95a8dac71a295d9a70ad2c0993c7279e3a883c3e1459f"
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.10"
+    version: "22.1.34"
   term_glyph:
     dependency: transitive
     description:
