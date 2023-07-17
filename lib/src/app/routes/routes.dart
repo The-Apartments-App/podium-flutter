@@ -28,7 +28,7 @@ class RouterClass {
 
   static List<GoRoute> getRoutes() {
     return [
-      //~~~~ Website Routes ~~~~
+      // ** ~~~~ Website Routes ~~~~
       GoRoute(
         path: '/',
         pageBuilder: (context, state) =>
@@ -42,7 +42,7 @@ class RouterClass {
         },
       ),
 
-      // ~~~~ Resident Portal Routes ~~~~
+      // ** ~~~~ Resident Portal Routes ~~~~
       GoRoute(
         path: '/residentProfile',
         pageBuilder: (context, state) => const MaterialPage(
@@ -72,11 +72,10 @@ class RouterClass {
       GoRoute(
         path: '/buildingAmenities',
         pageBuilder: (context, state) =>
-            // const MaterialPage(child: BuildingAmenitiesPage()),
             const MaterialPage(child: BuildingAmenitiesPage()),
       ),
 
-      // ~~~~ Building Owner Routes
+      // ** ~~~~ Building Owner Routes ~~~~
       GoRoute(
         path: '/ownerHome',
         pageBuilder: (context, state) => const MaterialPage(
@@ -102,7 +101,7 @@ class RouterClass {
         ),
       ),
 
-      // ~~~~ Community Manager Routes
+      // ** ~~~~ Community Manager Routes ~~~~
       GoRoute(
         path: '/communityManager',
         pageBuilder: (context, state) => const MaterialPage(
@@ -110,7 +109,7 @@ class RouterClass {
         ),
       ),
 
-      // ~~~~ Maintenance Tech Routes
+      // ** ~~~~  Maintenance Tech Routes ~~~~
       GoRoute(
         path: '/maintenanceTech',
         pageBuilder: (context, state) => const MaterialPage(
@@ -118,7 +117,7 @@ class RouterClass {
         ),
       ),
 
-      // ~~~~ Payment Confirmation Routes ~~~~
+      // ** ~~~~ Payment Confirmation Routes ~~~~
       GoRoute(
         path: '/success',
         pageBuilder: (context, state) => const MaterialPage(
