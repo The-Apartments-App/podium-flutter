@@ -40,7 +40,7 @@ class BlogStoryImage extends StatelessWidget {
                   fit: BoxFit.cover,
                 ).image,
                 thumbnail: Image.asset(
-                  'lib/src/assets/images/$blogImageName.jpg',
+                  'lib/src/shared/assets/images/$blogImageName.jpg',
                   fit: BoxFit.cover,
                 ).image,
                 image: url != null

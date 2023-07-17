@@ -45,7 +45,7 @@ class SocialSignInButton extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(
-                'lib/src/assets/images/$iconName',
+                'lib/src/shared/assets/images/$iconName',
                 height: height,
                 width: width,
               ),

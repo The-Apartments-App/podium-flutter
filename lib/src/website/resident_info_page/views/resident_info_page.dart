@@ -48,7 +48,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
       return ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Image.asset(
-          'lib/src/assets/images/$fileName',
+          'lib/src/shared/assets/images/$fileName',
           fit: BoxFit.cover,
           height: 400,
           width: 700,

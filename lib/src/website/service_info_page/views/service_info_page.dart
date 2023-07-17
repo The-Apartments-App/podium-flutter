@@ -48,7 +48,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
       return ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Image.asset(
-          'lib/src/assets/images/$fileName',
+          'lib/src/shared/assets/images/$fileName',
           fit: BoxFit.cover,
           height: 400,
           width: 700,
@@ -218,7 +218,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                               //   child: ClipRRect(
                               //     borderRadius: BorderRadius.circular(8),
                               //     child: Image.asset(
-                              //       'lib/src/assets/images/splash_page_community.png',
+                              //       'lib/src/shared/assets/images/splash_page_community.png',
                               //       fit: BoxFit.cover,
                               //       height: 700,
                               //       width: MediaQuery.of(context).size.width,

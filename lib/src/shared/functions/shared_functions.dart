@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 Widget getProfilePic() {
-  const defaultProfilePic = 'lib/src/assets/images/podium_logo_square.png';
+  const defaultProfilePic =
+      'lib/src/shared/assets/images/podium_logo_square.png';
   // if (user.photo != null) {
   //   return ClipRRect(
   //     borderRadius: BorderRadius.circular(10),
