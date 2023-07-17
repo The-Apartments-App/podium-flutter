@@ -323,10 +323,10 @@ packages:
     dependency: "direct main"
     description:
       name: dropdown_button2
-      sha256: "107444581478342c6511040c2eb52850748400df4f3295df3da8be75693180a5"
+      sha256: b71c0d7c63588d51686f1b4ef8ad23fc341caf86ef009dfa1df9dc4e6860f0ef
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.3.5"
   envied:
     dependency: "direct main"
     description:
@@ -379,10 +379,10 @@ packages:
     dependency: transitive
     description:
       name: file
-      sha256: "1b92bec4fc2a72f59a8e15af5f52cd441e4a7860b49499d69dfa817af20e925d"
+      sha256: "5fc22d7c25582e38ad9a8515372cd9a93834027aacf1801cf01164dac0ffa08c"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.4"
+    version: "7.0.0"
   file_picker:
     dependency: "direct main"
     description:
@@ -1189,14 +1189,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
-  process:
-    dependency: transitive
-    description:
-      name: process
-      sha256: "53fd8db9cec1d37b0574e12f07520d582019cb6c44abf5479a01505099a34a09"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.2.4"
   progressive_image:
     dependency: "direct main"
     description:
@@ -1662,10 +1654,10 @@ packages:
     dependency: transitive
     description:
       name: xdg_directories
-      sha256: ee1505df1426458f7f60aac270645098d318a8b4766d85fde75f76f2e21807d1
+      sha256: e0b1147eec179d3911f1f19b59206448f78195ca1d20514134e10641b7d7fbff
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   xml:
     dependency: transitive
     description:
