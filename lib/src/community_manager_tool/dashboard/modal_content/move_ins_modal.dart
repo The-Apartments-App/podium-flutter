@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:podium/src/owner_portal/owner_dashboard/modal_content/move_outs_modal.dart';
+import 'package:podium/src/owner_portal/dashboard/modal_content/move_outs_modal.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MoveInsModal extends StatelessWidget {

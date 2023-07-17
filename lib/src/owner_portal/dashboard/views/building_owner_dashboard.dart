@@ -2,24 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/owner_portal/owner_dashboard/components/owner_dashboard_components.dart';
-import 'package:podium/src/owner_portal/owner_dashboard/modal_content/modal_content.dart';
+import 'package:podium/src/owner_portal/dashboard/components/owner_dashboard_components.dart';
+import 'package:podium/src/owner_portal/dashboard/modal_content/modal_content.dart';
 import 'package:podium/src/shared/shared_index.dart';
 
-class OwnerDashboard extends StatefulWidget {
-  const OwnerDashboard({super.key});
+class BuildingOwnerDashboard extends StatefulWidget {
+  const BuildingOwnerDashboard({super.key});
 
   @override
-  State<OwnerDashboard> createState() => _OwnerDashboardState();
+  State<BuildingOwnerDashboard> createState() => _BuildingOwnerDashboardState();
 }
 
-class _OwnerDashboardState extends State<OwnerDashboard> {
+class _BuildingOwnerDashboardState extends State<BuildingOwnerDashboard> {
   int activeTabIndex = 0;
-  final timeLengths = [
-    'TODAY',
-    'TOMORROW',
-    'THIS WEEK',
-  ];
+  final timeLengths = ['THIS WEEK', 'THIS MONTH'];
   void handleTabTap(int index) {
     setState(() {
       activeTabIndex = index;
@@ -246,37 +242,37 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          OwnerDashboardInfoBox(
+                          DashboardInfoBox(
                             boxTitle: 'Move-ins',
                             icon: Icons.key,
                             boxInfo: '4',
                             modalContent: MoveInsModal(),
                           ),
-                          OwnerDashboardInfoBox(
+                          DashboardInfoBox(
                             boxTitle: 'Move-outs',
                             icon: Icons.exit_to_app,
                             boxInfo: '1',
                             modalContent: MoveOutsModal(),
                           ),
-                          OwnerDashboardInfoBox(
+                          DashboardInfoBox(
                             boxTitle: 'Maintenance',
                             icon: Icons.handyman,
                             boxInfo: '2',
                             modalContent: MaintenanceModal(),
                           ),
-                          OwnerDashboardInfoBox(
+                          DashboardInfoBox(
                             boxTitle: 'Guest Reviews',
                             icon: Icons.star,
                             boxInfo: '4.97',
                             modalContent: GuestReviewsModal(),
                           ),
-                          OwnerDashboardInfoBox(
+                          DashboardInfoBox(
                             boxTitle: 'Occupancy Rate',
                             icon: Icons.home,
                             boxInfo: '98%',
                             modalContent: OccupancyRateModal(),
                           ),
-                          OwnerDashboardInfoBox(
+                          DashboardInfoBox(
                             boxTitle: 'Rental Income',
                             icon: Icons.attach_money_rounded,
                             boxInfo: '452,719',

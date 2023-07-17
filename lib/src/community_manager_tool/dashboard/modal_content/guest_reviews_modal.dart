@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:podium/src/owner_portal/owner_dashboard/modal_content/modal_content_subcomponents/guest_reviews_building_comments.dart';
-import 'package:podium/src/owner_portal/owner_dashboard/modal_content/modal_content_subcomponents/guest_reviews_building_ratings.dart';
+import 'package:podium/src/owner_portal/dashboard/modal_content/modal_content_subcomponents/guest_reviews_building_comments.dart';
+import 'package:podium/src/owner_portal/dashboard/modal_content/modal_content_subcomponents/guest_reviews_building_ratings.dart';
 
 class GuestReviewsModal extends StatelessWidget {
   const GuestReviewsModal({super.key});

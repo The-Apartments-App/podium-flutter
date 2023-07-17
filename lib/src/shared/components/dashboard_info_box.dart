@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OwnerDashboardInfoBox extends StatefulWidget {
-  const OwnerDashboardInfoBox({
+class DashboardInfoBox extends StatefulWidget {
+  const DashboardInfoBox({
     super.key,
     required this.boxTitle,
     required this.icon,
@@ -14,10 +14,10 @@ class OwnerDashboardInfoBox extends StatefulWidget {
   final Widget modalContent;
 
   @override
-  OwnerDashboardInfoBoxState createState() => OwnerDashboardInfoBoxState();
+  DashboardInfoBoxState createState() => DashboardInfoBoxState();
 }
 
-class OwnerDashboardInfoBoxState extends State<OwnerDashboardInfoBox> {
+class DashboardInfoBoxState extends State<DashboardInfoBox> {
   OverlayEntry? _overlayEntry;
 
   void _showOverlay(BuildContext context) {
