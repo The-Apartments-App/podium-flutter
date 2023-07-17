@@ -75,25 +75,25 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - lib/src/assets/images/
+    - lib/src/shared/assets/images/
 
   fonts:
     - family: Roboto
       fonts:
-        - asset: lib/src/assets/fonts/Roboto-Thin.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Thin.ttf
           weight: 100
-        - asset: lib/src/assets/fonts/Roboto-Light.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Light.ttf
           weight: 300
-        - asset: lib/src/assets/fonts/Roboto-Regular.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Regular.ttf
           weight: 400
-        - asset: lib/src/assets/fonts/Roboto-Medium.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Medium.ttf
           weight: 500
-        - asset: lib/src/assets/fonts/Roboto-Bold.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Bold.ttf
           weight: 700
-        - asset: lib/src/assets/fonts/Roboto-Black.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Black.ttf
           weight: 900
 
 flutter_icons:
   android: true
   ios: true
-  image_path: lib/src/assets/images/podium_logo.png
+  image_path: lib/src/shared/assets/images/podium_logo.png

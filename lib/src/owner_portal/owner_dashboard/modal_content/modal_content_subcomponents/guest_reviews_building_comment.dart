@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 class GuestReviewsBuildingComment extends StatelessWidget {
   const GuestReviewsBuildingComment({
@@ -40,7 +41,7 @@ class GuestReviewsBuildingComment extends StatelessWidget {
                 child: Image.asset(
                   height: 70,
                   width: 70,
-                  'lib/src/assets/images/podium_logo_round.png',
+                  podiumLogoRound,
                 ),
               ),
               Padding(

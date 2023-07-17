@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 class PodiumLogoRound extends StatelessWidget {
   const PodiumLogoRound({super.key, this.height, this.width});
@@ -16,9 +17,7 @@ class PodiumLogoRound extends StatelessWidget {
       child: SizedBox(
         height: height,
         width: width,
-        child: Image.asset(
-          'lib/src/assets/images/podium_logo_round.png',
-        ),
+        child: Image.asset(podiumLogoRound),
       ),
     );
   }

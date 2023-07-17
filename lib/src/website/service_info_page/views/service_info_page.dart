@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:podium/src/shared/shared_index.dart';
-import 'package:podium/src/waitlist_button/view/waitlist_button.dart';
+import 'package:podium/src/website/splash_page/views/components/waitlist_button.dart';
 
 class ServiceInfoPage extends StatefulWidget {
   const ServiceInfoPage({super.key});

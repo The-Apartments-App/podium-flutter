@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/blog_story_page/blog_story_page.dart';
-import 'package:podium/src/profile_page/profile_page_index.dart';
+import 'package:podium/src/resident_portal/profile_page/profile_page_index.dart';
 import 'package:podium/src/resident_portal/user_documents/user_documents.dart';
 import 'package:podium/src/resident_portal/user_payments/user_payments.dart';
 import 'package:podium/src/resident_portal/user_settings/user_settings.dart';
+import 'package:podium/src/website/blog_story_page/blog_story_page.dart';
 import 'package:podium/src/website/website_pages_index.dart';
 
 import '../../test_helpers.dart';
