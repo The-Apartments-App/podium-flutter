@@ -31,6 +31,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     // _updateScreenSize();
   }
 
+  // ignore: unused_element
   void _updateScreenSize() {
     if (MediaQuery.of(context).size.width >= 650 && !_isLargeScreen) {
       _isLargeScreen = true;
