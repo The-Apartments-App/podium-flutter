@@ -23,7 +23,7 @@ dependencies:
   envied_generator: ^0.3.0+3
   equatable: ^2.0.3
   file_picker: ^5.3.2
-  firebase_analytics: ^10.4.1
+  firebase_analytics: ^10.4.5
   firebase_auth: ^4.6.1
   firebase_core: ^2.13.0
   firebase_storage: ^11.2.1
