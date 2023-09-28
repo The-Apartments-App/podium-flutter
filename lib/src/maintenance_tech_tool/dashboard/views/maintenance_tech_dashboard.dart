@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:podium/src/app/app.dart';
-import 'package:podium/src/owner_portal/dashboard/modal_content/modal_content.dart';
+import 'package:podium/src/maintenance_tech_tool/dashboard/components/maintenance_tech_dashboard_components.dart';
 import 'package:podium/src/shared/shared_index.dart';
 
 class MaintenanceTechDashboard extends StatefulWidget {
@@ -239,48 +239,8 @@ class _MaintenanceTechDashboardState extends State<MaintenanceTechDashboard> {
                       ],
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(top: 64, bottom: 128),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          DashboardInfoBox(
-                            boxTitle: 'Move-ins',
-                            icon: Icons.key,
-                            boxInfo: '4',
-                            modalContent: MoveInsModal(),
-                          ),
-                          DashboardInfoBox(
-                            boxTitle: 'Move-outs',
-                            icon: Icons.exit_to_app,
-                            boxInfo: '1',
-                            modalContent: MoveOutsModal(),
-                          ),
-                          DashboardInfoBox(
-                            boxTitle: 'Maintenance',
-                            icon: Icons.handyman,
-                            boxInfo: '2',
-                            modalContent: MaintenanceModal(),
-                          ),
-                          DashboardInfoBox(
-                            boxTitle: 'Guest Reviews',
-                            icon: Icons.star,
-                            boxInfo: '4.97',
-                            modalContent: GuestReviewsModal(),
-                          ),
-                          DashboardInfoBox(
-                            boxTitle: 'Occupancy Rate',
-                            icon: Icons.home,
-                            boxInfo: '98%',
-                            modalContent: OccupancyRateModal(),
-                          ),
-                          DashboardInfoBox(
-                            boxTitle: 'Rental Income',
-                            icon: Icons.attach_money_rounded,
-                            boxInfo: '452,719',
-                            modalContent: RentalIncomeModal(),
-                          ),
-                        ],
-                      ),
+                      padding: EdgeInsets.only(top: 64, bottom: 20),
+                      child: MaintenanceTechDashboardCalendar(),
                     ),
                     const Divider(),
                     Expanded(

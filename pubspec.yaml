@@ -61,6 +61,7 @@ dependencies:
   sign_in_with_apple: ^5.0.0
   stripe_checkout: ^1.0.0
   syncfusion_flutter_charts: ^22.1.38
+  table_calendar: ^3.0.0
   url_launcher: ^6.1.11
   url_strategy: ^0.2.0
 
