@@ -23,7 +23,7 @@ class _BlogFeedState extends State<BlogFeed> {
           items: const [
             BlogLink(
               blogId: 'blog1',
-              imageUrl: 'lib/src/assets/images/blog_story1_image3.jpg',
+              imageUrl: 'lib/src/shared/assets/images/blog_story1_image3.jpg',
               headline:
                   '''The Future of Urban Living: How Podium Buildings are Reviving the Spirit of 'Main Street' ''',
               subtext:
@@ -38,7 +38,7 @@ class _BlogFeedState extends State<BlogFeed> {
       children: [
         BlogLink(
           blogId: 'blog1',
-          imageUrl: 'lib/src/assets/images/blog_story1_image3.jpg',
+          imageUrl: 'lib/src/shared/assets/images/blog_story1_image3.jpg',
           headline:
               '''The Future of Urban Living: How Podium Buildings are Reviving the Spirit of 'Main Street' ''',
           subtext:

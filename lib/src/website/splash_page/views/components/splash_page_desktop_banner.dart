@@ -23,7 +23,7 @@ class _SplashPageDesktopBannerState extends State<SplashPageDesktopBanner> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1500),
               child: Image.asset(
-                'lib/src/assets/images/splash_page_top_image.jpg',
+                'lib/src/shared/assets/images/splash_page_top_image.jpg',
                 fit: BoxFit.cover,
                 height: 500,
                 width: MediaQuery.of(context).size.width,

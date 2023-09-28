@@ -3,8 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
-import 'package:podium/src/login/models/models.dart';
-import 'package:podium/src/login/models/username.dart';
+import 'package:podium/src/shared/shared_index.dart';
 part 'update_profile_name_state.dart';
 
 class UpdateProfileNameCubit extends Cubit<UpdateProfileNameState> {

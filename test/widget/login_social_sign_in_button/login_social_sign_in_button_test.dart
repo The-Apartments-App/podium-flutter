@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:podium/src/login/login.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 void main() {
   testWidgets('SocialSignInButton renders correctly',

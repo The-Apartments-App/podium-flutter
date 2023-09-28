@@ -17,7 +17,7 @@ class PodiumLogoSquare extends StatelessWidget {
         height: height,
         width: width,
         child: Image.asset(
-          'lib/src/assets/images/podium_logo_square.png',
+          'lib/src/shared/assets/images/podium_logo_square.png',
         ),
       ),
     );

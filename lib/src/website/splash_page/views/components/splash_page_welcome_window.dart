@@ -2,8 +2,8 @@ import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:podium/src/login/login.dart';
-import 'package:podium/src/waitlist_button/waitlist_button.dart';
+import 'package:podium/src/shared/shared_index.dart';
+import 'package:podium/src/website/splash_page/splash_page_index.dart';
 
 class SplashPageWelcomeWindow extends StatelessWidget {
   const SplashPageWelcomeWindow({super.key});
@@ -105,7 +105,7 @@ class SplashPageWelcomeWindow extends StatelessWidget {
             height: 48.5,
             child: PlatformElevatedButton(
               // ignore: dead_code, avoid_redundant_argument_values
-              onPressed: true ? null : () => displayModal(context),
+              onPressed: false ? null : () => displayModal(context),
               child: const Text(
                 'Login Coming Soon!',
                 style: TextStyle(

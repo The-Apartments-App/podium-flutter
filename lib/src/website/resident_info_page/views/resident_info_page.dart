@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:podium/src/shared/shared_index.dart';
-import 'package:podium/src/waitlist_button/view/waitlist_button.dart';
+import 'package:podium/src/website/splash_page/views/components/waitlist_button.dart';
 
 class ResidentInfoPage extends StatefulWidget {
   const ResidentInfoPage({super.key});
@@ -48,7 +48,7 @@ class _ResidentInfoPageState extends State<ResidentInfoPage> {
       return ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Image.asset(
-          'lib/src/assets/images/$fileName',
+          'lib/src/shared/assets/images/$fileName',
           fit: BoxFit.cover,
           height: 400,
           width: 700,

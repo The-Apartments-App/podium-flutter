@@ -6,6 +6,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:podium/src/app/app.dart';
 import 'package:podium/src/resident_portal/update_profile/update_profile.dart';
+import 'package:podium/src/shared/shared_index.dart';
 
 class UpdateProfilePhotoForm extends StatefulWidget {
   const UpdateProfilePhotoForm({super.key});
@@ -17,7 +18,6 @@ class UpdateProfilePhotoForm extends StatefulWidget {
 class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
   File? fileController;
   String? webController;
-  final defaultProfilePic = 'lib/src/assets/images/podium_logo_round.png';
 
   Future<void> takePhoto(ImageSource source) async {
     final picker = ImagePicker();
@@ -55,9 +55,9 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
         backgroundImage: Image.network(fakeWebControl).image,
       );
     } else {
-      return CircleAvatar(
+      return const CircleAvatar(
         radius: 50,
-        backgroundImage: AssetImage(defaultProfilePic),
+        backgroundImage: AssetImage(podiumLogoRound),
       );
     }
   }
@@ -74,9 +74,9 @@ class _UpdateProfilePhotoFormState extends State<UpdateProfilePhotoForm> {
           backgroundImage: Image.network(user.photo!).image,
         );
       } else {
-        return CircleAvatar(
+        return const CircleAvatar(
           radius: 50,
-          backgroundImage: AssetImage(defaultProfilePic),
+          backgroundImage: AssetImage(podiumLogoRound),
         );
       }
     }

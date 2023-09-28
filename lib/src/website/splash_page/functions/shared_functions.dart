@@ -12,7 +12,7 @@ Widget splashSectionImage(String fileName, BuildContext context) {
     child: ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: Image.asset(
-        'lib/src/assets/images/$fileName',
+        'lib/src/shared/assets/images/$fileName',
         fit: BoxFit.cover,
         width: isMobile(context)
             ? MediaQuery.of(context).size.width

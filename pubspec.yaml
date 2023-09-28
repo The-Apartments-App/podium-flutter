@@ -33,7 +33,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.3
   flutter_email_sender: ^6.0.1
-  flutter_facebook_auth: ^5.0.8
+  flutter_facebook_auth: ^6.0.0
   flutter_launcher_icons: ^0.13.1
   flutter_pdfview: ^1.3.0
   flutter_platform_widgets: ^3.3.5
@@ -46,8 +46,8 @@ dependencies:
     path: lib/packages/form_inputs
   formz: ^0.6.0
   go_router: ^9.0.0
-  google_fonts: ^4.0.4
-  http: ^0.13.0
+  google_fonts: ^5.1.0
+  http: ^1.1.0
   image_picker: ^0.8.9
   image_picker_web: ^3.0.0+1
   intl: ^0.18.1
@@ -61,6 +61,7 @@ dependencies:
   sign_in_with_apple: ^5.0.0
   stripe_checkout: ^1.0.0
   syncfusion_flutter_charts: ^22.1.38
+  table_calendar: ^3.0.0
   url_launcher: ^6.1.11
   url_strategy: ^0.2.0
 
@@ -75,25 +76,25 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - lib/src/assets/images/
+    - lib/src/shared/assets/images/
 
   fonts:
     - family: Roboto
       fonts:
-        - asset: lib/src/assets/fonts/Roboto-Thin.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Thin.ttf
           weight: 100
-        - asset: lib/src/assets/fonts/Roboto-Light.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Light.ttf
           weight: 300
-        - asset: lib/src/assets/fonts/Roboto-Regular.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Regular.ttf
           weight: 400
-        - asset: lib/src/assets/fonts/Roboto-Medium.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Medium.ttf
           weight: 500
-        - asset: lib/src/assets/fonts/Roboto-Bold.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Bold.ttf
           weight: 700
-        - asset: lib/src/assets/fonts/Roboto-Black.ttf
+        - asset: lib/src/shared/assets/fonts/Roboto-Black.ttf
           weight: 900
 
 flutter_icons:
   android: true
   ios: true
-  image_path: lib/src/assets/images/podium_logo.png
+  image_path: lib/src/shared/assets/images/podium_logo.png

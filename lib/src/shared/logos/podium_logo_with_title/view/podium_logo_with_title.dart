@@ -16,7 +16,7 @@ class PodiumLogoWithTitle extends StatelessWidget {
         height: height,
         width: width,
         child: Image.asset(
-          'lib/src/assets/images/podium_logo_with_title.png',
+          'lib/src/shared/assets/images/podium_logo_with_title.png',
         ),
       ),
     );

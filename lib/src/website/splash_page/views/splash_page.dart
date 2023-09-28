@@ -1,9 +1,7 @@
 import 'package:authentication_repo/authentication_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podium/src/login/login.dart';
 import 'package:podium/src/shared/shared_index.dart';
-import 'package:podium/src/website/splash_page/views/components/splash_page_mobile_banner.dart';
 import 'package:podium/src/website/website_pages_index.dart';
 
 class SplashPage extends StatefulWidget {
@@ -33,6 +31,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     // _updateScreenSize();
   }
 
+  // ignore: unused_element
   void _updateScreenSize() {
     if (MediaQuery.of(context).size.width >= 650 && !_isLargeScreen) {
       _isLargeScreen = true;
