@@ -15,7 +15,7 @@ dependencies:
   build_runner: ^2.4.6
   carousel_slider: ^4.2.1
   cloud_firestore: ^4.7.1
-  cloud_functions: ^4.3.3
+  cloud_functions: ^4.4.1
   cloud_functions_web: ^4.6.1
   dots_indicator: ^3.0.0
   dropdown_button2: ^2.3.9
