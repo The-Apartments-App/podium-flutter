@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@v1.5.1
+        uses: dart-lang/setup-dart@v1.6.0
      
   build:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
